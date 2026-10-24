@@ -18,6 +18,10 @@ interface SlideItem {
   rotatingWords: string[];
 }
 
+// Hides the text that is burned into the top of the background videos.
+// Increase if you still see it, decrease if too much of the video is cut.
+const VIDEO_CROP_TOP = 22; // percent
+
 const SLIDES: SlideItem[] = [
   {
     type: 'video',
@@ -99,7 +103,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
           return (
             <div
               key={idx}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              className={`absolute inset-0 overflow-hidden transition-opacity duration-1000 ease-in-out ${
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
@@ -115,7 +119,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
                   loop
                   autoPlay
                   preload="auto"
-                  className="w-full h-full object-cover transform scale-105 transition-transform duration-5000 ease-out"
+                  style={{ position: 'absolute', left: 0, width: '100%', top: `-${VIDEO_CROP_TOP}%`, height: `${100 + VIDEO_CROP_TOP}%` }}
+                  className="object-cover"
                 />
               ) : (
                 <motion.img
