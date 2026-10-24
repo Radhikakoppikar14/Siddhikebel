@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
@@ -11,7 +11,8 @@ import {
   Target,
   Compass,
   CheckCircle2,
-  Play
+  Play,
+  Loader2
 } from 'lucide-react';
 import { WhyChooseUs } from '../components/WhyChooseUs';
 
@@ -26,8 +27,28 @@ const AUTHORIZED_PARTNERS = [
   'MENNEKES Electric India Pvt Ltd',
 ];
 
+// Opens network connections to YouTube early so the player starts faster
+const preconnected = new Set<string>();
+const preconnect = (...urls: string[]) => {
+  urls.forEach((url) => {
+    if (preconnected.has(url)) return;
+    preconnected.add(url);
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = url;
+    link.crossOrigin = '';
+    document.head.appendChild(link);
+  });
+};
+
 export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
   const [videoActive, setVideoActive] = useState(false);
+  const [iframeReady, setIframeReady] = useState(false);
+
+  // Thumbnail host is needed as soon as the page opens
+  useEffect(() => {
+    preconnect('https://i.ytimg.com');
+  }, []);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; caption: string } | null>(null);
 
   const handleInquire = (topic: string) => {
@@ -347,17 +368,36 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
           >
             <div className="relative pb-[56.25%] h-0 overflow-hidden">
               {videoActive ? (
-                <iframe
-                  src="https://www.youtube-nocookie.com/embed/e3a0qpri5NA?rel=0&modestbranding=1&autoplay=1"
-                  title="Siddhi Kabel Corporate Overview"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute top-0 left-0 w-full h-full border-0"
-                />
+                <>
+                  {/* Thumbnail + spinner stay visible until the YouTube player is ready */}
+                  <img
+                    src="https://i.ytimg.com/vi/e3a0qpri5NA/hqdefault.jpg"
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  {!iframeReady && (
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <Loader2 className="w-10 h-10 text-white animate-spin" />
+                    </span>
+                  )}
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/e3a0qpri5NA?rel=0&modestbranding=1&autoplay=1&playsinline=1"
+                    title="Siddhi Kabel Corporate Overview"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    onLoad={() => setIframeReady(true)}
+                    className={`absolute top-0 left-0 w-full h-full border-0 transition-opacity duration-300 ${
+                      iframeReady ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                </>
               ) : (
                 <button
                   type="button"
                   onClick={() => setVideoActive(true)}
+                  onMouseEnter={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
+                  onFocus={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
+                  onTouchStart={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
                   aria-label="Play Siddhi Kabel corporate video"
                   className="absolute inset-0 w-full h-full cursor-pointer group/play"
                 >
