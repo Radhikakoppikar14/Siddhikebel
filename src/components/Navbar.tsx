@@ -67,19 +67,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
   return (
     <>
       {/* Utility Top Bar - Soft Brown (#5F524C) with Warm Beige (#F1D9CA) & Cream White (#FFFAF6) */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8 overflow-hidden">
+      <div className="bg-[#5F6670] text-white/90 text-xs py-2 px-4 sm:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
-          {/* Left: Tagline & Social Links */}
+          {/* Left: Social Icons, then Tagline */}
           <div className="flex items-center gap-3 min-w-0">
-            <span className="flex items-center gap-2 font-normal text-slate-300 truncate max-w-[220px] sm:max-w-xs md:max-w-md lg:max-w-none"><span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B] shrink-0" />
-              {COMPANY_INFO.tagline}
-            </span>
-            <div className="hidden lg:flex items-center gap-2.5 text-slate-400 border-l border-slate-700 pl-3 shrink-0">
+            <div className="hidden sm:flex items-center gap-2.5 text-white/75 border-r border-white/25 pr-3 shrink-0">
               <a
                 href={COMPANY_INFO.socials.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#FFD7C2] transition-colors"
+                className="hover:text-white transition-colors"
                 aria-label="Facebook"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -90,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 href={COMPANY_INFO.socials.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#FFD7C2] transition-colors"
+                className="hover:text-white transition-colors"
                 aria-label="Twitter"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -101,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 href={COMPANY_INFO.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#FFD7C2] transition-colors"
+                className="hover:text-white transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -109,23 +106,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 </svg>
               </a>
             </div>
+            <span className="flex items-center gap-2 font-normal text-white/90 truncate max-w-[220px] sm:max-w-xs md:max-w-md lg:max-w-none"><span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B] shrink-0" />
+              {COMPANY_INFO.tagline}
+            </span>
           </div>
 
           {/* Right: Phone & Email Contacts */}
-          <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-slate-300 shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-white/90 shrink-0">
             <a
               href="tel:09620000947"
-              className="flex items-center gap-1 sm:gap-1.5 hover:text-[#FFD7C2] transition-colors whitespace-nowrap"
+              className="flex items-center gap-1 sm:gap-1.5 hover:text-white transition-colors whitespace-nowrap"
             >
-              <Phone className="w-3 h-3 text-[#FFD7C2]" />
-              <span className="font-medium font-mono text-slate-100">096200 00947</span>
+              <Phone className="w-3 h-3 text-white/80" />
+              <span className="font-medium font-mono text-white">096200 00947</span>
             </a>
-            <span className="text-[#FFD7C2] hidden sm:inline" aria-hidden="true">·</span>
+            <span className="text-white/80 hidden sm:inline" aria-hidden="true">·</span>
             <a
               href="mailto:info@siddhikabel.com"
-              className="hidden sm:flex items-center gap-1.5 hover:text-[#FFD7C2] transition-colors whitespace-nowrap"
+              className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
             >
-              <Mail className="w-3 h-3 text-[#FFD7C2]" />
+              <Mail className="w-3 h-3 text-white/80" />
               <span>info@siddhikabel.com</span>
             </a>
           </div>
