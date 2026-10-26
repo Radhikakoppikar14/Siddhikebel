@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, MapPin, Phone, Mail, Send, CheckCircle2 } from 'lucide-react';
+import { X, MapPin, Phone, Mail, Send, CheckCircle2, User, Tag, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ContactModalProps {
@@ -7,6 +7,12 @@ interface ContactModalProps {
   prefilledItem?: string;
   onClose: () => void;
 }
+
+const FIELD_WRAP = 'relative';
+const FIELD_ICON = 'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9A8B84] pointer-events-none';
+const FIELD_INPUT =
+  'w-full pl-9 pr-2.5 py-3 bg-[#FFFAF6] border border-[#EBDCD2] rounded-xl text-[13px] leading-snug text-[#231815] placeholder:text-[#B3A59E] hover:border-[#D8C3B6] focus:outline-hidden focus:bg-white focus:border-[#D2430F] focus:ring-4 focus:ring-[#D2430F]/10 transition-all';
+const LABEL = 'block text-[11px] font-semibold uppercase tracking-wider text-[#5F524C] mb-1.5';
 
 export const ContactModal: React.FC<ContactModalProps> = ({
   isOpen,
@@ -64,219 +70,226 @@ export const ContactModal: React.FC<ContactModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#FFF1E8] backdrop-blur-sm backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#231815]/60 backdrop-blur-sm overflow-y-auto"
           onClick={onClose}
         >
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.94, y: 20 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="relative bg-[#EBC4A8] rounded-3xl shadow-2xl border border-[#CF9770] max-w-3xl w-full my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col overflow-hidden text-[#231815]"
+            exit={{ opacity: 0, scale: 0.95, y: 24 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="relative bg-white rounded-3xl shadow-2xl max-w-5xl w-full my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto md:overflow-hidden grid grid-cols-1 md:grid-cols-[2fr_3fr] text-[#231815]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Top Bar with Contact Title & Subtext */}
-            <div className="shrink-0 bg-[#E4B28E] px-6 sm:px-8 py-4 border-b border-[#CF9770] flex items-center justify-between">
-              <div>
-                <span className="text-sm sm:text-base font-bold uppercase tracking-widest text-[#231815] flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#D2430F]" />
-                  CONTACT SIDDHI KABEL
+            {/* Close */}
+            <motion.button
+              whileHover={{ rotate: 90, scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              onClick={onClose}
+              className="absolute top-3.5 right-3.5 z-20 p-2 rounded-full bg-white/95 hover:bg-white text-[#231815] shadow-md cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X className="w-4 h-4" />
+            </motion.button>
+
+            {/* Left: brand + contact details */}
+            <div className="relative bg-[#5F6670] text-white p-6 sm:p-8 flex flex-col gap-6 overflow-hidden">
+              <div className="absolute -bottom-24 -left-20 w-72 h-72 rounded-full bg-[#D2430F]/40 blur-3xl pointer-events-none" />
+              <div className="absolute -top-16 -right-16 w-52 h-52 rounded-full border border-white/10 pointer-events-none" />
+              <div className="absolute top-10 -right-24 w-52 h-52 rounded-full border border-white/10 pointer-events-none" />
+
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-semibold uppercase tracking-widest text-white/90">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B]" />
+                  Get in touch
                 </span>
-                <p className="text-[11px] sm:text-xs text-[#3D2F28] font-normal mt-1">
+                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold font-editorial leading-tight">
+                  Contact Siddhi Kabel
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm text-white/80 font-light leading-relaxed">
                   Get in touch with us for any questions about our products or solutions.
                 </p>
               </div>
-              <motion.button
-                whileHover={{ rotate: 90, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                onClick={onClose}
-                className="p-2 rounded-full bg-white hover:bg-[#F8E1D2] text-[#231815] transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </motion.button>
-            </div>
 
-            {/* Modal Body */}
-            <div className="p-4 sm:p-6 flex-1 min-h-0 overflow-y-auto space-y-4 bg-[#EBC4A8]">
-              {/* Head Office Quick Info Strip */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-4 bg-[#F8E1D2] rounded-2xl border border-[#CF9770] shadow-sm text-xs text-[#231815]">
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#D2430F] shrink-0 mt-0.5" />
+              <div className="relative space-y-5 text-xs">
+                <div className="flex items-start gap-3">
+                  <span className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4 text-[#FFD7C2]" />
+                  </span>
                   <div>
-                    <strong className="block font-semibold text-[#231815]">Head Office:</strong>
-                    <span className="text-[#5F524C] font-light text-[11px] leading-snug">
+                    <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Head Office</strong>
+                    <span className="text-white/95 leading-relaxed block">
                       No.3, 1st Main Road, 1st Block, Banashankari 3rd Stage, Bangalore 560 085
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5">
-                  <Phone className="w-4 h-4 text-[#D2430F] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3">
+                  <span className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
+                    <Phone className="w-4 h-4 text-[#FFD7C2]" />
+                  </span>
                   <div>
-                    <strong className="block font-semibold text-[#231815]">Call Support:</strong>
-                    <span className="text-[#5F524C] font-light text-[11px] block">
-                      080 – 2672 0440
-                    </span>
-                    <span className="text-[#231815] font-medium text-[11px] block">
-                      096200 00947, 098860 58511
-                    </span>
+                    <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Call Support</strong>
+                    <a href="tel:08026720440" className="block text-white/95 hover:text-white font-mono">080 – 2672 0440</a>
+                    <a href="tel:09620000947" className="block text-white/95 hover:text-white font-mono">096200 00947</a>
+                    <a href="tel:09886058511" className="block text-white/95 hover:text-white font-mono">098860 58511</a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-2.5">
-                  <Mail className="w-4 h-4 text-[#D2430F] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3">
+                  <span className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
+                    <Mail className="w-4 h-4 text-[#FFD7C2]" />
+                  </span>
                   <div>
-                    <strong className="block font-semibold text-[#231815]">Email Us:</strong>
-                    <span className="text-[#5F524C] font-light text-[11px] block">
-                      info@siddhikabel.com
-                    </span>
-                    <span className="text-[#5F524C] font-light text-[11px] block">
-                      guru@siddhikabel.com
-                    </span>
+                    <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Email Us</strong>
+                    <a href="mailto:info@siddhikabel.com" className="block text-white/95 hover:text-white">info@siddhikabel.com</a>
+                    <a href="mailto:guru@siddhikabel.com" className="block text-white/95 hover:text-white">guru@siddhikabel.com</a>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Success Feedback Screen */}
+            {/* Right: form */}
+            <div className="p-6 sm:p-8 md:overflow-y-auto md:max-h-[calc(100dvh-3rem)]">
               {isSent ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="py-8 px-6 bg-[#FFFAF6] rounded-2xl border border-[#F1D9CA] text-center space-y-4 shadow-xl"
+                  className="h-full min-h-[320px] flex flex-col items-center justify-center text-center space-y-4"
                 >
-                  <div className="w-14 h-14 bg-[#F1D9CA]/50 text-[#5F524C] rounded-full mx-auto flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-16 h-16 bg-[#D2430F]/10 text-[#D2430F] rounded-full flex items-center justify-center">
+                    <CheckCircle2 className="w-9 h-9" />
                   </div>
-                  <h4 className="text-2xl font-normal text-[#231815] font-editorial">
+                  <h4 className="text-2xl font-semibold text-[#231815] font-editorial">
                     Message Successfully Sent!
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#5F524C]/80 font-light max-w-md mx-auto leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#5F524C] font-light max-w-sm leading-relaxed">
                     Thank you, <strong className="font-semibold text-[#231815]">{formState.name}</strong>. An application sales engineer from Siddhi Kabel Bangalore will review your inquiry and get in touch with you shortly.
                   </p>
-                  <div className="pt-2">
-                    <button
-                      onClick={onClose}
-                      className="px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#FFFAF6] bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-colors shadow-sm cursor-pointer"
-                    >
-                      Close Window
-                    </button>
-                  </div>
+                  <button
+                    onClick={onClose}
+                    className="mt-2 px-7 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-full transition-colors shadow-md cursor-pointer"
+                  >
+                    Close Window
+                  </button>
                 </motion.div>
               ) : (
-                /* Contact Message Form in Crisp Light Contrast Container */
-                <div className="bg-[#F8E1D2] rounded-2xl p-5 sm:p-6 border border-[#CF9770] shadow-xl space-y-4">
-                  <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-                    <div className="flex items-center justify-between pb-2 border-b border-[#CF9770]">
-                      <h4 className="text-xs sm:text-sm font-bold text-[#231815] uppercase tracking-wider">
-                        Send an Inquiry Message
-                      </h4>
-                      {prefilledItem && (
-                        <span className="text-[11px] text-[#5F524C] bg-[#FFF1E8] px-2.5 py-0.5 rounded-full font-medium border border-[#F1D9CA]">
-                          Item: {prefilledItem}
-                        </span>
-                      )}
-                    </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="pr-10">
+                    <h4 className="text-lg sm:text-xl font-semibold text-[#231815] font-editorial">
+                      Send an Inquiry Message
+                    </h4>
+                    <div className="mt-2 h-1 w-12 rounded-full bg-[#D2430F]" />
+                    {prefilledItem && (
+                      <span className="inline-block mt-3 text-[11px] text-[#A8340A] bg-[#FFF1E8] px-3 py-1 rounded-full font-medium border border-[#F1D9CA]">
+                        Item: {prefilledItem}
+                      </span>
+                    )}
+                  </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div>
-                        <label className="block font-semibold text-[#231815] mb-1">
-                          Your Name *
-                        </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className={LABEL}>Your Name *</label>
+                      <div className={FIELD_WRAP}>
+                        <User className={FIELD_ICON} />
                         <input
                           type="text"
                           required
                           placeholder="Enter your name"
                           value={formState.name}
                           onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                          className="w-full px-3.5 py-2.5 bg-white border border-[#C58C64] rounded-xl focus:outline-hidden focus:border-[#D2430F] focus:ring-2 focus:ring-[#D2430F]/25 text-[#231815] transition-all"
+                          className={FIELD_INPUT}
                         />
                       </div>
-                      <div>
-                        <label className="block font-semibold text-[#231815] mb-1">
-                          Phone Number *
-                        </label>
+                    </div>
+                    <div>
+                      <label className={LABEL}>Phone Number *</label>
+                      <div className={FIELD_WRAP}>
+                        <Phone className={FIELD_ICON} />
                         <input
                           type="tel"
                           required
                           placeholder="Enter your mobile number"
                           value={formState.phone}
                           onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                          className="w-full px-3.5 py-2.5 bg-white border border-[#C58C64] rounded-xl focus:outline-hidden focus:border-[#D2430F] focus:ring-2 focus:ring-[#D2430F]/25 text-[#231815] transition-all"
+                          className={FIELD_INPUT}
                         />
                       </div>
                     </div>
+                  </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      <div>
-                        <label className="block font-semibold text-[#231815] mb-1">
-                          Email Address *
-                        </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className={LABEL}>Email Address *</label>
+                      <div className={FIELD_WRAP}>
+                        <Mail className={FIELD_ICON} />
                         <input
                           type="email"
                           required
                           placeholder="name@company.com"
                           value={formState.email}
                           onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                          className="w-full px-3.5 py-2.5 bg-white border border-[#C58C64] rounded-xl focus:outline-hidden focus:border-[#D2430F] focus:ring-2 focus:ring-[#D2430F]/25 text-[#231815] transition-all"
+                          className={FIELD_INPUT}
                         />
                       </div>
-                      <div>
-                        <label className="block font-semibold text-[#231815] mb-1">
-                          Subject / Requirement
-                        </label>
+                    </div>
+                    <div>
+                      <label className={LABEL}>Subject / Requirement</label>
+                      <div className={FIELD_WRAP}>
+                        <Tag className={FIELD_ICON} />
                         <input
                           type="text"
                           placeholder="e.g. Lapp Cable Quote / Switchgear"
                           value={formState.subject}
                           onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                          className="w-full px-3.5 py-2.5 bg-white border border-[#C58C64] rounded-xl focus:outline-hidden focus:border-[#D2430F] focus:ring-2 focus:ring-[#D2430F]/25 text-[#231815] transition-all"
+                          className={FIELD_INPUT}
                         />
                       </div>
                     </div>
+                  </div>
 
-                    <div>
-                      <label className="block font-semibold text-[#231815] mb-1">
-                        Your Message *
-                      </label>
+                  <div>
+                    <label className={LABEL}>Your Message *</label>
+                    <div className={FIELD_WRAP}>
+                      <MessageSquare className="absolute left-3 top-3.5 w-4 h-4 text-[#9A8B84] pointer-events-none" />
                       <textarea
-                        rows={3}
+                        rows={4}
                         required
                         placeholder="Specify item quantities, technical queries, or project delivery deadline..."
                         value={formState.message}
                         onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                        className="w-full px-3.5 py-2.5 bg-white border border-[#C58C64] rounded-xl focus:outline-hidden focus:border-[#D2430F] focus:ring-2 focus:ring-[#D2430F]/25 text-[#231815] transition-all"
+                        className={`${FIELD_INPUT} resize-none`}
                       />
                     </div>
+                  </div>
 
-                    <div className="pt-2 flex items-center justify-end gap-3 border-t border-[#CF9770]">
-                      <button
-                        type="button"
-                        onClick={onClose}
-                        className="px-4 py-2.5 text-xs text-[#5F524C] hover:text-[#231815] border border-[#F1D9CA] rounded-xl transition-colors cursor-pointer bg-white"
-                      >
-                        Cancel
-                      </button>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        type="submit"
-                        disabled={isSending}
-                        className="inline-flex items-center gap-2 px-7 py-2.5 text-xs font-semibold uppercase tracking-wider text-[#FFFAF6] bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-colors shadow-sm disabled:opacity-50 cursor-pointer"
-                      >
-                        {isSending ? (
-                          <span>Sending...</span>
-                        ) : (
-                          <>
-                            <span>Send Inquiry</span>
-                            <Send className="w-3.5 h-3.5" />
-                          </>
-                        )}
-                      </motion.button>
-                    </div>
-                  </form>
-                </div>
+                  <div className="pt-2 flex items-center justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="px-5 py-3 text-xs font-semibold text-[#5F524C] hover:text-[#231815] hover:bg-[#FFF1E8] rounded-full transition-colors cursor-pointer"
+                    >
+                      Cancel
+                    </button>
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      type="submit"
+                      disabled={isSending}
+                      className="inline-flex items-center gap-2 px-7 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-full transition-colors shadow-lg shadow-[#D2430F]/25 disabled:opacity-50 cursor-pointer"
+                    >
+                      {isSending ? (
+                        <span>Sending...</span>
+                      ) : (
+                        <>
+                          <span>Send Inquiry</span>
+                          <Send className="w-3.5 h-3.5" />
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
+                </form>
               )}
             </div>
           </motion.div>

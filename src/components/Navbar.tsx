@@ -11,7 +11,7 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
     to={to}
     end={end}
     className={({ isActive }) =>
-      `relative group whitespace-nowrap px-3 xl:px-4 py-2 text-sm transition-colors duration-200 ${
+      `relative group whitespace-nowrap px-2.5 xl:px-4 py-2 text-[13px] xl:text-sm transition-colors duration-200 ${
         isActive ? 'text-[#D2430F] font-semibold' : 'text-[#231815]/75 hover:text-[#231815]'
       }`
     }
@@ -19,11 +19,11 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
     {({ isActive }) => (
       <>
         <span className="relative z-10">{children}</span>
-        <span className="absolute left-3 right-3 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full origin-left bg-[#231815]/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+        <span className="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full origin-left bg-[#231815]/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
         {isActive && (
           <motion.span
             layoutId="nav-active-underline"
-            className="absolute left-3 right-3 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full bg-[#D2430F]"
+            className="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full bg-[#D2430F]"
             transition={{ type: 'spring', stiffness: 380, damping: 30 }}
           />
         )}
@@ -34,10 +34,10 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
 
 const MOBILE_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/products', label: 'Products Catalog' },
-  { to: '/industries', label: 'Industries We Cater' },
-  { to: '/about', label: 'About us' },
-  { to: '/contact', label: 'Contact Us' },
+  { to: '/products', label: 'Our Products' },
+  { to: '/industries', label: 'Industry Sectors' },
+  { to: '/about', label: 'Our Company' },
+  { to: '/contact', label: 'Get in Touch' },
 ];
 
 interface NavbarProps {
@@ -159,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
             </Link>
 
             {/* Navigation (desktop): Home, Industries, Products, About us, Contact */}
-            <nav className="hidden lg:flex items-center justify-center gap-2 font-medium text-[#231815]">
+            <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 font-medium text-[#231815]">
               <DesktopNavLink to="/" end>Home</DesktopNavLink>
 
               {/* Products - opens a full-width mega menu */}
@@ -170,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               >
                 <DesktopNavLink to="/products">
                   <span className="inline-flex items-center gap-1.5">
-                    <span>Products</span>
+                    <span>Our Products</span>
                     <motion.span
                       animate={{ rotate: productsDropdownOpen ? 180 : 0 }}
                       transition={{ duration: 0.25 }}
@@ -218,8 +218,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 </AnimatePresence>
               </div>
 
-              <DesktopNavLink to="/industries">Industries</DesktopNavLink>
-              <DesktopNavLink to="/about">About us</DesktopNavLink>
+              <DesktopNavLink to="/industries">Industry Sectors</DesktopNavLink>
+              <DesktopNavLink to="/about">Our Company</DesktopNavLink>
             </nav>
 
             {/* Desktop Action Button */}
@@ -227,14 +227,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>
-                  `inline-flex items-center justify-center whitespace-nowrap px-5 py-2.5 text-sm font-semibold rounded-full text-[#D2430F] border border-[#D2430F]/30 transition-colors ${
+                  `inline-flex items-center justify-center whitespace-nowrap px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm font-semibold rounded-full text-[#D2430F] border border-[#D2430F]/30 transition-colors ${
                     isActive ? 'bg-[#FFD7C2]' : 'bg-[#FFE7D8] hover:bg-[#FFD7C2]'
                   }`
                 }
               >
-                Contact Us
+                Get in Touch
               </NavLink>
-              <RfqButton className="px-5 py-2.5 text-sm rounded-full border border-transparent" />
+              <RfqButton className="px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm rounded-full border border-transparent" />
             </div>
 
             {/* Mobile & Tablet Toggle */}
