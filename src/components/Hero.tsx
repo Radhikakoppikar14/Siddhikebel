@@ -21,6 +21,8 @@ interface SlideItem {
 // Hides the text that is burned into the top of the background videos.
 // Increase if you still see it, decrease if too much of the video is cut.
 const VIDEO_CROP_TOP = 22; // percent
+const VIDEO_CROP_BOTTOM = 30; // percent trimmed off the bottom (hides the corner sparkle mark)
+const VIDEO_CROP_RIGHT = 18; // percent trimmed off the right (hides the corner sparkle mark)
 
 const SLIDES: SlideItem[] = [
   {
@@ -119,7 +121,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
                   loop
                   autoPlay
                   preload="auto"
-                  style={{ position: 'absolute', left: 0, width: '100%', top: `-${VIDEO_CROP_TOP}%`, height: `${100 + VIDEO_CROP_TOP}%` }}
+                  style={{ position: 'absolute', left: 0, width: `${100 + VIDEO_CROP_RIGHT}%`, top: `-${VIDEO_CROP_TOP}%`, height: `${100 + VIDEO_CROP_TOP + VIDEO_CROP_BOTTOM}%` }}
                   className="object-cover"
                 />
               ) : (
@@ -133,9 +135,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
                 />
               )}
 
-              {/* Lighter Scrim Overlay: allows background video to be clearly visible while maintaining contrast */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#FFFAF6]/88 via-[#FFFAF6]/45 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FFFAF6]/35 via-transparent to-transparent" />
+              {/* Black overlay so the white text stays readable over the video */}
+              <div className="absolute inset-0 bg-black/55" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
             </div>
           );
         })}
@@ -179,7 +181,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.12] tracking-tight text-[#231815] font-editorial"
+              className="text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.12] tracking-tight text-white font-editorial"
               style={{ textWrap: 'balance' }}
             >
               {slide.headline}
@@ -190,7 +192,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.18, duration: 0.45 }}
-              className="text-sm sm:text-base lg:text-lg text-[#5F524C] max-w-2xl font-normal leading-relaxed"
+              className="text-sm sm:text-base lg:text-lg text-white/85 max-w-2xl font-normal leading-relaxed"
             >
               {slide.subtext}
             </motion.p>
@@ -226,7 +228,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         </AnimatePresence>
 
         {/* Modern Enterprise Capability Highlights Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-4 mt-6 border-t border-[#D2430F]/15">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-4 mt-6 border-t border-white/20">
           <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <ShieldCheck className="w-4 h-4" />
@@ -269,7 +271,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         </div>
 
         {/* Live Slide Controls with 10-Second Linear Progress Bars */}
-        <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-[#D2430F]/15">
+        <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/20">
           {/* Slider Indicators */}
           <div className="flex items-center gap-2.5">
             {SLIDES.map((s, i) => {
@@ -279,7 +281,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
                   key={i}
                   onClick={() => setCurrentSlide(i)}
                   className={`relative h-2 rounded-full overflow-hidden transition-all duration-300 cursor-pointer ${
-                    isActive ? 'w-16 bg-[#D2430F]/20' : 'w-5 bg-[#D2430F]/12 hover:bg-[#D2430F]/25'
+                    isActive ? 'w-16 bg-white/25' : 'w-5 bg-white/20 hover:bg-white/40'
                   }`}
                   aria-label={`Slide ${i + 1} - ${s.tag}`}
                 >
@@ -299,7 +301,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               );
             })}
 
-            <span className="text-[11px] font-mono text-[#5F524C] ml-2">
+            <span className="text-[11px] font-mono text-white/80 ml-2">
               0{currentSlide + 1} / 0{SLIDES.length}
             </span>
           </div>

@@ -18,10 +18,10 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = () => {
   return (
-    <footer className="bg-[#D2430F] text-white border-t border-white/15 relative overflow-hidden">
+    <footer className="bg-[#5F6670] text-white border-t border-white/15 relative overflow-hidden">
       {/* Decorative background glows */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#F5B83D]/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Multi-Column Footer Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
@@ -188,7 +188,7 @@ export const Footer: React.FC<FooterProps> = () => {
       </div>
 
       {/* 4. Bottom Legal Bar */}
-      <div className="bg-[#D2430F] py-5 px-4 sm:px-6 lg:px-8 border-t border-white/15">
+      <div className="bg-[#5F6670] py-5 px-4 sm:px-6 lg:px-8 border-t border-white/15">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/80">
           <p>© 2026 Siddhi Kabel Corporation Private Limited. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-4 text-[11px]">
