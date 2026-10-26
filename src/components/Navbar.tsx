@@ -1,7 +1,7 @@
 import { RfqButton } from './RfqButton';
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Phone, Mail, Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Phone, Mail, Menu, X, Sparkles } from 'lucide-react';
 import { COMPANY_INFO, BRANDS_DATA } from '../data/siddhiData';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -191,15 +191,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                       className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50 w-[min(440px,calc(100vw-2rem))]"
                     >
                       <div className="bg-white shadow-2xl rounded-2xl border border-stone-100 p-3">
-                        {/* Catalog link at the top */}
-                        <Link
-                          to="/products"
-                          className="mb-3 flex items-center justify-between px-3 pb-3 border-b border-stone-100 text-xs font-semibold text-[#231815] hover:text-[#D2430F] transition-colors"
-                        >
-                          All Products Catalog
-                          <ArrowUpRight className="w-4 h-4" />
-                        </Link>
-
                         {/* 2 x 2 tiles for the 4 brands below */}
                         <div className="grid grid-cols-2 gap-2.5">
                           {BRANDS_DATA.map((brand, i) => (
@@ -211,21 +202,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                             >
                               <Link
                                 to={`/products/${brand.id}`}
-                                className="group/tile relative flex h-28 flex-col justify-between rounded-xl p-3 border border-transparent hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
-                                style={{ backgroundColor: brand.colorTint }}
+                                title={brand.name}
+                                className="group/tile relative flex h-20 items-center justify-center rounded-xl bg-white p-4 border border-[#F1D9CA] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
+                                onMouseEnter={(e) => (e.currentTarget.style.borderColor = brand.colorDark)}
+                                onMouseLeave={(e) => (e.currentTarget.style.borderColor = '')}
                               >
-                                <span className="h-9 w-20 rounded-lg bg-white flex items-center justify-center p-1.5 shadow-sm">
-                                  <img src={brand.logo} alt="" className="max-h-full max-w-full object-contain" />
-                                </span>
-                                <span className="flex items-end justify-between gap-2">
-                                  <span className="text-[13px] font-semibold leading-tight" style={{ color: brand.colorDark }}>
-                                    {brand.name}
-                                  </span>
-                                  <ArrowUpRight
-                                    className="w-4 h-4 shrink-0 opacity-0 -translate-x-1 group-hover/tile:opacity-100 group-hover/tile:translate-x-0 transition-all duration-200"
-                                    style={{ color: brand.colorDark }}
-                                  />
-                                </span>
+                                <img src={brand.logo} alt={brand.name} className="max-h-full max-w-full object-contain transition-transform duration-200 group-hover/tile:scale-105" />
                               </Link>
                             </motion.div>
                           ))}
