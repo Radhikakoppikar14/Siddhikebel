@@ -107,7 +107,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   <div>
                     <strong className="block font-semibold text-[#231815]">Head Office:</strong>
                     <span className="text-[#5F524C] font-light text-[11px] leading-snug">
-                      No.3, 1st Main Rd, Banashankari 3rd Stage, Bangalore 560 085
+                      No.3, 1st Main Road, 1st Block, Banashankari 3rd Stage, Bangalore 560 085
                     </span>
                   </div>
                 </div>

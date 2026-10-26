@@ -151,27 +151,35 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#FFD7C2] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  #76, 2nd Floor, 80 Feet Road, Banashankari 3rd Stage, Bangalore - 560 085, Karnataka, India
+                  Siddhi Kabel Corporation Private Limited, No.3, 1st Main Road, 1st Block, Banashankari 3rd Stage, Bangalore 560 085
                 </span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#FFD7C2] shrink-0" />
                 <div className="space-y-0.5">
+                  <a href="tel:08026720440" className="hover:text-[#FFD7C2] block font-mono">
+                    080 – 2672 0440
+                  </a>
                   <a href="tel:09620000947" className="hover:text-[#FFD7C2] block font-mono">
-                    +91 96200 00947
+                    096200 00947
                   </a>
                   <a href="tel:09886058511" className="hover:text-[#FFD7C2] block font-mono">
-                    +91 98860 58511
+                    098860 58511
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#FFD7C2] shrink-0" />
-                <a href="mailto:info@siddhikabel.com" className="hover:text-[#FFD7C2] transition-colors">
-                  info@siddhikabel.com
-                </a>
+                <div className="space-y-0.5">
+                  <a href="mailto:info@siddhikabel.com" className="hover:text-[#FFD7C2] transition-colors block">
+                    info@siddhikabel.com
+                  </a>
+                  <a href="mailto:guru@siddhikabel.com" className="hover:text-[#FFD7C2] transition-colors block">
+                    guru@siddhikabel.com
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-start gap-2.5 pt-1">
