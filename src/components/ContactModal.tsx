@@ -72,11 +72,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 20 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="relative bg-[#EBC4A8] rounded-3xl shadow-2xl border border-[#CF9770] max-w-3xl w-full my-auto overflow-hidden text-[#231815]"
+            className="relative bg-[#EBC4A8] rounded-3xl shadow-2xl border border-[#CF9770] max-w-3xl w-full my-auto max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col overflow-hidden text-[#231815]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Top Bar with Contact Title & Subtext */}
-            <div className="bg-[#E4B28E] px-6 sm:px-8 py-5 border-b border-[#CF9770] flex items-center justify-between">
+            <div className="shrink-0 bg-[#E4B28E] px-6 sm:px-8 py-4 border-b border-[#CF9770] flex items-center justify-between">
               <div>
                 <span className="text-sm sm:text-base font-bold uppercase tracking-widest text-[#231815] flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-[#D2430F]" />
@@ -99,7 +99,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             </div>
 
             {/* Modal Body */}
-            <div className="p-4 sm:p-6 max-h-[82vh] overflow-y-auto space-y-4 bg-[#EBC4A8]">
+            <div className="p-4 sm:p-6 flex-1 min-h-0 overflow-y-auto space-y-4 bg-[#EBC4A8]">
               {/* Head Office Quick Info Strip */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-4 bg-[#F8E1D2] rounded-2xl border border-[#CF9770] shadow-sm text-xs text-[#231815]">
                 <div className="flex items-start gap-2.5">

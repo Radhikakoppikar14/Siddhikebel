@@ -5,25 +5,25 @@ import { Phone, Mail, Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { COMPANY_INFO, BRANDS_DATA } from '../data/siddhiData';
 import { motion, AnimatePresence } from 'framer-motion';
 
-/* Desktop nav link with hover underline + sliding active indicator */
+/* Desktop nav link: slim underline that grows on hover and slides to the active page */
 const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: boolean }> = ({ to, children, end }) => (
   <NavLink
     to={to}
     end={end}
     className={({ isActive }) =>
-      `relative group whitespace-nowrap py-1 transition-colors duration-200 ${
-        isActive ? 'text-[#5F524C] font-semibold' : 'text-[#231815]/80 hover:text-[#5F524C]'
+      `relative group whitespace-nowrap px-3 xl:px-4 py-2 text-sm transition-colors duration-200 ${
+        isActive ? 'text-[#D2430F] font-semibold' : 'text-[#231815]/75 hover:text-[#231815]'
       }`
     }
   >
     {({ isActive }) => (
       <>
-        <span className="inline-block transition-transform duration-200 group-hover:-translate-y-px">{children}</span>
-        <span className="absolute left-0 -bottom-1 h-0.5 w-full origin-left scale-x-0 bg-[#D2430F] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+        <span className="relative z-10">{children}</span>
+        <span className="absolute left-3 right-3 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full origin-left bg-[#231815]/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
         {isActive && (
           <motion.span
             layoutId="nav-active-underline"
-            className="absolute left-0 -bottom-1 h-0.5 w-full rounded-full bg-[#D2430F]"
+            className="absolute left-3 right-3 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full bg-[#D2430F]"
             transition={{ type: 'spring', stiffness: 380, damping: 30 }}
           />
         )}
@@ -34,10 +34,10 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
 
 const MOBILE_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About us' },
   { to: '/products', label: 'Products Catalog' },
   { to: '/industries', label: 'Industries We Cater' },
-  { to: '/contact', label: 'Contact & Location' },
+  { to: '/about', label: 'About us' },
+  { to: '/contact', label: 'Contact Us' },
 ];
 
 interface NavbarProps {
@@ -67,14 +67,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
   return (
     <>
       {/* Utility Top Bar - Soft Brown (#5F524C) with Warm Beige (#F1D9CA) & Cream White (#FFFAF6) */}
-      <div className="bg-[#D2430F] text-white text-xs py-1.5 px-4 sm:px-8 border-b border-white/15 overflow-hidden">
+      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
           {/* Left: Tagline & Social Links */}
           <div className="flex items-center gap-3 min-w-0">
-            <span className="font-light text-white truncate max-w-[220px] sm:max-w-xs md:max-w-md lg:max-w-none">
+            <span className="flex items-center gap-2 font-normal text-slate-300 truncate max-w-[220px] sm:max-w-xs md:max-w-md lg:max-w-none"><span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B] shrink-0" />
               {COMPANY_INFO.tagline}
             </span>
-            <div className="hidden lg:flex items-center gap-2.5 text-white/80 border-l border-white/25 pl-3 shrink-0">
+            <div className="hidden lg:flex items-center gap-2.5 text-slate-400 border-l border-slate-700 pl-3 shrink-0">
               <a
                 href={COMPANY_INFO.socials.facebook}
                 target="_blank"
@@ -112,13 +112,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
           </div>
 
           {/* Right: Phone & Email Contacts */}
-          <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-white/80 shrink-0 pr-1">
+          <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-slate-300 shrink-0">
             <a
               href="tel:09620000947"
               className="flex items-center gap-1 sm:gap-1.5 hover:text-[#FFD7C2] transition-colors whitespace-nowrap"
             >
               <Phone className="w-3 h-3 text-[#FFD7C2]" />
-              <span className="font-medium font-mono text-white">096200 00947</span>
+              <span className="font-medium font-mono text-slate-100">096200 00947</span>
             </a>
             <span className="text-[#FFD7C2] hidden sm:inline" aria-hidden="true">·</span>
             <a
@@ -132,118 +132,148 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
         </div>
       </div>
 
-      {/* Main Header - Cream White (#FFFAF6) with Warm Beige (#F1D9CA) hairline border */}
-      <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-[#FFFAF6]/95 backdrop-blur-md shadow-sm border-b border-[#F1D9CA]'
-            : 'bg-[#FFFAF6] border-b border-[#F1D9CA]'
-        }`}
-      >
-        <div className={`max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-20'}`}>
-          {/* Brand Logo - click goes to the home page */}
-          <Link
-            to="/"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center shrink-0 group"
-            title="Siddhi Kabel - Home"
+      {/* Main Header - floating rounded island instead of a full-width bar */}
+      <header className="sticky top-0 z-40 px-1 sm:px-2 pt-3 pb-2 bg-[#FFFAF6] pointer-events-none">
+        <div
+          className={`pointer-events-auto relative max-w-[calc(80rem-1rem)] mx-auto rounded-3xl lg:rounded-full border border-[#F1D9CA] bg-white transition-shadow duration-300 ${
+            isScrolled ? 'shadow-lg shadow-[#D2430F]/10' : 'shadow-md shadow-[#231815]/5'
+          }`}
+        >
+          <div
+            className={`flex items-center justify-between gap-6 px-3 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] transition-all duration-300 ${
+              isScrolled ? 'py-2' : 'py-3'
+            }`}
           >
-            <img
-              src="/images/logo.png"
-              alt="Siddhi Kabel Corporation Private Limited"
-              className="h-8 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-2"
-            />
-          </Link>
-
-          {/* Navigation Links (Desktop lg+) */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#231815]">
-            <DesktopNavLink to="/" end>Home</DesktopNavLink>
-            <DesktopNavLink to="/about">About us</DesktopNavLink>
-
-            {/* Products with Brand Dropdown */}
-            <div
-              className="relative py-1"
-              onMouseEnter={() => setProductsDropdownOpen(true)}
-              onMouseLeave={() => setProductsDropdownOpen(false)}
+            {/* Brand Logo */}
+            <Link
+              to="/"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center justify-self-start shrink-0 group"
+              title="Siddhi Kabel - Home"
             >
-              <DesktopNavLink to="/products">
-                <span className="inline-flex items-center gap-1">
-                  <span>Products</span>
-                  <motion.span
-                    animate={{ rotate: productsDropdownOpen ? 180 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-[10px] text-[#D2430F] inline-block"
-                  >
-                    ▾
-                  </motion.span>
-                </span>
-              </DesktopNavLink>
+              <img
+                src="/images/logo.png"
+                alt="Siddhi Kabel Corporation Private Limited"
+                className="h-8 sm:h-10 lg:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
 
-              {/* Products Brand Dropdown */}
-              <AnimatePresence>
-                {productsDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
-                    style={{ transformOrigin: 'top left' }}
-                    className="absolute top-full left-0 w-60 bg-[#FFFAF6] rounded-xl shadow-xl border border-[#F1D9CA] py-2 z-50"
-                  >
-                    <Link
-                      to="/products"
-                      className="block px-4 py-2.5 text-xs font-semibold text-[#5F524C] hover:bg-[#FFF1E8] hover:pl-6 border-b border-[#F1D9CA]/60 transition-all duration-200"
+            {/* Navigation (desktop): Home, Industries, Products, About us, Contact */}
+            <nav className="hidden lg:flex items-center justify-center gap-2 font-medium text-[#231815]">
+              <DesktopNavLink to="/" end>Home</DesktopNavLink>
+
+              {/* Products - opens a full-width mega menu */}
+              <div
+                className="relative"
+                onMouseEnter={() => setProductsDropdownOpen(true)}
+                onMouseLeave={() => setProductsDropdownOpen(false)}
+              >
+                <DesktopNavLink to="/products">
+                  <span className="inline-flex items-center gap-1.5">
+                    <span>Products</span>
+                    <motion.span
+                      animate={{ rotate: productsDropdownOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="text-[10px] text-[#D2430F] inline-block"
                     >
-                      All Products Catalog
-                    </Link>
-                    {BRANDS_DATA.map((brand, i) => (
-                      <motion.div
-                        key={brand.id}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.03 * i + 0.05, duration: 0.25 }}
-                      >
+                      ▾
+                    </motion.span>
+                  </span>
+                </DesktopNavLink>
+
+                <AnimatePresence>
+                  {productsDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                      className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50 w-[min(440px,calc(100vw-2rem))]"
+                    >
+                      <div className="bg-white shadow-2xl rounded-2xl border border-stone-100 p-3">
+                        {/* Catalog link at the top */}
                         <Link
-                          to={`/products/${brand.id}`}
-                          className="block px-4 py-2 text-xs text-[#231815]/85 hover:text-[#5F524C] hover:bg-[#D2430F]/8 hover:pl-6 transition-all duration-200"
+                          to="/products"
+                          className="mb-3 flex items-center justify-between px-3 pb-3 border-b border-stone-100 text-xs font-semibold text-[#231815] hover:text-[#D2430F] transition-colors"
                         >
-                          {brand.name}
+                          All Products Catalog
+                          <ArrowUpRight className="w-4 h-4" />
                         </Link>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+
+                        {/* 2 x 2 tiles for the 4 brands below */}
+                        <div className="grid grid-cols-2 gap-2.5">
+                          {BRANDS_DATA.map((brand, i) => (
+                            <motion.div
+                              key={brand.id}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.04 * i + 0.04, duration: 0.25 }}
+                            >
+                              <Link
+                                to={`/products/${brand.id}`}
+                                className="group/tile relative flex h-28 flex-col justify-between rounded-xl p-3 border border-transparent hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
+                                style={{ backgroundColor: brand.colorTint }}
+                              >
+                                <span className="h-9 w-20 rounded-lg bg-white flex items-center justify-center p-1.5 shadow-sm">
+                                  <img src={brand.logo} alt="" className="max-h-full max-w-full object-contain" />
+                                </span>
+                                <span className="flex items-end justify-between gap-2">
+                                  <span className="text-[13px] font-semibold leading-tight" style={{ color: brand.colorDark }}>
+                                    {brand.name}
+                                  </span>
+                                  <ArrowUpRight
+                                    className="w-4 h-4 shrink-0 opacity-0 -translate-x-1 group-hover/tile:opacity-100 group-hover/tile:translate-x-0 transition-all duration-200"
+                                    style={{ color: brand.colorDark }}
+                                  />
+                                </span>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <DesktopNavLink to="/industries">Industries</DesktopNavLink>
+              <DesktopNavLink to="/about">About us</DesktopNavLink>
+            </nav>
+
+            {/* Desktop Action Button */}
+            <div className="hidden lg:flex items-center justify-self-end gap-3 shrink-0">
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `inline-flex items-center justify-center whitespace-nowrap px-5 py-2.5 text-sm font-semibold rounded-full text-[#D2430F] border border-[#D2430F]/30 transition-colors ${
+                    isActive ? 'bg-[#FFD7C2]' : 'bg-[#FFE7D8] hover:bg-[#FFD7C2]'
+                  }`
+                }
+              >
+                Contact Us
+              </NavLink>
+              <RfqButton className="px-5 py-2.5 text-sm rounded-full border border-transparent" />
             </div>
 
-            <DesktopNavLink to="/industries">Industries</DesktopNavLink>
-            <DesktopNavLink to="/contact">Contact</DesktopNavLink>
-          </nav>
-
-          {/* Desktop Action Button: CHECK OUR RFQ SITE (Visible only on lg+) */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <RfqButton className="px-5 py-2.5 text-sm rounded-md" />
-          </div>
-
-          {/* Mobile & Tablet Toggle */}
-          <div className="flex lg:hidden items-center gap-2">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 text-[#231815] hover:bg-[#FFF1E8] rounded-xl transition-colors cursor-pointer"
-              aria-label="Toggle navigation menu"
-            >
-              <motion.span
-                key={mobileMenuOpen ? 'close' : 'open'}
-                initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                transition={{ duration: 0.25 }}
-                className="block"
+            {/* Mobile & Tablet Toggle */}
+            <div className="flex lg:hidden items-center gap-2">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2.5 text-[#231815] bg-[#FFF4EC] hover:bg-[#FFE7D8] rounded-full transition-colors cursor-pointer"
+                aria-label="Toggle navigation menu"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </motion.span>
-            </button>
+                <motion.span
+                  key={mobileMenuOpen ? 'close' : 'open'}
+                  initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25 }}
+                  className="block"
+                >
+                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </motion.span>
+              </button>
+            </div>
           </div>
-        </div>
 
         {/* Mobile Navigation Drawer */}
         <AnimatePresence>
@@ -253,7 +283,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="lg:hidden bg-[#FFFAF6] border-b border-[#F1D9CA] px-6 py-6 shadow-2xl overflow-hidden"
+              className="lg:hidden border-t border-[#F1D9CA] px-5 py-5 overflow-hidden"
             >
               <nav className="flex flex-col gap-2 text-sm font-medium text-[#231815]">
                 {MOBILE_LINKS.map((item, i) => (
@@ -269,7 +299,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                       onClick={() => setMobileMenuOpen(false)}
                       className={({ isActive }) =>
                         `block py-2.5 border-b border-[#F1D9CA]/60 transition-all duration-200 hover:pl-2 hover:text-[#5F524C] ${
-                          isActive ? 'text-[#5F524C] font-semibold pl-2 border-l-2 border-l-[#5F524C]' : ''
+                          isActive ? 'text-[#D2430F] font-semibold pl-2 border-l-2 border-l-[#D2430F]' : ''
                         }`
                       }
                     >
@@ -280,7 +310,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
 
                 {/* Mobile Action Buttons */}
                 <div className="pt-4 space-y-2.5">
-                  <RfqButton onAfterClick={() => setMobileMenuOpen(false)} className="w-full py-3 text-sm rounded-md" />
+                  <RfqButton onAfterClick={() => setMobileMenuOpen(false)} className="w-full py-3 text-sm rounded-full" />
 
                   {onOpenContactModal && (
                     <button
@@ -298,6 +328,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </header>
     </>
   );

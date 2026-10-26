@@ -7,13 +7,16 @@ import {
   Clock,
   Send,
   CheckCircle2,
-  Building2,
   Sparkles,
   Maximize2,
   X,
   PhoneCall
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Photo shown in the Bangalore hub card and its enlarged view.
+// Use any image without baked-in text; change this one line to swap it.
+const HUB_IMAGE = '/images/industries/automation-robotics.jpg';
 
 export const ContactSection: React.FC = () => {
   const location = useLocation();
@@ -125,30 +128,14 @@ export const ContactSection: React.FC = () => {
               className="group relative rounded-3xl overflow-hidden border border-[#F1D9CA] shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-[#FFF1E8]"
             >
               <img
-                src="/images/resource/ind2.jpg"
+                src={HUB_IMAGE}
                 alt="Siddhi Kabel Bangalore Central Distribution Hub"
-                className="w-full h-64 sm:h-72 object-cover transition-transform duration-700 group-hover:scale-105 opacity-90"
+                className="w-full h-64 sm:h-72 object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#FFFAF6] via-[#FFFAF6]/40 to-transparent" />
 
-              {/* Top Zoom Pill */}
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#FFFAF6]/90 backdrop-blur-xs text-[11px] font-medium text-[#231815] flex items-center gap-1.5 shadow-sm group-hover:scale-105 transition-transform border border-[#F1D9CA]">
-                <Maximize2 className="w-3 h-3 text-[#5F524C]" />
-                <span>View Hub</span>
-              </div>
-
-              {/* Bottom Card Overlay Content */}
-              <div className="absolute bottom-5 left-5 right-5 text-[#231815] space-y-1.5">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#5F524C] tracking-wider uppercase">
-                  <Building2 className="w-3.5 h-3.5" />
-                  <span>Central Operations Hub</span>
-                </div>
-                <h3 className="text-base sm:text-lg font-medium font-editorial text-[#231815] leading-tight">
-                  Siddhi Kabel Bangalore Facility
-                </h3>
-                <p className="text-xs text-[#5F524C] font-light leading-snug">
-                  Banashankari 3rd Stage · Ready stock &amp; rapid industrial logistics across South India &amp; nationwide.
-                </p>
+              {/* Zoom icon only: click the image to enlarge */}
+              <div className="absolute top-4 right-4 p-2 rounded-full bg-[#FFFAF6]/90 backdrop-blur-xs shadow-sm group-hover:scale-110 transition-transform border border-[#F1D9CA]">
+                <Maximize2 className="w-4 h-4 text-[#5F524C]" />
               </div>
             </div>
           </motion.div>
@@ -416,13 +403,13 @@ export const ContactSection: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA]"
+              className="relative max-w-4xl w-full max-h-[calc(100dvh-2rem)] flex flex-col bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA]"
             >
-              <div className="relative">
+              <div className="relative flex-1 min-h-0 overflow-hidden">
                 <img
-                  src="/images/resource/ind2.jpg"
+                  src={HUB_IMAGE}
                   alt="Siddhi Kabel Central Facility Full View"
-                  className="w-full max-h-[75vh] object-cover"
+                  className="w-full h-full max-h-[62dvh] object-cover"
                 />
                 <button
                   onClick={() => setIsImageModalOpen(false)}
@@ -431,7 +418,7 @@ export const ContactSection: React.FC = () => {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <div className="p-6 bg-[#FFFAF6] space-y-1">
+              <div className="shrink-0 p-4 sm:p-6 bg-[#FFFAF6] space-y-1">
                 <h4 className="text-lg font-medium text-[#231815] font-editorial">
                   Siddhi Kabel Corporation · Bangalore Central Logistics Hub
                 </h4>

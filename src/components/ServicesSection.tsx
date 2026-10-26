@@ -161,13 +161,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA]"
+              className="relative max-w-4xl w-full max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA]"
             >
-              <div className="relative bg-[#FFF1E8] max-h-[60vh] flex items-center justify-center overflow-hidden">
+              <div className="relative bg-[#FFF1E8] flex-1 min-h-0 flex items-center justify-center overflow-hidden">
                 <img
                   src={selectedService.image}
                   alt={selectedService.title}
-                  className="max-h-[60vh] w-full object-contain"
+                  className="max-h-[48dvh] sm:max-h-[52dvh] w-full object-contain"
                 />
                 <button
                   onClick={() => setSelectedService(null)}
@@ -178,7 +178,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                 </button>
               </div>
 
-              <div className="p-6 sm:p-8 space-y-3 bg-[#FFFAF6]">
+              <div className="shrink-0 overflow-y-auto p-4 sm:p-6 space-y-2 sm:space-y-3 bg-[#FFFAF6]">
                 <div className="flex items-center gap-2 text-xs font-semibold text-[#5F524C] uppercase tracking-wider">
                   <span className="px-2 py-0.5 rounded bg-[#FFF1E8] border border-[#F1D9CA]">{selectedService.subtitle}</span>
                 </div>
@@ -189,7 +189,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                   {selectedService.description}
                 </p>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#F1D9CA]">
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#F1D9CA]">
                   <span className="text-xs text-[#D2430F] font-light">
                     Factory trained engineers &amp; certified testing equipment.
                   </span>

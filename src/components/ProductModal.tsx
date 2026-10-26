@@ -30,7 +30,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative bg-[#FFFAF6] rounded-3xl shadow-2xl border border-[#F1D9CA] max-w-3xl w-full max-h-[90vh] overflow-y-auto text-[#231815]"
+            className="relative bg-[#FFFAF6] rounded-3xl shadow-2xl border border-[#F1D9CA] max-w-3xl w-full max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto text-[#231815]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header Bar */}

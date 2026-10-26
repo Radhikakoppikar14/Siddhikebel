@@ -7,14 +7,13 @@ import {
   Sparkles,
   ArrowRight,
   Users,
-  Building2,
   Target,
   Compass,
-  CheckCircle2,
   Play,
   Loader2
 } from 'lucide-react';
 import { WhyChooseUs } from '../components/WhyChooseUs';
+import { PageHeader } from '../components/PageHeader';
 
 interface AboutPageProps {
   onGoToContact?: (subject?: string) => void;
@@ -59,95 +58,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
 
   return (
     <div className="bg-[#FFFAF6] text-[#231815] overflow-hidden">
-      {/* 1. Header Banner with Modern Industrial Image Background */}
-      <section className="relative bg-[#FFFAF6] text-[#231815] py-10 sm:py-14 overflow-hidden border-b border-[#F1D9CA] select-none">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <video
-            src="/assets/videos/hero-1.mp4"
-            poster="/assets/videos/hero-1-poster.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            ref={(v) => { if (v) { v.muted = true; v.play().catch(() => {}); } }}
-            className="no-zoom absolute inset-0 w-full h-full object-cover object-center"
-          />
-
-          {/* Scrim Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFAF6]/90 via-[#FFFAF6]/62 to-[#FFFAF6]/12" />
-          
-          {/* Floating Animated Ambient Glows */}
-          <div className="absolute top-1/4 -right-16 w-96 h-96 bg-[#D2430F]/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-1/4 -left-16 w-80 h-80 bg-[#D2430F]/8 rounded-full blur-3xl pointer-events-none" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="lg:col-span-8 space-y-4"
-            >
-              {/* Clean Sleek Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/70 border border-[#F1D9CA] text-[#231815] text-xs font-semibold uppercase tracking-wider backdrop-blur-md shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-[#5F524C]" />
-                <span>Established 2008 · Bangalore, India</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight font-editorial text-[#231815] uppercase drop-shadow-md">
-                ABOUT SIDDHI KABEL
-              </h1>
-
-              <p className="text-sm sm:text-base text-[#231815]/90 font-light max-w-2xl leading-relaxed drop-shadow-sm">
-                Dependable Electrical, Automation &amp; Safety Solutions for Indian Industry &amp; Multinationals.
-              </p>
-
-              {/* Breadcrumb: Home | About Us */}
-              <div className="pt-2 flex items-center gap-2 text-xs font-medium text-[#5F524C]">
-                <Link to="/" className="hover:text-[#231815] transition-colors flex items-center gap-1">
-                  <span>Home</span>
-                </Link>
-                <span className="text-[#5F524C]/60">|</span>
-                <span className="text-[#231815] font-semibold underline underline-offset-4 decoration-[#5F524C]">
-                  About Us
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Right Side: Live Floating Fast-Fact Badges */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="lg:col-span-4 hidden lg:flex flex-col gap-3"
-            >
-              <div className="p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-[#F1D9CA] shadow-lg flex items-center gap-3.5 hover:bg-white transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#F1D9CA]/70 border border-[#F1D9CA] flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-5 h-5 text-[#5F524C]" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#231815] uppercase tracking-wider">Direct OEM Supply</h4>
-                  <p className="text-[11px] text-[#5F524C] font-light">100% genuine factory certified products</p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-[#F1D9CA] shadow-lg flex items-center gap-3.5 hover:bg-white transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#F1D9CA]/70 border border-[#F1D9CA] flex items-center justify-center shrink-0">
-                  <Building2 className="w-5 h-5 text-[#5F524C]" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#231815] uppercase tracking-wider">Bangalore Central Hub</h4>
-                  <p className="text-[11px] text-[#5F524C] font-light">Same-day Karnataka dispatch &amp; buffer stock</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* 1. Header banner - same component and typography as every other page */}
+      <PageHeader
+        title="About Siddhi Kabel"
+        breadcrumb="About Us"
+        category="Siddhi Kabel LTD."
+        subtitle="Dependable Electrical, Automation & Safety Solutions for Indian Industry & Multinationals."
+        bgVideo="/assets/videos/hero-1.mp4"
+        bgImage="/assets/videos/hero-1-poster.jpg"
+      />
 
       {/* 2. Main About Section */}
       <section className="py-14 sm:py-20 bg-[#FFFAF6] relative">
@@ -210,7 +129,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 </div>
 
                 <div
-                  className="relative cursor-pointer overflow-hidden rounded-2xl bg-[#FFFAF6] flex items-center justify-center p-2"
+                  className="group/zoom relative cursor-pointer overflow-hidden rounded-2xl bg-[#FFFAF6] flex items-center justify-center p-2"
                   onClick={() =>
                     setLightboxImage({
                       src: '/images/resource/about.jpg',
@@ -222,11 +141,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                   <img
                     src="/images/resource/about.jpg"
                     alt="Siddhi Kabel Core Strengths Tree Graphic"
-                    className="w-full max-h-[460px] object-contain transition-transform duration-500 group-hover:scale-100"
+                    className="w-full max-h-[460px] object-contain"
                   />
-                  <div className="absolute inset-0 bg-white/0 group-hover:bg-[#FFF1E8] transition-colors flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity px-4 py-2 bg-white/90 text-[#231815] rounded-xl text-xs font-semibold backdrop-blur-xs flex items-center gap-1.5 border border-[#F1D9CA]/30">
-                      <ZoomIn className="w-3.5 h-3.5 text-[#D2430F]" /> Click to enlarge infographic
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <span className="opacity-0 group-hover/zoom:opacity-100 transition-opacity p-2.5 bg-white/90 rounded-full shadow-md backdrop-blur-xs flex items-center justify-center border border-[#F1D9CA]/30">
+                      <ZoomIn className="w-4 h-4 text-[#D2430F]" />
                     </span>
                   </div>
                 </div>
@@ -299,39 +218,39 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 With customer centric approach and constant focus on continuous improvement has helped us to serve our customers better and achieve higher customer satisfaction, with quality as a focus would always be the priority in all our activities and delivering on time if not earlier would be our motto.
               </p>
 
-              {/* Stats Box */}
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.2 }}
-                className="bg-white rounded-3xl border border-[#F1D9CA] shadow-xs hover:shadow-xl transition-all p-6 grid grid-cols-3 divide-x divide-[#F1D9CA] text-center mt-4"
-              >
-                <div className="px-2">
-                  <span className="block text-3xl sm:text-4xl font-normal text-[#5F524C] font-editorial tabular-nums">
-                    15+
-                  </span>
-                  <span className="block text-xs sm:text-sm text-[#D2430F] font-medium mt-1">
-                    Years Experience
-                  </span>
-                </div>
-
-                <div className="px-2">
-                  <span className="block text-3xl sm:text-4xl font-normal text-[#5F524C] font-editorial tabular-nums">
-                    20+
-                  </span>
-                  <span className="block text-xs sm:text-sm text-[#D2430F] font-medium mt-1">
-                    Industrial Segments
-                  </span>
-                </div>
-
-                <div className="px-2">
-                  <span className="block text-3xl sm:text-4xl font-normal text-[#5F524C] font-editorial tabular-nums">
-                    300+
-                  </span>
-                  <span className="block text-xs sm:text-sm text-[#D2430F] font-medium mt-1">
-                    Customers Served
-                  </span>
-                </div>
-              </motion.div>
+              {/* Stats Boxes - image backgrounds with light theme wash */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                {[
+                  { value: '15+', label: 'Years Experience', img: '/images/industries/plant-engineering.jpg', tint: '253,229,211' },
+                  { value: '20+', label: 'Industrial Segments', img: '/images/industries/automation-robotics.jpg', tint: '255,244,214' },
+                  { value: '300+', label: 'Customers Served', img: '/images/industries/oem-machines.jpg', tint: '233,238,244' },
+                ].map((stat) => (
+                  <motion.div
+                    key={stat.label}
+                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.2 }}
+                    className="relative overflow-hidden rounded-2xl border border-[#F1D9CA] shadow-sm hover:shadow-xl transition-shadow p-5 text-center group"
+                  >
+                    <div
+                      className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
+                      style={{ backgroundImage: `url(${stat.img})` }}
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: `linear-gradient(to bottom, rgba(${stat.tint},0.93) 0%, rgba(${stat.tint},0.70) 55%, rgba(${stat.tint},0.30) 100%)` }}
+                    />
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F]" />
+                    <div className="relative z-10">
+                      <span className="block text-3xl sm:text-4xl font-normal text-[#231815] font-editorial tabular-nums">
+                        {stat.value}
+                      </span>
+                      <span className="block text-xs sm:text-sm text-[#D2430F] font-semibold mt-1">
+                        {stat.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -613,7 +532,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative max-w-4xl w-full bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] p-4 text-[#231815]"
+              className="relative max-w-4xl w-full max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-4rem)] flex flex-col bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] p-4 text-[#231815]"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between pb-3 px-2 border-b border-[#F1D9CA]">
@@ -630,15 +549,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 </button>
               </div>
 
-              <div className="mt-3 overflow-auto max-h-[75vh] flex items-center justify-center bg-white rounded-2xl p-2 border border-[#F1D9CA]">
+              <div className="mt-3 flex-1 min-h-0 overflow-hidden flex items-center justify-center bg-white rounded-2xl p-2 border border-[#F1D9CA]">
                 <img
                   src={lightboxImage.src}
                   alt={lightboxImage.alt}
-                  className="max-h-[70vh] w-auto object-contain rounded-lg shadow-sm"
+                  className="max-h-[56dvh] sm:max-h-[60dvh] max-w-full w-auto object-contain rounded-lg shadow-sm"
                 />
               </div>
 
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-3 px-2 text-xs text-[#5F524C]/80">
+              <div className="mt-3 shrink-0 flex flex-wrap items-center justify-between gap-3 px-2 text-xs text-[#5F524C]/80">
                 <span>Authorized Siddhi Kabel Corporate Archives</span>
                 <button
                   onClick={() => {

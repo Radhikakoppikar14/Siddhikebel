@@ -1,86 +1,66 @@
 import React, { useState } from 'react';
-import { Target, Shield, Award, Users, Warehouse, FileCheck, HeartHandshake, Sparkles } from 'lucide-react';
+import { Users, Wrench, Cog, Warehouse, Truck, Globe, FileCheck, BadgeCheck, HeartHandshake, Scale, ShieldCheck, Sparkles, Factory, Building2, Lightbulb } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const STAT_THEMES = [
-  {
-    card: 'bg-gradient-to-br from-[#FFF7F0] to-[#FDE5D3] border-[#F1CDB3]',
-    num: 'text-[#1E293B]',
-    suffix: 'text-[#D2430F]',
-    label: 'text-[#1E293B]',
-    sub: 'text-[#475569]',
-    dot: 'bg-[#D2430F]',
-  },
-  {
-    card: 'bg-gradient-to-br from-[#FFF7F0] to-[#FDE5D3] border-[#F1CDB3]',
-    num: 'text-[#1E293B]',
-    suffix: 'text-[#D2430F]',
-    label: 'text-[#1E293B]',
-    sub: 'text-[#475569]',
-    dot: 'bg-[#D2430F]',
-  },
-  {
-    card: 'bg-gradient-to-br from-[#FFF7F0] to-[#FDE5D3] border-[#F1CDB3]',
-    num: 'text-[#1E293B]',
-    suffix: 'text-[#D2430F]',
-    label: 'text-[#1E293B]',
-    sub: 'text-[#475569]',
-    dot: 'bg-[#D2430F]',
-  },
+// Each card: photo + a wash colour picked from that photo's own tones
+const STAT_CARDS = [
+  { img: '/images/industries/plant-engineering.jpg', tint: '253,229,211' }, // sunset refinery - soft peach
+  { img: '/images/industries/automation-robotics.jpg', tint: '255,244,214' }, // yellow robots - warm cream
+  { img: '/images/industries/oem-machines.jpg', tint: '233,238,244' }, // steel machine - cool grey
 ];
 
-const CARD_TINTS = ['bg-[#FFF1E8]', 'bg-[#FFF4D6]', 'bg-[#FDE3D3]', 'bg-[#F6EBDD]'];
+const IconBubble: React.FC<{ icon: React.ElementType }> = ({ icon: Icon }) => (
+  <span className="w-9 h-9 rounded-full bg-white border border-[#F1D9CA] text-[#D2430F] flex items-center justify-center shadow-sm group-hover:bg-[#D2430F] group-hover:text-white transition-colors duration-200">
+    <Icon size={18} />
+  </span>
+);
 
-const REASONS = [
-  {
-    num: '01',
-    icon: Target,
-    title: 'One Trusted Single Source',
-    desc: 'Complete solution in Electrical, Safety, Energy, and Automation products & Services.',
-  },
-  {
-    num: '02',
-    icon: Shield,
-    title: 'Multiple World-Class Brands',
-    desc: 'Multiple brands with huge range of world class products.',
-  },
-  {
-    num: '03',
-    icon: Award,
-    title: 'Wide Range of Products',
-    desc: 'Wide range of products for Industrial, Commercial and Domestic applications.',
-  },
-  {
-    num: '04',
-    icon: Users,
-    title: 'Dedicated Skilled Team',
-    desc: 'Technically, commercially skilled dedicated team.',
-  },
-  {
-    num: '05',
-    icon: Award,
-    title: '25 Years Vertical Presence',
-    desc: '25 years of presence across industry verticals.',
-  },
-  {
-    num: '06',
-    icon: Warehouse,
-    title: 'Planned Inventory & Large Network',
-    desc: 'Customer specific and well-planned inventory added with reliable large network for better service.',
-  },
-  {
-    num: '07',
-    icon: FileCheck,
-    title: 'Complete Statutory Compliance',
-    desc: 'Complete statutory compliance for hassle free transaction.',
-  },
-  {
-    num: '08',
-    icon: HeartHandshake,
-    title: 'Ethical Business Practice',
-    desc: 'Ethical business practice with quality as our first priority.',
-  },
+const IconRow: React.FC<{ icons: React.ElementType[] }> = ({ icons }) => (
+  <div className="flex items-center gap-2 mt-3">
+    {icons.map((I, i) => (
+      <IconBubble key={i} icon={I} />
+    ))}
+  </div>
+);
+
+const BRAND_LOGOS = [
+  '/images/clients/lapp.png',
+  '/images/clients/eaton.png',
+  '/images/clients/partex.png',
+  '/images/clients/mennekes.png',
 ];
+
+const APPLICATIONS = [
+  { label: 'Industrial', img: '/images/industries/steel-cement.jpg', icon: Factory },
+  { label: 'Commercial', img: '/images/industries/construction.jpg', icon: Building2 },
+  { label: 'Domestic', img: '/images/gallery/led.jpg', icon: Lightbulb },
+];
+
+const InfoCard: React.FC<{
+  num: string;
+  title: string;
+  desc: string;
+  side?: 'left' | 'right';
+  delay?: number;
+  children?: React.ReactNode;
+}> = ({ num, title, desc, side, delay = 0, children }) => (
+  <motion.div
+    initial={{ opacity: 0, x: side === 'right' ? 24 : -24 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: false, amount: 0.15 }}
+    transition={{ duration: 0.45, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+    className="relative group rounded-2xl border border-[#F1D9CA] hover:border-[#D2430F]/50 bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-5 overflow-hidden cursor-default"
+  >
+    <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F]/70 group-hover:bg-[#D2430F] transition-colors" />
+    <span className="absolute right-3 top-3.5 w-7 h-7 rounded-full bg-[#D2430F]/10 text-[#D2430F] text-[11px] font-mono font-bold flex items-center justify-center">
+      {num}
+    </span>
+    <h4 className="text-sm sm:text-base font-semibold text-[#231815] leading-snug pr-9">{title}</h4>
+    <p className="text-xs sm:text-[13px] text-[#5F524C] leading-relaxed mt-1">{desc}</p>
+    {children}
+  </motion.div>
+);
 
 const AnimatedCounterCard: React.FC<{
   target: number;
@@ -90,7 +70,7 @@ const AnimatedCounterCard: React.FC<{
   theme?: number;
 }> = ({ target, suffix, label, subLabel, theme = 0 }) => {
   const [count, setCount] = useState(0);
-  const t = STAT_THEMES[theme % STAT_THEMES.length];
+  const card = STAT_CARDS[theme % STAT_CARDS.length];
 
   return (
     <motion.div
@@ -114,32 +94,42 @@ const AnimatedCounterCard: React.FC<{
           }
         }, stepTime);
       }}
-      whileHover={{ y: -7, scale: 1.04 }}
+      whileHover={{ y: -7, scale: 1.03 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className={`relative p-5 sm:p-6 rounded-2xl border shadow-sm hover:shadow-lg transition-all duration-300 cursor-default group overflow-hidden ${t.card}`}
+      className="relative p-5 sm:p-6 rounded-2xl border border-[#F1CDB3] shadow-sm hover:shadow-lg transition-shadow duration-300 cursor-default group overflow-hidden bg-[#FFF7F0]"
     >
-      {/* Top glowing accent border shimmer */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      {/* Ambient background hover flare */}
-      <div className="absolute -bottom-10 -right-10 w-28 h-28 bg-white/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
+        style={{ backgroundImage: `url(${card.img})` }}
+      />
+      {/* Wash in the photo's own colour: solid behind the text, fading out so the photo shows */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to right, rgba(${card.tint},0.97) 0%, rgba(${card.tint},0.80) 40%, rgba(${card.tint},0.15) 100%)`,
+        }}
+      />
+      {/* Accent bar */}
+      <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#D2430F]" />
 
-      <div className="relative z-10">
+      <div className="relative z-10 pl-2">
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline">
-            <span className={`text-3xl sm:text-4xl lg:text-5xl font-light font-editorial ${t.num} tabular-nums tracking-tight`}>
+            <span className="text-3xl sm:text-4xl lg:text-5xl font-light font-editorial text-[#1E293B] tabular-nums tracking-tight">
               {count}
             </span>
-            <span className={`text-2xl sm:text-3xl font-light ${t.suffix} font-editorial ml-0.5`}>
+            <span className="text-2xl sm:text-3xl font-light text-[#D2430F] font-editorial ml-0.5">
               {suffix}
             </span>
           </div>
-          <span className={`w-2.5 h-2.5 rounded-full ${t.dot} group-hover:scale-125 transition-transform`} />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#D2430F] group-hover:scale-125 transition-transform" />
         </div>
-        <span className={`text-xs sm:text-sm ${t.label} font-semibold mt-2.5 block tracking-tight`}>
+        <span className="text-xs sm:text-sm text-[#1E293B] font-semibold mt-2.5 block tracking-tight">
           {label}
         </span>
         {subLabel && (
-          <span className={`text-[11px] ${t.sub} font-light block mt-0.5`}>
+          <span className="text-[11px] text-[#475569] font-normal block mt-0.5">
             {subLabel}
           </span>
         )}
@@ -232,45 +222,110 @@ export const WhyChooseUs: React.FC = () => {
             <div className="w-12 h-0.5 bg-[#D2430F] mx-auto mt-2 rounded-full" />
           </div>
 
-          {/* 8 Items in Compact Architectural Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5">
-            {REASONS.map((r, index) => {
-              const IconComp = r.icon;
-              return (
-                <motion.div
-                  key={r.num}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.05 }}
-                  transition={{ duration: 0.35, delay: index * 0.04, ease: [0.21, 0.47, 0.32, 0.98] }}
-                  whileHover={{ y: -3, scale: 1.01, transition: { duration: 0.2, ease: 'easeOut' } }}
-                  className={`relative ${CARD_TINTS[index % CARD_TINTS.length]} rounded-2xl p-4 border border-[#F1D9CA] hover:border-[#D2430F]/50 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group overflow-hidden cursor-default`}
-                >
-                  {/* Subtle top accent bar */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F] opacity-70 group-hover:opacity-100 transition-opacity duration-200" />
-
-                  <div className="relative z-10">
-                    {/* Compact Icon + Index Row */}
-                    <div className="flex items-center justify-between mb-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[#FFFAF6] border border-[#F1D9CA] flex items-center justify-center text-[#5F524C] group-hover:bg-[#D2430F] group-hover:text-[#FFFAF6] transition-colors duration-200 shadow-2xs">
-                        <IconComp className="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
+          {/* Infographic panel */}
+          <div className="rounded-3xl border border-[#F1D9CA] bg-gradient-to-br from-[#FFFAF6] via-white to-[#FFF1E8] p-4 sm:p-8 shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_1fr] gap-4 lg:gap-8 items-center">
+              {/* LEFT COLUMN */}
+              <div className="space-y-4 order-2 lg:order-1">
+                <InfoCard num="02" side="left" title="Multiple World-Class Brands" desc="Multiple brands with huge range of world class products.">
+                  <div className="grid grid-cols-4 gap-2 mt-3">
+                    {BRAND_LOGOS.map((src) => (
+                      <div key={src} className="h-10 rounded-lg bg-white border border-[#F1D9CA] flex items-center justify-center p-1.5">
+                        <img src={src} alt="" loading="lazy" className="max-h-full max-w-full object-contain" />
                       </div>
-                      <span className="text-xs font-mono font-semibold text-[#D2430F] tabular-nums">
-                        {r.num}
+                    ))}
+                  </div>
+                </InfoCard>
+
+                <InfoCard num="03" side="left" delay={0.06} title="Wide Range of Products" desc="Wide range of products for Industrial, Commercial and Domestic applications.">
+                  <div className="grid grid-cols-3 gap-2 mt-3">
+                    {APPLICATIONS.map((a) => {
+                      const I = a.icon;
+                      return (
+                        <div key={a.label} className="relative h-16 rounded-lg overflow-hidden border border-[#F1D9CA]">
+                          <img src={a.img} alt={a.label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#231815]/80 via-[#231815]/20 to-transparent" />
+                          <span className="absolute bottom-1 left-1.5 right-1 flex items-center gap-1 text-[10px] font-semibold text-white">
+                            <I className="w-3 h-3" /> {a.label}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </InfoCard>
+
+                <InfoCard num="04" side="left" delay={0.12} title="Dedicated Skilled Team" desc="Technically, commercially skilled dedicated team.">
+                  <IconRow icons={[Users, Wrench, Cog]} />
+                </InfoCard>
+              </div>
+
+              {/* CENTER HUB */}
+              <div className="order-1 lg:order-2 flex flex-col items-center gap-5">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-60 h-60 sm:w-64 sm:h-64"
+                >
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-[#D2430F]/40"
+                  />
+                  <div className="absolute inset-3 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                    <img src="/images/industries/plant-engineering.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-[#FFF1E8]/85 to-[#FDE5D3]/90" />
+                    <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+                      <span className="w-11 h-11 rounded-full bg-[#D2430F] text-white flex items-center justify-center shadow-md mb-2">
+                        <ShieldCheck className="w-6 h-6" />
+                      </span>
+                      <span className="text-[10px] font-mono font-bold text-[#D2430F] tracking-widest">01</span>
+                      <span className="text-sm font-semibold text-[#231815] leading-snug">One Trusted Single Source</span>
+                      <span className="text-[11px] text-[#5F524C] leading-snug mt-1">
+                        Complete solution in Electrical, Safety, Energy, and Automation products &amp; Services.
                       </span>
                     </div>
-
-                    <h4 className="text-sm font-semibold text-[#231815] group-hover:text-[#5F524C] transition-colors leading-snug">
-                      {r.title}
-                    </h4>
-
-                    <p className="text-xs text-[#5F524C]/80 font-light leading-relaxed mt-1">
-                      {r.desc}
-                    </p>
                   </div>
                 </motion.div>
-              );
-            })}
+
+                {/* 25 years seal */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: 0.1 }}
+                  whileHover={{ y: -4 }}
+                  className="group relative w-full rounded-2xl border border-[#F1D9CA] bg-gradient-to-br from-white to-[#FFF4D6] shadow-sm hover:shadow-lg transition-shadow p-4 flex items-center gap-4"
+                >
+                  <div className="shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-[#D2430F] to-[#F08A4B] ring-4 ring-[#FFE1CC] text-white flex flex-col items-center justify-center leading-none shadow-md">
+                    <span className="text-xl font-bold font-editorial">25</span>
+                    <span className="text-[9px] font-semibold tracking-widest mt-0.5">YEARS</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono font-bold text-[#D2430F]">05</span>
+                    <h4 className="text-sm font-semibold text-[#231815] leading-snug">25 Years Vertical Presence</h4>
+                    <p className="text-xs text-[#5F524C] leading-relaxed mt-0.5">25 years of presence across industry verticals.</p>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* RIGHT COLUMN */}
+              <div className="space-y-4 order-3">
+                <InfoCard num="08" side="right" title="Ethical Business Practice" desc="Ethical business practice with quality as our first priority.">
+                  <IconRow icons={[HeartHandshake, Scale, ShieldCheck]} />
+                </InfoCard>
+
+                <InfoCard num="07" side="right" delay={0.06} title="Complete Statutory Compliance" desc="Complete statutory compliance for hassle free transaction.">
+                  <IconRow icons={[FileCheck, BadgeCheck]} />
+                </InfoCard>
+
+                <InfoCard num="06" side="right" delay={0.12} title="Planned Inventory & Large Network" desc="Customer specific and well-planned inventory added with reliable large network for better service.">
+                  <IconRow icons={[Warehouse, Truck, Globe]} />
+                </InfoCard>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

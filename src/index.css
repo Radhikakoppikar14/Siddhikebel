@@ -60,6 +60,24 @@
 }
 .font-mono { font-variant-numeric: tabular-nums; }
 
+/* ------------------------------------------------------------------
+   One consistent type style on every page (Sora).
+   Unlayered + !important so per-page font-bold / font-light / uppercase
+   utilities can no longer make one page look different from another.
+------------------------------------------------------------------- */
+h1, h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+  text-transform: none !important;
+}
+h3, h4 {
+  font-weight: 600 !important;
+}
+/* Body copy: no hairline "light" weight on some pages and regular on others */
+.font-thin, .font-extralight, .font-light {
+  font-weight: 400 !important;
+}
+
 /* Custom Scrollbar - slate */
 ::-webkit-scrollbar {
   width: 8px;

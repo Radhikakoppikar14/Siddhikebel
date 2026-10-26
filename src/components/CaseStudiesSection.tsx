@@ -397,14 +397,14 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ onOpenRf
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA]"
+              className="relative max-w-4xl w-full max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] flex flex-col bg-[#FFFAF6] rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA]"
             >
               {/* Image Preview with Close Button */}
-              <div className="relative bg-[#FFF1E8] max-h-[60vh] flex items-center justify-center overflow-hidden">
+              <div className="relative bg-[#FFF1E8] flex-1 min-h-0 flex items-center justify-center overflow-hidden">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="max-h-[60vh] w-full object-contain"
+                  className="max-h-[46dvh] sm:max-h-[50dvh] w-full object-contain"
                 />
                 <button
                   type="button"
@@ -420,7 +420,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ onOpenRf
               </div>
 
               {/* Details & Inquire Bar */}
-              <div className="p-6 sm:p-8 space-y-4 bg-[#FFFAF6]">
+              <div className="shrink-0 overflow-y-auto p-4 sm:p-6 space-y-2 sm:space-y-3 bg-[#FFFAF6]">
                 <div>
                   <h3 className="text-xl sm:text-2xl font-normal text-[#231815] font-editorial mb-1">
                     {selectedProject.title}
@@ -433,7 +433,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({ onOpenRf
                   {selectedProject.summary}
                 </p>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#F1D9CA]">
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#F1D9CA]">
                   <span className="text-xs text-[#D2430F] font-light">
                     Siddhi Kabel engineering &amp; factory-certified materials supply.
                   </span>
