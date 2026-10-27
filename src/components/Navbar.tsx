@@ -1,4 +1,4 @@
-import { ContactButton } from './ContactButton';
+import { RfqButton } from './RfqButton';
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Phone, Mail, Menu, X, Sparkles } from 'lucide-react';
@@ -234,7 +234,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               >
                 Get in Touch
               </NavLink>
-              <ContactButton className="px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm rounded-full border border-transparent" />
+              <RfqButton className="px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm rounded-full border border-transparent" />
             </div>
 
             {/* Mobile & Tablet Toggle */}
@@ -292,7 +292,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
 
                 {/* Mobile Action Buttons */}
                 <div className="pt-4 space-y-2.5">
-                  <ContactButton onAfterClick={() => setMobileMenuOpen(false)} className="w-full py-3 text-sm rounded-full" />
+                  <RfqButton onAfterClick={() => setMobileMenuOpen(false)} className="w-full py-3 text-sm rounded-full" />
 
                   {onOpenContactModal && (
                     <button

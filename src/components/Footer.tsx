@@ -1,3 +1,4 @@
+import { RfqButton } from './RfqButton';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -98,6 +99,9 @@ export const Footer: React.FC<FooterProps> = () => {
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Case Studies</span>
                 </Link>
+              </li>
+              <li>
+                <RfqButton className="px-4 py-2 text-sm rounded-md" />
               </li>
               <li>
                 <Link to="/contact" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
