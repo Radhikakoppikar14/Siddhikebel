@@ -240,7 +240,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                         <Tag className={FIELD_ICON} />
                         <input
                           type="text"
-                          placeholder="e.g. Lapp Cable Quote / Switchgear"
+                          placeholder="e.g. Lapp Cable / Switchgear"
                           value={formState.subject}
                           onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                           className={FIELD_INPUT}

@@ -2,11 +2,9 @@ import React from 'react';
 
 /**
  * "Check our RFQ site" button.
- * Button only for now: nothing opens when it is clicked.
- * When the RFQ site link is ready, set RFQ_SITE_URL and the button
- * will open it in a new tab.
+ * Opens the RFQ site in a new tab when clicked.
  */
-export const RFQ_SITE_URL = '';
+export const RFQ_SITE_URL = 'https://siddhikabelcorp-hdhr.vercel.app/';
 
 interface RfqButtonProps {
   className?: string;

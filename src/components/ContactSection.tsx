@@ -84,7 +84,7 @@ export const ContactSection: React.FC = () => {
 
             <p className="text-sm sm:text-base text-[#5F524C]/80 font-light max-w-xl leading-relaxed">
               Connect directly with our Bangalore central sales and application engineering division. 
-              We provide rapid turnaround quotes, OEM specifications, and factory-certified supply support.
+              We provide OEM specifications and factory-certified supply support.
             </p>
 
             {/* Quick Live Hotlines & Response Stat */}

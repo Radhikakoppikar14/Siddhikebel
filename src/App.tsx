@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -12,14 +12,14 @@ import { LiveEffects } from './components/LiveEffects';
 
 // The Exact Pages from the Original Website
 import { HomePage } from './pages/HomePage';
-import { AboutPage } from './pages/AboutPage';
-import { BrandPage } from './pages/BrandPage';
-import { ProductsPage } from './pages/ProductsPage';
-import { IndustriesPage } from './pages/IndustriesPage';
-import { ContactPage } from './pages/ContactPage';
-import { OffersPage } from './pages/OffersPage';
-import { ServicesPage } from './pages/ServicesPage';
-import { ProjectsPage } from './pages/ProjectsPage';
+// Home loads right away; every other page is downloaded only when it is opened
+const AboutPage = lazy(() => import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })));
+const BrandPage = lazy(() => import('./pages/BrandPage').then((m) => ({ default: m.BrandPage })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then((m) => ({ default: m.ProductsPage })));
+const IndustriesPage = lazy(() => import('./pages/IndustriesPage').then((m) => ({ default: m.IndustriesPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
+const ServicesPage = lazy(() => import('./pages/ServicesPage').then((m) => ({ default: m.ServicesPage })));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((m) => ({ default: m.ProjectsPage })));
 
 import { ProductItem, BRANDS_DATA } from './data/siddhiData';
 
@@ -81,10 +81,11 @@ function AppContent() {
             key={location.pathname}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, transition: { duration: 0.12 } }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="w-full"
           >
+            <Suspense fallback={<div className="min-h-[60vh]" />}>
             <Routes location={location} key={location.pathname}>
               <Route
                 path="/"
@@ -143,22 +144,15 @@ function AppContent() {
                 element={<ProjectsPage onOpenRfq={handleOpenContactModal} />}
               />
 
-              <Route
-                path="/products-on-offer"
-                element={<OffersPage onGoToContact={handleOpenContactModal} />}
-              />
-              <Route
-                path="/products-on-offer.html"
-                element={<OffersPage onGoToContact={handleOpenContactModal} />}
-              />
-              <Route
-                path="/offers"
-                element={<OffersPage onGoToContact={handleOpenContactModal} />}
-              />
+              {/* Old RFQ / offers links now go to Home */}
+              <Route path="/products-on-offer" element={<Navigate to="/" replace />} />
+              <Route path="/products-on-offer.html" element={<Navigate to="/" replace />} />
+              <Route path="/offers" element={<Navigate to="/" replace />} />
 
               {/* Fallback to Home */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

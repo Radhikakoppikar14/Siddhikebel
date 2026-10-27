@@ -30,9 +30,9 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onOpenSpecs, onGoToContact
 
   return (
     <div className="bg-white text-[#231815]">
-      {/* Brand colour header */}
-      <header style={{ backgroundColor: brand.color }} className="relative overflow-hidden text-white">
-        {/* Background video with a brand-colour wash so each brand keeps its own colour */}
+      {/* Header: dark overlay with white text, same as the home hero (brand colour kept as the bottom line) */}
+      <header className="relative overflow-hidden text-white bg-[#231815]" style={{ borderBottom: `4px solid ${brand.color}` }}>
+        {/* Background video */}
         <video
           key={bgVideo}
           src={bgVideo}
@@ -41,14 +41,12 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onOpenSpecs, onGoToContact
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: `linear-gradient(90deg, ${brand.color}F2 0%, ${brand.color}CC 45%, ${brand.color}80 100%)` }}
-        />
+        <div className="absolute inset-0 bg-black/55 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14">
           <nav className="flex items-center gap-2 text-sm text-white/90" aria-label="Breadcrumb">
             <Link to="/" className="hover:underline">Home</Link>

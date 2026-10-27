@@ -35,8 +35,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   }, [bgVideo]);
 
   return (
-    <header className="relative overflow-hidden bg-white border-b border-[#F1D9CA]">
-      {/* Photo shown as-is, no colour overlay, no pattern */}
+    <header className="relative overflow-hidden bg-[#231815]">
+      {/* Photo with a dark overlay so the white text stays readable (same as the home hero) */}
       <div className="absolute inset-0 z-0">
         {bgVideo ? (
           <video
@@ -47,7 +47,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             className="no-zoom absolute inset-0 w-full h-full object-cover object-center"
           />
         ) : (
@@ -59,34 +59,34 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             referrerPolicy="no-referrer"
           />
         )}
-        {/* Plain white fade on the left so the text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/0" />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 lg:py-16">
         <div className="max-w-3xl space-y-4">
-          <nav className="flex items-center gap-2 text-sm text-[#5F524C]" aria-label="Breadcrumb">
-            <Link to="/" className="font-medium hover:text-[#D2430F] transition-colors">
+          <nav className="flex items-center gap-2 text-sm text-white/75" aria-label="Breadcrumb">
+            <Link to="/" className="font-medium hover:text-white transition-colors">
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="font-semibold text-[#231815]">{breadcrumb}</span>
+            <span className="font-semibold text-white">{breadcrumb}</span>
           </nav>
 
-          <p className="text-sm font-semibold text-[#D2430F]">
+          <p className="text-sm font-semibold text-[#FF8A55]">
             {category}
-            <span className="text-[#5F524C] font-normal"> &nbsp;|&nbsp; Official Channel Partner</span>
+            <span className="text-white/75 font-normal"> &nbsp;|&nbsp; Official Channel Partner</span>
           </p>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#231815] font-editorial leading-[1.05]">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-editorial leading-[1.05]">
             {title}
           </h1>
 
-          <p className="text-base sm:text-lg text-[#3D332E] leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
             {subtitle || DEFAULT_SUBTITLE}
           </p>
 
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-sm font-medium text-[#231815]">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-sm font-medium text-white">
             {POINTS.map((p) => (
               <li key={p} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-[#D2430F]" />
