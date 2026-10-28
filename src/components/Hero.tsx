@@ -18,11 +18,11 @@ interface SlideItem {
   rotatingWords: string[];
 }
 
-// Hides the text that is burned into the top of the background videos.
-// Increase if you still see it, decrease if too much of the video is cut.
-const VIDEO_CROP_TOP = 22; // percent
-const VIDEO_CROP_BOTTOM = 30; // percent trimmed off the bottom (hides the corner sparkle mark)
-const VIDEO_CROP_RIGHT = 18; // percent trimmed off the right (hides the corner sparkle mark)
+// The new demo videos have no burned-in text and the corner mark is already
+// removed from the files, so no cropping is needed any more.
+const VIDEO_CROP_TOP = 0; // percent
+const VIDEO_CROP_BOTTOM = 0; // percent
+const VIDEO_CROP_RIGHT = 0; // percent
 
 const SLIDES: SlideItem[] = [
   {

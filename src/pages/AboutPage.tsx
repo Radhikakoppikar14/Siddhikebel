@@ -64,8 +64,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
         breadcrumb="About Us"
         category="Siddhi Kabel LTD."
         subtitle="Dependable Electrical, Automation & Safety Solutions for Indian Industry & Multinationals."
-        bgVideo="/assets/videos/hero-1.mp4"
-        bgImage="/assets/videos/hero-1-poster.jpg"
+        bgVideo="/assets/videos/demoo1.mp4"
+        bgImage="/assets/videos/demoo1-poster.jpg"
       />
 
       {/* 2. About Us introduction */}

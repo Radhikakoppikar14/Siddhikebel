@@ -17,7 +17,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onGoToContact }) => 
         title="Products"
         breadcrumb="Products"
         category="Siddhi Kabel LTD."
-        bgVideo="/assets/videos/hero-1.mp4"
+        bgVideo="/assets/videos/demoo1.mp4"
+        bgImage="/assets/videos/demoo1-poster.jpg"
       />
 
       <BrandServicesSection onOpenRfq={onGoToContact} />
