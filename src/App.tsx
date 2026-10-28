@@ -32,7 +32,7 @@ if (typeof window !== 'undefined') {
     img.src = b.logo;
   });
   const thumb = new Image();
-  thumb.src = 'https://i.ytimg.com/vi/e3a0qpri5NA/hqdefault.jpg';
+  thumb.src = 'https://i.ytimg.com/vi/e3a0qpri5NA/maxresdefault.jpg';
 }
 
 function AppContent() {

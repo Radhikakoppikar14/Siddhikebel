@@ -62,7 +62,7 @@ const BRAND_LOGOS = [
 const APPLICATIONS = [
   { label: 'Industrial', img: '/images/industries/steel-cement.jpg', icon: Factory },
   { label: 'Commercial', img: '/images/industries/construction.jpg', icon: Building2 },
-  { label: 'Domestic', img: '/images/gallery/led.jpg', icon: Lightbulb },
+  { label: 'Domestic', img: '/images/domestic.jpg', icon: Lightbulb },
 ];
 
 const InfoCard: React.FC<{

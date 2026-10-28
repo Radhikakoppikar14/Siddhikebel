@@ -16,7 +16,8 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
   const brand = BRANDS_DATA.find((b) => b.id === brandId);
   if (!brand) return <Navigate to="/products" replace />;
 
-  const bgVideo = ['lapp', 'partex'].includes(brand.id) ? '/assets/videos/hero-1.mp4' : '/assets/videos/hero-2.mp4';
+  // Same warehouse video for all four brands (Lapp, Eaton, Partex, Mennekes)
+  const bgVideo = '/assets/videos/demo1_97642c15.mp4';
   const detail = BRAND_DETAILS[brand.id];
   const products = PRODUCTS_CATALOG.filter((p) => p.brandId === brand.id);
 

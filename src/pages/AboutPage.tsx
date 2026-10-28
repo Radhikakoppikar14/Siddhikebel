@@ -40,6 +40,19 @@ const preconnect = (...urls: string[]) => {
   });
 };
 
+// maxresdefault is a true 16:9 image (hqdefault is 4:3 with black bars, which looks cropped and blurry).
+// mqdefault is a true 16:9 fallback for videos that have no maxres thumbnail.
+const VIDEO_THUMB = 'https://i.ytimg.com/vi/e3a0qpri5NA/maxresdefault.jpg';
+const VIDEO_THUMB_FALLBACK = 'https://i.ytimg.com/vi/e3a0qpri5NA/mqdefault.jpg';
+const swapToFallbackThumb = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  const img = e.currentTarget;
+  if (img.src !== VIDEO_THUMB_FALLBACK) img.src = VIDEO_THUMB_FALLBACK;
+};
+const checkThumbSize = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  // YouTube answers with a tiny 120px placeholder when maxres does not exist
+  if (e.currentTarget.naturalWidth <= 200) swapToFallbackThumb(e);
+};
+
 export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
   const [videoActive, setVideoActive] = useState(false);
   const [iframeReady, setIframeReady] = useState(false);
@@ -153,9 +166,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 <>
                   {/* Thumbnail + spinner stay visible until the YouTube player is ready */}
                   <img
-                    src="https://i.ytimg.com/vi/e3a0qpri5NA/hqdefault.jpg"
+                    src={VIDEO_THUMB}
+                    onLoad={checkThumbSize}
+                    onError={swapToFallbackThumb}
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                   />
                   {!iframeReady && (
                     <span className="absolute inset-0 flex items-center justify-center bg-black/30">
@@ -184,11 +199,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                   className="absolute inset-0 w-full h-full cursor-pointer group/play"
                 >
                   <img
-                    src="https://i.ytimg.com/vi/e3a0qpri5NA/hqdefault.jpg"
+                    src={VIDEO_THUMB}
+                    onLoad={checkThumbSize}
+                    onError={swapToFallbackThumb}
                     alt="Siddhi Kabel Corporate Overview video thumbnail"
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                   />
                   <span className="absolute inset-0 bg-black/25 group-hover/play:bg-black/10 transition-colors" />
                   <span className="absolute inset-0 flex items-center justify-center">

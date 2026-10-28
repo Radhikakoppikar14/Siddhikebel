@@ -105,7 +105,7 @@ export const BRANDS_DATA: BrandInfo[] = [
     name: "LAPP India",
     shortDesc: "Integrated cable and connection technology.",
     fullDesc:
-      "LAPP India Private Limited, part of the Stuttgart-based LAPP Group, supplies cables and connection technology: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.",
+      "We supply LAPP cables and connection products: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.",
     logo: "/images/clients/lapp.png",
     featuredImg: "/images/brands/lapp.jpg",
     categories: ["Power & Control Cables", "Data Communication", "Cable Glands & Connectors"],
