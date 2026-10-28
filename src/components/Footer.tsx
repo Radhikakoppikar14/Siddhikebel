@@ -155,10 +155,10 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-[#FFD7C2] shrink-0" />
                 <div className="space-y-0.5">
-                  <a href="tel:09620000947" className="hover:text-[#FFD7C2] block font-mono">
+                  <a href="tel:+919620000947" className="hover:text-[#FFD7C2] block font-mono">
                     {COMPANY_INFO.contacts.primaryPhone}
                   </a>
-                  <a href="tel:09886058511" className="hover:text-[#FFD7C2] block font-mono">
+                  <a href="tel:+919886058511" className="hover:text-[#FFD7C2] block font-mono">
                     {COMPANY_INFO.contacts.secondaryPhone}
                   </a>
                 </div>

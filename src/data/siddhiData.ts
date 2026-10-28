@@ -74,8 +74,8 @@ export const COMPANY_INFO = {
   segmentsServed: "16+",
   customersServed: "1,800+",
   contacts: {
-    primaryPhone: "096200 00947",
-    secondaryPhone: "098860 58511",
+    primaryPhone: "+91 96200 00947",
+    secondaryPhone: "+91 98860 58511",
     // TODO(client): replace with the confirmed Sales email ID and verify both mobile numbers.
     // Every page (navbar, footer, contact page, enquiry popup) reads these values.
     salesEmail: "info@siddhikabel.com",

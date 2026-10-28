@@ -114,11 +114,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
           {/* Right: Phone & Email Contacts */}
           <div className="flex items-center gap-2.5 sm:gap-4 text-[11px] sm:text-xs text-white/90 shrink-0">
             <a
-              href="tel:09620000947"
+              href="tel:+919620000947"
               className="flex items-center gap-1 sm:gap-1.5 hover:text-white transition-colors whitespace-nowrap"
             >
               <Phone className="w-3 h-3 text-white/80" />
-              <span className="font-medium font-mono text-white">096200 00947</span>
+              <span className="font-medium font-mono text-white">+91 96200 00947</span>
             </a>
             <span className="text-white/80 hidden sm:inline" aria-hidden="true">·</span>
             <a
