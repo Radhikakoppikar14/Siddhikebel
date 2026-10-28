@@ -166,7 +166,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
       />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-12 lg:pb-6 min-h-[360px] sm:min-h-[400px] flex flex-col justify-between">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-12 lg:pb-6 min-h-[360px] sm:min-h-[400px] flex flex-col justify-between">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}

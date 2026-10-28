@@ -50,7 +50,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section id="contact" className="py-10 sm:py-12 bg-[#FFF1E8] relative">
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* If pre-filled from clicking an item */}
         {prefilledProduct && (
           <motion.div

@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
     <>
       {/* Utility Top Bar - Soft Brown (#5F524C) with Warm Beige (#F1D9CA) & Cream White (#FFFAF6) */}
       <div className="bg-[#D2430F] text-white/90 text-xs py-2 px-4 sm:px-8 overflow-hidden">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
+        <div className="max-w-[calc(80rem-4rem)] mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
           {/* Left: Social Icons, then Tagline */}
           <div className="flex items-center gap-3 min-w-0">
             <div className="hidden sm:flex items-center gap-2.5 text-white/75 border-r border-white/25 pr-3 shrink-0">
@@ -133,14 +133,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
       </div>
 
       {/* Main Header - floating rounded island instead of a full-width bar */}
-      <header className="sticky top-0 z-40 px-1 sm:px-2 pt-2 pb-1 bg-[#FFFAF6] pointer-events-none">
+      <header className={`sticky top-0 z-40 bg-white border-b border-[#F1D9CA] transition-shadow duration-300 ${isScrolled ? 'shadow-md shadow-[#D2430F]/10' : ''}`}>
         <div
-          className={`pointer-events-auto relative max-w-[calc(80rem-1rem)] mx-auto rounded-3xl lg:rounded-full border border-[#F1D9CA] bg-white transition-shadow duration-300 ${
-            isScrolled ? 'shadow-lg shadow-[#D2430F]/10' : 'shadow-md shadow-[#231815]/5'
-          }`}
+          className="relative max-w-7xl mx-auto px-4 sm:px-8"
         >
           <div
-            className={`flex items-center justify-between gap-6 px-3 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr] transition-all duration-300 ${
+            className={`flex items-center justify-between gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr] transition-all duration-300 ${
               isScrolled ? 'py-2' : 'py-3'
             }`}
           >

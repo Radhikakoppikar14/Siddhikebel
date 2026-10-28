@@ -37,7 +37,7 @@ interface BrandSelectorProps {
 export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand }) => {
   return (
     <section id="brands" className="py-10 sm:py-12 bg-white border-b border-[#EBD9CD] ">
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-[#231815] font-editorial">Our Authorised Brand Partners</h2>
         </div>
@@ -81,25 +81,26 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand }) =
                   />
                 </div>
 
-                <ul className="mt-4 flex flex-wrap justify-start gap-1.5">
+                <ul className="mt-4 flex flex-col gap-2">
                   {brand.categories.map((cat) => (
-                    <li
-                      key={cat}
-                      className="inline-flex items-center gap-1.5 text-[11px] font-semibold pl-2.5 pr-1 py-1 rounded-md bg-white/80 border"
-                      style={{ color: brand.colorDark, borderColor: `${brand.color}55` }}
-                    >
-                      <span>{cat}</span>
+                    <li key={cat} className="flex items-center justify-between gap-2">
+                      <span
+                        className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1.5 rounded-md bg-white/80 border"
+                        style={{ color: brand.colorDark, borderColor: `${brand.color}55` }}
+                      >
+                        {cat}
+                      </span>
                       <img
                         src={CATEGORY_IMAGES[cat] ?? brand.featuredImg}
                         alt=""
                         aria-hidden="true"
                         loading="lazy"
                         decoding="async"
-                        width={24}
-                        height={24}
+                        width={40}
+                        height={40}
                         onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                        className="no-zoom w-6 h-6 shrink-0 rounded-full bg-white object-contain border"
-                        style={{ borderColor: `${brand.color}33` }}
+                        className="no-zoom w-10 h-10 shrink-0 rounded-md bg-white object-contain p-0.5 border"
+                        style={{ borderColor: `${brand.color}55` }}
                       />
                     </li>
                   ))}

@@ -83,7 +83,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
 
       {/* 2. About Us introduction */}
       <section className="pt-6 pb-10 sm:pt-8 sm:pb-12 bg-[#FFFAF6] relative">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="mb-8 flex items-center text-xs font-medium text-[#5F524C]">
             <span className="text-[#D2430F] mr-2">←</span>
             <Link to="/" className="hover:text-[#231815] transition-colors">Home</Link>
@@ -139,7 +139,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
         <div className="absolute top-1/2 -right-20 w-96 h-96 bg-[#FFF1E8] rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 -left-20 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA] mb-3">
               <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
@@ -254,7 +254,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
           <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D2430F]/8 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-[#5F524C] px-3 py-1 rounded-full bg-white border border-[#F1D9CA]/30">
               Guiding Principles

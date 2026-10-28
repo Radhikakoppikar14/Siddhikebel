@@ -40,7 +40,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
         />
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
           <nav className="flex items-center gap-2 text-sm text-white/90" aria-label="Breadcrumb">
             <Link to="/" className="hover:underline">Home</Link>
             <ChevronRight className="w-3.5 h-3.5" />
@@ -67,7 +67,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
       </header>
 
       {/* About: compact so it fits on one screen */}
-      <section className="max-w-screen-2xl mx-auto px-4 sm:px-8 py-6 sm:py-8 grid lg:grid-cols-12 gap-5 lg:gap-8 items-center">
+      <section className="max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8 grid lg:grid-cols-12 gap-5 lg:gap-8 items-center">
         <div className="lg:col-span-9">
           <h2 className="text-xl sm:text-2xl font-bold font-editorial" style={{ color: brand.colorDark }}>
             About {brand.name}
@@ -98,7 +98,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
       {/* Brand range */}
       {detail && (
         <section className="border-t border-[#F1D9CA]" style={{ backgroundColor: brand.colorTint }}>
-          <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
             <h2 className="text-3xl sm:text-4xl font-bold font-editorial" style={{ color: brand.colorDark }}>
               {brand.name.split(' ')[0]} product range
             </h2>
@@ -130,13 +130,13 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
 
       {/* Catalogue products */}
       {products.length > 0 && (
-        <section className="max-w-screen-2xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+        <section className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
           <h2 className="text-3xl sm:text-4xl font-bold font-editorial">Featured {brand.name.split(' ')[0]} products</h2>
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {products.map((p) => (
               <article key={p.id} className="flex flex-col border border-[#F1D9CA] rounded-md overflow-hidden bg-white">
-                <div className="h-48 bg-[#FFFAF6] flex items-center justify-center p-4 shrink-0">
-                  <img src={p.image} alt={p.name} loading="lazy" decoding="async" className="no-zoom max-h-full max-w-full object-contain" />
+                <div className="h-52 sm:h-56 bg-[#FFFAF6] overflow-hidden shrink-0">
+                  <img src={p.image} alt={p.name} loading="lazy" decoding="async" className="no-zoom w-full h-full object-cover" />
                 </div>
                 <div className="p-5 flex flex-col flex-1 border-t-4" style={{ borderColor: brand.color }}>
                   <h3 className="font-bold leading-snug">{p.name}</h3>
@@ -151,7 +151,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
       {/* Industries using this brand */}
       {(BRAND_INDUSTRIES[brand.id]?.length ?? 0) > 0 && (
         <section className="border-t border-[#F1D9CA]" style={{ backgroundColor: brand.colorTint }}>
-          <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
             <h2 className="text-3xl sm:text-4xl font-bold font-editorial" style={{ color: brand.colorDark }}>
               Industries using {brand.name.split(' ')[0]}
             </h2>
@@ -164,7 +164,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
 
       {/* Other brands */}
       <section className="border-t border-[#F1D9CA]">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 py-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
           <span className="font-semibold">Other brands</span>
           {BRANDS_DATA.filter((b) => b.id !== brand.id).map((b) => (
             <Link key={b.id} to={`/products/${b.id}`} className="font-semibold hover:underline" style={{ color: b.colorDark }}>

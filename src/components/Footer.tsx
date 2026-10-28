@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = () => {
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Multi-Column Footer Grid */}
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-6 items-start">
           
           {/* Brand Identity & Trust Badges (4 cols) */}
@@ -192,7 +192,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
       {/* 4. Bottom Legal Bar */}
       <div className="bg-[#5F6670] py-3 px-4 sm:px-6 lg:px-8 border-t border-white/15">
-        <div className="max-w-screen-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 lg:pr-16 text-[11px] text-white/80">
+        <div className="max-w-[calc(80rem-4rem)] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 lg:pr-16 text-[11px] text-white/80">
           <p>© 2026 Siddhi Kabel Corporation Private Limited. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
             <span>ISO 9001:2015 Certified Partner</span>

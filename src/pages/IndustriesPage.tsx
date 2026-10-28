@@ -16,7 +16,7 @@ export const IndustriesPage: React.FC = () => {
       />
 
       <section className="pt-6 pb-10 sm:pt-8 sm:pb-12 bg-[#FFFAF6] border-b border-[#F1D9CA]">
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <MotionReveal yOffset={20} duration={0.5}>
             <div className="max-w-3xl mb-8 space-y-3">
               <h2 className="text-2xl sm:text-3xl font-normal text-[#231815] font-editorial">

@@ -10,6 +10,8 @@ interface PageHeaderProps {
   bgImage?: string;
   bgVideo?: string;
   onOpenRfq?: (subject?: string) => void;
+  /** title on top, then Home > page breadcrumb; hides partner line, subtitle and bullet points */
+  minimal?: boolean;
 }
 
 const DEFAULT_SUBTITLE =
@@ -24,6 +26,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   category = 'Siddhi Kabel LTD.',
   bgImage = '/images/main-slider/1.jpg',
   bgVideo,
+  minimal = false,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -65,6 +68,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 lg:py-16">
         <div className="max-w-3xl space-y-4">
+          {!minimal && (
+            <>
           <nav className="flex items-center gap-2 text-sm text-white/75" aria-label="Breadcrumb">
             <Link to="/" className="font-medium hover:text-white transition-colors">
               Home
@@ -78,10 +83,24 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             <span className="text-white/75 font-normal"> &nbsp;|&nbsp; Official Channel Partner</span>
           </p>
 
+            </>
+          )}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-editorial leading-[1.05]">
             {title}
           </h1>
 
+          {minimal && (
+          <nav className="flex items-center gap-2 text-sm text-white/75" aria-label="Breadcrumb">
+              <Link to="/" className="font-medium hover:text-white transition-colors">
+                Home
+              </Link>
+              <ChevronRight className="w-3.5 h-3.5" />
+              <span className="font-semibold text-white">{breadcrumb}</span>
+            </nav>
+
+          )}
+          {!minimal && (
+            <>
           {/* pass subtitle="" to hide the line on a page (e.g. Contact) */}
           {(subtitle ?? DEFAULT_SUBTITLE) !== '' && (
             <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
@@ -97,6 +116,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               </li>
             ))}
           </ul>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -7,9 +7,10 @@ export const ContactPage: React.FC = () => {
     <div>
       <PageHeader
         title="Contact"
-        breadcrumb="Contact-us"
+        breadcrumb="Contact us"
         category="Siddhi Kabel LTD."
         subtitle=""
+        minimal
         bgVideo="/assets/videos/demoo1.mp4"
         bgImage="/assets/videos/demoo1-poster.jpg"
       />
