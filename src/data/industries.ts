@@ -4,11 +4,12 @@ export interface IndustryItem {
   image: string; // drop a relevant photo at this path in /public
 }
 
-// Images live in /public/images/industries (.jpg stills from the hero videos).
+// Images live in /public/images/industries. Final list = 16 segments (client to confirm wording).
+// Replace each still with a photo that shows the supplied products (cables, connectors, breakers) in use.
 export const INDUSTRIES: IndustryItem[] = [
   { name: 'Automobile & Rail Transport', desc: 'Flexible control and power cables, connectors and glands for assembly lines, robotic cells and vehicle manufacturing plants.', image: '/images/industries/automobile-rail.jpg' },
-  { name: 'Automation & Robotics', desc: 'Servo, data and control cabling with industrial plugs and motor protection for conveyor systems and automated material handling.', image: '/images/industries/automation-robotics.jpg' },
-  { name: 'Mechanical & Plant Engineering', desc: 'Cables, connectors, circuit breakers and safety relays for machine tool builders and plant engineering.', image: '/images/industries/plant-engineering.jpg' },
+  { name: 'Automation & Robotics', desc: 'Robot-grade flexible servo, data and Ethernet cables, connectors and motor protection used inside robotic cells and conveyor systems.', image: '/images/industries/automation-robotics.jpg' },
+  { name: 'Mechanical & Plant Engineering', desc: 'Cables, connectors, circuit breakers and contactors installed on machines and in plant control panels.', image: '/images/industries/plant-engineering.jpg' },
   { name: 'OEM & Machine Manufacturers', desc: 'Custom harness, motor circuit breakers and flexible cables for machine builders.', image: '/images/industries/oem-machines.jpg' },
   { name: 'Panel Builders & System Integrators', desc: 'Contactors, pilot devices, wire marking and DIN-rail components for control panels.', image: '/images/industries/panel-builders.jpg' },
   { name: 'Renewable Energy (Solar & Wind)', desc: 'UV-resistant cables, connectors and protection for solar and wind installations.', image: '/images/industries/renewable-energy.jpg' },
@@ -19,9 +20,7 @@ export const INDUSTRIES: IndustryItem[] = [
   { name: 'Pharmaceutical & Bio Tech', desc: 'Washdown pilot switches, cables and marking for cleanroom and process areas.', image: '/images/industries/pharma-biotech.jpg' },
   { name: 'Research & Development', desc: 'Data and control cables and switchgear for laboratories and test setups.', image: '/images/industries/research-development.jpg' },
   { name: 'Garment & Textile', desc: 'Control cables, plugs and motor protection for textile machinery.', image: '/images/industries/garment-textile.jpg' },
-  { name: 'Construction Industry', desc: 'Site power distribution units and CEE plugs and sockets for construction sites.', image: '/images/industries/construction.jpg' },
-  { name: 'Contractors & Projects Management', desc: 'Project supply of cables, switchgear and plugs with documentation.', image: '/images/industries/contractors-projects.jpg' },
-  { name: 'Medical Equipment', desc: 'Certified cables and connectors for medical and imaging equipment.', image: '/images/industries/medical-equipment.jpg' },
+  { name: 'Construction & Contract Projects', desc: 'Site power distribution units, CEE plugs and sockets, cables and switchgear supplied project-wise with documentation.', image: '/images/industries/construction.jpg' },
   { name: 'Marine Engineering', desc: 'Approved cables, glands and plugs for marine and offshore use.', image: '/images/industries/marine.jpg' },
   { name: 'Defense', desc: 'Fire-retardant wiring and precision connectors for defense electronics.', image: '/images/industries/defense.jpg' },
 ];
@@ -34,7 +33,7 @@ export const BRAND_INDUSTRIES: Record<string, string[]> = {
   lapp: [
     'Automobile & Rail Transport', 'Automation & Robotics', 'Mechanical & Plant Engineering',
     'OEM & Machine Manufacturers', 'Renewable Energy (Solar & Wind)', 'Food & Beverage',
-    'Packaging Machinery', 'Garment & Textile', 'Marine Engineering', 'Medical Equipment', 'Defense',
+    'Packaging Machinery', 'Garment & Textile', 'Marine Engineering', 'Defense',
   ],
   eaton: [
     'Panel Builders & System Integrators', 'Automation & Robotics', 'OEM & Machine Manufacturers',
@@ -43,10 +42,10 @@ export const BRAND_INDUSTRIES: Record<string, string[]> = {
   ],
   partex: [
     'Panel Builders & System Integrators', 'OEM & Machine Manufacturers', 'Automobile & Rail Transport',
-    'Contractors & Projects Management', 'Marine Engineering', 'Defense', 'Renewable Energy (Solar & Wind)',
+    'Construction & Contract Projects', 'Marine Engineering', 'Defense', 'Renewable Energy (Solar & Wind)',
   ],
   mennekes: [
-    'Construction Industry', 'Contractors & Projects Management', 'Oil, Gas, Chemical & Paint',
+    'Construction & Contract Projects', 'Oil, Gas, Chemical & Paint',
     'Food & Beverage', 'Steel & Cement', 'Marine Engineering', 'Mechanical & Plant Engineering',
   ],
 };

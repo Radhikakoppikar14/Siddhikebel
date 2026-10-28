@@ -23,7 +23,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenRfq }) => {
       <ServicesSection onOpenRfq={onOpenRfq} />
 
       {/* Technical Audit & Site Consultation CTA Banner */}
-      <section className="py-16 bg-[#FFFAF6] border-b border-[#F1D9CA]">
+      <section className="py-10 sm:py-12 bg-[#FFFAF6] border-b border-[#F1D9CA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <MotionReveal yOffset={20} duration={0.5}>
             <div className="bg-white rounded-3xl border border-[#F1D9CA] p-8 sm:p-12 shadow-xs">

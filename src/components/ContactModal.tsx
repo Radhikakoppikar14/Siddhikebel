@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, MapPin, Phone, Mail, Send, CheckCircle2, User, Tag, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { COMPANY_INFO } from '../data/siddhiData';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -100,16 +101,9 @@ export const ContactModal: React.FC<ContactModalProps> = ({
               <div className="absolute top-10 -right-24 w-52 h-52 rounded-full border border-white/10 pointer-events-none" />
 
               <div className="relative">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-semibold uppercase tracking-widest text-white/90">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B]" />
-                  Get in touch
-                </span>
-                <h3 className="mt-4 text-2xl sm:text-3xl font-semibold font-editorial leading-tight">
-                  Contact Siddhi Kabel
+                <h3 className="text-2xl sm:text-3xl font-semibold font-editorial leading-tight">
+                  Contact
                 </h3>
-                <p className="mt-2 text-xs sm:text-sm text-white/80 font-light leading-relaxed">
-                  Get in touch with us for any questions about our products or solutions.
-                </p>
               </div>
 
               <div className="relative space-y-5 text-xs">
@@ -131,7 +125,6 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </span>
                   <div>
                     <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Call Support</strong>
-                    <a href="tel:08026720440" className="block text-white/95 hover:text-white font-mono">080 – 2672 0440</a>
                     <a href="tel:09620000947" className="block text-white/95 hover:text-white font-mono">096200 00947</a>
                     <a href="tel:09886058511" className="block text-white/95 hover:text-white font-mono">098860 58511</a>
                   </div>
@@ -143,8 +136,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </span>
                   <div>
                     <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Email Us</strong>
-                    <a href="mailto:info@siddhikabel.com" className="block text-white/95 hover:text-white">info@siddhikabel.com</a>
-                    <a href="mailto:guru@siddhikabel.com" className="block text-white/95 hover:text-white">guru@siddhikabel.com</a>
+                    <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="block text-white/95 hover:text-white">{COMPANY_INFO.contacts.salesEmail}</a>
                   </div>
                 </div>
               </div>
@@ -240,7 +232,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                         <Tag className={FIELD_ICON} />
                         <input
                           type="text"
-                          placeholder="e.g. Lapp Cable / Switchgear"
+                          placeholder="e.g. LAPP Cable / Switchgear"
                           value={formState.subject}
                           onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
                           className={FIELD_INPUT}

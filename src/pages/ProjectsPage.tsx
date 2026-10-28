@@ -23,7 +23,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onOpenRfq }) => {
       <CaseStudiesSection onOpenRfq={onOpenRfq} />
 
       {/* Project Execution Methodology Banner */}
-      <section className="py-20 bg-[#FFFAF6] border-b border-[#F1D9CA]">
+      <section className="py-10 sm:py-12 bg-[#FFFAF6] border-b border-[#F1D9CA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <MotionReveal yOffset={20} duration={0.5}>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">

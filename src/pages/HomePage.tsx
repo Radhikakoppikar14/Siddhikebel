@@ -1,8 +1,8 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
 import { BrandSelector } from '../components/BrandSelector';
+import { BrandServicesSection } from '../components/BrandServicesSection';
 import { WhyChooseUs } from '../components/WhyChooseUs';
-import { ServicesSection } from '../components/ServicesSection';
 import { CaseStudiesSection } from '../components/CaseStudiesSection';
 import { ClientsWall } from '../components/ClientsWall';
 import { MotionReveal } from '../components/MotionReveal';
@@ -23,17 +23,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onGoToContact, onSelectBrand
         <WhyChooseUs />
       </MotionReveal>
 
-      {/* 3. Brands We Deal With (Interactive Selection & Inquiries) */}
+      {/* 3. Our Authorised Brand Partners */}
       <MotionReveal direction="up" yOffset={50} duration={0.9}>
-        <BrandSelector
-          onSelectBrand={onSelectBrand}
-          onOpenRfq={onGoToContact}
-        />
+        <BrandSelector onSelectBrand={onSelectBrand} onOpenRfq={onGoToContact} />
       </MotionReveal>
 
       {/* 4. Services For Industries */}
-      <MotionReveal direction="left" yOffset={70} duration={0.9}>
-        <ServicesSection onOpenRfq={onGoToContact} />
+      <MotionReveal direction="up" yOffset={50} duration={0.9}>
+        <BrandServicesSection onOpenRfq={onGoToContact} />
       </MotionReveal>
 
       {/* 6. Recent Projects */}

@@ -11,14 +11,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
 
   return (
-    <section id="services" className="py-20 lg:py-28 bg-white border-b border-[#F1D9CA] relative overflow-hidden">
+    <section id="services" className="py-10 sm:py-12 bg-white border-b border-[#F1D9CA] relative overflow-hidden">
       {/* Ambient background glows */}
       <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#FFF1E8] rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}

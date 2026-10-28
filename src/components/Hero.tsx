@@ -45,7 +45,7 @@ const SLIDES: SlideItem[] = [
       'Heavy-duty cabling, CEE plugs and protection gear built for oil, gas, chemical and steel plants, dispatched same day from our Bangalore warehouse.',
     badge: 'CENTRAL BANGALORE WAREHOUSE',
     accent: '#FFF1E8',
-    rotatingWords: ['Ex-Stock Drums', 'Same-Day Dispatch', 'Banashankari Hub', '500+ Clients'],
+    rotatingWords: ['Ex-Stock Drums', 'Same-Day Dispatch', 'Banashankari Hub', '1,800+ Clients'],
   },
 ];
 
@@ -166,7 +166,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
       />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-12 lg:pb-6 min-h-[360px] sm:min-h-[400px] flex flex-col justify-between">
+      <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-12 lg:pb-6 min-h-[360px] sm:min-h-[400px] flex flex-col justify-between">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -234,8 +234,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">15+ Years Experience</span>
-              <span className="block text-[10px] text-[#5F524C] truncate">Since 2008 in Karnataka</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">33+ Years Industrial Experience</span>
+              <span className="block text-[10px] text-[#5F524C] truncate">Industrial electrical supply</span>
             </div>
           </div>
 

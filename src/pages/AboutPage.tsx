@@ -68,10 +68,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
         bgImage="/assets/videos/hero-1-poster.jpg"
       />
 
-      {/* 2. Main About Section */}
-      <section className="py-14 sm:py-20 bg-[#FFFAF6] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          {/* Breadcrumb bar on top of content area */}
+      {/* 2. About Us introduction */}
+      <section className="pt-6 pb-10 sm:pt-8 sm:pb-12 bg-[#FFFAF6] relative">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8">
           <div className="mb-8 flex items-center text-xs font-medium text-[#5F524C]">
             <span className="text-[#D2430F] mr-2">←</span>
             <Link to="/" className="hover:text-[#231815] transition-colors">Home</Link>
@@ -79,190 +78,55 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
             <span className="text-[#231815] font-semibold">About Us</span>
           </div>
 
-          {/* Two-Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-            {/* Left Column: Opening narrative & Tree graphic */}
-            <motion.div
-              initial={{ opacity: 0, x: -25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal"
-            >
+            {/* Left column */}
+            <div className="space-y-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal">
               <p className="text-justify">
                 <span className="font-semibold text-[#231815]">Siddhi Kabel</span> was established in the year 2008 by professionals with experience of more than 15 years in providing solutions for various needs of high quality Industrial electrical, automation and safety products.
               </p>
-
-              <p className="text-justify">
-                Siddhi is one of the leading channel partners of world class, Indian and international manufacturers, offering wide range of products like LT &amp; HT Cables, Cable - Glands, Conduits, Connectors, Complete range of LED Lighting solutions for domestic, Commercial &amp; Industrial needs, Switchgears, Circuit breakers – MCB, MCCB, ELCB, RCCB, Distribution boards, Safety relays, Isolators, Maintenance free Chemical Electrical Grounding / earthing solutions, Lightning arrestors as per IS – IEC standards, Insulated Plugs &amp; Sockets and much more.
-              </p>
-
               <p className="text-justify">
                 For many customers Siddhi Kabel is more than a supplier, we combine superior product offerings with unparalleled technical support and supply chain services, Whether its providing products &amp; services for a Machine tool industries, Pharmaceutical, Process industry, automotive, Oil &amp; Gas, Chemical &amp; Paint industries, projects, or System integrators, we know our customers are looking for more than a supply of parts and pieces, we focus on addressing our customers larger business needs.
               </p>
+            </div>
 
-              {/* The Tree Graphic */}
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                className="relative bg-white p-5 rounded-3xl border border-[#F1D9CA] shadow-xs group overflow-hidden mt-6"
-              >
-                <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#F1D9CA]">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#D2430F] animate-pulse" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#231815]">
-                      Siddhi Kabel Core Strengths &amp; Pillars
-                    </span>
-                  </div>
-                  <button
-                    onClick={() =>
-                      setLightboxImage({
-                        src: '/images/resource/about.jpg',
-                        alt: 'Siddhi Kabel Strengths Tree Infographic',
-                        caption: 'Siddhi Kabel Value Proposition & Integrated Core Strengths',
-                      })
-                    }
-                    className="inline-flex items-center gap-1.5 text-xs text-[#5F524C] hover:text-[#231815] font-semibold transition-colors cursor-pointer"
-                  >
-                    <ZoomIn className="w-3.5 h-3.5 text-[#5F524C]" />
-                    <span>Click to Zoom</span>
-                  </button>
-                </div>
-
-                <div
-                  className="group/zoom relative cursor-pointer overflow-hidden rounded-2xl bg-[#FFFAF6] flex items-center justify-center p-2"
-                  onClick={() =>
-                    setLightboxImage({
-                      src: '/images/resource/about.jpg',
-                      alt: 'Siddhi Kabel Strengths Tree Infographic',
-                      caption: 'Siddhi Kabel Value Proposition & Integrated Core Strengths',
-                    })
-                  }
-                >
-                  <img
-                    src="/images/resource/about.jpg"
-                    alt="Siddhi Kabel Core Strengths Tree Graphic"
-                    className="w-full max-h-[460px] object-contain"
-                  />
-                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                    <span className="opacity-0 group-hover/zoom:opacity-100 transition-opacity p-2.5 bg-white/90 rounded-full shadow-md backdrop-blur-xs flex items-center justify-center border border-[#F1D9CA]/30">
-                      <ZoomIn className="w-4 h-4 text-[#D2430F]" />
-                    </span>
-                  </div>
-                </div>
-
-                {/* Micro-pills for key tree branches */}
-                <div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-[#F1D9CA] text-[11px] text-[#231815]">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#D2430F] shrink-0" />
-                    <span>Reliable Solution Provider</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#D2430F] shrink-0" />
-                    <span>Ethical Business Compliance</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#D2430F] shrink-0" />
-                    <span>Customized Inventory Buffer</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#D2430F] shrink-0" />
-                    <span>Dedicated Technical Team</span>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Right Column */}
-            <motion.div
-              initial={{ opacity: 0, x: 25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal flex flex-col justify-between h-full"
-            >
+            {/* Right column */}
+            <div className="space-y-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal">
               <p className="text-justify">
                 We constantly monitor and adjust each program so that when our customers' needs change our solutions change with them, our expertise lies in understanding the customer requirements and careful analysis of applications to provide the best possible techno commercial solutions, our team strives hard in planning and managing best inventory apart from arranging and sourcing of materials from our large and reliable network to offer uninterrupted services to our valued customers.
               </p>
 
-              {/* Authorized Distributors Section */}
-              <div className="bg-white p-6 rounded-3xl border border-[#F1D9CA] space-y-4 shadow-2xs">
-                <h3 className="text-base sm:text-lg font-semibold text-[#231815] leading-snug">
-                  Siddhi is Authorized Distributors / Dealers / Channel partners / Importer with world class major manufacturing companies:
-                </h3>
-
-                <ul className="space-y-2.5 pt-1">
-                  {AUTHORIZED_PARTNERS.map((partner, idx) => (
-                    <motion.li
-                      key={idx}
-                      whileHover={{ x: 6 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-[#231815] group cursor-pointer"
-                      onClick={() => handleInquire(`Authorized Line: ${partner}`)}
-                    >
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#D2430F] shrink-0 group-hover:scale-125 transition-transform" />
-                      <span className="group-hover:text-[#5F524C] transition-colors">{partner}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-
-                <div className="w-24 h-0.5 bg-[#D2430F] my-4" />
-              </div>
-
-              {/* Services Paragraph */}
-              <p className="text-justify">
-                On the services side we take up auditing &amp; installation of Electrical earth pits, Lightning arrestors, we take up supply and installation of all kinds of LED Light fittings for retrofit and new establishments, we offer customized electrical control equipment’s and wire harnessing to our valued customers.
-              </p>
-
-              {/* Motto & Continuous Improvement Paragraph */}
-              <p className="text-justify">
-                With customer centric approach and constant focus on continuous improvement has helped us to serve our customers better and achieve higher customer satisfaction, with quality as a focus would always be the priority in all our activities and delivering on time if not earlier would be our motto.
-              </p>
-
-              {/* Stats Boxes - image backgrounds with light theme wash */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-                {[
-                  { value: '15+', label: 'Years Experience', img: '/images/industries/plant-engineering.jpg', tint: '253,229,211' },
-                  { value: '20+', label: 'Industrial Segments', img: '/images/industries/automation-robotics.jpg', tint: '255,244,214' },
-                  { value: '300+', label: 'Customers Served', img: '/images/industries/oem-machines.jpg', tint: '233,238,244' },
-                ].map((stat) => (
-                  <motion.div
-                    key={stat.label}
-                    whileHover={{ y: -4 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative overflow-hidden rounded-2xl border border-[#F1D9CA] shadow-sm hover:shadow-xl transition-shadow p-5 text-center group"
-                  >
-                    <div
-                      className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700"
-                      style={{ backgroundImage: `url(${stat.img})` }}
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: `linear-gradient(to bottom, rgba(${stat.tint},0.93) 0%, rgba(${stat.tint},0.70) 55%, rgba(${stat.tint},0.30) 100%)` }}
-                    />
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F]" />
-                    <div className="relative z-10">
-                      <span className="block text-3xl sm:text-4xl font-normal text-[#231815] font-editorial tabular-nums">
-                        {stat.value}
-                      </span>
-                      <span className="block text-xs sm:text-sm text-[#D2430F] font-semibold mt-1">
-                        {stat.label}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                <div className="bg-white p-5 sm:p-6 rounded-lg border border-[#F1D9CA] space-y-3 shadow-2xs">
+                  <h3 className="text-base sm:text-lg font-semibold text-[#231815] leading-snug">
+                    Siddhi is Authorized Distributors / Dealers / Channel partners / Importer with world class major manufacturing companies:
+                  </h3>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                    {AUTHORIZED_PARTNERS.map((partner) => (
+                      <li
+                        key={partner}
+                        className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-[#231815] cursor-pointer"
+                        onClick={() => handleInquire(`Authorized Line: ${partner}`)}
+                      >
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#D2430F] shrink-0" />
+                        <span>{partner}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* 3. Why Choose Us */}
+      <WhyChooseUs />
+
       {/* 2.5. Corporate Video Feature: Precision Industrial Infrastructure in Action (YouTube e3a0qpri5NA) */}
-      <section className="py-16 sm:py-24 bg-[#FFF1E8] border-y border-[#F1D9CA] relative overflow-hidden">
+      <section className="py-10 sm:py-12 bg-[#FFF1E8] border-y border-[#F1D9CA] relative overflow-hidden">
         {/* Subtle decorative ambient glows */}
         <div className="absolute top-1/2 -right-20 w-96 h-96 bg-[#FFF1E8] rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 -left-20 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA] mb-3">
               <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
@@ -271,8 +135,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
             <h2 className="text-2xl sm:text-4xl font-normal text-[#231815] font-editorial tracking-tight">
               Siddhi Kabel Industrial Capability in Action
             </h2>
-            <div className="w-16 h-0.5 bg-[#D2430F] mx-auto mt-3 mb-4 rounded-full" />
-            <p className="text-sm sm:text-base text-[#5F524C]/80 font-light max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-[#5F524C]/80 font-light max-w-2xl mx-auto leading-relaxed">
               Explore our comprehensive cable supply, specialized machine harness integration, and central Bangalore warehouse logistics.
             </p>
           </div>
@@ -283,7 +146,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] bg-black relative group"
+            className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] bg-black relative group"
           >
             <div className="relative pb-[56.25%] h-0 overflow-hidden">
               {videoActive ? (
@@ -367,26 +230,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
       </section>
 
       {/* 3. Vision & Mission Section */}
-      <section className="py-16 sm:py-24 bg-[#FFF1E8] relative overflow-hidden text-[#231815] border-b border-[#F1D9CA]">
+      <section className="py-10 sm:py-12 bg-[#FFF1E8] relative overflow-hidden text-[#231815] border-b border-[#F1D9CA]">
         {/* Ambient background glow */}
         <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
           <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#D2430F] rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D2430F]/8 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-8">
             <span className="text-xs font-bold uppercase tracking-widest text-[#5F524C] px-3 py-1 rounded-full bg-white border border-[#F1D9CA]/30">
               Guiding Principles
             </span>
             <h2 className="text-2xl sm:text-4xl font-light font-editorial mt-3 text-[#231815]">
               Vision &amp; Mission of Siddhi Kabel
             </h2>
-            <div className="w-16 h-0.5 bg-[#F1D9CA] mx-auto mt-3" />
           </div>
 
           {/* 2x2 Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
             {/* Top-Left: Vision Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -513,9 +375,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
           </div>
         </div>
       </section>
-
-      {/* 4. Why Choose Us Section with Interactive Animated Counters */}
-      <WhyChooseUs />
 
       {/* High-Resolution Lightbox Modal */}
       <AnimatePresence>

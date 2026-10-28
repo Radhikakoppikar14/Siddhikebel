@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageHeader } from '../components/PageHeader';
-import { BrandSelector } from '../components/BrandSelector';
+import { BrandServicesSection } from '../components/BrandServicesSection';
 import { ProductItem } from '../data/siddhiData';
 
 interface ProductsPageProps {
@@ -10,7 +10,7 @@ interface ProductsPageProps {
   onGoToContact: (productName?: string) => void;
 }
 
-export const ProductsPage: React.FC<ProductsPageProps> = ({ onSelectBrand, onGoToContact }) => {
+export const ProductsPage: React.FC<ProductsPageProps> = ({ onGoToContact }) => {
   return (
     <div>
       <PageHeader
@@ -20,8 +20,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onSelectBrand, onGoT
         bgVideo="/assets/videos/hero-1.mp4"
       />
 
-      {/* Brand partners + industries each brand serves */}
-      <BrandSelector onSelectBrand={onSelectBrand} onOpenRfq={onGoToContact} />
+      <BrandServicesSection onOpenRfq={onGoToContact} />
     </div>
   );
 };

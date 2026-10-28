@@ -82,9 +82,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             {title}
           </h1>
 
-          <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
-            {subtitle || DEFAULT_SUBTITLE}
-          </p>
+          {/* pass subtitle="" to hide the line on a page (e.g. Contact) */}
+          {(subtitle ?? DEFAULT_SUBTITLE) !== '' && (
+            <p className="text-base sm:text-lg text-white/90 leading-relaxed max-w-2xl">
+              {subtitle ?? DEFAULT_SUBTITLE}
+            </p>
+          )}
 
           <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-sm font-medium text-white">
             {POINTS.map((p) => (

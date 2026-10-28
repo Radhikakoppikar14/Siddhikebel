@@ -34,10 +34,10 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
 
 const MOBILE_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/products', label: 'Our Products' },
-  { to: '/industries', label: 'Industry Sectors' },
-  { to: '/about', label: 'Our Company' },
-  { to: '/contact', label: 'Get in Touch' },
+  { to: '/about', label: 'About Us' },
+  { to: '/products', label: 'Products' },
+  { to: '/industries', label: 'Industries' },
+  { to: '/contact', label: 'Contact' },
 ];
 
 interface NavbarProps {
@@ -67,8 +67,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
   return (
     <>
       {/* Utility Top Bar - Soft Brown (#5F524C) with Warm Beige (#F1D9CA) & Cream White (#FFFAF6) */}
-      <div className="bg-[#5F6670] text-white/90 text-xs py-2 px-4 sm:px-8 overflow-hidden">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
+      <div className="bg-[#D2430F] text-white/90 text-xs py-2 px-4 sm:px-8 overflow-hidden">
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
           {/* Left: Social Icons, then Tagline */}
           <div className="flex items-center gap-3 min-w-0">
             <div className="hidden sm:flex items-center gap-2.5 text-white/75 border-r border-white/25 pr-3 shrink-0">
@@ -122,18 +122,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
             </a>
             <span className="text-white/80 hidden sm:inline" aria-hidden="true">·</span>
             <a
-              href="mailto:info@siddhikabel.com"
+              href={`mailto:${COMPANY_INFO.contacts.salesEmail}`}
               className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
             >
               <Mail className="w-3 h-3 text-white/80" />
-              <span>info@siddhikabel.com</span>
+              <span>{COMPANY_INFO.contacts.salesEmail}</span>
             </a>
           </div>
         </div>
       </div>
 
       {/* Main Header - floating rounded island instead of a full-width bar */}
-      <header className="sticky top-0 z-40 px-1 sm:px-2 pt-3 pb-2 bg-[#FFFAF6] pointer-events-none">
+      <header className="sticky top-0 z-40 px-1 sm:px-2 pt-2 pb-1 bg-[#FFFAF6] pointer-events-none">
         <div
           className={`pointer-events-auto relative max-w-[calc(80rem-1rem)] mx-auto rounded-3xl lg:rounded-full border border-[#F1D9CA] bg-white transition-shadow duration-300 ${
             isScrolled ? 'shadow-lg shadow-[#D2430F]/10' : 'shadow-md shadow-[#231815]/5'
@@ -158,9 +158,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               />
             </Link>
 
-            {/* Navigation (desktop): Home, Industries, Products, About us, Contact */}
+            {/* Navigation (desktop): Home, About Us, Products, Industries, Contact */}
             <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 font-medium text-[#231815]">
               <DesktopNavLink to="/" end>Home</DesktopNavLink>
+              <DesktopNavLink to="/about">About Us</DesktopNavLink>
 
               {/* Products - opens a full-width mega menu */}
               <div
@@ -170,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               >
                 <DesktopNavLink to="/products">
                   <span className="inline-flex items-center gap-1.5">
-                    <span>Our Products</span>
+                    <span>Products</span>
                     <motion.span
                       animate={{ rotate: productsDropdownOpen ? 180 : 0 }}
                       transition={{ duration: 0.25 }}
@@ -218,22 +219,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 </AnimatePresence>
               </div>
 
-              <DesktopNavLink to="/industries">Industry Sectors</DesktopNavLink>
-              <DesktopNavLink to="/about">Our Company</DesktopNavLink>
+              <DesktopNavLink to="/industries">Industries</DesktopNavLink>
+              <DesktopNavLink to="/contact">Contact</DesktopNavLink>
             </nav>
 
             {/* Desktop Action Button */}
             <div className="hidden lg:flex items-center justify-self-end gap-3 shrink-0">
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  `inline-flex items-center justify-center whitespace-nowrap px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm font-semibold rounded-full text-[#D2430F] border border-[#D2430F]/30 transition-colors ${
-                    isActive ? 'bg-[#FFD7C2]' : 'bg-[#FFE7D8] hover:bg-[#FFD7C2]'
-                  }`
-                }
-              >
-                Get in Touch
-              </NavLink>
               <RfqButton className="px-4 xl:px-5 py-2.5 text-[13px] xl:text-sm rounded-full border border-transparent" />
             </div>
 

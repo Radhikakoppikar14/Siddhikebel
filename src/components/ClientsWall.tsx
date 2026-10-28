@@ -17,13 +17,13 @@ export const ClientsWall: React.FC = () => {
   const marqueeRow2 = [...row2, ...row2, ...row2];
 
   return (
-    <section className="py-20 lg:py-28 bg-[#FFF1E8] border-b border-[#F1D9CA] relative overflow-hidden select-none">
+    <section className="py-10 sm:py-12 bg-[#FFF1E8] border-b border-[#F1D9CA] relative overflow-hidden select-none">
       {/* Background radial gradient accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#FFF1E8] rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 mb-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
+        <div className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA] mb-3">
             <Building2 className="w-3.5 h-3.5 text-[#D2430F]" />
             <span>Trusted by industry</span>
@@ -31,8 +31,7 @@ export const ClientsWall: React.FC = () => {
           <h2 className="text-3xl sm:text-5xl font-normal text-[#231815] font-editorial tracking-tight">
             Our Clients
           </h2>
-          <div className="w-16 h-0.5 bg-[#D2430F] mx-auto mt-4 mb-4 rounded-full" />
-          <p className="text-sm sm:text-base text-[#5F524C]/80 font-light max-w-xl mx-auto">
+          <p className="mt-4 text-sm sm:text-base text-[#5F524C]/80 font-light max-w-3xl mx-auto">
             We are committed to provide safe industrial solutions to India's foremost engineering, automotive, defense, and manufacturing leaders.
           </p>
 

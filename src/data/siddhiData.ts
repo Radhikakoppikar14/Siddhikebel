@@ -68,17 +68,17 @@ export const COMPANY_INFO = {
   tagline: "Dependable Electrical Solutions for your Industrial Requirements",
   headline: "Transforming Indian Industry With Innovative Engineering Products",
   description:
-    "Siddhi Kabel Corporation Private Limited is one of the leading and reliable suppliers of world-class Industrial Electrical, Automation & Safety Products. Established in 2008 with over 15 years of industry leadership.",
+    "Siddhi Kabel Corporation Private Limited supplies industrial electrical, automation and safety products. 33+ years of industry experience.",
   establishedYear: "2008",
-  experienceYears: "15+",
-  segmentsServed: "25+",
-  customersServed: "500+",
+  experienceYears: "33+",
+  segmentsServed: "16+",
+  customersServed: "1,800+",
   contacts: {
     primaryPhone: "096200 00947",
     secondaryPhone: "098860 58511",
-    landline: "080 – 2672 0440",
-    primaryEmail: "info@siddhikabel.com",
-    directorEmail: "guru@siddhikabel.com",
+    // TODO(client): replace with the confirmed Sales email ID and verify both mobile numbers.
+    // Every page (navbar, footer, contact page, enquiry popup) reads these values.
+    salesEmail: "info@siddhikabel.com",
     address: {
       line1: "No.3, 1st Main Road, 1st Block",
       line2: "Banashankari 3rd Stage",
@@ -87,7 +87,10 @@ export const COMPANY_INFO = {
       state: "Karnataka",
       country: "India",
     },
-    hours: "Monday – Saturday: 9:00 AM – 6:30 PM",
+    hours: [
+      { days: "Monday – Friday", time: "9:30 AM – 6:30 PM" },
+      { days: "Saturday", time: "9:30 AM – 5:00 PM" },
+    ],
   },
   socials: {
     facebook: "https://www.facebook.com/siddhikabel/",
@@ -99,12 +102,12 @@ export const COMPANY_INFO = {
 export const BRANDS_DATA: BrandInfo[] = [
   {
     id: "lapp",
-    name: "Lapp Kabel",
-    shortDesc: "Global pioneer in integrated cable and connection technology.",
+    name: "LAPP India",
+    shortDesc: "Integrated cable and connection technology.",
     fullDesc:
-      "Lapp produces cables and conductors for different industries and markets. Known worldwide for engineering benchmarks like ÖLFLEX®, UNITRONIC® and ETHERLINE®.",
+      "LAPP India Private Limited, part of the Stuttgart-based LAPP Group, supplies cables and connection technology: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.",
     logo: "/images/clients/lapp.png",
-    featuredImg: "/images/olflex.png",
+    featuredImg: "/images/brands/lapp.jpg",
     categories: ["Power & Control Cables", "Data Communication", "Cable Glands & Connectors"],
     productCount: "40,000+ Items",
     origin: "Germany",
@@ -115,11 +118,11 @@ export const BRANDS_DATA: BrandInfo[] = [
   {
     id: "eaton",
     name: "Eaton - Moeller",
-    shortDesc: "World leader in intelligent motor control, switchgear, automation and power distribution.",
+    shortDesc: "Motor control, switchgear and power distribution.",
     fullDesc:
-      "Eaton produces a broad range of products and services for power and control applications, including motor-protective circuit breakers, contactors, pilot devices and smart communication systems.",
+      "Eaton makes power and control products: motor-protective circuit breakers, contactors, pilot devices and communication systems.",
     logo: "/images/clients/eaton.png",
-    featuredImg: "/images/resource/et1.jpg",
+    featuredImg: "/images/brands/eaton.jpg",
     categories: ["Motor Protection (PKZ/PKE)", "Contactors & Relays", "Pilot Devices (RMQ 22.5)"],
     productCount: "Full Industrial Line",
     origin: "Germany / USA",
@@ -130,11 +133,11 @@ export const BRANDS_DATA: BrandInfo[] = [
   {
     id: "partex",
     name: "Partex",
-    shortDesc: "Precision wire, cable and component marking systems engineered in Sweden since 1948.",
+    shortDesc: "Precision wire, cable and component marking systems.",
     fullDesc:
-      "Partex Marking Systems makes wire, cable and component identification for panels, machines and plants: sleeves, markers, labels and printers that keep installations traceable.",
+      "Partex Marking Systems makes wire, cable and component identification: sleeves, markers, labels and printers.",
     logo: "/images/clients/partex.png",
-    featuredImg: "/images/clients/partex.png",
+    featuredImg: "/images/brands/partex.jpg",
     categories: ["Wire & Cable Markers", "Marking Sleeves", "Labels & Marking Printers"],
     productCount: "Marking Systems",
     origin: "Sweden",
@@ -145,11 +148,11 @@ export const BRANDS_DATA: BrandInfo[] = [
   {
     id: "mennekes",
     name: "Mennekes",
-    shortDesc: "Industry-defining standard in industrial plugs, CEE receptacles and distribution units.",
+    shortDesc: "Industrial plugs, CEE receptacles and distribution units.",
     fullDesc:
-      "MENNEKES is a leading manufacturer of industrial plugs and sockets, CEE receptacles and interlocked combination units designed for harsh mechanical and chemical industrial environments.",
+      "MENNEKES makes industrial plugs and sockets, CEE receptacles and interlocked combinations for harsh industrial environments.",
     logo: "/images/clients/mennekes.png",
-    featuredImg: "/images/resource/me1.jpg",
+    featuredImg: "/images/brands/mennekes.jpg",
     categories: ["CEE Plugs & Sockets (16A–125A)", "Interlocked Combinations", "Distribution Units"],
     productCount: "IP44 / IP67 Rated",
     origin: "Germany",
@@ -162,142 +165,83 @@ export const BRANDS_DATA: BrandInfo[] = [
 export const PRODUCTS_CATALOG: ProductItem[] = [
   // Lapp products
   {
-    id: "lapp-olflex",
+    id: "lapp-power-control",
     brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "ÖLFLEX® Flexible Power & Control Cables",
+    brandName: "LAPP India",
+    name: "Power and Control Cables",
     category: "Power & Control Cables",
-    code: "OLFLEX-CLASSIC-110",
-    shortDesc: "Oil-resistant, highly flexible PVC control cable for fixed installation as well as occasional flexing.",
-    details:
-      "The classic ÖLFLEX® cable range offers superior mechanical strength, flame retardancy, and oil resistance. Widely used in machine tool manufacturing, assembly lines, and production facilities.",
-    specifications: [
-      { label: "Conductor", value: "Bare copper, fine wire class 5" },
-      { label: "Nominal Voltage", value: "U0/U: 300/500 V" },
-      { label: "Temperature Range", value: "-40°C to +80°C fixed" },
-      { label: "Core Identification", value: "Black with white numbers + G/Y" },
-    ],
-    image: "/images/olflex.png",
-    standards: ["VDE", "CE", "RoHS", "EAC"],
+    shortDesc: "Flexible, oil-resistant ÖLFLEX® cables for machines, control panels and power connections.",
+    details: "Flexible, oil-resistant ÖLFLEX® cables for machines, control panels and power connections.",
+    specifications: [],
+    image: "/images/lapp/power-control-cables.jpg",
+    standards: [],
     isFeatured: true,
   },
   {
-    id: "lapp-unitronic",
+    id: "lapp-data-communication",
     brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "UNITRONIC® Data Communication Shielded Cables",
-    category: "Data & Bus Cables",
-    code: "UNITRONIC-LiYCY",
-    shortDesc: "Screened data transmission cable with color code according to DIN 47100.",
-    details:
-      "Shielded with high coverage tinned copper wire braid to prevent EMI interference. Essential for electronic control units, automated weighing systems, and computing terminals.",
-    specifications: [
-      { label: "Screening", value: "Tinned copper braid (85% coverage)" },
-      { label: "Working Voltage", value: "Peak 350V / 500V test" },
-      { label: "Characteristics", value: "Flame retardant IEC 60332-1-2" },
-      { label: "Minimum Bending", value: "6x outer diameter" },
-    ],
-    image: "/images/unitronic.png",
-    standards: ["DIN 47100", "CE", "UL Recognized"],
+    brandName: "LAPP India",
+    name: "Data Communication Cables",
+    category: "Data Communication",
+    shortDesc: "Shielded UNITRONIC® data and bus cables for reliable signal transmission.",
+    details: "Shielded UNITRONIC® data and bus cables for reliable signal transmission.",
+    specifications: [],
+    image: "/images/lapp/data-communication-cables.jpg",
+    standards: [],
     isFeatured: true,
   },
   {
-    id: "lapp-etherline",
+    id: "lapp-control-cabinet",
     brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "ETHERLINE® Industrial Ethernet & Profinet",
-    category: "Data & Bus Cables",
-    code: "ETHERLINE-CAT6A-PN",
-    shortDesc: "High-speed Cat.6A industrial Ethernet cable for flexible and drag chain industrial operations.",
-    details:
-      "Supports 10 Gbit/s industrial Ethernet in heavy robotic and manufacturing automation settings. High resistance to lubricants, weld splatter, and continuous torsional stress.",
-    specifications: [
-      { label: "Transmission Rate", value: "Up to 10 Gbit/s Cat.6A" },
-      { label: "Shielding", value: "SF/UTP (Braid + Foil)" },
-      { label: "Outer Sheath", value: "PUR / Halogen-free FRNC" },
-      { label: "Flexing Life", value: "> 5 million cycles" },
-    ],
-    image: "/images/etherline.png",
-    standards: ["Profinet Type C", "Cat.6A", "UL/CSA"],
-  },
-  {
-    id: "lapp-hitronic",
-    brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "HITRONIC® Superfast Optical Fibre Cables",
-    category: "Data & Bus Cables",
-    code: "HITRONIC-TDM",
-    shortDesc: "Non-metallic, longitudinal and transversely watertight universal indoor/outdoor optical fiber cables.",
-    details:
-      "Engineered for high data bandwidth transmission immune to all electromagnetic interference. Perfect for high-voltage substations, campus networks, and automated storage systems.",
-    specifications: [
-      { label: "Fiber Types", value: "Single-mode 9/125, Multi-mode OM3/OM4" },
-      { label: "Fiber Count", value: "4, 8, 12, 24 fibers" },
-      { label: "Protection", value: "Rodent protection & LSZH jacket" },
-      { label: "Tensile Strength", value: "Up to 3000 N" },
-    ],
-    image: "/images/hitronic.png",
-    standards: ["IEC 60794", "CE", "RoHS"],
-  },
-  {
-    id: "lapp-skintop",
-    brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "SKINTOP® High-Performance Cable Glands",
-    category: "Cable Glands & Connectors",
-    code: "SKINTOP-MS-M",
-    shortDesc: "Nickel-plated brass cable gland with metric connecting thread and optimum strain relief.",
-    details:
-      "The benchmark in cable termination with patented lamellar clamp system that guarantees IP68 protection up to 10 bar. Chemical resistant, vibration-proof, and anti-twist.",
-    specifications: [
-      { label: "Protection Class", value: "IP68 (10 bar) / IP69" },
-      { label: "Material", value: "Nickel-plated brass / Polyamide 6" },
-      { label: "Thread Sizes", value: "M12 to M63 x 1.5" },
-      { label: "Temperature", value: "-40°C to +100°C" },
-    ],
-    image: "/images/skintop.png",
-    standards: ["IP68", "UL Recognized", "VDE", "DNV-GL"],
+    brandName: "LAPP India",
+    name: "Control Cabinet Single Cores",
+    category: "Power & Control Cables",
+    shortDesc: "Single-core wires for control cabinet and panel wiring.",
+    details: "Single-core wires for control cabinet and panel wiring.",
+    specifications: [],
+    image: "/images/lapp/control-cabinet-single-cores.jpg",
+    standards: [],
     isFeatured: true,
   },
   {
-    id: "lapp-epic",
+    id: "lapp-glands",
     brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "EPIC® Heavy-Duty Industrial Connectors",
+    brandName: "LAPP India",
+    name: "Cable Glands & Counter Nuts",
     category: "Cable Glands & Connectors",
-    code: "EPIC-HBE-16",
-    shortDesc: "Robust rectangular and circular power & signal multi-pin connectors for heavy industry.",
-    details:
-      "Die-cast aluminum housings with powder coating provide impenetrable shielding for harsh robotics, plastic molding, packaging machinery, and rolling stock.",
-    specifications: [
-      { label: "Rated Voltage", value: "Up to 500 V / 16 A" },
-      { label: "Number of Pins", value: "6, 10, 16, 24, 32 contacts" },
-      { label: "Locking Mechanism", value: "Single or double lever latching" },
-      { label: "Enclosure Rating", value: "IP65 certified" },
-    ],
-    image: "/images/epic.png",
-    standards: ["DIN EN 61984", "UL", "CSA"],
+    shortDesc: "SKINTOP® cable glands, counter nuts and entry plates for secure, sealed cable entries.",
+    details: "SKINTOP® cable glands, counter nuts and entry plates for secure, sealed cable entries.",
+    specifications: [],
+    image: "/images/lapp/cable-glands-counter-nuts.jpg",
+    standards: [],
+    isFeatured: true,
   },
   {
-    id: "lapp-silvyn",
+    id: "lapp-conduit",
     brandId: "lapp",
-    brandName: "Lapp Kabel",
-    name: "SILVYN® Flexible Conduit & Protection Systems",
+    brandName: "LAPP India",
+    name: "Rill, Conduit & Klick",
     category: "Cable Glands & Connectors",
-    code: "SILVYN-RILL-PA6",
-    shortDesc: "Corrugated protective conduits and matching fittings for comprehensive mechanical defense.",
-    details:
-      "Provides complete cable enclosure protecting conductors against abrasion, hot chips, oils, aggressive fluids, and heavy impacts in conveyor and machine tool applications.",
-    specifications: [
-      { label: "Material", value: "Specially formulated Polyamide 6" },
-      { label: "Fire Classification", value: "UL94 V0 self-extinguishing" },
-      { label: "Impact Strength", value: "Class 4 (Heavy duty)" },
-      { label: "Fitting System", value: "Fast push-in lock" },
-    ],
-    image: "/images/silvyn.png",
-    standards: ["EN 61386", "UL94-V0", "CE"],
+    shortDesc: "Flexible conduits, fittings and cable chains that guide and protect cables.",
+    details: "Flexible conduits, fittings and cable chains that guide and protect cables.",
+    specifications: [],
+    image: "/images/lapp/rill-conduit-klick.jpg",
+    standards: [],
+    isFeatured: true,
   },
-
+  {
+    id: "lapp-domestic",
+    brandId: "lapp",
+    brandName: "LAPP India",
+    name: "Domestic / House Wiring",
+    category: "Power & Control Cables",
+    shortDesc: "Wires and cable end sleeves for safe, neat domestic and house wiring.",
+    details: "Wires and cable end sleeves for safe, neat domestic and house wiring.",
+    specifications: [],
+    image: "/images/lapp/domestic-house-wiring.jpg",
+    standards: [],
+    isFeatured: true,
+  },
   // Eaton Moeller products
   {
     id: "eaton-pkz",
@@ -414,7 +358,6 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Application", value: "Wire & cable identification" },
       { label: "Formats", value: "Sleeves, clip-on markers, flat labels" },
       { label: "Marking", value: "Pre-printed or printed on demand" },
-      { label: "Origin", value: "Sweden" },
     ],
     image: "/images/clients/partex.png",
     standards: ["CE", "RoHS"],
@@ -433,7 +376,6 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     specifications: [
       { label: "Output", value: "Sleeves, labels, tags" },
       { label: "Use", value: "Panel building, maintenance, projects" },
-      { label: "Origin", value: "Sweden" },
     ],
     image: "/images/clients/partex.png",
     standards: ["CE"],
@@ -474,10 +416,10 @@ export const CLIENTS_LIST: ClientPartner[] = [
 export const SERVICES_DATA = [
   {
     id: "electrical",
-    title: "Cost-Effective & Reliable Electrical Solutions",
+    title: "Electrical Solutions",
     subtitle: "Engineered Power & Control",
     description:
-      "We offer customized electrical control equipment, wire harness assemblies, LT and HT cables, cable glands, conductors, and connectors specifically configured for high-stress manufacturing plants.",
+      "Customized control equipment, wire harness assemblies, LT and HT cables, glands, conductors and connectors.",
     features: [
       "Custom control panel wiring & harness assemblies",
       "Authorized Lapp Olflex & Uniplus bulk supply",
@@ -488,10 +430,10 @@ export const SERVICES_DATA = [
   },
   {
     id: "energy",
-    title: "Energy Saving LED Lighting Solutions",
-    subtitle: "Sustainable Illumination",
+    title: "LED Lighting Solutions",
+    subtitle: "Energy-Saving Lighting",
     description:
-      "Supply and complete installation of all kinds of high-efficacy LED light fittings for retrofits and new establishments, reducing shop floor power consumption by up to 65%.",
+      "Supply and installation of LED light fittings for retrofits and new establishments.",
     features: [
       "Factory & shop floor high-bay LED retrofit projects",
       "Commercial office and cleanroom luminaires",
@@ -503,9 +445,9 @@ export const SERVICES_DATA = [
   {
     id: "grounding",
     title: "Earthing & Lightning Protection Systems",
-    subtitle: "Complete Personnel & Asset Safety",
+    subtitle: "Safety for People & Assets",
     description:
-      "Specialized auditing and precision installation of electrical earth pits, maintenance-free chemical grounding solutions, and active ESE lightning arrestor networks.",
+      "Auditing and installation of earth pits, chemical grounding and ESE lightning arrestors.",
     features: [
       "Auditing and testing of existing electrical earth pits",
       "Maintenance-free chemical grounding installation",
@@ -519,11 +461,11 @@ export const SERVICES_DATA = [
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: "cs-grounding",
-    title: "Precision Chemical Grounding Systems",
+    title: "Chemical Grounding Systems",
     category: "Safety & Protection",
     clients: "GE India, Toyota, National Aerospace Laboratory (NAL), Orb Energy",
     summary:
-      "Complete supply and precision installation of maintenance-free carbon chemical grounding systems across Bangalore manufacturing plants and critical research laboratories.",
+      "Supply and installation of maintenance-free carbon chemical grounding systems for Bangalore plants and laboratories.",
     highlights: [
       "Achieved sub-1-Ohm resistance across high-resistivity soil",
       "Zero periodic watering required with 25-year service life guarantee",
@@ -533,11 +475,11 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "cs-led",
-    title: "Industrial LED High-Bay & Office Retrofits",
+    title: "Industrial LED Retrofits",
     category: "Energy Efficiency",
     clients: "Denso Kirloskar, Sartorius, EFD, BP Biotree, Tata Advance Materials, Sutures India, Kennametal",
     summary:
-      "Comprehensive retrofit and installation of high-efficiency industrial LED light fixtures for new factory blocks, CNC shop floors, cleanrooms, and corporate offices.",
+      "Retrofit and installation of industrial LED fixtures for factory blocks, CNC shop floors, cleanrooms and offices.",
     highlights: [
       "Over 60% lighting energy savings across continuous 24/7 operating lines",
       "Uniform lux distribution improving operator inspection accuracy",
@@ -547,11 +489,11 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "cs-lightning",
-    title: "Active ESE Lightning Protection Network",
+    title: "ESE Lightning Protection",
     category: "Infrastructure Defense",
     clients: "Ace Designers Ltd, Himalaya Drug Company, H & R Johnson",
     summary:
-      "Specialized installation of advanced Early Streamer Emission (ESE) lightning arrestor systems protecting high-bay factory structures, CNC tooling shops, and pharmaceutical labs.",
+      "Installation of ESE lightning arrestor systems for factory structures, CNC tooling shops and pharmaceutical labs.",
     highlights: [
       "Expanded 120-meter protection umbrella per terminal",
       "Complete surge protection safeguarding computerized CNC machine controls",

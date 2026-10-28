@@ -40,7 +40,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = () => {
   return (
     <section
       id="projects"
-      className="py-16 sm:py-20 lg:py-24 bg-[#FFF1E8] border-b border-[#F1D9CA] relative overflow-hidden"
+      className="py-10 sm:py-12 bg-[#FFF1E8] border-b border-[#F1D9CA] relative overflow-hidden"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >

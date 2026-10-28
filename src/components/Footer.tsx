@@ -1,4 +1,5 @@
 import { RfqButton } from './RfqButton';
+import { COMPANY_INFO } from '../data/siddhiData';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -24,11 +25,11 @@ export const Footer: React.FC<FooterProps> = () => {
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Multi-Column Footer Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-6 items-start">
           
           {/* Brand Identity & Trust Badges (4 cols) */}
-          <div className="lg:col-span-4 space-y-5">
+          <div className="lg:col-span-4 space-y-4">
             <Link to="/" className="inline-block">
               <img
                 src="/images/logo.png"
@@ -49,7 +50,7 @@ export const Footer: React.FC<FooterProps> = () => {
               </div>
               <div className="flex items-center gap-2 text-xs text-white/80">
                 <Award className="w-4 h-4 shrink-0 text-[#FFD7C2]" />
-                <span className="font-medium">Direct Authorized Channel Partner since 2008</span>
+                <span className="font-medium">Direct Authorized Channel Partner</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-white/80">
                 <Building2 className="w-4 h-4 shrink-0 text-[#FFD7C2]" />
@@ -63,7 +64,7 @@ export const Footer: React.FC<FooterProps> = () => {
             <h4 className="text-xs font-bold uppercase tracking-wider text-white/80 flex items-center gap-1.5">
               <span>Navigation</span>
             </h4>
-            <ul className="space-y-2 text-xs font-light text-white/80">
+            <ul className="space-y-1.5 text-xs font-light text-white/80">
               <li>
                 <Link to="/" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
@@ -101,13 +102,13 @@ export const Footer: React.FC<FooterProps> = () => {
                 </Link>
               </li>
               <li>
-                <RfqButton className="px-4 py-2 text-sm rounded-md" />
-              </li>
-              <li>
                 <Link to="/contact" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Contact Office</span>
                 </Link>
+              </li>
+              <li>
+                <RfqButton className="px-4 py-2 text-sm rounded-md" />
               </li>
             </ul>
           </div>
@@ -117,22 +118,18 @@ export const Footer: React.FC<FooterProps> = () => {
             <h4 className="text-xs font-bold uppercase tracking-wider text-white/80">
               Authorized Alliances
             </h4>
-            <ul className="space-y-2 text-xs font-light text-white/80">
-              <li className="flex items-center justify-between group">
-                <span className="hover:text-[#FFD7C2] transition-colors">Lapp Cables (ÖLFLEX / UNITRONIC)</span>
-                <span className="text-[10px] text-white/80 font-mono">Germany</span>
+            <ul className="space-y-1.5 text-xs font-light text-white/80">
+              <li className="group">
+                <span className="hover:text-[#FFD7C2] transition-colors">LAPP India (ÖLFLEX / UNITRONIC)</span>
               </li>
-              <li className="flex items-center justify-between group">
+              <li className="group">
                 <span className="hover:text-[#FFD7C2] transition-colors">Eaton - Moeller Switchgears</span>
-                <span className="text-[10px] text-white/80 font-mono">USA / Germany</span>
               </li>
-              <li className="flex items-center justify-between group">
+              <li className="group">
                 <span className="hover:text-[#FFD7C2] transition-colors">Partex Marking Systems</span>
-                <span className="text-[10px] text-white/80 font-mono">Sweden</span>
               </li>
-              <li className="flex items-center justify-between group">
-                <span className="hover:text-[#FFD7C2] transition-colors">Mennekes CEE Plugs &amp; Sockets</span>
-                <span className="text-[10px] text-white/80 font-mono">Germany</span>
+              <li className="group">
+                <span className="hover:text-[#FFD7C2] transition-colors">Mennekes Plugs &amp; Sockets</span>
               </li>
               
               
@@ -155,29 +152,23 @@ export const Footer: React.FC<FooterProps> = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-[#FFD7C2] shrink-0" />
                 <div className="space-y-0.5">
-                  <a href="tel:08026720440" className="hover:text-[#FFD7C2] block font-mono">
-                    080 – 2672 0440
-                  </a>
                   <a href="tel:09620000947" className="hover:text-[#FFD7C2] block font-mono">
-                    096200 00947
+                    {COMPANY_INFO.contacts.primaryPhone}
                   </a>
                   <a href="tel:09886058511" className="hover:text-[#FFD7C2] block font-mono">
-                    098860 58511
+                    {COMPANY_INFO.contacts.secondaryPhone}
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-[#FFD7C2] shrink-0" />
                 <div className="space-y-0.5">
-                  <a href="mailto:info@siddhikabel.com" className="hover:text-[#FFD7C2] transition-colors block">
-                    info@siddhikabel.com
-                  </a>
-                  <a href="mailto:guru@siddhikabel.com" className="hover:text-[#FFD7C2] transition-colors block">
-                    guru@siddhikabel.com
+                  <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
+                    {COMPANY_INFO.contacts.salesEmail}
                   </a>
                 </div>
               </div>
@@ -185,8 +176,12 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5 pt-1">
                 <Clock className="w-4 h-4 text-[#FFD7C2] shrink-0 mt-0.5" />
                 <div>
-                  <span className="block font-medium text-white">Operating Hours:</span>
-                  <span className="text-[11px] text-white/80">Mon – Sat: 9:30 AM to 6:30 PM IST</span>
+                  <span className="block font-medium text-white">Business Hours:</span>
+                  {COMPANY_INFO.contacts.hours.map((h) => (
+                    <span key={h.days} className="block text-[11px] text-white/80">
+                      {h.days}: {h.time}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -196,10 +191,10 @@ export const Footer: React.FC<FooterProps> = () => {
       </div>
 
       {/* 4. Bottom Legal Bar */}
-      <div className="bg-[#5F6670] py-5 px-4 sm:px-6 lg:px-8 border-t border-white/15">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/80">
+      <div className="bg-[#5F6670] py-3 px-4 sm:px-6 lg:px-8 border-t border-white/15">
+        <div className="max-w-screen-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 lg:pr-16 text-[11px] text-white/80">
           <p>© 2026 Siddhi Kabel Corporation Private Limited. All rights reserved.</p>
-          <div className="flex flex-wrap items-center gap-4 text-[11px]">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
             <span>ISO 9001:2015 Certified Partner</span>
             <span aria-hidden="true">·</span>
             <span>GST Registered Industrial Supplier</span>
