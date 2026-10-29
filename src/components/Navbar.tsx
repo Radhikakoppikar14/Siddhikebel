@@ -53,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled((prev) => (prev ? window.scrollY > 4 : window.scrollY > 40));
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -138,9 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
           className="relative max-w-7xl mx-auto px-4 sm:px-8"
         >
           <div
-            className={`flex items-center justify-between gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr] transition-all duration-300 ${
-              isScrolled ? 'py-2' : 'py-3'
-            }`}
+            className={`flex items-center justify-between gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr] py-2`}
           >
             {/* Brand Logo */}
             <Link
