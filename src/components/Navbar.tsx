@@ -150,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               <img
                 src="/images/logo.png"
                 alt="Siddhi Kabel Corporation Private Limited"
-                className="h-10 sm:h-14 lg:h-16 w-auto max-w-[200px] sm:max-w-none object-contain object-left transition-transform duration-300 group-hover:scale-105"
+                className="h-9 sm:h-11 lg:h-12 w-auto max-w-[180px] sm:max-w-none object-contain object-left transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
