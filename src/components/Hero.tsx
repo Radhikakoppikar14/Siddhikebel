@@ -101,14 +101,115 @@ const SLIDES: SlideItem[] = [
     ],
     accent: '#FFF1E8',
   },
+  {
+    type: 'video',
+    src: '/assets/videos/hero-allied.mp4',
+    poster: '/assets/videos/hero-allied-poster.jpg',
+    tag: 'Allied products & services',
+    brand: 'ALLIED PRODUCTS & SERVICES',
+    headline: 'More than cables. Support for the whole project.',
+    subtext:
+      'We support OEMs with product options aligned to equipment specifications and repeat sourcing needs. For industrial and building projects, we help coordinate LT/HT and armoured cables, lighting and earthing products around project specifications and site requirements. RMO services cover Repair, Maintenance & Overhaul.',
+    ranges: [
+      'LT & HT power cables',
+      'Industrial lighting',
+      'OEM requirements',
+      'RMO · Repair, Maintenance & Overhaul',
+      'Armoured cables',
+      'Earthing solutions',
+      'Project supplies',
+    ],
+    accent: '#F1D9CA',
+  },
 ];
+
+const SlideContent: React.FC<{ slide: SlideItem; onOpenRfq: (topic?: string) => void }> = ({ slide, onOpenRfq }) => (
+  <>
+            {/* Headline with Live Fade & Scale */}
+            <motion.h1
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,6.5vh,3.75rem)] font-semibold leading-[1.1] tracking-tight text-white font-editorial"
+              style={{ textWrap: 'balance' }}
+            >
+              {slide.headline}
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.45 }}
+              className="text-sm sm:text-base text-white/85 max-w-3xl font-normal leading-relaxed"
+            >
+              {slide.subtext}
+            </motion.p>
+
+            {/* Product ranges for this brand */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.22, duration: 0.45 }}
+              className="pt-1"
+            >
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#FFD7C2]">
+                {slide.brand} product ranges
+              </p>
+              <div className="mt-2 flex flex-col sm:flex-row gap-y-1.5 sm:gap-x-8 text-xs sm:text-[13px] font-medium text-white">
+                {(() => {
+                  const n = slide.ranges.length;
+                  const leftCount = Math.ceil(n / 2);
+                  return [slide.ranges.slice(0, leftCount), slide.ranges.slice(leftCount)].map((col, ci) => (
+                    <ul key={ci} className="flex flex-col gap-y-1.5">
+                      {col.map((r) => (
+                        <li key={r} className="flex items-start gap-2">
+                          <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#F08A4B]" />
+                          <span>{r}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ));
+                })()}
+              </div>
+            </motion.div>
+
+            {/* Live Action Row - Inquire and Catalog */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.45 }}
+              className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
+            >
+              <motion.button
+                whileHover={{
+                  scale: 1.03,
+                  boxShadow: '0 0 25px rgba(210, 67, 15, 0.5)',
+                }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => onOpenRfq(slide.headline)}
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-all shadow-lg border border-[#D2430F] group cursor-pointer"
+              >
+                <span>Inquire / Contact Us</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </motion.button>
+
+              <Link
+                to="/products"
+                className="inline-flex w-full sm:w-auto items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A] bg-white/85 hover:bg-white border border-[#D2430F]/30 rounded-xl transition-all hover:scale-102 shadow-sm"
+              >
+                Browse Catalog
+              </Link>
+            </motion.div>
+  </>
+);
 
 export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 10-second interval timer (one slide per brand)
+  // 10-second interval timer (one slide per brand, plus Allied Products & Services)
   useEffect(() => {
     if (!isPlaying) return;
     const timer = setInterval(() => {
@@ -213,90 +314,92 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         className="absolute bottom-1/4 -left-16 w-80 h-80 bg-[#F5B83D]/20 rounded-full blur-3xl pointer-events-none"
       />
 
-      {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[420px] lg:min-h-0 flex flex-col gap-5 lg:gap-4">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-4xl space-y-4"
-          >
-            {/* Headline with Live Fade & Scale */}
-            <motion.h1
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,6.5vh,3.75rem)] font-semibold leading-[1.1] tracking-tight text-white font-editorial"
-              style={{ textWrap: 'balance' }}
-            >
-              {slide.headline}
-            </motion.h1>
+        <div className="absolute top-4 right-4 sm:right-8 z-20 flex items-center gap-4 sm:gap-5">
+          {/* Slider Indicators */}
+          <div className="flex items-center gap-2">
+            {SLIDES.map((s, i) => {
+              const isActive = i === currentSlide;
+              return (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`relative h-1.5 w-12 shrink-0 rounded-full overflow-hidden transition-colors duration-300 cursor-pointer ${
+                    isActive ? 'bg-white/30' : 'bg-white/20 hover:bg-white/40'
+                  }`}
+                  aria-label={`Slide ${i + 1} - ${s.tag}`}
+                >
+                  {isActive && isPlaying && (
+                    <motion.div
+                      key={`progress-${currentSlide}`}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 10, ease: 'linear' }}
+                      style={{ transformOrigin: 'left' }}
+                      className="h-full w-full bg-[#F5B83D]"
+                    />
+                  )}
+                  {isActive && !isPlaying && (
+                    <div className="h-full w-full bg-[#F5B83D]" />
+                  )}
+                </button>
+              );
+            })}
 
-            {/* Subtext */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.45 }}
-              className="text-sm sm:text-base text-white/85 max-w-2xl font-normal leading-relaxed"
-            >
-              {slide.subtext}
-            </motion.p>
-
-            {/* Product ranges for this brand */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.22, duration: 0.45 }}
-              className="pt-1"
-            >
-              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#FFD7C2]">
-                {slide.brand} product ranges
-              </p>
-              <ul
-                className="mt-2 inline-grid grid-flow-row sm:grid-flow-col sm:[grid-template-rows:repeat(var(--r),auto)] gap-x-8 gap-y-1.5 text-xs sm:text-[13px] font-medium text-white"
-                style={{ ['--r' as string]: Math.ceil(slide.ranges.length / 2) } as React.CSSProperties}
-              >
-                {slide.ranges.map((r) => (
-                  <li key={r} className="flex items-start gap-2">
-                    <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#F08A4B]" />
-                    <span>{r}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Live Action Row - Inquire and Catalog */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25, duration: 0.45 }}
-              className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
-            >
+            <span className="text-[11px] font-mono text-white/80 ml-3 tabular-nums">
+              0{currentSlide + 1} / 0{SLIDES.length}
+            </span>
+          </div>
+          {/* Navigation Controls: Prev & Next */}
+            <div className="flex items-center gap-2.5">
               <motion.button
-                whileHover={{
-                  scale: 1.03,
-                  boxShadow: '0 0 25px rgba(210, 67, 15, 0.5)',
-                }}
-                whileTap={{ scale: 0.96 }}
-                onClick={() => onOpenRfq(slide.headline)}
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-all shadow-lg border border-[#D2430F] group cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length)}
+                className="p-2 rounded-full border border-[#D2430F]/25 bg-white/70 hover:bg-white transition-colors text-[#D2430F] cursor-pointer"
+                aria-label="Previous slide"
               >
-                <span>Inquire / Contact Us</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ChevronLeft className="w-4 h-4" />
               </motion.button>
 
-              <Link
-                to="/products"
-                className="inline-flex w-full sm:w-auto items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A] bg-white/85 hover:bg-white border border-[#D2430F]/30 rounded-xl transition-all hover:scale-102 shadow-sm"
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setCurrentSlide((prev) => (prev + 1) % SLIDES.length)}
+                className="p-2 rounded-full border border-[#D2430F]/25 bg-white/70 hover:bg-white transition-colors text-[#D2430F] cursor-pointer"
+                aria-label="Next slide"
               >
-                Browse Catalog
-              </Link>
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </div>
+        </div>
+
+      {/* Hero Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[420px] lg:min-h-0 flex flex-col gap-5 lg:gap-4">
+        {/* All slides are stacked in one grid cell (hidden copies) so the tallest slide
+            sets the height and the hero never jumps between slides. */}
+        <div className="grid">
+          {SLIDES.map((s, i) => (
+            <div
+              key={`size-${i}`}
+              aria-hidden="true"
+              className="invisible pointer-events-none max-w-4xl space-y-3 self-center [grid-area:1/1]"
+            >
+              <SlideContent slide={s} onOpenRfq={onOpenRfq} />
+            </div>
+          ))}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-4xl space-y-3 self-center [grid-area:1/1]"
+            >
+              <SlideContent slide={slide} onOpenRfq={onOpenRfq} />
             </motion.div>
-          </motion.div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </div>
 
         {/* Modern Enterprise Capability Highlights Strip */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-3 mt-2 border-t border-white/20">
@@ -338,66 +441,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <span className="block text-xs font-semibold text-[#231815] tracking-tight">Statutory Compliant</span>
               <span className="block text-[10px] text-[#5F524C] sm:truncate">IS & IEC Certified Supply</span>
             </div>
-          </div>
-        </div>
-
-        {/* Live Slide Controls with 10-Second Linear Progress Bars */}
-        <div className="pt-3 flex flex-row items-center justify-between gap-3 border-t border-white/20">
-          {/* Slider Indicators */}
-          <div className="flex items-center gap-2.5">
-            {SLIDES.map((s, i) => {
-              const isActive = i === currentSlide;
-              return (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlide(i)}
-                  className={`relative h-2 rounded-full overflow-hidden transition-all duration-300 cursor-pointer ${
-                    isActive ? 'w-16 bg-white/25' : 'w-5 bg-white/20 hover:bg-white/40'
-                  }`}
-                  aria-label={`Slide ${i + 1} - ${s.tag}`}
-                >
-                  {isActive && isPlaying && (
-                    <motion.div
-                      key={`progress-${currentSlide}`}
-                      initial={{ width: 0 }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: 10, ease: 'linear' }}
-                      className="h-full bg-[#F5B83D] rounded-full"
-                    />
-                  )}
-                  {isActive && !isPlaying && (
-                    <div className="h-full w-full bg-[#F5B83D] rounded-full" />
-                  )}
-                </button>
-              );
-            })}
-
-            <span className="text-[11px] font-mono text-white/80 ml-2">
-              0{currentSlide + 1} / 0{SLIDES.length}
-            </span>
-          </div>
-
-          {/* Navigation Controls: Prev & Next */}
-          <div className="flex items-center gap-2.5">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length)}
-              className="p-2 rounded-full border border-[#D2430F]/25 bg-white/70 hover:bg-white transition-colors text-[#D2430F] cursor-pointer"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setCurrentSlide((prev) => (prev + 1) % SLIDES.length)}
-              className="p-2 rounded-full border border-[#D2430F]/25 bg-white/70 hover:bg-white transition-colors text-[#D2430F] cursor-pointer"
-              aria-label="Next slide"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </motion.button>
           </div>
         </div>
       </div>
