@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { WhyChooseUs } from '../components/WhyChooseUs';
 import { PageHeader } from '../components/PageHeader';
+import { ServiceSteps } from '../components/ServicesSteps';
+import { IndustriesServed } from '../components/IndustriesServed';
 
 interface AboutPageProps {
   onGoToContact?: (subject?: string) => void;
@@ -33,10 +35,14 @@ const preconnect = (...urls: string[]) => {
   });
 };
 
+// ---- Replace these when the client sends the final Vision, Mission and company video ----
+const VISION = 'To be a leading, preferred and respected solution partner to our valuable customers in the field of electrical products & services.';
+const MISSION = 'Work towards continuous improvement, stay focused on achieving customer satisfaction.';
+const VIDEO_ID = 'e3a0qpri5NA'; // YouTube video id of the company video
 // maxresdefault is a true 16:9 image (hqdefault is 4:3 with black bars, which looks cropped and blurry).
 // mqdefault is a true 16:9 fallback for videos that have no maxres thumbnail.
-const VIDEO_THUMB = 'https://i.ytimg.com/vi/e3a0qpri5NA/maxresdefault.jpg';
-const VIDEO_THUMB_FALLBACK = 'https://i.ytimg.com/vi/e3a0qpri5NA/mqdefault.jpg';
+const VIDEO_THUMB = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
+const VIDEO_THUMB_FALLBACK = `https://i.ytimg.com/vi/${VIDEO_ID}/mqdefault.jpg`;
 const swapToFallbackThumb = (e: React.SyntheticEvent<HTMLImageElement>) => {
   const img = e.currentTarget;
   if (img.src !== VIDEO_THUMB_FALLBACK) img.src = VIDEO_THUMB_FALLBACK;
@@ -87,38 +93,64 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
       {/* 3. About (Built on experience) + counters + Why industry chooses Siddhi Kabel */}
       <WhyChooseUs onOpenRfq={onGoToContact} />
 
-      {/* 2.5. Corporate Video Feature: Precision Industrial Infrastructure in Action (YouTube e3a0qpri5NA) */}
-      <section className="py-10 sm:py-12 bg-[#FFF1E8] border-y border-[#F1D9CA] relative overflow-hidden">
-        {/* Subtle decorative ambient glows */}
-        <div className="absolute top-1/2 -right-20 w-96 h-96 bg-[#FFF1E8] rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 -left-20 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* 4. Service that starts with understanding */}
+      <ServiceSteps />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA] mb-3">
+      {/* 5. Vision, Mission and company video.
+          Space reserved for the final content the client will send:
+          replace VISION, MISSION and VIDEO_ID at the top of this file. */}
+      <section id="vision-mission" className="py-10 sm:py-14 bg-[#FFF1E8] border-y border-[#F1D9CA] relative overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-white border border-[#F1D9CA]">
               <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
-              <span>Official Video Presentation</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-normal text-[#231815] font-editorial tracking-tight">
-              Siddhi Kabel Industrial Capability in Action
+              Who we are
+            </span>
+            <h2 className="mt-3 text-2xl sm:text-4xl font-normal font-editorial tracking-tight text-[#231815]">
+              Our vision, mission and story.
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-[#5F524C]/80 font-light max-w-2xl mx-auto leading-relaxed">
-              Explore our comprehensive cable supply, specialized machine harness integration, and central Bangalore warehouse logistics.
-            </p>
           </div>
 
-          {/* 16:9 Video Embed Player */}
+          {/* Vision + Mission side by side, each with a big watermark number */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { icon: Compass, title: 'Vision', text: VISION },
+              { icon: Target, title: 'Mission', text: MISSION },
+            ].map(({ icon: Icon, title, text }) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.4 }}
+                className="relative overflow-hidden bg-[#FFFAF6] border border-[#F1D9CA] border-l-4 border-l-[#D2430F] rounded-2xl p-7 sm:p-9 shadow-lg"
+              >
+                <div className="relative flex items-center gap-3">
+                  <span className="w-11 h-11 rounded-xl bg-white border border-[#F1D9CA] text-[#D2430F] flex items-center justify-center shadow-sm">
+                    <Icon className="w-5 h-5" />
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-bold font-editorial text-[#231815]">{title}</h3>
+                </div>
+                <p className="relative mt-5 text-sm sm:text-base text-[#5F524C] leading-relaxed">{text}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Company video (16:9) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
-            className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] bg-black relative group"
+            className="mt-8 max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] bg-black"
           >
             <div className="relative pb-[56.25%] h-0 overflow-hidden">
               {videoActive ? (
                 <>
-                  {/* Thumbnail + spinner stay visible until the YouTube player is ready */}
                   <img
                     src={VIDEO_THUMB}
                     onLoad={checkThumbSize}
@@ -132,8 +164,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                     </span>
                   )}
                   <iframe
-                    src="https://www.youtube-nocookie.com/embed/e3a0qpri5NA?rel=0&modestbranding=1&autoplay=1&playsinline=1"
-                    title="Siddhi Kabel Corporate Overview"
+                    src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?rel=0&modestbranding=1&autoplay=1&playsinline=1`}
+                    title="Siddhi Kabel company video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
                     onLoad={() => setIframeReady(true)}
@@ -149,14 +181,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                   onMouseEnter={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
                   onFocus={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
                   onTouchStart={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
-                  aria-label="Play Siddhi Kabel corporate video"
+                  aria-label="Play Siddhi Kabel company video"
                   className="absolute inset-0 w-full h-full cursor-pointer group/play"
                 >
                   <img
                     src={VIDEO_THUMB}
                     onLoad={checkThumbSize}
                     onError={swapToFallbackThumb}
-                    alt="Siddhi Kabel Corporate Overview video thumbnail"
+                    alt="Siddhi Kabel company video thumbnail"
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover object-center"
@@ -167,185 +199,42 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                       <Play className="w-7 h-7 sm:w-8 sm:h-8 text-white fill-white ml-1" />
                     </span>
                   </span>
+                  <span className="absolute left-4 bottom-4 text-xs font-semibold text-white bg-black/50 rounded-full px-3 py-1">Our company video</span>
                 </button>
               )}
             </div>
-
-            {/* Video footer bar */}
-            <div className="p-4 sm:p-5 bg-[#FFF1E8] text-[#231815] flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#F1D9CA]">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#D2430F] flex items-center justify-center text-white shrink-0">
-                  <Play className="w-4 h-4 fill-white" />
-                </div>
-                <div className="text-left">
-                  <span className="text-xs font-semibold text-[#231815] block">
-                    Siddhi Kabel Corporate &amp; Engineering Reel
-                  </span>
-                  <span className="text-[11px] text-[#5F524C] font-light block">
-                    Authorised Industrial Cables, Automation Switchgear &amp; Safety Systems
-                  </span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => handleInquire('Corporate Video Inquiry')}
-                className="inline-flex items-center gap-2 px-5 py-2 text-xs font-semibold uppercase tracking-wider text-[#FFFAF6] bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-colors cursor-pointer shadow-md shrink-0 border border-[#F1D9CA]/30"
-              >
-                <span>Request Facility Visit</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
           </motion.div>
-        </div>
-      </section>
 
-      {/* 3. Vision & Mission Section */}
-      <section className="py-10 sm:py-12 bg-[#FFF1E8] relative overflow-hidden text-[#231815] border-b border-[#F1D9CA]">
-        {/* Ambient background glow */}
-        <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
-          <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#D2430F] rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D2430F]/8 rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#5F524C] px-3 py-1 rounded-full bg-white border border-[#F1D9CA]/30">
-              Guiding Principles
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-light font-editorial mt-3 text-[#231815]">
-              Vision &amp; Mission of Siddhi Kabel
-            </h2>
-          </div>
-
-          {/* 2x2 Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
-            {/* Top-Left: Vision Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.4 }}
-              className="bg-[#FFFAF6] text-[#231815] p-8 sm:p-12 rounded-3xl shadow-xl flex flex-col justify-center items-center text-center relative group border border-[#F1D9CA]"
-            >
-              <div className="p-3 bg-[#FFF1E8] rounded-2xl text-[#5F524C] mb-4 group-hover:scale-110 transition-transform">
-                <Compass className="w-6 h-6 text-[#5F524C]" />
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#231815] font-editorial">
-                Vision
-              </h3>
-              <div className="w-14 h-0.5 bg-[#D2430F] my-4" />
-              <p className="text-sm sm:text-base text-[#5F524C]/80 font-light leading-relaxed max-w-sm">
-                To be a leading, preferred and respected solution partner to our valuable customers in the field of electrical products &amp; services.
-              </p>
-              <button
-                onClick={() => handleInquire('Vision & Solutions Inquiry')}
-                className="mt-6 text-xs font-semibold uppercase tracking-wider text-[#5F524C] hover:text-[#231815] flex items-center gap-1.5 cursor-pointer"
+          {/* Team photos (click to enlarge) */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { src: '/images/resource/about2.jpg', alt: 'Siddhi Kabel Team Photo', caption: 'Siddhi Kabel Executive Leadership & Operations Team', label: 'Leadership & Engineering Team', icon: Users },
+              { src: '/images/resource/about3.jpg', alt: 'Siddhi Kabel Team Meeting', caption: 'Siddhi Kabel Technical Solution Analysis & Application Engineering', label: 'Technical Review & Client Support', icon: Target },
+            ].map(({ src, alt, caption, label, icon: Icon }) => (
+              <div
+                key={src}
+                onClick={() => setLightboxImage({ src, alt, caption })}
+                className="relative rounded-2xl overflow-hidden shadow-lg border border-[#F1D9CA] group cursor-pointer h-56 sm:h-64"
               >
-                <span>Partner With Us</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </motion.div>
-
-            {/* Top-Right: Outdoor Team Photo */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
-                            transition={{ duration: 0.4 }}
-              className="relative rounded-3xl overflow-hidden shadow-xl border border-[#F1D9CA] group cursor-pointer min-h-[280px]"
-              onClick={() =>
-                setLightboxImage({
-                  src: '/images/resource/about2.jpg',
-                  alt: 'Siddhi Kabel Corporate Team Bangalore',
-                  caption: 'Siddhi Kabel Executive Leadership & Operations Team',
-                })
-              }
-            >
-              <img
-                decoding="async"
-                loading="eager"
-                src="/images/resource/about2.jpg"
-                alt="Siddhi Kabel Team Photo"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col justify-end p-5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#231815] bg-white/80 px-3 py-1 rounded-full backdrop-blur-xs flex items-center gap-1.5 border border-[#F1D9CA]/30">
-                    <Users className="w-3.5 h-3.5 text-[#D2430F]" /> Leadership &amp; Engineering Team
-                  </span>
-                  <span className="p-1.5 rounded-full bg-white text-white group-hover:bg-[#D2430F] transition-colors">
-                    <ZoomIn className="w-4 h-4" />
-                  </span>
+                <img decoding="async" loading="lazy" src={src} alt={alt} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col justify-end p-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#231815] bg-white/80 px-3 py-1 rounded-full flex items-center gap-1.5 border border-[#F1D9CA]/30">
+                      <Icon className="w-3.5 h-3.5 text-[#D2430F]" /> {label}
+                    </span>
+                    <span className="p-1.5 rounded-full bg-white text-[#231815] group-hover:bg-[#D2430F] group-hover:text-white transition-colors">
+                      <ZoomIn className="w-4 h-4" />
+                    </span>
+                  </div>
                 </div>
               </div>
-            </motion.div>
-
-            {/* Bottom-Left: Indoor Laptop Meeting Photo */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
-                            transition={{ duration: 0.4 }}
-              className="relative rounded-3xl overflow-hidden shadow-xl border border-[#F1D9CA] group cursor-pointer min-h-[280px] order-last md:order-none"
-              onClick={() =>
-                setLightboxImage({
-                  src: '/images/resource/about3.jpg',
-                  alt: 'Siddhi Kabel Technical Consultation Team',
-                  caption: 'Siddhi Kabel Technical Solution Analysis & Application Engineering',
-                })
-              }
-            >
-              <img
-                decoding="async"
-                loading="eager"
-                src="/images/resource/about3.jpg"
-                alt="Siddhi Kabel Team Meeting"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col justify-end p-5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#231815] bg-white/80 px-3 py-1 rounded-full backdrop-blur-xs flex items-center gap-1.5 border border-[#F1D9CA]/30">
-                    <Target className="w-3.5 h-3.5 text-[#D2430F]" /> Technical Review &amp; Client Support
-                  </span>
-                  <span className="p-1.5 rounded-full bg-white text-white group-hover:bg-[#D2430F] transition-colors">
-                    <ZoomIn className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Bottom-Right: Mission Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.4 }}
-              className="bg-[#FFFAF6] text-[#231815] p-8 sm:p-12 rounded-3xl shadow-xl flex flex-col justify-center items-center text-center relative group border border-[#F1D9CA]"
-            >
-              <div className="p-3 bg-[#FFF1E8] rounded-2xl text-[#5F524C] mb-4 group-hover:scale-110 transition-transform">
-                <Target className="w-6 h-6 text-[#5F524C]" />
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#231815] font-editorial">
-                Mission
-              </h3>
-              <div className="w-14 h-0.5 bg-[#D2430F] my-4" />
-              <p className="text-sm sm:text-base text-[#5F524C]/80 font-light leading-relaxed max-w-sm">
-                Work towards continuous improvement, stay focused on achieving customer satisfaction.
-              </p>
-              <button
-                onClick={() => handleInquire('Mission & Continuous Improvement')}
-                className="mt-6 text-xs font-semibold uppercase tracking-wider text-[#5F524C] hover:text-[#231815] flex items-center gap-1.5 cursor-pointer"
-              >
-                <span>Request Consultation</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </motion.div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* 6. Industries we serve */}
+      <IndustriesServed />
 
       {/* Closing call to action */}
       <section id="cta" className="py-12 sm:py-16 bg-gradient-to-br from-[#D2430F] to-[#A8340A] text-white text-center">

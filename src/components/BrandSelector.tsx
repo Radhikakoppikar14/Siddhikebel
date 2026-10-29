@@ -31,13 +31,13 @@ const BRAND_COPY: Record<string, { title: string; desc: string }> = {
 };
 
 const ALLIED = [
-  { icon: Zap, bg: 'bg-[#FFF1E8]', tag: 'POWER', title: 'LT & HT cables', desc: 'Cable options for low- and high-voltage distribution and industrial applications.' },
-  { icon: ShieldCheck, bg: 'bg-[#FFF6D9]', tag: 'PROTECTION', title: 'Armoured cables', desc: 'Protected cable choices for fixed power installations and demanding routes.' },
-  { icon: Lightbulb, bg: 'bg-[#E8F0F8]', tag: 'LIGHTING', title: 'Industrial lighting', desc: 'Lighting options for plant floors, workshops, warehouses and work areas.' },
-  { icon: HardHat, bg: 'bg-[#E9F4EA]', tag: 'SAFETY', title: 'Earthing solutions', desc: 'Products to support safe, dependable earthing and bonding installations.' },
-  { icon: Cog, bg: 'bg-[#F5ECF6]', tag: 'OEM SUPPORT', title: 'OEM requirements', desc: 'Product sourcing aligned with equipment specifications, bills of materials and repeat build needs.' },
-  { icon: ClipboardList, bg: 'bg-[#FFEDE0]', tag: 'PROJECTS', title: 'Project handling', desc: 'Coordination of product requirements and supply for industrial and building projects.' },
-  { icon: Wrench, bg: 'bg-[#E6F3F3]', tag: 'LIFECYCLE', title: 'RMO services', desc: 'Repair, Maintenance & Overhaul support for equipment and operations.' },
+  { icon: Zap, tag: 'POWER', title: 'LT & HT cables', desc: 'Cable options for low- and high-voltage distribution and industrial applications.' },
+  { icon: ShieldCheck, tag: 'PROTECTION', title: 'Armoured cables', desc: 'Protected cable choices for fixed power installations and demanding routes.' },
+  { icon: Lightbulb, tag: 'LIGHTING', title: 'Industrial lighting', desc: 'Lighting options for plant floors, workshops, warehouses and work areas.' },
+  { icon: HardHat, tag: 'SAFETY', title: 'Earthing solutions', desc: 'Products to support safe, dependable earthing and bonding installations.' },
+  { icon: Cog, tag: 'OEM SUPPORT', title: 'OEM requirements', desc: 'Product sourcing aligned with equipment specifications, bills of materials and repeat build needs.' },
+  { icon: ClipboardList, tag: 'PROJECTS', title: 'Project handling', desc: 'Coordination of product requirements and supply for industrial and building projects.' },
+  { icon: Wrench, tag: 'LIFECYCLE', title: 'RMO services', desc: 'Repair, Maintenance & Overhaul support for equipment and operations.' },
 ];
 
 interface BrandSelectorProps {
@@ -51,7 +51,7 @@ interface BrandSelectorProps {
  * Same structure and left alignment on every card; each card uses its own brand colour
  * plus the brand's product photo and logo. Brand name and description text are removed.
  */
-export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand }) => {
+export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onOpenRfq }) => {
   return (
     <section id="brands" className="py-10 sm:py-12 bg-white border-b border-[#EBD9CD] ">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -143,37 +143,81 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand }) =
           ))}
         </div>
 
-        {/* More ways we support your requirements */}
-        <div className="mt-12">
-          <div className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase text-[#5F524C] mb-3 px-3 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]">
-            Allied products &amp; services
+        {/* More ways we support your requirements: split panel (intro + numbered list) */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)] rounded-3xl overflow-hidden border border-[#F1D9CA] shadow-xl bg-white">
+          {/* Left: intro panel */}
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#D2430F] to-[#A8340A] text-white p-8 sm:p-10 flex flex-col">
+            <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+            <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full border border-white/15 pointer-events-none" />
+            <span className="relative self-start inline-flex items-center text-[11px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/15 border border-white/30">
+              Allied products &amp; services
+            </span>
+            <h3 className="relative mt-5 text-2xl sm:text-3xl font-normal font-editorial tracking-tight !text-white leading-tight">
+              More ways we support your requirements.
+            </h3>
+            <p className="relative mt-4 text-sm text-white/85 leading-relaxed">
+              Alongside our authorised brands, we help with allied product sourcing, OEM needs, project supply and lifecycle services.
+            </p>
+            {/* Related image fills the free space (same photo as the Allied slide in the hero) */}
+            <div className="relative mt-6 flex-1 min-h-[160px] rounded-2xl overflow-hidden border border-white/25 shadow-lg">
+              <img
+                src="/assets/videos/hero-allied-poster.jpg"
+                alt="Allied industrial products and services"
+                loading="lazy"
+                decoding="async"
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                className="no-zoom absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#A8340A]/70 via-transparent to-transparent" />
+            </div>
+            <div className="relative pt-6">
+              {onOpenRfq ? (
+                <button
+                  type="button"
+                  onClick={() => onOpenRfq()}
+                  className="inline-flex items-center gap-2 bg-white text-[#A8340A] text-xs font-bold uppercase tracking-wider rounded-md px-5 py-3 shadow-lg hover:bg-[#FFF1E8] transition-colors cursor-pointer"
+                >
+                  Share your requirement <ArrowUpRight className="w-4 h-4" />
+                </button>
+              ) : (
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 bg-white text-[#A8340A] text-xs font-bold uppercase tracking-wider rounded-md px-5 py-3 shadow-lg hover:bg-[#FFF1E8] transition-colors"
+                >
+                  Share your requirement <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              )}
+            </div>
           </div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-[#231815]">More ways we support your requirements.</h3>
-          <p className="mt-1 text-sm text-[#5F524C]/80">
-            Alongside our authorised brands, we help with allied product sourcing, OEM needs, project supply and lifecycle services.
-          </p>
-          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+          {/* Right: numbered rows */}
+          <ul className="grid grid-cols-1 sm:grid-cols-2 bg-[#FFFAF6]">
             {ALLIED.map((a, i) => {
               const Icon = a.icon;
+              const isLast = i === ALLIED.length - 1;
               return (
-                <div
+                <li
                   key={a.title}
-                  className={`group relative overflow-hidden rounded-2xl border border-[#F1D9CA] ${a.bg} p-6 min-h-[170px] cursor-default shadow-xs transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#D2430F] hover:bg-[#FFE6D3] ${i === ALLIED.length - 1 ? 'lg:col-span-2' : ''}`}
+                  className={`group relative flex gap-4 p-5 sm:p-6 border-b border-[#F1D9CA] cursor-default transition-colors duration-300 hover:bg-[#FFF1E8] ${
+                    isLast ? 'sm:col-span-2 border-b-0' : i % 2 === 0 ? 'sm:border-r' : ''
+                  }`}
                 >
-                  <Icon className="absolute -right-4 -bottom-4 w-28 h-28 text-[#D2430F]/10 group-hover:text-[#D2430F]/20 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500 pointer-events-none" strokeWidth={1.25} />
-                  <div className="relative flex items-center gap-3">
-                    <span className="w-11 h-11 rounded-xl bg-white text-[#D2430F] border border-[#F1D9CA] flex items-center justify-center shadow-sm transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F] group-hover:scale-110 group-hover:rotate-6">
-                      <Icon className="w-5 h-5" />
-                    </span>
-                    <span className="text-[10px] font-bold tracking-widest text-[#D2430F] group-hover:text-[#A8340A] transition-colors">{a.tag}</span>
+                  <span className="absolute left-0 top-0 h-full w-1 bg-[#D2430F] scale-y-0 origin-top transition-transform duration-300 group-hover:scale-y-100" />
+                  <span className="shrink-0 w-12 h-12 rounded-full border border-[#D2430F]/30 bg-white text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F]">
+                    <Icon className="w-5 h-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-bold tabular-nums text-[#D2430F]/60">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="text-[10px] font-bold tracking-widest text-[#5F524C]">{a.tag}</span>
+                    </div>
+                    <h4 className="mt-1 text-base sm:text-lg font-semibold text-[#231815] group-hover:text-[#D2430F] transition-colors">{a.title}</h4>
+                    <p className="mt-1 text-xs sm:text-[13px] text-[#5F524C] leading-relaxed">{a.desc}</p>
                   </div>
-                  <h4 className="relative mt-4 text-lg font-semibold text-[#231815] group-hover:text-[#D2430F] transition-colors">{a.title}</h4>
-                  <p className="relative mt-1.5 text-xs sm:text-[13px] text-[#5F524C] leading-relaxed group-hover:text-[#231815] transition-colors">{a.desc}</p>
-                  <span className="absolute left-0 bottom-0 h-1 w-0 bg-[#D2430F] transition-all duration-500 group-hover:w-full" />
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

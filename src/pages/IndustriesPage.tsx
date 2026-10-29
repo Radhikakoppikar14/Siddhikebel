@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { MotionReveal } from '../components/MotionReveal';
-import { INDUSTRIES } from '../data/industries';
+import { SERVED_INDUSTRIES } from '../data/industries';
 import { IndustryCard } from '../components/IndustryCard';
 
 export const IndustriesPage: React.FC = () => {
@@ -27,8 +27,8 @@ export const IndustriesPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {INDUSTRIES.map((industry) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {SERVED_INDUSTRIES.map((industry) => (
                 <IndustryCard key={industry.name} industry={industry} />
               ))}
             </div>
