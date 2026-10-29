@@ -34,7 +34,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <img
                 src="/images/logo.png"
                 alt="Siddhi Kabel Corporation"
-                className="h-16 sm:h-20 w-auto object-contain bg-white px-5 py-2 rounded-lg shadow-sm"
+                className="h-11 sm:h-14 w-auto object-contain bg-white px-3 py-1.5 rounded-lg shadow-sm"
               />
             </Link>
 
