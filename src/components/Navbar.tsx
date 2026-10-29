@@ -144,13 +144,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center justify-self-start shrink-0 group bg-white px-4 sm:px-6 py-1"
+              className="flex items-center justify-self-start shrink-0 group bg-white py-1"
               title="Siddhi Kabel - Home"
             >
               <img
                 src="/images/logo.png"
                 alt="Siddhi Kabel Corporation Private Limited"
-                className="h-11 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-10 sm:h-14 lg:h-16 w-auto max-w-[200px] sm:max-w-none object-contain object-left transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
