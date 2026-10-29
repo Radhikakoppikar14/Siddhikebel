@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { BRANDS_DATA, PRODUCTS_CATALOG, ProductItem } from '../data/siddhiData';
 import { BRAND_DETAILS } from '../data/brandDetails';
+import { CroppedVideo } from '../components/CroppedVideo';
 import { BrandIndustries } from '../components/BrandIndustries';
 import { BRAND_INDUSTRIES } from '../data/industries';
 
@@ -27,18 +28,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
       {/* Header: dark overlay with white text, same as the home hero (brand colour kept as the bottom line) */}
       <header className="relative overflow-hidden text-white bg-[#231815] min-h-[240px] sm:min-h-[280px] lg:min-h-[300px] flex" style={{ borderBottom: `4px solid ${brand.color}` }}>
         {/* Background video */}
-        <video
-          key={bgVideo}
-          src={bgVideo}
-          poster={bgPoster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          className="no-zoom absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
-        />
+        <CroppedVideo key={bgVideo} src={bgVideo} poster={bgPoster} />
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">

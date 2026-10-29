@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, ShieldCheck, Zap, Award } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { CroppedVideo } from './CroppedVideo';
 
 interface HeroProps {
   onOpenRfq: (topic?: string) => void;
@@ -150,7 +151,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
   const slide = SLIDES[currentSlide];
 
   return (
-    <section className="relative bg-[#FFF1E8] text-[#231815] overflow-hidden select-none lg:h-[calc(100svh-7.5rem)] lg:min-h-[600px]">
+    <section className="relative bg-[#FFF1E8] text-[#231815] overflow-hidden select-none">
       {/* Background Media Slider with Smooth Transitions */}
       <div className="absolute inset-0 z-0">
         {SLIDES.map((s, idx) => {
@@ -163,19 +164,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               }`}
             >
               {s.type === 'video' ? (
-                <video
+                <CroppedVideo
+                  src={s.src}
                   poster={s.poster}
-                  ref={(el) => {
+                  preload="auto"
+                  videoRef={(el) => {
                     videoRefs.current[idx] = el;
                   }}
-                  src={s.src}
-                  muted
-                  playsInline
-                  loop
-                  autoPlay
-                  preload="auto"
-                  style={{ position: 'absolute', left: 0, width: `${100 + VIDEO_CROP_RIGHT}%`, top: `-${VIDEO_CROP_TOP}%`, height: `${100 + VIDEO_CROP_TOP + VIDEO_CROP_BOTTOM}%` }}
-                  className="object-cover"
                 />
               ) : (
                 <motion.img
@@ -219,7 +214,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
       />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[460px] sm:min-h-[520px] lg:min-h-0 lg:h-full flex flex-col justify-between">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[420px] lg:min-h-0 flex flex-col gap-5 lg:gap-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -304,7 +299,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         </AnimatePresence>
 
         {/* Modern Enterprise Capability Highlights Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-3 mt-4 border-t border-white/20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-3 mt-2 border-t border-white/20">
           <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <ShieldCheck className="w-4 h-4" />

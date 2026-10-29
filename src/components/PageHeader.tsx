@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { CroppedVideo } from './CroppedVideo';
 
 interface PageHeaderProps {
   title: string;
@@ -42,17 +43,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       {/* Photo with a dark overlay so the white text stays readable (same as the home hero) */}
       <div className="absolute inset-0 z-0">
         {bgVideo ? (
-          <video
-            ref={videoRef}
-            src={bgVideo}
-            poster={bgImage}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="no-zoom absolute inset-0 w-full h-full object-cover object-center"
-          />
+          <CroppedVideo videoRef={videoRef} src={bgVideo} poster={bgImage} />
         ) : (
           <img
             src={bgImage}

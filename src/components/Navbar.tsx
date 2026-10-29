@@ -11,7 +11,7 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
     to={to}
     end={end}
     className={({ isActive }) =>
-      `relative group whitespace-nowrap px-2.5 xl:px-4 py-2 text-[13px] xl:text-sm transition-colors duration-200 ${
+      `relative group inline-flex items-center whitespace-nowrap leading-6 px-2.5 xl:px-4 py-2 text-[13px] xl:text-sm transition-colors duration-200 ${
         isActive ? 'text-[#D2430F] font-semibold' : 'text-[#231815]/75 hover:text-[#231815]'
       }`
     }
@@ -161,17 +161,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
 
               {/* Products - opens a full-width mega menu */}
               <div
-                className="relative"
+                className="relative flex items-center"
                 onMouseEnter={() => setProductsDropdownOpen(true)}
                 onMouseLeave={() => setProductsDropdownOpen(false)}
               >
                 <DesktopNavLink to="/products">
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 leading-6">
                     <span>Products</span>
                     <motion.span
                       animate={{ rotate: productsDropdownOpen ? 180 : 0 }}
                       transition={{ duration: 0.25 }}
-                      className="text-[10px] text-[#D2430F] inline-block"
+                      className="text-[10px] leading-none text-[#D2430F] inline-block"
                     >
                       ▾
                     </motion.span>
