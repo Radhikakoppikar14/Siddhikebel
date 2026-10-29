@@ -91,11 +91,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
             <span className="text-[#231815] font-semibold">About Us</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
             {/* Left column */}
             <div className="space-y-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal">
               <p className="text-justify">
                 <span className="font-semibold text-[#231815]">Siddhi Kabel</span> was established in the year 2008 by professionals with experience of more than 15 years in providing solutions for various needs of high quality Industrial electrical, automation and safety products.
+              </p>
+              <p className="text-justify">
+                Siddhi is one of the leading channel partners of world class, Indian and international manufacturers, offering wide range of products like LT &amp; HT Cables, Cable - Glands, Conduits, Connectors, Complete range of LED Lighting solutions for domestic, Commercial &amp; Industrial needs, Switchgears, Circuit breakers – MCB, MCCB, ELCB, RCCB, Distribution boards, Safety relays, Isolators, Maintenance free Chemical Electrical Grounding / earthing solutions, Insulated Plugs &amp; Sockets and much more.
               </p>
               <p className="text-justify">
                 For many customers Siddhi Kabel is more than a supplier, we combine superior product offerings with unparalleled technical support and supply chain services, Whether its providing products &amp; services for a Machine tool industries, Pharmaceutical, Process industry, automotive, Oil &amp; Gas, Chemical &amp; Paint industries, projects, or System integrators, we know our customers are looking for more than a supply of parts and pieces, we focus on addressing our customers larger business needs.
@@ -103,28 +106,30 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
             </div>
 
             {/* Right column */}
-            <div className="space-y-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal">
+            <div className="flex flex-col gap-6 text-sm sm:text-base text-[#231815]/85 leading-relaxed font-normal">
               <p className="text-justify">
                 We constantly monitor and adjust each program so that when our customers' needs change our solutions change with them, our expertise lies in understanding the customer requirements and careful analysis of applications to provide the best possible techno commercial solutions, our team strives hard in planning and managing best inventory apart from arranging and sourcing of materials from our large and reliable network to offer uninterrupted services to our valued customers.
               </p>
 
-                <div className="bg-white p-5 sm:p-6 rounded-lg border border-[#F1D9CA] space-y-3 shadow-2xs">
-                  <h3 className="text-base sm:text-lg font-semibold text-[#231815] leading-snug">
-                    Siddhi is Authorized Distributors / Dealers / Channel partners / Importer with world class major manufacturing companies:
-                  </h3>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                    {AUTHORIZED_PARTNERS.map((partner) => (
-                      <li
-                        key={partner}
-                        className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-[#231815] cursor-pointer"
-                        onClick={() => handleInquire(`Authorized Line: ${partner}`)}
-                      >
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#D2430F] shrink-0" />
-                        <span>{partner}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="flex-1 relative lg:min-h-[260px]">
+              <div className="lg:absolute lg:inset-0 flex flex-col bg-white p-5 sm:p-6 rounded-lg border border-[#F1D9CA] shadow-2xs">
+                <h3 className="text-base sm:text-lg font-semibold text-[#231815] leading-snug">
+                  Siddhi is Authorized Distributors / Dealers / Channel partners / Importer with world class major manufacturing companies:
+                </h3>
+                <ul className="mt-4 flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 auto-rows-fr">
+                  {AUTHORIZED_PARTNERS.map((partner) => (
+                    <li
+                      key={partner}
+                      className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-[#231815] cursor-pointer rounded-md bg-[#FFF1E8] border border-[#F1D9CA] px-3 py-3"
+                      onClick={() => handleInquire(`Authorized Line: ${partner}`)}
+                    >
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#D2430F] shrink-0" />
+                      <span>{partner}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              </div>
             </div>
           </div>
         </div>

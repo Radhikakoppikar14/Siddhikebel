@@ -100,20 +100,17 @@ export const ClientsWall: React.FC = () => {
           {items.map((client, idx) => (
             <div
               key={`${client.name}-${idx}`}
-              className="group relative bg-white rounded-2xl border border-[#F1D9CA] hover:border-[#5F524C] hover:shadow-xl p-5 w-52 sm:w-60 h-28 flex flex-col items-center justify-center transition-[border-color,box-shadow] duration-300 overflow-hidden shrink-0 cursor-pointer"
+              className="group relative bg-white rounded-2xl border border-[#F1D9CA] hover:border-[#5F524C] hover:shadow-xl px-4 py-3 w-64 sm:w-80 h-44 flex flex-col items-center justify-center transition-[border-color,box-shadow] duration-300 overflow-hidden shrink-0 cursor-pointer"
             >
-              <div className="h-10 w-full flex items-center justify-center">
+              <div className="h-24 w-full flex items-center justify-center">
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="max-h-9 max-w-[85%] object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 opacity-75 group-hover:opacity-100"
+                  className="h-full w-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="mt-2 text-center">
-                <span className="block text-xs font-semibold text-[#231815] truncate max-w-[180px]">{client.name}</span>
-                <span className="block text-[10px] text-[#D2430F] font-light truncate">{client.industry}</span>
-              </div>
+              <span className="mt-2 block w-full text-center text-[10px] font-medium text-[#5F524C] truncate">{client.name}</span>
             </div>
           ))}
         </div>

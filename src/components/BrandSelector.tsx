@@ -67,13 +67,13 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand }) =
               <div className="flex flex-col items-start flex-1 px-6 pb-6">
                 {/* Logo overlapping the photo */}
                 <div
-                  className="-mt-8 w-16 h-16 rounded-md bg-white border shadow-md flex items-center justify-center p-2 relative z-10"
+                  className="-mt-10 w-36 h-20 rounded-md bg-white border shadow-md flex items-center justify-center px-3 py-2 relative z-10"
                   style={{ borderColor: `${brand.color}55` }}
                 >
                   <img
                     src={brand.logo}
                     alt={brand.name}
-                    className="max-h-8 max-w-full object-contain"
+                    className="max-h-14 max-w-full w-auto object-contain"
                     loading="eager"
                     decoding="async"
                     width={96}
@@ -81,7 +81,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand }) =
                   />
                 </div>
 
-                <ul className="mt-4 flex flex-col gap-2">
+                <ul className="mt-5 flex flex-col gap-2">
                   {brand.categories.map((cat) => (
                     <li key={cat} className="flex items-center justify-between gap-2">
                       <span

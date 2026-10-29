@@ -49,7 +49,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenRfq }) => {
                     </span>
                     <span className="flex items-center gap-1.5 font-medium">
                       <Zap className="w-4 h-4 text-[#5F524C]" />
-                      ESE Lightning Umbrella Radius Calculation
+                      Earthing Design & Compliance Review
                     </span>
                   </div>
                 </div>

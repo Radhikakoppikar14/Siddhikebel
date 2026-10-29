@@ -83,7 +83,7 @@ export const COMPANY_INFO = {
       line1: "No.3, 1st Main Road, 1st Block",
       line2: "Banashankari 3rd Stage",
       city: "Bangalore",
-      pincode: "560 085",
+      pincode: "560085",
       state: "Karnataka",
       country: "India",
     },
@@ -359,7 +359,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Formats", value: "Sleeves, clip-on markers, flat labels" },
       { label: "Marking", value: "Pre-printed or printed on demand" },
     ],
-    image: "/images/clients/partex.png",
+    image: "/images/partex/marking-sleeves.jpg",
     standards: ["CE", "RoHS"],
     isFeatured: true,
   },
@@ -377,7 +377,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Output", value: "Sleeves, labels, tags" },
       { label: "Use", value: "Panel building, maintenance, projects" },
     ],
-    image: "/images/clients/partex.png",
+    image: "/images/partex/wire-markers.jpg",
     standards: ["CE"],
   },
 ];
@@ -444,14 +444,14 @@ export const SERVICES_DATA = [
   },
   {
     id: "grounding",
-    title: "Earthing & Lightning Protection Systems",
+    title: "Earthing & Grounding Systems",
     subtitle: "Safety for People & Assets",
     description:
-      "Auditing and installation of earth pits, chemical grounding and ESE lightning arrestors.",
+      "Auditing and installation of earth pits and maintenance-free chemical grounding for plants, laboratories and commercial buildings, keeping people and equipment safe.",
     features: [
       "Auditing and testing of existing electrical earth pits",
       "Maintenance-free chemical grounding installation",
-      "Early Streamer Emission (ESE) lightning arrestors",
+      "Earth resistance testing with certified test reports",
       "Exothermic welding for low-impedance permanent bonding",
     ],
     image: "/images/gallery/grounding.jpg",
@@ -488,14 +488,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     image: "/images/resource/ind3.jpg",
   },
   {
-    id: "cs-lightning",
-    title: "ESE Lightning Protection",
+    id: "cs-surge-earthing",
+    title: "Surge & Earthing Protection",
     category: "Infrastructure Defense",
     clients: "Ace Designers Ltd, Himalaya Drug Company, H & R Johnson",
     summary:
-      "Installation of ESE lightning arrestor systems for factory structures, CNC tooling shops and pharmaceutical labs.",
+      "Installation of earthing and surge protection for factory structures, CNC tooling shops and pharmaceutical labs.",
     highlights: [
-      "Expanded 120-meter protection umbrella per terminal",
+      "Reliable low-impedance earthing across the whole site",
       "Complete surge protection safeguarding computerized CNC machine controls",
       "Accompanied by shop floor LED retrofit for maximum operating savings",
     ],

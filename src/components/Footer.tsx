@@ -34,7 +34,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <img
                 src="/images/logo.png"
                 alt="Siddhi Kabel Corporation"
-                className="h-11 w-auto object-contain bg-white/95 p-1.5 rounded-lg shadow-sm"
+                className="h-16 sm:h-20 w-auto object-contain bg-white px-5 py-2 rounded-lg shadow-sm"
               />
             </Link>
 
@@ -148,7 +148,13 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#FFD7C2] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  Siddhi Kabel Corporation Private Limited, No.3, 1st Main Road, 1st Block, Banashankari 3rd Stage, Bangalore 560 085
+                  Siddhi Kabel Corporation Private Limited,
+                  <br />
+                  No.3, 1st Main Road, 1st Block,
+                  <br />
+                  Banashankari 3rd Stage,
+                  <br />
+                  Bangalore 560085
                 </span>
               </div>
 

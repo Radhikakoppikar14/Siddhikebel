@@ -80,7 +80,9 @@ export const ContactSection: React.FC = () => {
                   <br />
                   {contacts.address.line1},
                   <br />
-                  {contacts.address.line2}, {contacts.address.city} {contacts.address.pincode}.
+                  {contacts.address.line2},
+                  <br />
+                  {contacts.address.city} {contacts.address.pincode}.
                 </p>
               </div>
             </div>

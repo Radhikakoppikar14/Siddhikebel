@@ -13,14 +13,14 @@ export const BrandIndustries: React.FC<{ brand: BrandInfo; compact?: boolean }> 
   return (
     <div
       className={`grid gap-4 ${
-        compact ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+        'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
       }`}
     >
       {industries.map((ind) => (
         <Link
           key={ind.name}
           to="/industries"
-          className="group flex flex-col overflow-hidden rounded-xl bg-white border transition-shadow hover:shadow-lg"
+          className="group flex flex-col h-full overflow-hidden rounded-xl bg-white border transition-shadow hover:shadow-lg"
           style={{ borderColor: `${brand.color}55` }}
         >
           <div className="relative aspect-[16/10] overflow-hidden bg-[#FFF1E8]">
@@ -32,7 +32,7 @@ export const BrandIndustries: React.FC<{ brand: BrandInfo; compact?: boolean }> 
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
-          <div className="px-4 py-3 border-t-4" style={{ borderColor: brand.color }}>
+          <div className="px-4 py-3 border-t-4 flex-1 flex items-center min-h-[56px]" style={{ borderColor: brand.color }}>
             <h4 className="text-sm font-bold leading-snug" style={{ color: brand.colorDark }}>
               {ind.name}
             </h4>
