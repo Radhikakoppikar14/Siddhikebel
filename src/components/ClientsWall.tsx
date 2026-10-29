@@ -2,6 +2,70 @@ import React, { useEffect, useRef } from 'react';
 import { CLIENTS_LIST } from '../data/siddhiData';
 import { Building2, ChevronLeft, ChevronRight } from 'lucide-react';
 
+
+// Logo files often have a lot of empty (transparent or white) space around them, which makes them look small.
+// This crops that space off once in the browser so every logo fills its box as large as possible.
+const trimmedCache = new Map<string, string>();
+const TrimmedLogo: React.FC<{ src: string; alt: string }> = ({ src, alt }) => {
+  const [url, setUrl] = React.useState<string>(trimmedCache.get(src) ?? src);
+
+  useEffect(() => {
+    if (trimmedCache.has(src)) { setUrl(trimmedCache.get(src)!); return; }
+    let cancelled = false;
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const w = img.naturalWidth, h = img.naturalHeight;
+        if (!w || !h) return;
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        const ctx = c.getContext('2d');
+        if (!ctx) return;
+        ctx.drawImage(img, 0, 0);
+        const { data } = ctx.getImageData(0, 0, w, h);
+        let minX = w, minY = h, maxX = -1, maxY = -1;
+        for (let y = 0; y < h; y++) {
+          for (let x = 0; x < w; x++) {
+            const i = (y * w + x) * 4;
+            const a = data[i + 3];
+            const isBlank = a < 20 || (data[i] > 245 && data[i + 1] > 245 && data[i + 2] > 245);
+            if (!isBlank) {
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+              if (y < minY) minY = y;
+              if (y > maxY) maxY = y;
+            }
+          }
+        }
+        if (maxX < 0) return;
+        const pad = 2;
+        minX = Math.max(0, minX - pad); minY = Math.max(0, minY - pad);
+        maxX = Math.min(w - 1, maxX + pad); maxY = Math.min(h - 1, maxY + pad);
+        const cw = maxX - minX + 1, ch = maxY - minY + 1;
+        const out = document.createElement('canvas');
+        out.width = cw; out.height = ch;
+        out.getContext('2d')!.drawImage(c, minX, minY, cw, ch, 0, 0, cw, ch);
+        const data64 = out.toDataURL('image/png');
+        trimmedCache.set(src, data64);
+        if (!cancelled) setUrl(data64);
+      } catch {
+        /* keep the original image */
+      }
+    };
+    img.src = src;
+    return () => { cancelled = true; };
+  }, [src]);
+
+  return (
+    <img
+      src={url}
+      alt={alt}
+      className="w-full h-full object-contain"
+      referrerPolicy="no-referrer"
+    />
+  );
+};
+
 export const ClientsWall: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const pausedRef = useRef(false);
@@ -100,15 +164,10 @@ export const ClientsWall: React.FC = () => {
           {items.map((client, idx) => (
             <div
               key={`${client.name}-${idx}`}
-              className="group relative bg-white rounded-2xl border border-[#F1D9CA] hover:border-[#5F524C] hover:shadow-xl px-4 py-3 w-64 sm:w-80 h-44 flex flex-col items-center justify-center transition-[border-color,box-shadow] duration-300 overflow-hidden shrink-0 cursor-pointer"
+              className="group relative bg-white rounded-2xl border border-[#F1D9CA] hover:border-[#5F524C] hover:shadow-xl px-4 py-3 w-60 sm:w-72 h-36 flex flex-col items-center justify-center transition-[border-color,box-shadow] duration-300 overflow-hidden shrink-0 cursor-pointer"
             >
-              <div className="h-24 w-full flex items-center justify-center">
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="h-full w-full object-contain"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="h-16 w-full flex items-center justify-center px-10">
+                <TrimmedLogo src={client.logo} alt={client.name} />
               </div>
               <span className="mt-2 block w-full text-center text-[10px] font-medium text-[#5F524C] truncate">{client.name}</span>
             </div>

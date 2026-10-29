@@ -32,6 +32,8 @@ export interface ClientPartner {
   name: string;
   logo: string;
   industry: string;
+  /** Optional zoom for logo files that have a lot of empty space around them (1 = normal). */
+  scale?: number;
 }
 
 export interface CaseStudy {
