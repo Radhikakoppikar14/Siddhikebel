@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Users, Wrench, Cog, Warehouse, Truck, Globe, FileCheck, BadgeCheck, HeartHandshake, Scale, ShieldCheck, Sparkles, Factory, Building2, Lightbulb } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Users, Wrench, Cog, Warehouse, Truck, Globe, FileCheck, BadgeCheck, HeartHandshake, Scale, ShieldCheck, Sparkles, Factory, Building2, Lightbulb, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 // Each card: soft line-art + a wash colour that keeps the text sharp
@@ -7,6 +8,7 @@ const STAT_CARDS = [
   { tint: '253,229,211' }, // warm peach
   { tint: '255,244,214' }, // warm cream
   { tint: '233,238,244' }, // cool grey
+  { tint: '245,236,228' }, // warm sand
 ];
 
 // Soft line-art backgrounds for the three counter cards (right side, text stays on the left)
@@ -20,21 +22,23 @@ const CARD_ART: React.ReactNode[] = [
     <path d="M184 22V6M184 6l14 5-14 5" />
     <circle cx="184" cy="22" r="5" />
   </svg>,
-  // 2. Industrial segments: solar panels, power bolt and gear
-  <svg preserveAspectRatio="xMaxYMid meet" key="industry" viewBox="0 0 200 120" fill="none" stroke="#D2430F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M14 96 L52 96 L70 46 L32 46 Z" />
-    <path d="M23 71H61M26.5 59H64M41 46L23 96M51 46L33 96" strokeWidth="1" />
-    <path d="M60 96 L98 96 L116 46 L78 46 Z" />
-    <path d="M69 71H107M72.5 59H110M87 46L69 96M97 46L79 96" strokeWidth="1" />
-    <path d="M156 10 L134 58 H154 L144 100 L178 46 H158 Z" />
-    <circle cx="176" cy="92" r="9" /><circle cx="176" cy="92" r="3.5" />
-    <path d="M176 78v-4M176 106v4M162 92h-4M190 92h4M166 82l-3-3M186 102l3 3M186 82l3-3M166 102l-3 3" />
+  // 2. Established: calendar
+  <svg preserveAspectRatio="xMaxYMid meet" key="calendar" viewBox="0 0 200 120" fill="none" stroke="#D2430F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="110" y="22" width="72" height="80" rx="6" />
+    <path d="M110 44H182M130 12V30M162 12V30" />
+    <path d="M122 58h10M144 58h10M166 58h8M122 72h10M144 72h10M166 72h8M122 86h10M144 86h10" />
   </svg>,
   // 3. Customers: pan-India network map
   <svg preserveAspectRatio="xMaxYMid meet" key="india" viewBox="0 0 100 100" fill="none" stroke="#D2430F" strokeWidth="1" strokeLinejoin="round" aria-hidden="true">
     <path d="M24 3 L32 8 L38 11 L37 18 L42 24 L45 26 L54 30 L67 33 L72 36 L80 36 L90 31 L96 32 L93 35 L90 38 L88 45 L85 50 L82 51 L80 45 L78 41 L73 41 L70 38 L69 45 L70 51 L64 53 L58 59 L48 69 L43 74 L42 80 L41 89 L36 93 L34 96 L30 91 L26 82 L22 72 L19 61 L18 54 L11 55 L6 50 L4 46 L10 44 L13 40 L10 35 L14 30 L22 22 L24 18 L26 13 Z" fill="#D2430F" fillOpacity="0.10" />
     <g strokeWidth="0.8" strokeDasharray="2 2"><line x1="35" y1="32" x2="43" y2="36"/><line x1="43" y1="36" x2="58" y2="40"/><line x1="58" y1="40" x2="68" y2="49"/><line x1="68" y1="49" x2="19" y2="61"/><line x1="19" y1="61" x2="28" y2="50"/><line x1="28" y1="50" x2="35" y2="32"/><line x1="28" y1="50" x2="33" y2="80"/><line x1="33" y1="80" x2="30" y2="90"/><line x1="19" y1="61" x2="33" y2="80"/><line x1="43" y1="36" x2="28" y2="50"/></g>
     <g fill="#D2430F" stroke="none"><circle cx="35" cy="32" r="3.2"/><circle cx="33" cy="80" r="3.2"/><circle cx="19" cy="61" r="3.2"/><circle cx="68" cy="49" r="3.2"/><circle cx="43" cy="36" r="3.2"/><circle cx="30" cy="90" r="3.2"/><circle cx="58" cy="40" r="3.2"/><circle cx="28" cy="50" r="3.2"/></g>
+  </svg>,
+  // 4. Brands: four partner tiles
+  <svg preserveAspectRatio="xMaxYMid meet" key="brands" viewBox="0 0 200 120" fill="none" stroke="#D2430F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="104" y="14" width="38" height="38" rx="6" /><rect x="148" y="14" width="38" height="38" rx="6" />
+    <rect x="104" y="58" width="38" height="38" rx="6" /><rect x="148" y="58" width="38" height="38" rx="6" />
+    <g fill="#D2430F" stroke="none"><circle cx="123" cy="33" r="4" /><circle cx="167" cy="33" r="4" /><circle cx="123" cy="77" r="4" /><circle cx="167" cy="77" r="4" /></g>
   </svg>,
 ];
 
@@ -167,7 +171,19 @@ const AnimatedCounterCard: React.FC<{
   );
 };
 
-export const WhyChooseUs: React.FC = () => {
+interface WhyChooseUsProps {
+  onOpenRfq?: (subject?: string) => void;
+  /** Hide the "Built on experience" text block (used on the About page, which has its own intro) */
+  hideAbout?: boolean;
+}
+
+// To show a looping video in the "Why" hub, put a file at this path in /public.
+// If it is missing, the photo is shown instead.
+const WHY_VIDEO = '/assets/videos/why-siddhi.mp4';
+const WHY_IMAGE = '/images/industries/automation-robotics.jpg';
+
+export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout = false }) => {
+  const [videoOk, setVideoOk] = useState(true);
   return (
     <section id="about" className="py-10 sm:py-12 bg-white border-b border-[#F1D9CA] relative overflow-hidden">
       {/* Decorative ambient glowing circles */}
@@ -176,53 +192,73 @@ export const WhyChooseUs: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
         {/* Story & Background Split */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-8 sm:mb-10">
+        {!hideAbout && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-8 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0 }}
             transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="lg:col-span-12 space-y-6"
+            className="lg:col-span-7 space-y-6"
           >
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1.5 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]">
               <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
-              <span>We Are Siddhi Kabel</span>
+              <span>About Siddhi Kabel</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal text-[#231815] font-editorial tracking-tight leading-[1.15]">
-              Transforming Indian Industry <br className="hidden sm:inline" />
-              With Innovative Products
+              Built on experience. <br className="hidden sm:inline" />
+              Focused on your application.
             </h2>
             <div className="space-y-4 text-sm sm:text-base text-[#231815]/85 font-light leading-relaxed">
               <p>
-                A trusted supplier of industrial electrical, automation and safety products, with 33+ years of experience.
+                Since 2008, Siddhi Kabel Corporation Private Limited has supported industrial businesses with electrical, automation, safety and infrastructure requirements. As an authorised channel partner for LAPP, Eaton, Partex and MENNEKES, we provide access to trusted product ranges—alongside sourcing support for allied product needs.
+              </p>
+              <p>
+                From OEM product specifications and project-based requirements to repair, maintenance and overhaul support, we help identify suitable products and coordinate supply for plants, control panels, buildings and production lines. Our allied offerings include LT and HT cables, armoured cables, industrial lighting and earthing products. RMO support covers Repair, Maintenance and Overhaul. With more than 33 years of industrial experience, we are able to make procurement clearer and ongoing support more dependable.
               </p>
             </div>
-
-            {/* Quick Badges with Live Animated Counters */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#F1D9CA]">
-              <AnimatedCounterCard
-                target={33}
-                suffix="+"
-                theme={0}
-                label="Years of Industrial Experience"
-                subLabel="Industrial electrical field"
-              />
-              <AnimatedCounterCard
-                target={16}
-                suffix="+"
-                theme={1}
-                label="Industrial segments"
-                subLabel="Pharma, Solar, OEM & more"
-              />
-              <AnimatedCounterCard
-                target={1800}
-                suffix="+"
-                theme={2}
-                label="Customers served"
-                subLabel="Pan-India Corporate Clients"
-              />
-            </div>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.45 }}
+            className="lg:col-span-5 relative flex flex-col justify-center self-stretch rounded-2xl border border-[#F1D9CA] bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm p-6 sm:p-10 overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F]" />
+            <span className="self-start inline-block text-[10px] font-semibold tracking-widest uppercase text-[#D2430F] px-3 py-1 rounded-full bg-white border border-[#F1D9CA]">
+              Your industrial supply partner
+            </span>
+            <h3 className="mt-5 text-xl sm:text-2xl lg:text-3xl font-semibold text-[#231815] leading-snug">
+              OEM sourcing, project coordination and RMO support—from one responsive team.
+            </h3>
+            <p className="mt-4 text-sm sm:text-base text-[#5F524C] leading-relaxed">
+              From product selection and supply coordination to Repair, Maintenance &amp; Overhaul support shaped around your operation.
+            </p>
+            {onOpenRfq ? (
+              <button
+                type="button"
+                onClick={() => onOpenRfq('About: Talk with our team')}
+                className="mt-6 self-start inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A] cursor-pointer"
+              >
+                Talk with our team <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            ) : (
+              <Link to="/contact" className="mt-6 self-start inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A]">
+                Talk with our team <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            )}
+          </motion.div>
+        </div>
+        )}
+
+        {/* Quick Badges with Live Animated Counters */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-[#F1D9CA] mb-10 sm:mb-12">
+          <AnimatedCounterCard target={33} suffix="+ years" theme={0} label="Industrial experience" />
+          <AnimatedCounterCard target={18} suffix=" years" theme={1} label="Established in 2008" />
+          <AnimatedCounterCard target={1800} suffix="+" theme={2} label="Happy customers served" />
+          <AnimatedCounterCard target={4} suffix=" brands" theme={3} label="LAPP · Eaton · Partex · MENNEKES" />
         </div>
 
         {/* Why Choose Us Grid - Redesigned to be space-efficient & compact */}
@@ -243,8 +279,11 @@ export const WhyChooseUs: React.FC = () => {
               transition={{ delay: 0.1 }}
               className="text-2xl sm:text-4xl font-normal text-[#231815] font-editorial tracking-tight"
             >
-              Why Choose Us
+              Why industry chooses Siddhi Kabel.
             </motion.h2>
+            <p className="text-sm sm:text-base text-[#5F524C]/80 font-light leading-relaxed">
+              Strong product partnerships. Real-world experience. One responsive team for your industrial requirements.
+            </p>
           </div>
 
           {/* Infographic panel */}
@@ -252,7 +291,7 @@ export const WhyChooseUs: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_1fr] gap-4 lg:gap-8 items-center">
               {/* LEFT COLUMN */}
               <div className="space-y-4 order-2 lg:order-1">
-                <InfoCard num="02" side="left" title="Multiple World-Class Brands" desc="Leading brands from one supplier.">
+                <InfoCard num="02" side="left" title="Four authorised partners" desc="Trusted products from LAPP, Eaton, Partex and MENNEKES.">
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {BRAND_LOGOS.map((src) => (
                       <div key={src} className="h-10 rounded-lg bg-white border border-[#F1D9CA] flex items-center justify-center p-1.5">
@@ -262,7 +301,7 @@ export const WhyChooseUs: React.FC = () => {
                   </div>
                 </InfoCard>
 
-                <InfoCard num="03" side="left" delay={0.06} title="Wide Range of Products" desc="For various applications.">
+                <InfoCard num="03" side="left" delay={0.06} title="Broad product choice" desc="Options for industrial, commercial and domestic applications.">
                   <div className="flex items-stretch gap-2 mt-3">
                     {APPLICATIONS.map((a) => {
                       const I = a.icon;
@@ -281,7 +320,7 @@ export const WhyChooseUs: React.FC = () => {
                   </div>
                 </InfoCard>
 
-                <InfoCard num="04" side="left" delay={0.12} title="Dedicated Skilled Team" desc="Skilled technical and commercial team.">
+                <InfoCard num="04" side="left" delay={0.12} title="People who understand" desc="Responsive technical and commercial product guidance.">
                   <IconRow icons={[Users, Wrench, Cog]} />
                 </InfoCard>
               </div>
@@ -301,16 +340,29 @@ export const WhyChooseUs: React.FC = () => {
                     className="absolute inset-0 rounded-full border-2 border-dashed border-[#D2430F]/40"
                   />
                   <div className="absolute inset-3 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                    <img src="/images/industries/plant-engineering.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    <img src={WHY_IMAGE} alt="" className="no-zoom absolute inset-0 w-full h-full object-cover" />
+                    {videoOk && (
+                      <video
+                        src={WHY_VIDEO}
+                        poster={WHY_IMAGE}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        onError={() => setVideoOk(false)}
+                        className="no-zoom absolute inset-0 w-full h-full object-cover"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-[#FFF1E8]/85 to-[#FDE5D3]/90" />
                     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
                       <span className="w-11 h-11 rounded-full bg-[#D2430F] text-white flex items-center justify-center shadow-md mb-2">
                         <ShieldCheck className="w-6 h-6" />
                       </span>
                       <span className="text-[10px] font-mono font-bold text-[#D2430F] tracking-widest">01</span>
-                      <span className="text-sm font-semibold text-[#231815] leading-snug">One Trusted Single Source</span>
+                      <span className="text-sm font-semibold text-[#231815] leading-snug">One dependable source</span>
                       <span className="text-[11px] text-[#5F524C] leading-snug mt-1">
-                        Electrical, safety, energy and automation products &amp; services.
+                        Electrical, safety, energy and automation ranges together.
                       </span>
                     </div>
                   </div>
@@ -331,23 +383,23 @@ export const WhyChooseUs: React.FC = () => {
                   </div>
                   <div>
                     <span className="text-[10px] font-mono font-bold text-[#D2430F]">05</span>
-                    <h4 className="text-sm font-semibold text-[#231815] leading-snug">33+ Years of Industrial Experience</h4>
-                    <p className="text-xs text-[#5F524C] leading-relaxed mt-0.5">Across industry segments.</p>
+                    <h4 className="text-sm font-semibold text-[#231815] leading-snug">33+ years of experience</h4>
+                    <p className="text-xs text-[#5F524C] leading-relaxed mt-0.5">Industrial knowledge built across varied segments.</p>
                   </div>
                 </motion.div>
               </div>
 
               {/* RIGHT COLUMN */}
               <div className="space-y-4 order-3">
-                <InfoCard num="08" side="right" title="Ethical Business Practice" desc="Quality first, ethical practice.">
+                <InfoCard num="08" side="right" title="Ethical business practices" desc="Transparent dealings, quality-first decisions and trust built over time.">
                   <IconRow icons={[HeartHandshake, Scale, ShieldCheck]} />
                 </InfoCard>
 
-                <InfoCard num="07" side="right" delay={0.06} title="Complete Statutory Compliance" desc="Full statutory compliance.">
+                <InfoCard num="07" side="right" delay={0.06} title="100% statutory compliance" desc="Committed to meeting applicable statutory requirements in our business operations.">
                   <IconRow icons={[FileCheck, BadgeCheck]} />
                 </InfoCard>
 
-                <InfoCard num="06" side="right" delay={0.12} title="Planned Inventory & Large Network" desc="Well-planned stock and a large network for better service.">
+                <InfoCard num="06" side="right" delay={0.12} title="Planned stock, wider reach" desc="Inventory planning backed by an extensive network.">
                   <IconRow icons={[Warehouse, Truck, Globe]} />
                 </InfoCard>
               </div>
