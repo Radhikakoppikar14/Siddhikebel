@@ -273,7 +273,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.45 }}
-              className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4"
+              className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
             >
               <motion.button
                 whileHover={{
@@ -282,7 +282,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
                 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => onOpenRfq(slide.headline)}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-all shadow-lg border border-[#D2430F] group cursor-pointer"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-xl transition-all shadow-lg border border-[#D2430F] group cursor-pointer"
               >
                 <span>Inquire / Contact Us</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -290,7 +290,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
 
               <Link
                 to="/products"
-                className="inline-flex items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A] bg-white/85 hover:bg-white border border-[#D2430F]/30 rounded-xl transition-all hover:scale-102 shadow-sm"
+                className="inline-flex w-full sm:w-auto items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A] bg-white/85 hover:bg-white border border-[#D2430F]/30 rounded-xl transition-all hover:scale-102 shadow-sm"
               >
                 Browse Catalog
               </Link>
@@ -300,49 +300,49 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
 
         {/* Modern Enterprise Capability Highlights Strip */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-3 mt-2 border-t border-white/20">
-          <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2.5 p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div className="min-w-0">
               <span className="block text-xs font-semibold text-[#231815] tracking-tight">33+ Years Industrial Experience</span>
-              <span className="block text-[10px] text-[#5F524C] truncate">Industrial electrical supply</span>
+              <span className="block text-[10px] text-[#5F524C] sm:truncate">Industrial electrical supply</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2.5 p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <Sparkles className="w-4 h-4" />
             </div>
             <div className="min-w-0">
               <span className="block text-xs font-semibold text-[#231815] tracking-tight">4 Global OEM Brands</span>
-              <span className="block text-[10px] text-[#5F524C] truncate">Lapp, Eaton, Partex, Mennekes</span>
+              <span className="block text-[10px] text-[#5F524C] sm:truncate">Lapp, Eaton, Partex, Mennekes</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2.5 p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <Zap className="w-4 h-4" />
             </div>
             <div className="min-w-0">
               <span className="block text-xs font-semibold text-[#231815] tracking-tight">Central Bangalore Hub</span>
-              <span className="block text-[10px] text-[#5F524C] truncate">Banashankari Ex-Stock Drums</span>
+              <span className="block text-[10px] text-[#5F524C] sm:truncate">Banashankari Ex-Stock Drums</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2.5 p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <Award className="w-4 h-4" />
             </div>
             <div className="min-w-0">
               <span className="block text-xs font-semibold text-[#231815] tracking-tight">Statutory Compliant</span>
-              <span className="block text-[10px] text-[#5F524C] truncate">IS & IEC Certified Supply</span>
+              <span className="block text-[10px] text-[#5F524C] sm:truncate">IS & IEC Certified Supply</span>
             </div>
           </div>
         </div>
 
         {/* Live Slide Controls with 10-Second Linear Progress Bars */}
-        <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/20">
+        <div className="pt-3 flex flex-row items-center justify-between gap-3 border-t border-white/20">
           {/* Slider Indicators */}
           <div className="flex items-center gap-2.5">
             {SLIDES.map((s, i) => {

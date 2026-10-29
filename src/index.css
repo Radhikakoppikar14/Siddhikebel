@@ -305,3 +305,23 @@ h3.font-editorial {
 .text-\[13px\], .sm\:text-\[13px\] { font-size: 0.8125rem !important; }
 /* Buttons and form fields use the same body size */
 button, input, select, textarea { font-size: inherit; }
+
+/* ------------------------------------------------------------------
+   One font family everywhere: every element, button, form field, badge,
+   counter and pseudo-element uses --font-main (Sora). Nothing can override it.
+------------------------------------------------------------------- */
+*, *::before, *::after,
+button, input, select, textarea {
+  font-family: var(--font-main) !important;
+}
+
+/* ------------------------------------------------------------------
+   One page-title style everywhere: home slider, brand pages and every
+   page header share the same size, weight and spacing (font: Sora).
+------------------------------------------------------------------- */
+main h1 {
+  font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem) !important;
+  line-height: 1.1 !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+}

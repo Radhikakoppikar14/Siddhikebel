@@ -8,7 +8,7 @@ import { useEffect } from 'react';
  * screen are centred so the whole section is visible after each jump. Modals, scrollable
  * boxes, form fields, touch screens and "reduce motion" users keep normal scrolling.
  */
-const SETTLE_MS = 800;   // time the page is given to finish a jump
+const SETTLE_MS = 650;   // time the page is given to finish a jump
 const GESTURE_GAP_MS = 150; // quiet time that marks the start of a new gesture
 const MIN_DELTA = 4;     // ignore tiny wheel noise
 
@@ -42,6 +42,7 @@ export const SectionScroll = () => {
     let lockedUntil = 0;
     let lastWheel = 0;
     let consumed = false;
+    let jumpAt = 0;
 
     const onWheel = (e: WheelEvent) => {
       if (e.ctrlKey || e.metaKey || reduceMotion.matches) return;
@@ -52,11 +53,13 @@ export const SectionScroll = () => {
       if (insideScrollable(target)) return;
 
       const now = performance.now();
-      if (now - lastWheel > GESTURE_GAP_MS) consumed = false; // new gesture
+      const newGesture = now - lastWheel > GESTURE_GAP_MS;
+      if (newGesture) consumed = false; // new gesture
       lastWheel = now;
 
       // Rest of a gesture that already caused a jump: swallow it so the page doesn't drift.
-      if (consumed || now < lockedUntil) {
+      // A clearly new gesture is allowed once the jump is under way, so scrolling never feels stuck.
+      if (consumed || (now < lockedUntil && !(newGesture && now - jumpAt > 300))) {
         e.preventDefault();
         return;
       }
@@ -78,6 +81,7 @@ export const SectionScroll = () => {
         return {
           top: Math.min(maxY, Math.max(0, Math.round(snap))),
           bottom: r.bottom + y,
+          tall: h >= avail,
         };
       });
       if (tops.length === 0) return;
@@ -91,18 +95,28 @@ export const SectionScroll = () => {
         // current section still extends below the screen: let it scroll normally
         if (cur.bottom > y + vh + 5) return;
         if (idx + 1 < tops.length) dest = tops[idx + 1].top;
-      } else if (y - cur.top > 5) {
-        // inside a section: a tall one scrolls normally until the top is within one screen
-        if (y - cur.top > vh) return;
-        dest = cur.top;
-      } else if (idx > 0) {
-        dest = tops[idx - 1].top;
+      } else {
+        // Where to land when arriving from below: a tall section is entered at its END
+        // (so it scrolls up naturally), a short one is centred.
+        const landing = (i: number) =>
+          tops[i].tall ? Math.min(maxY, Math.max(tops[i].top, Math.round(tops[i].bottom - vh))) : tops[i].top;
+        const into = y - cur.top;
+        if (cur.tall) {
+          // tall section: scroll normally until its top is close, then glide to the previous one
+          if (into > 120) return;
+          if (idx > 0) dest = landing(idx - 1);
+        } else if (into > 5) {
+          dest = cur.top;
+        } else if (idx > 0) {
+          dest = landing(idx - 1);
+        }
       }
 
       if (dest === null || Math.abs(dest - y) < 4) return;
 
       e.preventDefault();
       consumed = true;
+      jumpAt = now;
       lockedUntil = now + SETTLE_MS;
       window.scrollTo({ top: dest, behavior: 'smooth' });
     };
