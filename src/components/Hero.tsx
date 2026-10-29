@@ -10,12 +10,13 @@ interface HeroProps {
 interface SlideItem {
   type: 'video' | 'image';
   src: string;
+  poster: string;
   tag: string;
+  brand: string;
   headline: string;
   subtext: string;
-  badge: string;
+  ranges: string[];
   accent: string;
-  rotatingWords: string[];
 }
 
 // The new demo videos have no burned-in text and the corner mark is already
@@ -24,28 +25,80 @@ const VIDEO_CROP_TOP = 0; // percent
 const VIDEO_CROP_BOTTOM = 0; // percent
 const VIDEO_CROP_RIGHT = 0; // percent
 
+// One slide per brand. Each brand has its own background video and poster in /public/assets/videos
+// (hero-lapp.mp4, hero-eaton.mp4, hero-partex.mp4, hero-mennekes.mp4).
 const SLIDES: SlideItem[] = [
   {
     type: 'video',
-    src: '/assets/videos/hero-1.mp4',
-    tag: 'Cables & Switchgear for Every Industry',
-    headline: 'Industrial Cables, Control Gear & Connectors for Every Production Line',
+    src: '/assets/videos/hero-lapp.mp4',
+    poster: '/assets/videos/hero-lapp-poster.jpg',
+    tag: 'LAPP cables & connectivity',
+    brand: 'LAPP',
+    headline: 'Cable and connectivity for every production line',
     subtext:
-      'From machine tools and robotic cells to pharma, rail and renewable energy: authorised supply of Lapp, Eaton, Partex and Mennekes with ex-stock availability.',
-    badge: 'AUTHORISED INDUSTRIAL DISTRIBUTOR',
+      'Power every process. Connect every signal. Explore LAPP’s cable and connectivity range for industrial equipment, control panels and building installations.',
+    ranges: [
+      'ÖLFLEX® · Power & control cables',
+      'UNITRONIC® · Data & bus cables',
+      'SILVYN® · Cable protection & guiding systems',
+      'ÖLFLEX® UNIPLUS · Single-core cables for industry & buildings',
+      'SKINTOP® · Cable glands',
+      'EPIC® · Industrial connectors',
+    ],
     accent: '#F1D9CA',
-    rotatingWords: ['Precision Harnessing', 'Motor Protection', 'Zero Downtime', 'German Quality'],
   },
   {
     type: 'video',
-    src: '/assets/videos/hero-2.mp4',
-    tag: 'Process Plants & Heavy Industry',
-    headline: 'Chemical-Resistant Cables, Glands & Plugs for Process Plants',
+    src: '/assets/videos/hero-eaton.mp4',
+    poster: '/assets/videos/hero-eaton-poster.jpg',
+    tag: 'Eaton switchgear & control',
+    brand: 'EATON',
+    headline: 'Control every circuit with confidence.',
     subtext:
-      'Heavy-duty cabling, CEE plugs and protection gear built for oil, gas, chemical and steel plants, dispatched same day from our Bangalore warehouse.',
-    badge: 'CENTRAL BANGALORE WAREHOUSE',
+      'Control, protect and isolate equipment with Eaton’s industrial switchgear and control products—from motor protection and contactors to pushbuttons and switch-disconnectors for machinery, panels and production lines.',
+    ranges: [
+      'Switchgear & motor-protection circuit breakers',
+      'Contactors & relays',
+      'Switch-disconnectors & cam switches',
+      'Controllers & motor starters',
+      'Pushbuttons & pilot devices',
+    ],
     accent: '#FFF1E8',
-    rotatingWords: ['Ex-Stock Drums', 'Same-Day Dispatch', 'Banashankari Hub', '1,800+ Clients'],
+  },
+  {
+    type: 'video',
+    src: '/assets/videos/hero-partex.mp4',
+    poster: '/assets/videos/hero-partex-poster.jpg',
+    tag: 'Partex wire & cable marking',
+    brand: 'PARTEX',
+    headline: 'Make every wire easy to identify',
+    subtext:
+      'Keep wiring clear from installation through maintenance. Partex marking solutions help identify cables, wires, terminals and components across control panels and industrial systems.',
+    ranges: [
+      'Cable & wire markers',
+      'Marking sleeves, profiles & labels',
+      'Cable ties, fixings & accessories',
+      'Terminal & component markers',
+      'Printers & marking software',
+    ],
+    accent: '#F1D9CA',
+  },
+  {
+    type: 'video',
+    src: '/assets/videos/hero-mennekes.mp4',
+    poster: '/assets/videos/hero-mennekes-poster.jpg',
+    tag: 'Mennekes industrial plugs & sockets',
+    brand: 'MENNEKES',
+    headline: 'Reliable power connections where work happens',
+    subtext:
+      'Connect machines and equipment with MENNEKES industrial plugs, sockets and distribution products for factories, workshops and demanding worksites.',
+    ranges: [
+      'CEE plugs & connectors',
+      'Interlocked switch-socket combinations',
+      'Sockets & inlets',
+      'Industrial distribution units',
+    ],
+    accent: '#FFF1E8',
   },
 ];
 
@@ -54,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // 10-second interval timer per user specification (2 demo videos)
+  // 10-second interval timer (one slide per brand)
   useEffect(() => {
     if (!isPlaying) return;
     const timer = setInterval(() => {
@@ -97,7 +150,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
   const slide = SLIDES[currentSlide];
 
   return (
-    <section className="relative bg-[#FFF1E8] text-[#231815] overflow-hidden select-none">
+    <section className="relative bg-[#FFF1E8] text-[#231815] overflow-hidden select-none lg:h-[calc(100svh-7.5rem)] lg:min-h-[600px]">
       {/* Background Media Slider with Smooth Transitions */}
       <div className="absolute inset-0 z-0">
         {SLIDES.map((s, idx) => {
@@ -105,13 +158,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
           return (
             <div
               key={idx}
-              className={`absolute inset-0 overflow-hidden transition-opacity duration-1000 ease-in-out ${
+              className={`absolute inset-0 overflow-hidden bg-[#231815] transition-opacity duration-1000 ease-in-out ${
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
               {s.type === 'video' ? (
                 <video
-                  poster={idx === 0 ? '/assets/videos/hero-1-poster.jpg' : '/assets/videos/hero-2-poster.jpg'}
+                  poster={s.poster}
                   ref={(el) => {
                     videoRefs.current[idx] = el;
                   }}
@@ -166,7 +219,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
       />
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-12 lg:pb-6 min-h-[360px] sm:min-h-[400px] flex flex-col justify-between">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[460px] sm:min-h-[520px] lg:min-h-0 lg:h-full flex flex-col justify-between">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -174,14 +227,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl space-y-4"
+            className="max-w-4xl space-y-4"
           >
             {/* Headline with Live Fade & Scale */}
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.12] tracking-tight text-white font-editorial"
+              className="text-3xl sm:text-4xl lg:text-[clamp(2.25rem,6.5vh,3.75rem)] font-semibold leading-[1.1] tracking-tight text-white font-editorial"
               style={{ textWrap: 'balance' }}
             >
               {slide.headline}
@@ -192,10 +245,33 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.18, duration: 0.45 }}
-              className="text-sm sm:text-base lg:text-lg text-white/85 max-w-2xl font-normal leading-relaxed"
+              className="text-sm sm:text-base text-white/85 max-w-2xl font-normal leading-relaxed"
             >
               {slide.subtext}
             </motion.p>
+
+            {/* Product ranges for this brand */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.22, duration: 0.45 }}
+              className="pt-1"
+            >
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-[#FFD7C2]">
+                {slide.brand} product ranges
+              </p>
+              <ul
+                className="mt-2 inline-grid grid-flow-row sm:grid-flow-col sm:[grid-template-rows:repeat(var(--r),auto)] gap-x-8 gap-y-1.5 text-xs sm:text-[13px] font-medium text-white"
+                style={{ ['--r' as string]: Math.ceil(slide.ranges.length / 2) } as React.CSSProperties}
+              >
+                {slide.ranges.map((r) => (
+                  <li key={r} className="flex items-start gap-2">
+                    <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#F08A4B]" />
+                    <span>{r}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
             {/* Live Action Row - Inquire and Catalog */}
             <motion.div
@@ -228,7 +304,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         </AnimatePresence>
 
         {/* Modern Enterprise Capability Highlights Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-4 mt-6 border-t border-white/20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-3 mt-4 border-t border-white/20">
           <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <ShieldCheck className="w-4 h-4" />

@@ -38,7 +38,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   }, [bgVideo]);
 
   return (
-    <header className="relative overflow-hidden bg-[#231815]">
+    <header className="relative overflow-hidden bg-[#231815] flex items-center min-h-[260px] sm:min-h-[340px] lg:min-h-[400px]">
       {/* Photo with a dark overlay so the white text stays readable (same as the home hero) */}
       <div className="absolute inset-0 z-0">
         {bgVideo ? (
@@ -66,7 +66,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 lg:py-16">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 lg:py-16">
         <div className="max-w-3xl space-y-4">
           {!minimal && (
             <>
