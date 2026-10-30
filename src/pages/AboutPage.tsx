@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import {
   ZoomIn,
   X,
@@ -78,16 +77,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
         bgVideo="/assets/videos/demoo1.mp4"
         bgImage="/assets/videos/demoo1-poster.jpg"
       />
-
-      {/* 2. Breadcrumb */}
-      <div className="bg-[#FFFAF6] pt-6 sm:pt-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center text-xs font-medium text-[#5F524C]">
-          <span className="text-[#D2430F] mr-2">←</span>
-          <Link to="/" className="hover:text-[#231815] transition-colors">Home</Link>
-          <span className="mx-2 text-[#5F524C]">|</span>
-          <span className="text-[#231815] font-semibold">About Us</span>
-        </div>
-      </div>
 
       {/* 3. About (Built on experience) + counters + Why industry chooses Siddhi Kabel */}
       <WhyChooseUs onOpenRfq={onGoToContact} />
