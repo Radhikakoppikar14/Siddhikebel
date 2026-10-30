@@ -66,9 +66,9 @@ export const ContactSection: React.FC = () => {
           </motion.div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
           {/* Contact details: shown straight away */}
-          <div className="lg:col-span-5 bg-[#FFF1E8] text-[#231815] rounded-3xl border border-[#F1D9CA] p-6 sm:p-8 space-y-5 shadow-md">
+          <div className="lg:col-span-5 bg-white text-[#231815] rounded-3xl border border-[#F1D9CA] p-6 sm:p-8 space-y-5 shadow-md">
             <div className="flex items-start gap-4">
               <div className={iconCls}>
                 <MapPin className="w-5 h-5 text-[#D2430F]" />

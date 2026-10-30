@@ -263,7 +263,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
 
       {/* Closing call to action */}
       <section id="cta" className="py-12 sm:py-16 bg-[#FFFAF6]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl border border-[#F1D9CA] bg-gradient-to-br from-white via-white to-[#FFE6D3] p-8 sm:p-12 shadow-lg">
             {/* decorative rings */}
             <span aria-hidden="true" className="absolute -top-24 -right-24 w-72 h-72 rounded-full border-[28px] border-[#D2430F]/10 pointer-events-none" />

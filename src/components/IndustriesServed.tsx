@@ -13,7 +13,7 @@ const SEGMENTS = [
 
 export const IndustriesServed: React.FC = () => (
   <section id="industries" className="py-12 sm:py-16 bg-white border-b border-[#F1D9CA]">
-    <div className="max-w-6xl mx-auto px-4 sm:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center max-w-3xl mx-auto">
         <h2 className="text-[#231815] font-editorial">Supporting the people who keep work moving.</h2>
         <p className="mt-3 text-sm sm:text-base text-[#5F524C] leading-relaxed">
@@ -21,11 +21,11 @@ export const IndustriesServed: React.FC = () => (
         </p>
       </div>
 
-      <ul className="mt-10 flex flex-wrap justify-center gap-4">
-        {SEGMENTS.map(({ icon: Icon, label }) => (
+      <ul className="mt-10 grid grid-cols-2 sm:grid-cols-6 lg:grid-cols-12 gap-4 lg:gap-6">
+        {SEGMENTS.map(({ icon: Icon, label }, i) => (
           <li
             key={label}
-            className="group relative overflow-hidden w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.7rem)] lg:w-[calc(25%-0.75rem)] rounded-2xl border border-[#F1D9CA] bg-white px-5 py-6 flex items-center gap-4 cursor-default shadow-xs transition-all duration-300 motion-safe:hover:-translate-y-1.5 hover:shadow-xl hover:border-[#D2430F] hover:bg-[#FFF1E8]"
+            className={`${i < 4 ? 'lg:col-span-3' : 'lg:col-span-4'} ${i < 6 ? 'sm:col-span-2' : 'sm:col-span-6'} ${i === 6 ? 'col-span-2' : ''} group relative overflow-hidden rounded-2xl border border-[#F1D9CA] bg-white px-5 py-6 flex items-center gap-4 cursor-default shadow-xs transition-all duration-300 motion-safe:hover:-translate-y-1.5 hover:shadow-xl hover:border-[#D2430F] hover:bg-[#FFF1E8]`}
           >
             <span className="w-12 h-12 shrink-0 rounded-xl bg-[#FFF1E8] text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white motion-safe:group-hover:rotate-6 motion-safe:group-hover:scale-110">
               <Icon className="w-6 h-6" />
