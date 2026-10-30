@@ -411,3 +411,17 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
     </section>
   );
 };
+
+/** Just the four animated number cards (33+ years, 18 years, 1,800+ customers, 4 brands). Used on the Home page under the slider. */
+export const StatsStrip: React.FC = () => (
+  <section className="py-8 sm:py-10 bg-white border-b border-[#F1D9CA]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <AnimatedCounterCard target={33} suffix="+ years" theme={0} label="Industrial experience" />
+        <AnimatedCounterCard target={18} suffix=" years" theme={1} label="Established in 2008" />
+        <AnimatedCounterCard target={1800} suffix="+" theme={2} label="Happy customers served" />
+        <AnimatedCounterCard target={4} suffix=" brands" theme={3} label="LAPP · Eaton · Partex · MENNEKES" />
+      </div>
+    </div>
+  </section>
+);

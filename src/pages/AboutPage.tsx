@@ -10,7 +10,10 @@ import {
   Target,
   Compass,
   Play,
-  Loader2
+  Loader2,
+  Cog,
+  Zap,
+  Wrench
 } from 'lucide-react';
 import { WhyChooseUs } from '../components/WhyChooseUs';
 import { PageHeader } from '../components/PageHeader';
@@ -35,14 +38,10 @@ const preconnect = (...urls: string[]) => {
   });
 };
 
-// ---- Replace these when the client sends the final Vision, Mission and company video ----
-const VISION = 'To be a leading, preferred and respected solution partner to our valuable customers in the field of electrical products & services.';
-const MISSION = 'Work towards continuous improvement, stay focused on achieving customer satisfaction.';
-const VIDEO_ID = 'e3a0qpri5NA'; // YouTube video id of the company video
 // maxresdefault is a true 16:9 image (hqdefault is 4:3 with black bars, which looks cropped and blurry).
 // mqdefault is a true 16:9 fallback for videos that have no maxres thumbnail.
-const VIDEO_THUMB = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
-const VIDEO_THUMB_FALLBACK = `https://i.ytimg.com/vi/${VIDEO_ID}/mqdefault.jpg`;
+const VIDEO_THUMB = 'https://i.ytimg.com/vi/e3a0qpri5NA/maxresdefault.jpg';
+const VIDEO_THUMB_FALLBACK = 'https://i.ytimg.com/vi/e3a0qpri5NA/mqdefault.jpg';
 const swapToFallbackThumb = (e: React.SyntheticEvent<HTMLImageElement>) => {
   const img = e.currentTarget;
   if (img.src !== VIDEO_THUMB_FALLBACK) img.src = VIDEO_THUMB_FALLBACK;
@@ -93,163 +92,238 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
       {/* 3. About (Built on experience) + counters + Why industry chooses Siddhi Kabel */}
       <WhyChooseUs onOpenRfq={onGoToContact} />
 
-      {/* 4. Service that starts with understanding */}
+      {/* Service that starts with understanding */}
       <ServiceSteps />
 
-      {/* 5. Vision, Mission and company video.
-          Space reserved for the final content the client will send:
-          replace VISION, MISSION and VIDEO_ID at the top of this file. */}
-      <section id="vision-mission" className="py-10 sm:py-14 bg-[#FFF1E8] border-y border-[#F1D9CA] relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-[#D2430F]/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-white border border-[#F1D9CA]">
-              <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
-              Who we are
-            </span>
-            <h2 className="mt-3 text-2xl sm:text-4xl font-normal font-editorial tracking-tight text-[#231815]">
-              Our vision, mission and story.
-            </h2>
+      {/* Video + Vision & Mission + team photos, combined in one section */}
+      <section id="who-we-are" className="py-12 sm:py-16 bg-[#FFF1E8] border-y border-[#F1D9CA]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <h2 className="text-[#231815] font-editorial">Our vision, mission and story.</h2>
+            <p className="mt-3 text-sm sm:text-base text-[#5F524C] leading-relaxed">
+              Explore our comprehensive cable supply, specialized machine harness integration, and central Bangalore warehouse logistics.
+            </p>
           </div>
 
-          {/* Vision + Mission side by side, each with a big watermark number */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { icon: Compass, title: 'Vision', text: VISION },
-              { icon: Target, title: 'Mission', text: MISSION },
-            ].map(({ icon: Icon, title, text }) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.4 }}
-                className="relative overflow-hidden bg-[#FFFAF6] border border-[#F1D9CA] border-l-4 border-l-[#D2430F] rounded-2xl p-7 sm:p-9 shadow-lg"
-              >
-                <div className="relative flex items-center gap-3">
-                  <span className="w-11 h-11 rounded-xl bg-white border border-[#F1D9CA] text-[#D2430F] flex items-center justify-center shadow-sm">
-                    <Icon className="w-5 h-5" />
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold font-editorial text-[#231815]">{title}</h3>
-                </div>
-                <p className="relative mt-5 text-sm sm:text-base text-[#5F524C] leading-relaxed">{text}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Company video (16:9) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6 }}
-            className="mt-8 max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-[#F1D9CA] bg-black"
-          >
-            <div className="relative pb-[56.25%] h-0 overflow-hidden">
-              {videoActive ? (
-                <>
-                  <img
-                    src={VIDEO_THUMB}
-                    onLoad={checkThumbSize}
-                    onError={swapToFallbackThumb}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                  />
-                  {!iframeReady && (
-                    <span className="absolute inset-0 flex items-center justify-center bg-black/30">
-                      <Loader2 className="w-10 h-10 text-white animate-spin" />
+          {/* Video (left) + Vision & Mission (right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 items-stretch">
+            {/* Company video */}
+            <div className="flex flex-col rounded-3xl overflow-hidden border border-[#F1D9CA] bg-white shadow-xl">
+              <div className="relative pb-[56.25%] h-0 overflow-hidden bg-black">
+                {videoActive ? (
+                  <>
+                    <img
+                      src={VIDEO_THUMB}
+                      onLoad={checkThumbSize}
+                      onError={swapToFallbackThumb}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                    />
+                    {!iframeReady && (
+                      <span className="absolute inset-0 flex items-center justify-center bg-black/30">
+                        <Loader2 className="w-10 h-10 text-white animate-spin" />
+                      </span>
+                    )}
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/e3a0qpri5NA?rel=0&modestbranding=1&autoplay=1&playsinline=1"
+                      title="Siddhi Kabel Corporate Overview"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      onLoad={() => setIframeReady(true)}
+                      className={`absolute top-0 left-0 w-full h-full border-0 transition-opacity duration-300 ${
+                        iframeReady ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setVideoActive(true)}
+                    onMouseEnter={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
+                    onFocus={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
+                    onTouchStart={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
+                    aria-label="Play Siddhi Kabel corporate video"
+                    className="absolute inset-0 w-full h-full cursor-pointer group/play"
+                  >
+                    <img
+                      src={VIDEO_THUMB}
+                      onLoad={checkThumbSize}
+                      onError={swapToFallbackThumb}
+                      alt="Siddhi Kabel Corporate Overview video thumbnail"
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                    />
+                    <span className="absolute inset-0 bg-black/25 group-hover/play:bg-black/10 transition-colors" />
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#D2430F] flex items-center justify-center shadow-xl ring-8 ring-white/30 group-hover/play:scale-110 transition-transform">
+                        <Play className="w-7 h-7 sm:w-8 sm:h-8 text-white fill-white ml-1" />
+                      </span>
                     </span>
-                  )}
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?rel=0&modestbranding=1&autoplay=1&playsinline=1`}
-                    title="Siddhi Kabel company video"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    onLoad={() => setIframeReady(true)}
-                    className={`absolute top-0 left-0 w-full h-full border-0 transition-opacity duration-300 ${
-                      iframeReady ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  />
-                </>
-              ) : (
+                  </button>
+                )}
+              </div>
+
+              <div className="p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#F1D9CA]">
+                <div className="flex items-center gap-3 text-left">
+                  <span className="w-9 h-9 rounded-lg bg-[#D2430F] flex items-center justify-center text-white shrink-0">
+                    <Play className="w-4 h-4 fill-white" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-[#231815]">Siddhi Kabel Corporate &amp; Engineering Reel</span>
+                    <span className="block text-xs text-[#5F524C]">Authorised Industrial Cables, Automation Switchgear &amp; Safety Systems</span>
+                  </span>
+                </div>
                 <button
                   type="button"
-                  onClick={() => setVideoActive(true)}
-                  onMouseEnter={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
-                  onFocus={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
-                  onTouchStart={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
-                  aria-label="Play Siddhi Kabel company video"
-                  className="absolute inset-0 w-full h-full cursor-pointer group/play"
+                  onClick={() => handleInquire('Corporate Video Inquiry')}
+                  className="group inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#D2430F] hover:bg-[#A8340A] rounded-full transition-colors cursor-pointer shadow-md shrink-0"
                 >
-                  <img
-                    src={VIDEO_THUMB}
-                    onLoad={checkThumbSize}
-                    onError={swapToFallbackThumb}
-                    alt="Siddhi Kabel company video thumbnail"
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover object-center"
-                  />
-                  <span className="absolute inset-0 bg-black/25 group-hover/play:bg-black/10 transition-colors" />
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#D2430F] flex items-center justify-center shadow-xl group-hover/play:scale-110 transition-transform">
-                      <Play className="w-7 h-7 sm:w-8 sm:h-8 text-white fill-white ml-1" />
-                    </span>
-                  </span>
-                  <span className="absolute left-4 bottom-4 text-xs font-semibold text-white bg-black/50 rounded-full px-3 py-1">Our company video</span>
+                  Request Facility Visit
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
-              )}
-            </div>
-          </motion.div>
-
-          {/* Team photos (click to enlarge) */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {[
-              { src: '/images/resource/about2.jpg', alt: 'Siddhi Kabel Team Photo', caption: 'Siddhi Kabel Executive Leadership & Operations Team', label: 'Leadership & Engineering Team', icon: Users },
-              { src: '/images/resource/about3.jpg', alt: 'Siddhi Kabel Team Meeting', caption: 'Siddhi Kabel Technical Solution Analysis & Application Engineering', label: 'Technical Review & Client Support', icon: Target },
-            ].map(({ src, alt, caption, label, icon: Icon }) => (
-              <div
-                key={src}
-                onClick={() => setLightboxImage({ src, alt, caption })}
-                className="relative rounded-2xl overflow-hidden shadow-lg border border-[#F1D9CA] group cursor-pointer h-56 sm:h-64"
-              >
-                <img decoding="async" loading="lazy" src={src} alt={alt} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent flex flex-col justify-end p-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#231815] bg-white/80 px-3 py-1 rounded-full flex items-center gap-1.5 border border-[#F1D9CA]/30">
-                      <Icon className="w-3.5 h-3.5 text-[#D2430F]" /> {label}
-                    </span>
-                    <span className="p-1.5 rounded-full bg-white text-[#231815] group-hover:bg-[#D2430F] group-hover:text-white transition-colors">
-                      <ZoomIn className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
               </div>
+            </div>
+
+            {/* Vision + Mission */}
+            <div className="flex flex-col gap-6">
+              {[
+                {
+                  icon: Compass,
+                  title: 'Vision',
+                  text: 'To be a leading, preferred and respected solution partner to our valuable customers in the field of electrical products & services.',
+                  cta: 'Partner with us',
+                  topic: 'Vision & Solutions Inquiry',
+                },
+                {
+                  icon: Target,
+                  title: 'Mission',
+                  text: 'Work towards continuous improvement, stay focused on achieving customer satisfaction.',
+                  cta: 'Request consultation',
+                  topic: 'Mission & Continuous Improvement',
+                },
+              ].map(({ icon: Icon, title, text, cta, topic }) => (
+                <div
+                  key={title}
+                  className="group relative flex-1 overflow-hidden rounded-3xl border border-[#F1D9CA] bg-white p-6 sm:p-7 flex flex-col justify-center text-left shadow-md transition-all duration-300 motion-safe:hover:-translate-y-1 hover:shadow-xl hover:border-[#D2430F]"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-11 h-11 rounded-xl bg-[#FFF1E8] text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white">
+                      <Icon className="w-5 h-5" />
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-[#231815]">{title}</h3>
+                  </div>
+                  <p className="mt-3 text-sm text-[#5F524C] leading-relaxed">{text}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleInquire(topic)}
+                    className="mt-4 self-start inline-flex items-center gap-1.5 text-sm font-semibold text-[#D2430F] hover:text-[#A8340A] transition-colors cursor-pointer"
+                  >
+                    {cta}
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+                  <span aria-hidden="true" className="absolute left-0 bottom-0 h-1 w-0 bg-[#D2430F] transition-all duration-500 group-hover:w-full" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Team photos */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {[
+              {
+                src: '/images/resource/about2.jpg',
+                alt: 'Siddhi Kabel Corporate Team Bangalore',
+                caption: 'Siddhi Kabel Executive Leadership & Operations Team',
+                chip: 'Leadership & Engineering Team',
+                icon: Users,
+              },
+              {
+                src: '/images/resource/about3.jpg',
+                alt: 'Siddhi Kabel Technical Consultation Team',
+                caption: 'Siddhi Kabel Technical Solution Analysis & Application Engineering',
+                chip: 'Technical Review & Client Support',
+                icon: Target,
+              },
+            ].map(({ src, alt, caption, chip, icon: Icon }) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setLightboxImage({ src, alt, caption })}
+                aria-label={`View photo: ${chip}`}
+                className="group relative h-64 sm:h-72 rounded-3xl overflow-hidden border border-[#F1D9CA] shadow-md hover:shadow-xl transition-shadow cursor-pointer text-left"
+              >
+                <img decoding="async" loading="lazy" src={src} alt={alt} className="absolute inset-0 w-full h-full object-cover" />
+                <span className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <span className="absolute inset-x-0 bottom-0 p-5 flex items-center justify-between">
+                  <span className="text-xs font-semibold text-[#231815] bg-white/90 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                    <Icon className="w-3.5 h-3.5 text-[#D2430F]" /> {chip}
+                  </span>
+                  <span className="w-9 h-9 rounded-full bg-white text-[#D2430F] flex items-center justify-center shadow-md transition-colors group-hover:bg-[#D2430F] group-hover:text-white">
+                    <ZoomIn className="w-4 h-4" />
+                  </span>
+                </span>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. Industries we serve */}
+      {/* Industries we serve */}
       <IndustriesServed />
 
       {/* Closing call to action */}
-      <section id="cta" className="py-12 sm:py-16 bg-gradient-to-br from-[#D2430F] to-[#A8340A] text-white text-center">
-        <div className="max-w-3xl mx-auto px-4 sm:px-8">
-          <h2 className="text-3xl sm:text-5xl font-normal font-editorial tracking-tight !text-white">Let’s keep your next project moving.</h2>
-          <p className="mt-4 text-sm text-white/90 leading-relaxed max-w-xl mx-auto">
-            Tell us what you are building, connecting or maintaining. Our team is ready to help with suitable industrial product options.
-          </p>
-          <button
-            type="button"
-            onClick={() => handleInquire('Project enquiry')}
-            className="mt-7 inline-flex items-center gap-2 bg-white text-[#A8340A] text-xs font-bold uppercase tracking-wider rounded-md px-6 py-3 shadow-lg hover:bg-[#FFF1E8] transition-colors cursor-pointer"
-          >
-            Talk to Siddhi Kabel <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+      <section id="cta" className="py-12 sm:py-16 bg-[#FFFAF6]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8">
+          <div className="relative overflow-hidden rounded-3xl border border-[#F1D9CA] bg-gradient-to-br from-white via-white to-[#FFE6D3] p-8 sm:p-12 shadow-lg">
+            {/* decorative rings */}
+            <span aria-hidden="true" className="absolute -top-24 -right-24 w-72 h-72 rounded-full border-[28px] border-[#D2430F]/10 pointer-events-none" />
+            <span aria-hidden="true" className="absolute -top-8 -right-8 w-32 h-32 rounded-full border-[14px] border-[#D2430F]/15 pointer-events-none" />
+
+            <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+              <div className="max-w-xl">
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight !text-[#231815]">
+                  Let’s keep your next project moving.
+                </h2>
+                <p className="mt-3 text-sm sm:text-base text-[#5F524C] leading-relaxed">
+                  Tell us what you are building, connecting or maintaining. Our team is ready to help with suitable industrial product options.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row lg:flex-col lg:items-end sm:items-center gap-4 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleInquire('Project enquiry')}
+                  className="group inline-flex items-center justify-center gap-2 bg-[#D2430F] hover:bg-[#A8340A] text-white text-sm font-semibold rounded-full px-7 py-3.5 shadow-md hover:shadow-xl transition-all duration-300 motion-safe:hover:-translate-y-0.5 cursor-pointer"
+                >
+                  Talk to Siddhi Kabel
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </div>
+            </div>
+
+            {/* Tell us: building -> connecting -> maintaining */}
+            <ol className="relative mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
+              {[
+                { icon: Cog, title: 'Building', desc: 'New machines, panels and projects' },
+                { icon: Zap, title: 'Connecting', desc: 'Cables, plugs and power distribution' },
+                { icon: Wrench, title: 'Maintaining', desc: 'Repair, upgrades and spares' },
+              ].map(({ icon: Icon, title, desc }) => (
+                <li
+                  key={title}
+                  className="group relative rounded-2xl border border-[#F1D9CA] bg-white/90 p-5 flex items-center gap-4 cursor-default transition-all duration-300 motion-safe:hover:-translate-y-1.5 hover:shadow-xl hover:border-[#D2430F] hover:bg-[#FFF1E8]"
+                >
+                  <span className="w-14 h-14 shrink-0 rounded-full bg-[#FFF1E8] border-2 border-[#D2430F]/40 text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F] motion-safe:group-hover:scale-110 motion-safe:group-hover:rotate-6">
+                    <Icon className="w-6 h-6" />
+                  </span>
+                  <span>
+                    <span className="block text-base font-semibold text-[#231815] group-hover:text-[#A8340A] transition-colors">{title}</span>
+                    <span className="block mt-0.5 text-sm text-[#5F524C]">{desc}</span>
+                  </span>
+                  <span aria-hidden="true" className="absolute left-0 bottom-0 h-1 w-0 rounded-bl-2xl bg-[#D2430F] transition-all duration-500 group-hover:w-full" />
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 

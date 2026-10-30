@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Zap, ShieldCheck, Lightbulb, HardHat, Cog, ClipboardList, Wrench } from 'lucide-react';
+import { ArrowUpRight, Check, Zap, ShieldCheck, Lightbulb, HardHat, Cog, ClipboardList, Wrench } from 'lucide-react';
 import { BRANDS_DATA } from '../data/siddhiData';
 
 // Small image shown on the right side of each category pill.
@@ -55,11 +55,37 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
   return (
     <section id="brands" className="py-10 sm:py-12 bg-white border-b border-[#EBD9CD] ">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-[#231815] font-editorial">Trusted brand partners. Broader industrial solutions.</h2>
-          <p className="mt-3 text-sm sm:text-base text-[#5F524C]/80 leading-relaxed">
-            Authorised ranges from LAPP, Eaton, Partex and MENNEKES—alongside allied product sourcing, OEM requirement support and project handling.
-          </p>
+        {/* Heading (left) + authorised brand logos (right) */}
+        <div className="mb-10 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-8 lg:gap-14 items-center">
+          <div className="border-l-4 border-[#D2430F] pl-5 sm:pl-7 text-left">
+            <h2 className="text-[#231815] font-editorial leading-tight">
+              Trusted brand partners.
+              <br className="hidden sm:block" />{' '}
+              <span className="text-[#D2430F]">Broader industrial solutions.</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-sm sm:text-base text-[#5F524C] leading-relaxed">
+              Authorised ranges from LAPP, Eaton, Partex and MENNEKES—alongside allied product sourcing, OEM requirement support and project handling.
+            </p>
+          </div>
+
+          {/* What we cover: summarises the intro line */}
+          <ul className="rounded-2xl border border-[#F1D9CA] bg-[#FFFAF6] divide-y divide-[#F1D9CA] shadow-xs">
+            {[
+              { title: 'Authorised brand ranges', desc: 'LAPP, Eaton, Partex and MENNEKES' },
+              { title: 'Allied product sourcing', desc: 'LT & HT cables, lighting, earthing and more' },
+              { title: 'OEM, project and RMO support', desc: 'From selection and supply to repair and overhaul' },
+            ].map((item) => (
+              <li key={item.title} className="group flex items-center gap-4 px-5 py-4 transition-colors duration-300 hover:bg-[#FFF1E8]">
+                <span className="w-9 h-9 shrink-0 rounded-full bg-white border border-[#D2430F]/30 text-[#D2430F] flex items-center justify-center transition-colors duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F]">
+                  <Check className="w-4 h-4" strokeWidth={2.5} />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-[#231815]">{item.title}</span>
+                  <span className="block text-xs text-[#5F524C]">{item.desc}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -143,16 +169,18 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
           ))}
         </div>
 
-        {/* More ways we support your requirements: split panel (intro + numbered list) */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)] rounded-3xl overflow-hidden border border-[#F1D9CA] shadow-xl bg-white">
+        {/* Allied products & services: big heading outside the panel */}
+        <div className="mt-14 mb-8 max-w-3xl border-l-4 border-[#D2430F] pl-5 sm:pl-7 text-left">
+          <h2 className="text-[#231815] font-editorial leading-tight">Allied products &amp; services.</h2>
+        </div>
+
+        {/* Split panel (intro + numbered list) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)] rounded-3xl overflow-hidden border border-[#F1D9CA] shadow-xl bg-white">
           {/* Left: intro panel */}
           <div className="relative overflow-hidden bg-gradient-to-br from-[#D2430F] to-[#A8340A] text-white p-8 sm:p-10 flex flex-col">
             <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-white/10 blur-2xl pointer-events-none" />
             <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full border border-white/15 pointer-events-none" />
-            <span className="relative self-start inline-flex items-center text-[11px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full bg-white/15 border border-white/30">
-              Allied products &amp; services
-            </span>
-            <h3 className="relative mt-5 text-2xl sm:text-3xl font-normal font-editorial tracking-tight !text-white leading-tight">
+            <h3 className="relative text-2xl sm:text-3xl font-normal font-editorial tracking-tight !text-white leading-tight">
               More ways we support your requirements.
             </h3>
             <p className="relative mt-4 text-sm text-white/85 leading-relaxed">
