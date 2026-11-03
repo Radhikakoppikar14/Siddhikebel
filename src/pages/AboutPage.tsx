@@ -180,14 +180,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 {
                   icon: Compass,
                   title: 'Vision',
-                  text: 'To be a leading, preferred and respected solution partner to our valuable customers in the field of electrical products & services.',
+                  text: 'To be the most trusted and preferred industrial solutions partner, recognized for reliability, credibility, customer value, employee growth, and sustainable profitability.',
                   cta: 'Partner with us',
                   topic: 'Vision & Solutions Inquiry',
                 },
                 {
                   icon: Target,
                   title: 'Mission',
-                  text: 'Work towards continuous improvement, stay focused on achieving customer satisfaction.',
+                  text: 'To build a Win-Win-Win ecosystem where Customers receive exceptional value, Team Members grow and thrive, and the Organisation achieves sustainable profitability.',
                   cta: 'Request consultation',
                   topic: 'Mission & Continuous Improvement',
                 },
