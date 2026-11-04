@@ -53,6 +53,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
               />
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-editorial leading-none">{brand.name}</h1>
+            <p className="mt-3 text-sm font-semibold text-[#FF8A55]">Siddhi Cable Corporation Private Limited</p>
           </div>
         </div>
       </header>
@@ -63,7 +64,9 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
           <h2 className="text-xl sm:text-2xl font-bold font-editorial" style={{ color: brand.colorDark }}>
             About {brand.name}
           </h2>
-          <p className="mt-2 text-base leading-relaxed text-[#3D332E]">{detail?.intro ?? brand.fullDesc}</p>
+          {(detail?.intro ?? brand.fullDesc).split('\n\n').map((para, i) => (
+            <p key={i} className="mt-2 text-base leading-relaxed text-[#3D332E]">{para}</p>
+          ))}
         </div>
         <div className="lg:col-span-3">
           <div
