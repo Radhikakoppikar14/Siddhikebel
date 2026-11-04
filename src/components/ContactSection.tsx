@@ -112,13 +112,11 @@ export const ContactSection: React.FC = () => {
               <div>
                 <h3 className={labelCls}>Email</h3>
                 <p className="text-sm text-[#5F524C]">
-                  <span className="font-medium text-[#231815]">Sales: </span>
                   <a href={`mailto:${contacts.salesEmail}`} className="font-mono hover:text-[#D2430F] transition-colors">
                     {contacts.salesEmail}
                   </a>
                 </p>
                 <p className="text-sm text-[#5F524C] mt-1">
-                  <span className="font-medium text-[#231815]">Enquiry: </span>
                   <a href={`mailto:${contacts.infoEmail}`} className="font-mono hover:text-[#D2430F] transition-colors">
                     {contacts.infoEmail}
                   </a>

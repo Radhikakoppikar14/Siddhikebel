@@ -169,10 +169,10 @@ export const Footer: React.FC<FooterProps> = () => {
                 <div className="space-y-0.5">
                   <span className="block font-medium text-white">Email:</span>
                   <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
-                    Sales: {COMPANY_INFO.contacts.salesEmail}
+                    {COMPANY_INFO.contacts.salesEmail}
                   </a>
                   <a href={`mailto:${COMPANY_INFO.contacts.infoEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
-                    Enquiry: {COMPANY_INFO.contacts.infoEmail}
+                    {COMPANY_INFO.contacts.infoEmail}
                   </a>
                 </div>
               </div>

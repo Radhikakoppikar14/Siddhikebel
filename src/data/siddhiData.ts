@@ -79,7 +79,7 @@ export const COMPANY_INFO = {
     primaryPhone: "+91 96200 00947",
     secondaryPhone: "+91 98860 58511",
     salesEmail: "sales@siddhicable.com",
-    infoEmail: "info@siddhicable.com",
+    infoEmail: "enquiry@siddhicable.com",
     address: {
       line1: "No.3, 1st Main Road, 1st Block",
       line2: "Banashankari 3rd Stage",

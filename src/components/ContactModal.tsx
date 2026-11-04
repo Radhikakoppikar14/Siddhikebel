@@ -136,8 +136,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </span>
                   <div>
                     <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Email Us</strong>
-                    <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="block text-white/95 hover:text-white">Sales: {COMPANY_INFO.contacts.salesEmail}</a>
-                    <a href={`mailto:${COMPANY_INFO.contacts.infoEmail}`} className="block text-white/95 hover:text-white">Enquiry: {COMPANY_INFO.contacts.infoEmail}</a>
+                    <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="block text-white/95 hover:text-white">{COMPANY_INFO.contacts.salesEmail}</a>
+                    <a href={`mailto:${COMPANY_INFO.contacts.infoEmail}`} className="block text-white/95 hover:text-white">{COMPANY_INFO.contacts.infoEmail}</a>
                   </div>
                 </div>
               </div>

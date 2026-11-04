@@ -75,7 +75,7 @@ export const ClientsWall: React.FC = () => {
   const items = [...CLIENTS_LIST, ...CLIENTS_LIST];
 
   useEffect(() => {
-    const SPEED = 70; // px per second (higher = faster)
+    const SPEED = 110; // px per second (higher = faster)
     let last = performance.now();
     let raf = 0;
     const tick = (now: number) => {
