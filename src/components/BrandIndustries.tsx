@@ -11,34 +11,27 @@ export const BrandIndustries: React.FC<{ brand: BrandInfo; compact?: boolean }> 
   if (industries.length === 0) return null;
 
   return (
-    <div
-      className={`grid gap-4 ${
-        'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-      }`}
-    >
+    <ul className="divide-y border rounded-md bg-white overflow-hidden" style={{ borderColor: `${brand.color}55` }}>
       {industries.map((ind) => (
-        <Link
-          key={ind.name}
-          to="/industries"
-          className="group flex flex-col h-full overflow-hidden rounded-xl bg-white border transition-shadow hover:shadow-lg"
-          style={{ borderColor: `${brand.color}55` }}
-        >
-          <div className="relative aspect-[16/10] overflow-hidden bg-[#FFF1E8]">
+        <li key={ind.name}>
+          <Link
+            to="/industries"
+            className="group flex items-center gap-3 px-3 py-2 border-l-4 transition-colors hover:bg-[#FFF8F3]"
+            style={{ borderLeftColor: brand.color }}
+          >
             <img
               src={ind.image}
               alt={ind.name}
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-12 h-12 rounded object-cover shrink-0 bg-[#FFF1E8]"
             />
-          </div>
-          <div className="px-4 py-3 border-t-4 flex-1 flex items-center min-h-[56px]" style={{ borderColor: brand.color }}>
-            <h4 className="text-sm font-bold leading-snug" style={{ color: brand.colorDark }}>
+            <h4 className="text-sm font-semibold leading-snug" style={{ color: brand.colorDark }}>
               {ind.name}
             </h4>
-          </div>
-        </Link>
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

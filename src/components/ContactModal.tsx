@@ -136,7 +136,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </span>
                   <div>
                     <strong className="block text-[11px] uppercase tracking-wider text-white/70 font-semibold mb-0.5">Email Us</strong>
-                    <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="block text-white/95 hover:text-white">{COMPANY_INFO.contacts.salesEmail}</a>
+                    <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="block text-white/95 hover:text-white">Sales: {COMPANY_INFO.contacts.salesEmail}</a>
+                    <a href={`mailto:${COMPANY_INFO.contacts.infoEmail}`} className="block text-white/95 hover:text-white">Enquiry: {COMPANY_INFO.contacts.infoEmail}</a>
                   </div>
                 </div>
               </div>
@@ -157,7 +158,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     Message Successfully Sent!
                   </h4>
                   <p className="text-xs sm:text-sm text-[#5F524C] font-light max-w-sm leading-relaxed">
-                    Thank you, <strong className="font-semibold text-[#231815]">{formState.name}</strong>. An application sales engineer from Siddhi Kabel Bangalore will review your inquiry and get in touch with you shortly.
+                    Thank you, <strong className="font-semibold text-[#231815]">{formState.name}</strong>. An application sales engineer from Siddhi Cable Bangalore will review your inquiry and get in touch with you shortly.
                   </p>
                   <button
                     onClick={onClose}

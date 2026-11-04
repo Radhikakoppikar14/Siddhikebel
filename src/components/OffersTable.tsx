@@ -158,7 +158,7 @@ export const OffersTable: React.FC<OffersTableProps> = ({ onOpenRfq }) => {
               <li>Delivery: Free Delivery to Bangalore urban and industrial area.</li>
               <li>Warranty: 12 months from the date of sale against any manufacturing defects.</li>
               <li>We look forward to receive your valued order.</li>
-              <li>Contact Details: info@siddhikabel.com, 080 – 2672 0440</li>
+              <li>Contact Details: info@siddhicable.com, 080 – 2672 0440</li>
             </ul>
           </div>
         </div>

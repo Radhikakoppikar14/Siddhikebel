@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrandSelector } from '../components/BrandSelector';
 import { Hero } from '../components/Hero';
-import { WhyChooseUs } from '../components/WhyChooseUs';
+import { StatsStrip } from '../components/WhyChooseUs';
 import { BrandServicesSection } from '../components/BrandServicesSection';
 import { CaseStudiesSection } from '../components/CaseStudiesSection';
 import { ClientsWall } from '../components/ClientsWall';
@@ -19,10 +19,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onGoToContact, onSelectBrand
       {/* 1. Main slider */}
       <Hero onOpenRfq={() => onGoToContact()} />
 
-      {/* 2. Key numbers + Why industry chooses Siddhi Kabel */}
-      <MotionReveal direction="up" yOffset={50} duration={0.9}>
-        <WhyChooseUs hideAbout onOpenRfq={onGoToContact} />
-      </MotionReveal>
+      {/* 2. Key numbers */}
+      <StatsStrip />
 
       {/* 3. Trusted brand partners + allied products & services */}
       <MotionReveal direction="up" yOffset={50} duration={0.9}>

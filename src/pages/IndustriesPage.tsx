@@ -10,7 +10,7 @@ export const IndustriesPage: React.FC = () => {
       <PageHeader
         title="Industries"
         breadcrumb="Industries"
-        category="Siddhi Kabel LTD."
+        category="Siddhi Cable Corporation Private Limited"
         bgVideo="/assets/videos/demoo1.mp4"
         bgImage="/assets/videos/demoo1-poster.jpg"
       />

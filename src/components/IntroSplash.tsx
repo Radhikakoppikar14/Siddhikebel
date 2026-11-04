@@ -93,7 +93,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onFinish }) => {
               className="space-y-3"
             >
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight font-editorial text-[#231815]">
-                Siddhi <span className="text-[#D2430F] font-medium">Kabel</span>
+                Siddhi <span className="text-[#D2430F] font-medium">Cable</span>
               </h1>
 
               {/* Refined Warm Beige / Mocha Hairline Gradient Divider */}

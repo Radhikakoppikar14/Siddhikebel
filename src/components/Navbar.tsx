@@ -128,6 +128,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               <Mail className="w-3 h-3 text-white/80" />
               <span>{COMPANY_INFO.contacts.salesEmail}</span>
             </a>
+            <span className="text-white/80 hidden md:inline" aria-hidden="true">·</span>
+            <a
+              href={`mailto:${COMPANY_INFO.contacts.infoEmail}`}
+              className="hidden md:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
+            >
+              <Mail className="w-3 h-3 text-white/80" />
+              <span>{COMPANY_INFO.contacts.infoEmail}</span>
+            </a>
           </div>
         </div>
       </div>
@@ -145,11 +153,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center justify-self-start shrink-0 group bg-white py-1"
-              title="Siddhi Kabel - Home"
+              title="Siddhi Cable - Home"
             >
               <img
                 src="/images/logo.png"
-                alt="Siddhi Kabel Corporation Private Limited"
+                alt="Siddhi Cable Corporation Private Limited"
                 className="h-9 sm:h-11 lg:h-12 w-auto max-w-[180px] sm:max-w-none object-contain object-left transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
@@ -185,11 +193,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50 w-[min(440px,calc(100vw-2rem))]"
+                      className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50 w-[min(300px,calc(100vw-2rem))]"
                     >
-                      <div className="bg-white shadow-2xl rounded-2xl border border-stone-100 p-3">
+                      <div className="bg-white shadow-2xl rounded-2xl border border-stone-100 p-2">
                         {/* 2 x 2 tiles for the 4 brands below */}
-                        <div className="grid grid-cols-2 gap-2.5">
+                        <div className="grid grid-cols-2 gap-2">
                           {BRANDS_DATA.map((brand, i) => (
                             <motion.div
                               key={brand.id}
@@ -200,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                               <Link
                                 to={`/products/${brand.id}`}
                                 title={brand.name}
-                                className="group/tile relative flex h-20 items-center justify-center rounded-xl bg-white p-4 border border-[#F1D9CA] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
+                                className="group/tile relative flex h-14 items-center justify-center rounded-xl bg-white p-2.5 border border-[#F1D9CA] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
                                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = brand.colorDark)}
                                 onMouseLeave={(e) => (e.currentTarget.style.borderColor = '')}
                               >

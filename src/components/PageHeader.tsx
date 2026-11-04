@@ -24,7 +24,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   subtitle,
   breadcrumb,
-  category = 'Siddhi Kabel LTD.',
+  category = 'Siddhi Cable Corporation Private Limited',
   bgImage = '/images/main-slider/1.jpg',
   bgVideo,
   minimal = false,
@@ -71,7 +71,6 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           <p className="text-sm font-semibold text-[#FF8A55]">
             {category}
-            <span className="text-white/75 font-normal"> &nbsp;|&nbsp; Official Channel Partner</span>
           </p>
 
             </>

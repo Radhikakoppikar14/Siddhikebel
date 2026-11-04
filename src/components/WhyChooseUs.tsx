@@ -83,7 +83,7 @@ const InfoCard: React.FC<{
     viewport={{ once: false, amount: 0.15 }}
     transition={{ duration: 0.45, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     whileHover={{ y: -4, transition: { duration: 0.2 } }}
-    className="relative group rounded-2xl border border-[#F1D9CA] hover:border-[#D2430F]/50 bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-5 overflow-hidden cursor-default"
+    className="relative group rounded-2xl border border-[#F1D9CA] hover:border-[#D2430F]/50 bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-5 overflow-hidden cursor-default lg:flex-1"
   >
     <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F]/70 group-hover:bg-[#D2430F] transition-colors" />
     <span className="absolute right-3 top-3.5 w-7 h-7 rounded-full bg-[#D2430F]/10 text-[#D2430F] text-[11px] font-mono font-bold flex items-center justify-center">
@@ -203,15 +203,16 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
           >
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1.5 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]">
               <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
-              <span>About Siddhi Kabel</span>
+              <span>About Siddhi Cable</span>
             </div>
+            <p className="text-sm font-semibold text-[#D2430F]">Siddhi Cable Corporation Private Limited</p>
             <h2 className="text-3xl sm:text-5xl font-normal text-[#231815] font-editorial tracking-tight leading-[1.15]">
               Built on experience. <br className="hidden sm:inline" />
               Focused on your application.
             </h2>
             <div className="space-y-4 text-sm sm:text-base text-[#231815]/85 font-light leading-relaxed">
               <p>
-                Since 2008, Siddhi Kabel Corporation Private Limited has supported industrial businesses with electrical, automation, safety and infrastructure requirements. As an authorised channel partner for LAPP, Eaton, Partex and MENNEKES, we provide access to trusted product ranges—alongside sourcing support for allied product needs.
+                Since 2008, Siddhi Cable Corporation Private Limited has supported industrial businesses with electrical, automation, safety and infrastructure requirements. We provide access to trusted LAPP, Eaton, Partex and MENNEKES product ranges—alongside sourcing support for allied product needs.
               </p>
               <p>
                 From OEM product specifications and project-based requirements to repair, maintenance and overhaul support, we help identify suitable products and coordinate supply for plants, control panels, buildings and production lines. Our allied offerings include LT and HT cables, armoured cables, industrial lighting and earthing products. RMO support covers Repair, Maintenance and Overhaul. With more than 33 years of industrial experience, we are able to make procurement clearer and ongoing support more dependable.
@@ -270,7 +271,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               viewport={{ once: false, amount: 0.05 }}
               className="inline-block text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]"
             >
-              The Siddhi Kabel Advantage
+              The Siddhi Cable Advantage
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
@@ -279,7 +280,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               transition={{ delay: 0.1 }}
               className="text-2xl sm:text-4xl font-normal text-[#231815] font-editorial tracking-tight"
             >
-              Why industry chooses Siddhi Kabel.
+              Why industry chooses Siddhi Cable.
             </motion.h2>
             <p className="text-sm sm:text-base text-[#5F524C]/80 font-light leading-relaxed">
               Strong product partnerships. Real-world experience. One responsive team for your industrial requirements.
@@ -288,9 +289,9 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
 
           {/* Infographic panel */}
           <div className="rounded-3xl border border-[#F1D9CA] bg-gradient-to-br from-[#FFFAF6] via-white to-[#FFF1E8] p-4 sm:p-8 shadow-sm">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_1fr] gap-4 lg:gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_1fr] gap-4 lg:gap-8 items-stretch">
               {/* LEFT COLUMN */}
-              <div className="space-y-4 order-2 lg:order-1">
+              <div className="flex flex-col gap-4 order-2 lg:order-1">
                 <InfoCard num="02" side="left" title="Four authorised partners" desc="Trusted products from LAPP, Eaton, Partex and MENNEKES.">
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {BRAND_LOGOS.map((src) => (
@@ -306,14 +307,11 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                     {APPLICATIONS.map((a) => {
                       const I = a.icon;
                       return (
-                        <div key={a.label} className="flex-1 overflow-hidden rounded-lg border border-[#F1D9CA] bg-white">
-                          <div className="relative h-16">
-                            <img src={a.img} alt="" loading="lazy" className="no-zoom w-full h-full object-cover" />
-                            <span className="absolute left-1.5 top-1.5 w-6 h-6 rounded-md bg-[#D2430F] text-white flex items-center justify-center">
-                              <I className="w-3.5 h-3.5" />
-                            </span>
-                          </div>
-                          <span className="block py-1.5 text-center text-xs font-semibold text-[#231815]">{a.label}</span>
+                        <div key={a.label} className="flex-1 flex flex-col items-center gap-2 rounded-lg border border-[#F1D9CA] bg-white py-3 px-2">
+                          <span className="w-9 h-9 rounded-md bg-[#D2430F] text-white flex items-center justify-center">
+                            <I className="w-5 h-5" />
+                          </span>
+                          <span className="block text-center text-xs font-semibold text-[#231815]">{a.label}</span>
                         </div>
                       );
                     })}
@@ -326,7 +324,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               </div>
 
               {/* CENTER HUB */}
-              <div className="order-1 lg:order-2 flex flex-col items-center gap-5">
+              <div className="order-1 lg:order-2 flex flex-col items-center justify-center gap-5">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -390,7 +388,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               </div>
 
               {/* RIGHT COLUMN */}
-              <div className="space-y-4 order-3">
+              <div className="flex flex-col gap-4 order-3">
                 <InfoCard num="08" side="right" title="Ethical business practices" desc="Transparent dealings, quality-first decisions and trust built over time.">
                   <IconRow icons={[HeartHandshake, Scale, ShieldCheck]} />
                 </InfoCard>

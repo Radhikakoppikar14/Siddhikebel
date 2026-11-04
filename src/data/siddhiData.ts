@@ -65,12 +65,12 @@ export interface SpecialOfferItem {
 }
 
 export const COMPANY_INFO = {
-  name: "Siddhi Kabel Corporation Private Limited",
-  shortName: "Siddhi Kabel",
+  name: "Siddhi Cable Corporation Private Limited",
+  shortName: "Siddhi Cable",
   tagline: "Dependable Electrical Solutions for your Industrial Requirements",
   headline: "Transforming Indian Industry With Innovative Engineering Products",
   description:
-    "Siddhi Kabel Corporation Private Limited supplies industrial electrical, automation and safety products. 33+ years of industry experience.",
+    "Siddhi Cable Corporation Private Limited supplies industrial electrical, automation and safety products. 33+ years of industry experience.",
   establishedYear: "2008",
   experienceYears: "33+",
   segmentsServed: "16+",
@@ -78,9 +78,8 @@ export const COMPANY_INFO = {
   contacts: {
     primaryPhone: "+91 96200 00947",
     secondaryPhone: "+91 98860 58511",
-    // TODO(client): replace with the confirmed Sales email ID and verify both mobile numbers.
-    // Every page (navbar, footer, contact page, enquiry popup) reads these values.
-    salesEmail: "info@siddhikabel.com",
+    salesEmail: "sales@siddhicable.com",
+    infoEmail: "info@siddhicable.com",
     address: {
       line1: "No.3, 1st Main Road, 1st Block",
       line2: "Banashankari 3rd Stage",
@@ -107,7 +106,7 @@ export const BRANDS_DATA: BrandInfo[] = [
     name: "LAPP India",
     shortDesc: "Integrated cable and connection technology.",
     fullDesc:
-      "We supply LAPP cables and connection products: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.",
+      "We supply LAPP cables and connection products: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits. LAPP Group, headquartered in Stuttgart, Germany, has over 65 years of experience in cable and connection technology, with more than 5,500 employees, 27 production sites and a presence in 152 countries. LAPP India, a 100% subsidiary of the Group, began operations in 1996 at Jigani, Bengaluru and today serves over 12,000 customers with more than 500 employees. It manufactures at Bengaluru, Bhopal and Dharuhera, backed by an in-house testing lab for mechanical, electrical, flame and chemical tests. The portfolio of over 40,000 products serves industries such as automotive, cement, railways, oil and gas, renewable energy and e-mobility.",
     logo: "/images/clients/lapp.png",
     featuredImg: "/images/brands/lapp.jpg",
     categories: ["Power & Control Cables", "Data Communication", "Cable Glands & Connectors"],

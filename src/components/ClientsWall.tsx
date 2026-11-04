@@ -68,7 +68,6 @@ const TrimmedLogo: React.FC<{ src: string; alt: string }> = ({ src, alt }) => {
 
 export const ClientsWall: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
-  const pausedRef = useRef(false);
   const offsetRef = useRef(0);   // current scroll position in px
   const targetRef = useRef(0);   // extra distance still to travel after an arrow click
 
@@ -76,7 +75,7 @@ export const ClientsWall: React.FC = () => {
   const items = [...CLIENTS_LIST, ...CLIENTS_LIST];
 
   useEffect(() => {
-    const SPEED = 25; // px per second (lower = slower)
+    const SPEED = 70; // px per second (higher = faster)
     let last = performance.now();
     let raf = 0;
     const tick = (now: number) => {
@@ -90,7 +89,7 @@ export const ClientsWall: React.FC = () => {
           const step = targetRef.current * Math.min(1, dt * 8);
           offsetRef.current += step;
           targetRef.current -= step;
-        } else if (!pausedRef.current) {
+        } else {
           offsetRef.current += SPEED * dt;
         }
         if (loop > 0) offsetRef.current = ((offsetRef.current % loop) + loop) % loop;
@@ -104,7 +103,7 @@ export const ClientsWall: React.FC = () => {
 
   const shift = (dir: 1 | -1) => {
     const first = trackRef.current?.firstElementChild as HTMLElement | null;
-    const card = (first?.offsetWidth ?? 240) + 20; // card + gap
+    const card = (first?.offsetWidth ?? 192) + 20; // card + gap
     targetRef.current += dir * card * 2;
   };
 
@@ -132,10 +131,6 @@ export const ClientsWall: React.FC = () => {
 
       <div
         className="relative w-full overflow-hidden"
-        onMouseEnter={() => { pausedRef.current = true; }}
-        onMouseLeave={() => { pausedRef.current = false; }}
-        onTouchStart={() => { pausedRef.current = true; }}
-        onTouchEnd={() => { pausedRef.current = false; }}
       >
         {/* Edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#FFF1E8] to-transparent z-20" />
@@ -164,9 +159,9 @@ export const ClientsWall: React.FC = () => {
           {items.map((client, idx) => (
             <div
               key={`${client.name}-${idx}`}
-              className="group relative bg-white rounded-2xl border border-[#F1D9CA] hover:border-[#5F524C] hover:shadow-xl px-4 py-3 w-60 sm:w-72 h-36 flex flex-col items-center justify-center transition-[border-color,box-shadow] duration-300 overflow-hidden shrink-0 cursor-pointer"
+              className="group relative bg-white rounded-2xl border border-[#F1D9CA] hover:border-[#5F524C] hover:shadow-xl px-3 py-2 w-40 sm:w-48 h-28 flex flex-col items-center justify-center transition-[border-color,box-shadow] duration-300 overflow-hidden shrink-0 cursor-pointer"
             >
-              <div className="h-16 w-full flex items-center justify-center px-10">
+              <div className="h-12 w-full flex items-center justify-center px-6">
                 <TrimmedLogo src={client.logo} alt={client.name} />
               </div>
               <span className="mt-2 block w-full text-center text-[10px] font-medium text-[#5F524C] truncate">{client.name}</span>

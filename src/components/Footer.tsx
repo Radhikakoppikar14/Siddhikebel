@@ -8,7 +8,6 @@ import {
   MapPin,
   Clock,
   ShieldCheck,
-  Award,
   ChevronRight,
   Building2
 } from 'lucide-react';
@@ -26,20 +25,19 @@ export const Footer: React.FC<FooterProps> = () => {
 
       {/* Main Multi-Column Footer Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
+        <Link to="/" className="inline-block mb-5">
+          <img
+            src="/images/logo.png"
+            alt="Siddhi Cable Corporation"
+            className="h-11 sm:h-14 w-auto object-contain bg-white px-3 py-1.5 rounded-lg shadow-sm"
+          />
+        </Link>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-x-8 gap-y-6 items-start">
           
           {/* Brand Identity & Trust Badges (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <Link to="/" className="inline-block">
-              <img
-                src="/images/logo.png"
-                alt="Siddhi Kabel Corporation"
-                className="h-11 sm:h-14 w-auto object-contain bg-white px-3 py-1.5 rounded-lg shadow-sm"
-              />
-            </Link>
-
             <p className="text-xs text-white/80 font-light leading-relaxed">
-              Siddhi Kabel Corporation Private Limited is an authorized industrial distributor, dealer, and engineering partner supplying world-leading electrical cables, switchgears, plugs, and safety equipment.
+              Siddhi Cable Corporation Private Limited supplies world-leading electrical cables, switchgears, plugs, and safety equipment.
             </p>
 
             {/* Certifications and Badges */}
@@ -47,10 +45,6 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-center gap-2 text-xs text-white/80">
                 <ShieldCheck className="w-4 h-4 shrink-0 text-[#FFD7C2]" />
                 <span className="font-medium">100% Factory Certified &amp; OEM Warranted</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-white/80">
-                <Award className="w-4 h-4 shrink-0 text-[#FFD7C2]" />
-                <span className="font-medium">Direct Authorized Channel Partner</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-white/80">
                 <Building2 className="w-4 h-4 shrink-0 text-[#FFD7C2]" />
@@ -148,7 +142,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#FFD7C2] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  Siddhi Kabel Corporation Private Limited,
+                  Siddhi Cable Corporation Private Limited,
                   <br />
                   No.3, 1st Main Road, 1st Block,
                   <br />
@@ -173,8 +167,12 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-[#FFD7C2] shrink-0" />
                 <div className="space-y-0.5">
+                  <span className="block font-medium text-white">Email:</span>
                   <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
-                    {COMPANY_INFO.contacts.salesEmail}
+                    Sales: {COMPANY_INFO.contacts.salesEmail}
+                  </a>
+                  <a href={`mailto:${COMPANY_INFO.contacts.infoEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
+                    Enquiry: {COMPANY_INFO.contacts.infoEmail}
                   </a>
                 </div>
               </div>
@@ -199,7 +197,7 @@ export const Footer: React.FC<FooterProps> = () => {
       {/* 4. Bottom Legal Bar */}
       <div className="bg-[#5F6670] py-3 px-4 sm:px-6 lg:px-8 border-t border-white/15">
         <div className="max-w-[calc(80rem-4rem)] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 lg:pr-16 text-[11px] text-white/80">
-          <p>© 2026 Siddhi Kabel Corporation Private Limited. All rights reserved.</p>
+          <p>© 2026 Siddhi Cable Corporation Private Limited. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
             <span>ISO 9001:2015 Certified Partner</span>
             <span aria-hidden="true">·</span>

@@ -53,7 +53,6 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
               />
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-editorial leading-none">{brand.name}</h1>
-            <p className="mt-2 text-base sm:text-lg font-semibold tracking-wide text-white/90">Private Limited</p>
           </div>
         </div>
       </header>
