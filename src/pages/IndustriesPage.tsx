@@ -10,9 +10,9 @@ export const IndustriesPage: React.FC = () => {
       <PageHeader
         title="Industries"
         breadcrumb="Industries"
-        category="Siddhi Cable Corporation Private Limited"
-        bgVideo="/assets/videos/demoo1.mp4"
-        bgImage="/assets/videos/demoo1-poster.jpg"
+        category="Siddhi Kabel Corporation Private Limited"
+        bgImage="/images/industries-banner.webp"
+        overlay={false}
       />
 
       <section className="pt-6 pb-10 sm:pt-8 sm:pb-12 bg-[#FFFAF6] border-b border-[#F1D9CA]">

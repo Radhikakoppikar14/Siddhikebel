@@ -179,11 +179,8 @@ interface WhyChooseUsProps {
 
 // To show a looping video in the "Why" hub, put a file at this path in /public.
 // If it is missing, the photo is shown instead.
-const WHY_VIDEO = '/assets/videos/why-siddhi.mp4';
-const WHY_IMAGE = '/images/industries/automation-robotics.jpg';
 
 export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout = false }) => {
-  const [videoOk, setVideoOk] = useState(true);
   return (
     <section id="about" className="py-10 sm:py-12 bg-white border-b border-[#F1D9CA] relative overflow-hidden">
       {/* Decorative ambient glowing circles */}
@@ -203,16 +200,16 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
           >
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1.5 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]">
               <Sparkles className="w-3.5 h-3.5 text-[#D2430F]" />
-              <span>About Siddhi Cable</span>
+              <span>About Siddhi Kabel</span>
             </div>
-            <p className="text-sm font-semibold text-[#D2430F]">Siddhi Cable Corporation Private Limited</p>
+            <p className="text-sm font-semibold text-[#D2430F]">Siddhi Kabel Corporation Private Limited</p>
             <h2 className="text-3xl sm:text-5xl font-normal text-[#231815] font-editorial tracking-tight leading-[1.15]">
               Built on experience. <br className="hidden sm:inline" />
               Focused on your application.
             </h2>
             <div className="space-y-4 text-sm sm:text-base text-[#231815]/85 font-light leading-relaxed">
               <p>
-                Since 2008, Siddhi Cable Corporation Private Limited has supported industrial businesses with electrical, automation, safety and infrastructure requirements. We provide access to trusted LAPP, Eaton, Partex and MENNEKES product ranges—alongside sourcing support for allied product needs.
+                Since 2008, Siddhi Kabel Corporation Private Limited has supported industrial businesses with electrical, automation, safety and infrastructure requirements. We provide access to trusted LAPP, Eaton, Partex and MENNEKES product ranges—alongside sourcing support for allied product needs.
               </p>
               <p>
                 From OEM product specifications and project-based requirements to repair, maintenance and overhaul support, we help identify suitable products and coordinate supply for plants, control panels, buildings and production lines. Our allied offerings include LT and HT cables, armoured cables, industrial lighting and earthing products. RMO support covers Repair, Maintenance and Overhaul. With more than 33 years of industrial experience, we are able to make procurement clearer and ongoing support more dependable.
@@ -271,7 +268,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               viewport={{ once: false, amount: 0.05 }}
               className="inline-block text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]"
             >
-              The Siddhi Cable Advantage
+              The Siddhi Kabel Advantage
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
@@ -280,7 +277,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               transition={{ delay: 0.1 }}
               className="text-2xl sm:text-4xl font-normal text-[#231815] font-editorial tracking-tight"
             >
-              Why industry chooses Siddhi Cable.
+              Why industry chooses Siddhi Kabel.
             </motion.h2>
             <p className="text-sm sm:text-base text-[#5F524C]/80 font-light leading-relaxed">
               Strong product partnerships. Real-world experience. One responsive team for your industrial requirements.
@@ -338,21 +335,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                     className="absolute inset-0 rounded-full border-2 border-dashed border-[#D2430F]/40"
                   />
                   <div className="absolute inset-3 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                    <img src={WHY_IMAGE} alt="" className="no-zoom absolute inset-0 w-full h-full object-cover" />
-                    {videoOk && (
-                      <video
-                        src={WHY_VIDEO}
-                        poster={WHY_IMAGE}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        onError={() => setVideoOk(false)}
-                        className="no-zoom absolute inset-0 w-full h-full object-cover"
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-[#FFF1E8]/85 to-[#FDE5D3]/90" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white via-[#FFF1E8] to-[#FDE5D3]" />
                     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
                       <span className="w-11 h-11 rounded-full bg-[#D2430F] text-white flex items-center justify-center shadow-md mb-2">
                         <ShieldCheck className="w-6 h-6" />

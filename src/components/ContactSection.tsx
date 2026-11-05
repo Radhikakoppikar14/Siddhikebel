@@ -110,13 +110,14 @@ export const ContactSection: React.FC = () => {
                 <Mail className="w-5 h-5 text-[#D2430F]" />
               </div>
               <div>
-                <h3 className={labelCls}>Email</h3>
+                <h3 className={labelCls}>Sales</h3>
                 <p className="text-sm text-[#5F524C]">
                   <a href={`mailto:${contacts.salesEmail}`} className="font-mono hover:text-[#D2430F] transition-colors">
                     {contacts.salesEmail}
                   </a>
                 </p>
-                <p className="text-sm text-[#5F524C] mt-1">
+                <h3 className={labelCls + ' mt-3'}>Enquiry</h3>
+                <p className="text-sm text-[#5F524C]">
                   <a href={`mailto:${contacts.infoEmail}`} className="font-mono hover:text-[#D2430F] transition-colors">
                     {contacts.infoEmail}
                   </a>
@@ -159,7 +160,7 @@ export const ContactSection: React.FC = () => {
                 </div>
                 <h4 className="text-lg font-medium text-[#231815] font-editorial">Enquiry Sent</h4>
                 <p className="text-xs text-[#5F524C]/80 max-w-sm mx-auto leading-relaxed">
-                  Thank you for contacting Siddhi Cable. Our sales team will get back to you shortly.
+                  Thank you for contacting Siddhi Kabel. Our sales team will get back to you shortly.
                 </p>
                 <button
                   onClick={() => setIsSent(false)}

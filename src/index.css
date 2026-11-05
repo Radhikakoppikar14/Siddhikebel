@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
 /* Refined, tighter radius + softer shadow scale for a minimal look */
@@ -30,7 +30,7 @@
     scroll-padding-top: 6rem; /* clears the sticky header on anchor jumps */
     overflow-anchor: auto;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background-color: #FFFAF6;
     color: #231815;
   }
@@ -41,32 +41,32 @@
 
   /* Single modern sans family; headings get tighter tracking */
   h1, h2, .font-editorial {
-    font-family: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     letter-spacing: -0.025em;
     font-weight: 600;
   }
   body, #root {
-    font-family: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
   h3 { letter-spacing: -0.015em; }
   h3, h4, h5, h6, button, input, select, textarea {
-    font-family: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
 }
 
 /* Unlayered so these always win over Tailwind's font-* utilities */
 .font-editorial, .font-serif {
-  font-family: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
   letter-spacing: -0.025em;
 }
 .italic { font-style: normal; }
 .font-mono, .font-sans {
-  font-family: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif !important;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
 }
 .font-mono { font-variant-numeric: tabular-nums; }
 
 /* ------------------------------------------------------------------
-   One consistent type style on every page (Sora).
+   One consistent type style on every page (Plus Jakarta Sans).
    Unlayered + !important so per-page font-bold / font-light / uppercase
    utilities can no longer make one page look different from another.
 ------------------------------------------------------------------- */
@@ -290,10 +290,10 @@ main section .text-center > h2::after {
 }
 
 /* ------------------------------------------------------------------
-   One type scale for every page and section (font: Sora).
+   One type scale for every page and section (font: Plus Jakarta Sans).
    To change the site font, edit --font-main and the font import at the top.
 ------------------------------------------------------------------- */
-:root { --font-main: 'Sora Variable', 'Sora', system-ui, -apple-system, sans-serif; }
+:root { --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
 /* Sub-headings (modals, service/project titles, About blocks) share one size */
 h3.font-editorial {
   font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem) !important;
@@ -308,7 +308,7 @@ button, input, select, textarea { font-size: inherit; }
 
 /* ------------------------------------------------------------------
    One font family everywhere: every element, button, form field, badge,
-   counter and pseudo-element uses --font-main (Sora). Nothing can override it.
+   counter and pseudo-element uses --font-main (Plus Jakarta Sans). Nothing can override it.
 ------------------------------------------------------------------- */
 *, *::before, *::after,
 button, input, select, textarea {
@@ -317,11 +317,21 @@ button, input, select, textarea {
 
 /* ------------------------------------------------------------------
    One page-title style everywhere: home slider, brand pages and every
-   page header share the same size, weight and spacing (font: Sora).
+   page header share the same size, weight and spacing (font: Plus Jakarta Sans).
 ------------------------------------------------------------------- */
 main h1 {
   font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem) !important;
   line-height: 1.1 !important;
   font-weight: 600 !important;
   letter-spacing: -0.025em !important;
+}
+
+/* Hero slider overlay: keeps the white text readable over the video */
+.hero-overlay {
+  background: linear-gradient(90deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.4) 100%);
+}
+
+/* Eaton slide: slightly darker on the left */
+.hero-overlay--eaton {
+  background: linear-gradient(90deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.65) 55%, rgba(0,0,0,.4) 100%);
 }

@@ -8,11 +8,11 @@ export const ContactPage: React.FC = () => {
       <PageHeader
         title="Contact"
         breadcrumb="Contact us"
-        category="Siddhi Cable Corporation Private Limited"
+        category="Siddhi Kabel Corporation Private Limited"
         subtitle=""
         minimal
-        bgVideo="/assets/videos/demoo1.mp4"
-        bgImage="/assets/videos/demoo1-poster.jpg"
+        bgImage="/images/contact-banner.webp"
+        overlay={false}
       />
 
       {/* Exact Head Office Details & Send Message Form */}

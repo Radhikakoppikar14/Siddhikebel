@@ -103,12 +103,12 @@ export const SERVED_INDUSTRIES: IndustryItem[] = [
   {
     name: "Manufacturing",
     desc: "Custom harness, flexible cables and motor protection for production lines and machine builders.",
-    image: "/images/industries/oem-machines.jpg",
+    image: "/images/industries/manufacturing.webp",
   },
   {
     name: "Pharmaceuticals",
     desc: "Washdown pilot switches, cables and marking for cleanroom and process areas.",
-    image: "/images/industries/pharmaceutical-cleanroom.jpg",
+    image: "/images/industries/pharmaceuticals.webp",
   },
   {
     name: "Automotive",
@@ -118,12 +118,12 @@ export const SERVED_INDUSTRIES: IndustryItem[] = [
   {
     name: "Process industries",
     desc: "Chemical-resistant cables, glands and plugs for oil, gas, chemical and paint process plants.",
-    image: "/images/industries/oil-gas-chemical.jpg",
+    image: "/images/industries/process-industries.webp",
   },
   {
     name: "Infrastructure",
     desc: "Site power distribution, CEE plugs and sockets, cables and switchgear supplied project-wise.",
-    image: "/images/industries/construction.jpg",
+    image: "/images/industries/infrastructure.webp",
   },
   {
     name: "System integrators",

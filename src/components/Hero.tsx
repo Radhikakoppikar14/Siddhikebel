@@ -285,8 +285,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               )}
 
               {/* Black overlay so the white text stays readable over the video */}
-              <div className="absolute inset-0 bg-black/55" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
+              <div className={`${s.brand === 'EATON' ? 'hero-overlay--eaton' : 'hero-overlay'} absolute inset-0`} />
             </div>
           );
         })}

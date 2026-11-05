@@ -158,7 +158,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     Message Successfully Sent!
                   </h4>
                   <p className="text-xs sm:text-sm text-[#5F524C] font-light max-w-sm leading-relaxed">
-                    Thank you, <strong className="font-semibold text-[#231815]">{formState.name}</strong>. An application sales engineer from Siddhi Cable Bangalore will review your inquiry and get in touch with you shortly.
+                    Thank you, <strong className="font-semibold text-[#231815]">{formState.name}</strong>. An application sales engineer from Siddhi Kabel Bangalore will review your inquiry and get in touch with you shortly.
                   </p>
                   <button
                     onClick={onClose}

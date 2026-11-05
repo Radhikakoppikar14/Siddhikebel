@@ -70,15 +70,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
     <div className="bg-[#FFFAF6] text-[#231815] overflow-hidden">
       {/* 1. Header banner - same component and typography as every other page */}
       <PageHeader
-        title="About Siddhi Cable"
+        title="About Siddhi Kabel"
         breadcrumb="About Us"
-        category="Siddhi Cable Corporation Private Limited"
+        category="Siddhi Kabel Corporation Private Limited"
         subtitle="Dependable Electrical, Automation & Safety Solutions for Indian Industry & Multinationals."
-        bgVideo="/assets/videos/demoo1.mp4"
-        bgImage="/assets/videos/demoo1-poster.jpg"
+        bgImage="/images/about-banner.webp"
+        overlay={false}
       />
 
-      {/* 3. About (Built on experience) + counters + Why industry chooses Siddhi Cable */}
+      {/* 3. About (Built on experience) + counters + Why industry chooses Siddhi Kabel */}
       <WhyChooseUs onOpenRfq={onGoToContact} />
 
       {/* Service that starts with understanding */}
@@ -138,15 +138,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
             {[
               {
                 src: '/images/resource/about2.jpg',
-                alt: 'Siddhi Cable Corporate Team Bangalore',
-                caption: 'Siddhi Cable Executive Leadership & Operations Team',
+                alt: 'Siddhi Kabel Corporate Team Bangalore',
+                caption: 'Siddhi Kabel Executive Leadership & Operations Team',
                 chip: 'Leadership & Engineering Team',
                 icon: Users,
               },
               {
                 src: '/images/resource/about3.jpg',
-                alt: 'Siddhi Cable Technical Consultation Team',
-                caption: 'Siddhi Cable Technical Solution Analysis & Application Engineering',
+                alt: 'Siddhi Kabel Technical Consultation Team',
+                caption: 'Siddhi Kabel Technical Solution Analysis & Application Engineering',
                 chip: 'Technical Review & Client Support',
                 icon: Target,
               },
@@ -202,7 +202,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 )}
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/e3a0qpri5NA?rel=0&modestbranding=1&autoplay=1&playsinline=1"
-                  title="Siddhi Cable Corporate Overview"
+                  title="Siddhi Kabel Corporate Overview"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   onLoad={() => setIframeReady(true)}
@@ -218,14 +218,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 onMouseEnter={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
                 onFocus={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
                 onTouchStart={() => preconnect('https://www.youtube-nocookie.com', 'https://www.google.com')}
-                aria-label="Play Siddhi Cable corporate video"
+                aria-label="Play Siddhi Kabel corporate video"
                 className="absolute inset-0 w-full h-full cursor-pointer group/play"
               >
                 <img
                   src={VIDEO_THUMB}
                   onLoad={checkThumbSize}
                   onError={swapToFallbackThumb}
-                  alt="Siddhi Cable Corporate Overview video thumbnail"
+                  alt="Siddhi Kabel Corporate Overview video thumbnail"
                   loading="lazy"
                   decoding="async"
                   className="absolute inset-0 w-full h-full object-cover object-center"
@@ -246,7 +246,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 <Play className="w-4 h-4 fill-white" />
               </span>
               <span>
-                <span className="block text-sm font-semibold text-[#231815]">Siddhi Cable Corporate &amp; Engineering Reel</span>
+                <span className="block text-sm font-semibold text-[#231815]">Siddhi Kabel Corporate &amp; Engineering Reel</span>
                 <span className="block text-xs text-[#5F524C]">Authorised Industrial Cables, Automation Switchgear &amp; Safety Systems</span>
               </span>
             </div>
@@ -289,7 +289,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                   onClick={() => handleInquire('Project enquiry')}
                   className="group inline-flex items-center justify-center gap-2 bg-[#D2430F] hover:bg-[#A8340A] text-white text-sm font-semibold rounded-full px-7 py-3.5 shadow-md hover:shadow-xl transition-all duration-300 motion-safe:hover:-translate-y-0.5 cursor-pointer"
                 >
-                  Talk to Siddhi Cable
+                  Talk to Siddhi Kabel
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </div>
@@ -362,7 +362,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
               </div>
 
               <div className="mt-3 shrink-0 flex flex-wrap items-center justify-between gap-3 px-2 text-xs text-[#5F524C]/80">
-                <span>Authorized Siddhi Cable Corporate Archives</span>
+                <span>Authorized Siddhi Kabel Corporate Archives</span>
                 <button
                   onClick={() => {
                     setLightboxImage(null);

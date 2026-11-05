@@ -254,7 +254,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = () => {
 
                 <div className="pt-3 border-t border-[#F1D9CA]">
                   <span className="text-xs text-[#D2430F] font-light">
-                    Siddhi Cable engineering &amp; factory-certified materials supply.
+                    Siddhi Kabel engineering &amp; factory-certified materials supply.
                   </span>
                 </div>
               </div>

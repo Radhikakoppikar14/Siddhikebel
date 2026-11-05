@@ -13,6 +13,8 @@ interface PageHeaderProps {
   onOpenRfq?: (subject?: string) => void;
   /** title on top, then Home > page breadcrumb; hides partner line, subtitle and bullet points */
   minimal?: boolean;
+  /** set false when the banner image already has its own dark side for the text */
+  overlay?: boolean;
 }
 
 const DEFAULT_SUBTITLE =
@@ -24,10 +26,11 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   subtitle,
   breadcrumb,
-  category = 'Siddhi Cable Corporation Private Limited',
+  category = 'Siddhi Kabel Corporation Private Limited',
   bgImage = '/images/main-slider/1.jpg',
   bgVideo,
   minimal = false,
+  overlay = true,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -53,12 +56,18 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             referrerPolicy="no-referrer"
           />
         )}
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
+        {overlay ? (
+          <>
+            <div className="absolute inset-0 bg-black/55" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
+          </>
+        ) : (
+          <div className="hero-overlay absolute inset-0" />
+        )}
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-14 lg:py-16">
-        <div className="max-w-3xl space-y-4">
+        <div className={`${overlay ? 'max-w-3xl' : 'max-w-xl'} space-y-4 [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]`}>
           {!minimal && (
             <>
           <nav className="flex items-center gap-2 text-sm text-white/75" aria-label="Breadcrumb">

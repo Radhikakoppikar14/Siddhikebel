@@ -65,12 +65,12 @@ export interface SpecialOfferItem {
 }
 
 export const COMPANY_INFO = {
-  name: "Siddhi Cable Corporation Private Limited",
-  shortName: "Siddhi Cable",
+  name: "Siddhi Kabel Corporation Private Limited",
+  shortName: "Siddhi Kabel",
   tagline: "Dependable Electrical Solutions for your Industrial Requirements",
   headline: "Transforming Indian Industry With Innovative Engineering Products",
   description:
-    "Siddhi Cable Corporation Private Limited supplies industrial electrical, automation and safety products. 33+ years of industry experience.",
+    "Siddhi Kabel Corporation Private Limited supplies industrial electrical, automation and safety products. 33+ years of industry experience.",
   establishedYear: "2008",
   experienceYears: "33+",
   segmentsServed: "16+",
@@ -78,8 +78,8 @@ export const COMPANY_INFO = {
   contacts: {
     primaryPhone: "+91 96200 00947",
     secondaryPhone: "+91 98860 58511",
-    salesEmail: "sales@siddhicable.com",
-    infoEmail: "enquiry@siddhicable.com",
+    salesEmail: "sales@siddhikabel.com",
+    infoEmail: "enquiry@siddhikabel.com",
     address: {
       line1: "No.3, 1st Main Road, 1st Block",
       line2: "Banashankari 3rd Stage",
@@ -200,7 +200,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     shortDesc: "Single-core wires for control cabinet and panel wiring.",
     details: "Single-core wires for control cabinet and panel wiring.",
     specifications: [],
-    image: "/images/lapp/control-cabinet-single-cores.jpg",
+    image: "/images/lapp/control-cabinet-single-cores.webp",
     standards: [],
     isFeatured: true,
   },
@@ -239,7 +239,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     shortDesc: "Wires and cable end sleeves for safe, neat domestic and house wiring.",
     details: "Wires and cable end sleeves for safe, neat domestic and house wiring.",
     specifications: [],
-    image: "/images/lapp/domestic-house-wiring.jpg",
+    image: "/images/lapp/domestic-house-wiring.webp",
     standards: [],
     isFeatured: true,
   },

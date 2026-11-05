@@ -12,7 +12,7 @@ export const OffersPage: React.FC<OffersPageProps> = ({ onGoToContact }) => {
       <PageHeader
         title="Check our RFQ site"
         breadcrumb="RFQ Site & Special Offers"
-        category="Siddhi Cable Corporation Private Limited"
+        category="Siddhi Kabel Corporation Private Limited"
         bgVideo="/assets/videos/hero-1.mp4"
       />
 

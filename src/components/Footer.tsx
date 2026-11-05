@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = () => {
         <Link to="/" className="inline-block mb-5">
           <img
             src="/images/logo.png"
-            alt="Siddhi Cable Corporation"
+            alt="Siddhi Kabel Corporation"
             className="h-11 sm:h-14 w-auto object-contain bg-white px-3 py-1.5 rounded-lg shadow-sm"
           />
         </Link>
@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = () => {
           {/* Brand Identity & Trust Badges (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <p className="text-xs text-white/80 font-light leading-relaxed">
-              Siddhi Cable Corporation Private Limited supplies world-leading electrical cables, switchgears, plugs, and safety equipment.
+              Siddhi Kabel Corporation Private Limited supplies world-leading electrical cables, switchgears, plugs, and safety equipment.
             </p>
 
             {/* Certifications and Badges */}
@@ -142,7 +142,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#FFD7C2] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  Siddhi Cable Corporation Private Limited,
+                  Siddhi Kabel Corporation Private Limited,
                   <br />
                   No.3, 1st Main Road, 1st Block,
                   <br />
@@ -167,10 +167,11 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-[#FFD7C2] shrink-0" />
                 <div className="space-y-0.5">
-                  <span className="block font-medium text-white">Email:</span>
+                  <span className="block font-medium text-white">Sales:</span>
                   <a href={`mailto:${COMPANY_INFO.contacts.salesEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
                     {COMPANY_INFO.contacts.salesEmail}
                   </a>
+                  <span className="block font-medium text-white pt-1">Enquiry:</span>
                   <a href={`mailto:${COMPANY_INFO.contacts.infoEmail}`} className="hover:text-[#FFD7C2] transition-colors block">
                     {COMPANY_INFO.contacts.infoEmail}
                   </a>
@@ -179,10 +180,10 @@ export const Footer: React.FC<FooterProps> = () => {
 
               <div className="flex items-start gap-2.5 pt-1">
                 <Clock className="w-4 h-4 text-[#FFD7C2] shrink-0 mt-0.5" />
-                <div>
-                  <span className="block font-medium text-white">Business Hours:</span>
+                <div className="space-y-1">
+                  <span className="block font-semibold text-white">Business Hours:</span>
                   {COMPANY_INFO.contacts.hours.map((h) => (
-                    <span key={h.days} className="block text-[11px] text-white/80">
+                    <span key={h.days} className="block text-sm leading-relaxed text-white/90">
                       {h.days}: {h.time}
                     </span>
                   ))}
@@ -197,7 +198,7 @@ export const Footer: React.FC<FooterProps> = () => {
       {/* 4. Bottom Legal Bar */}
       <div className="bg-[#5F6670] py-3 px-4 sm:px-6 lg:px-8 border-t border-white/15">
         <div className="max-w-[calc(80rem-4rem)] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 lg:pr-16 text-[11px] text-white/80">
-          <p>© 2026 Siddhi Cable Corporation Private Limited. All rights reserved.</p>
+          <p>© 2026 Siddhi Kabel Corporation Private Limited. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px]">
             <span>ISO 9001:2015 Certified Partner</span>
             <span aria-hidden="true">·</span>
