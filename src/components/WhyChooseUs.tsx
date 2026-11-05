@@ -83,7 +83,7 @@ const InfoCard: React.FC<{
     viewport={{ once: false, amount: 0.15 }}
     transition={{ duration: 0.45, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     whileHover={{ y: -4, transition: { duration: 0.2 } }}
-    className="relative group rounded-2xl border border-[#F1D9CA] hover:border-[#D2430F]/50 bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-5 overflow-hidden cursor-default lg:flex-1"
+    className="relative group rounded-2xl border border-[#F1D9CA] hover:border-[#D2430F]/50 bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-5 overflow-hidden cursor-default lg:flex-1 min-h-fit"
   >
     <div className="absolute top-0 left-0 right-0 h-1 bg-[#D2430F]/70 group-hover:bg-[#D2430F] transition-colors" />
     <span className="absolute right-3 top-3.5 w-7 h-7 rounded-full bg-[#D2430F]/10 text-[#D2430F] text-[11px] font-mono font-bold flex items-center justify-center">
