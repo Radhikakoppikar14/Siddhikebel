@@ -122,16 +122,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
             </a>
             <span className="text-white/80 hidden sm:inline" aria-hidden="true">·</span>
             <a
-              href={`mailto:${COMPANY_INFO.contacts.salesEmail}`}
-              className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
-            >
-              <Mail className="w-3 h-3 text-white/80" />
-              <span>{COMPANY_INFO.contacts.salesEmail}</span>
-            </a>
-            <span className="text-white/80 hidden md:inline" aria-hidden="true">·</span>
-            <a
               href={`mailto:${COMPANY_INFO.contacts.infoEmail}`}
-              className="hidden md:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
+              className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
             >
               <Mail className="w-3 h-3 text-white/80" />
               <span>{COMPANY_INFO.contacts.infoEmail}</span>
