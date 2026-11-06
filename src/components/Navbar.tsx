@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
       <div className="bg-[#D2430F] text-white/90 text-xs py-2 px-4 sm:px-8 overflow-hidden">
         <div className="max-w-[calc(80rem-4rem)] mx-auto flex items-center justify-between gap-3 text-[11px] sm:text-xs">
           {/* Left: Social Icons, then Tagline */}
-          <div className="flex items-center gap-3 min-w-0">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
             <div className="hidden sm:flex items-center gap-2.5 text-white/75 border-r border-white/25 pr-3 shrink-0">
               <a
                 href={COMPANY_INFO.socials.facebook}
@@ -120,10 +120,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
               <Phone className="w-3 h-3 text-white/80" />
               <span className="font-medium font-mono text-white">+91 96200 00947</span>
             </a>
-            <span className="text-white/80 hidden sm:inline" aria-hidden="true">·</span>
+            <span className="text-white/80 hidden lg:inline" aria-hidden="true">·</span>
             <a
               href={`mailto:${COMPANY_INFO.contacts.infoEmail}`}
-              className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
+              className="hidden lg:flex items-center gap-1.5 hover:text-white transition-colors whitespace-nowrap"
             >
               <Mail className="w-3 h-3 text-white/80" />
               <span>{COMPANY_INFO.contacts.infoEmail}</span>

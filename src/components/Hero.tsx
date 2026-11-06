@@ -313,7 +313,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         className="absolute bottom-1/4 -left-16 w-80 h-80 bg-[#F5B83D]/20 rounded-full blur-3xl pointer-events-none"
       />
 
-        <div className="absolute top-4 right-4 sm:right-8 z-20 flex items-center gap-4 sm:gap-5">
+      {/* Hero Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[420px] lg:min-h-0 flex flex-col gap-5 lg:gap-4">
+        <div className="relative z-20 flex flex-wrap items-center justify-start lg:justify-end gap-x-4 gap-y-2 sm:gap-x-5">
           {/* Slider Indicators */}
           <div className="flex items-center gap-2">
             {SLIDES.map((s, i) => {
@@ -322,7 +324,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
                 <button
                   key={i}
                   onClick={() => setCurrentSlide(i)}
-                  className={`relative h-1.5 w-12 shrink-0 rounded-full overflow-hidden transition-colors duration-300 cursor-pointer ${
+                  className={`relative h-1.5 w-8 sm:w-12 shrink-0 rounded-full overflow-hidden transition-colors duration-300 cursor-pointer ${
                     isActive ? 'bg-white/30' : 'bg-white/20 hover:bg-white/40'
                   }`}
                   aria-label={`Slide ${i + 1} - ${s.tag}`}
@@ -372,8 +374,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
             </div>
         </div>
 
-      {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 pt-8 pb-5 sm:pt-10 sm:pb-6 lg:pt-8 lg:pb-5 min-h-[420px] lg:min-h-0 flex flex-col gap-5 lg:gap-4">
         {/* All slides are stacked in one grid cell (hidden copies) so the tallest slide
             sets the height and the hero never jumps between slides. */}
         <div className="grid">

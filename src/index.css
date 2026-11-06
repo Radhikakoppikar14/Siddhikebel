@@ -33,7 +33,9 @@
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background-color: #FFFAF6;
     color: #231815;
+    overflow-x: clip; /* stops the page scrolling sideways */
   }
+  body { overflow-x: clip; max-width: 100%; }
 
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: auto; }

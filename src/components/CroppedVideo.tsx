@@ -16,7 +16,22 @@ interface CroppedVideoProps {
   videoRef?: React.Ref<HTMLVideoElement>;
 }
 
-export const CroppedVideo: React.FC<CroppedVideoProps> = ({ src, poster, preload = 'metadata', videoRef }) => (
+export const CroppedVideo: React.FC<CroppedVideoProps> = ({ src, poster, preload = 'metadata', videoRef }) => {
+  // React does not always set the DOM `muted` property, and browsers block autoplay unless it is set.
+  const setRef = React.useCallback(
+    (el: HTMLVideoElement | null) => {
+      if (el) {
+        el.muted = true;
+        el.defaultMuted = true;
+        el.setAttribute('muted', '');
+        el.setAttribute('playsinline', '');
+      }
+      if (typeof videoRef === 'function') videoRef(el);
+      else if (videoRef) (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
+    },
+    [videoRef]
+  );
+  return (
   <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ containerType: 'size' }} aria-hidden="true">
     <div
       className="absolute overflow-hidden"
@@ -29,7 +44,7 @@ export const CroppedVideo: React.FC<CroppedVideoProps> = ({ src, poster, preload
       }}
     >
       <video
-        ref={videoRef}
+        ref={setRef}
         src={src}
         poster={poster}
         autoPlay
@@ -42,4 +57,5 @@ export const CroppedVideo: React.FC<CroppedVideoProps> = ({ src, poster, preload
       />
     </div>
   </div>
-);
+  );
+};
