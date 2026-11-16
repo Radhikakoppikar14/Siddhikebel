@@ -18,7 +18,7 @@ export interface BrandDetail {
 export const BRAND_DETAILS: Record<string, BrandDetail> = {
   eaton: {
     intro:
-      "Eaton’s electrical business is a global leader in power distribution, power quality, control and automation, power monitoring, and energy management products and services. Through its global electrical product series and solutions, Eaton is positioned to answer today’s most critical electrical power management challenges.",
+      "Eaton is a power management company doing business in more than 160 countries, with over 92,000 employees and a history that goes back to 1911. Its electrical business covers power distribution, power quality, control and automation, power monitoring and energy management products and services.\n\nWe supply Eaton’s range for industrial and commercial applications: contactors, MCCB, MPCB, ACB and VCB circuit breakers, Bussmann fuses and UPS systems, helping plants and panel builders protect, control and manage their electrical power.",
     sections: [
       {
         title: "RMQ 22.5 mm Pilot Devices",
@@ -112,13 +112,13 @@ export const BRAND_DETAILS: Record<string, BrandDetail> = {
 
   partex: {
     intro:
-      "Partex leads the world in industrial marking systems.\n\nWe manufacture products for the identification of wires, cables, pipes and components. From the individual electrician to the world’s largest companies, our unique marking systems contribute towards increased efficiency and higher safety levels.\n\nPartex is a family owned company going back three generations. We have over 75 years of experience in the field of marking. This experience, combined with state of the art production capabilities, enables us to offer the perfect solutions for today’s demanding identification requirements. Our continuous forward development in materials and advanced production techniques ensures that we will be equally well placed to offer solutions for tomorrow’s requirements.",
+      "Partex is a family-owned marking company that has led industrial marking systems for over 75 years. Founded in Sweden in 1948, it makes products for the identification of wires, cables, pipes and components, helping to raise efficiency and safety from the individual electrician to the world’s largest companies.\n\nWe supply Partex marking machines, labels, cable ties, tools and cable accessories, with Partex Marking Systems India based in Bengaluru since 2012 to support Indian industry.",
     sections: [],
   },
 
   mennekes: {
     intro:
-      "The right solution for every application. Where high currents have to be transferred safely and economically, customers and partners can rely on MENNEKES. They think holistically and create powerful connections that help people handle energy more innovatively and distribute and manage it more intelligently.",
+      "MENNEKES is a family-owned German company, founded in 1935 and headquartered in Kirchhundem, with about 1,600 employees and customers in more than 90 countries. It is known for industrial plugs and sockets and for e-mobility charging solutions, built to transfer high currents safely and economically.\n\nWe supply MENNEKES CEE industrial plugs, receptacles, connectors, interlocked units and panel-mounted inlets for demanding industrial environments.",
     sections: [
       {
         title: "Heat-resistant contact carriers",

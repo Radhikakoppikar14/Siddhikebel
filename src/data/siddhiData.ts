@@ -108,7 +108,7 @@ export const BRANDS_DATA: BrandInfo[] = [
     name: "LAPP",
     shortDesc: "Power, control, data and communication cables, single-core wires, cable glands, conduit systems and domestic wiring solutions for industrial and commercial applications.",
     fullDesc:
-      "We supply LAPP cables and connection products: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.\n\nLAPP, headquartered in Stuttgart, Germany, has over 65 years of experience in cable and connection technology, with 5,500+ employees and a presence in 152 countries. LAPP India began operations in 1996 at Jigani, Bengaluru, serves 12,000+ customers and manufactures at Bengaluru, Bhopal and Dharuhera, supported by an in-house testing lab.",
+      "LAPP is a global leader in integrated solutions and branded products for cable and connection technology. Headquartered in Stuttgart, Germany, it has over 65 years of experience, 5,500+ employees and a presence in 152 countries.\n\nLAPP India began operations in 1996, serves 12,000+ customers and manufactures at Bengaluru, Bhopal and Dharuhera. We supply ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.",
     logo: "/images/clients/lapp.png",
     featuredImg: "/images/brands/lapp.jpg",
     categories: ["Power & Control Cables", "Data and Communication Cables", "Control Cabinet Single Core", "Cable Glands & Counter Nuts", "Rill, Conduit & Klick", "Domestic / House Wiring"],
