@@ -30,8 +30,7 @@ const ProductImage: React.FC<{ product: ProductItem; color: string; tint: string
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}
-      style={product.imagePosition ? { objectPosition: product.imagePosition } : undefined}
-      className="no-zoom w-full h-full object-cover"
+      className="no-zoom w-full h-full object-contain p-2"
     />
   );
 };
@@ -124,7 +123,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
                 const frame = e.currentTarget.parentElement;
                 if (frame) frame.style.display = 'none';
               }}
-              className="no-zoom w-full h-32 lg:h-36 object-cover"
+              className="no-zoom w-full h-32 lg:h-36 object-contain bg-white"
             />
           </div>
         </div>
@@ -137,7 +136,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {products.map((p) => (
               <article key={p.id} id={p.id} className="flex flex-col border border-[#F1D9CA] rounded-md overflow-hidden bg-white scroll-mt-28">
-                <div className="h-52 sm:h-56 bg-[#FFFAF6] overflow-hidden shrink-0">
+                <div className="h-52 sm:h-56 bg-white overflow-hidden shrink-0">
                   <ProductImage product={p} color={brand.color} tint={brand.colorTint} dark={brand.colorDark} />
                 </div>
                 <div className="p-5 flex flex-col flex-1 border-t-4" style={{ borderColor: brand.color }}>
