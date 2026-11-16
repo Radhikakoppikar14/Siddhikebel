@@ -109,15 +109,13 @@ const SLIDES: SlideItem[] = [
     brand: 'ALLIED PRODUCTS & SERVICES',
     headline: 'More than cables. Support for the whole project.',
     subtext:
-      'We support OEMs with product options aligned to equipment specifications and repeat sourcing needs. For industrial and building projects, we help coordinate LT/HT and armoured cables, lighting and earthing products around project specifications and site requirements. RMO services cover Repair, Maintenance & Overhaul.',
+      'Five core areas for plants and projects: earthing, LED retrofits, LT & HT cables with laying and termination, MRO (Maintenance, Repair, and Overhaul) support, and industrial electrical consumables and equipment.',
     ranges: [
-      'LT & HT power cables',
-      'Industrial lighting',
-      'OEM requirements',
-      'RMO · Repair, Maintenance & Overhaul',
-      'Armoured cables',
-      'Earthing solutions',
-      'Project supplies',
+      'Grounding or Earthing Solutions',
+      'Industrial LED Retrofits',
+      'LT & HT Armoured and Unarmoured Cables (supply, laying & termination)',
+      'MRO · Maintenance, Repair, and Overhaul',
+      'Industrial Electrical Consumables & Equipment',
     ],
     accent: '#F1D9CA',
   },
@@ -401,14 +399,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
         </div>
 
         {/* Modern Enterprise Capability Highlights Strip */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 py-3 mt-2 border-t border-white/20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3.5 py-3 mt-2 border-t border-white/20">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-2.5 p-3 rounded-xl bg-white/90 backdrop-blur-md border border-[#F1D9CA] shadow-xs">
             <div className="w-8 h-8 rounded-lg bg-[#FFF1E8] flex items-center justify-center text-[#D2430F] shrink-0 border border-[#D2430F]/20">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">33+ Years Industrial Experience</span>
-              <span className="block text-[10px] text-[#5F524C] sm:truncate">Industrial electrical supply</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">33+ Years Engineering Expertise</span>
+              <span className="block text-[10px] leading-snug text-[#5F524C]">End-to-end industrial electrical, automation &amp; switchgear solutions</span>
             </div>
           </div>
 
@@ -417,8 +415,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <Sparkles className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">4 Global OEM Brands</span>
-              <span className="block text-[10px] text-[#5F524C] sm:truncate">Lapp, Eaton, Partex, Mennekes</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">Authorized Multi-Brand Stockist</span>
+              <span className="block text-[10px] leading-snug text-[#5F524C]">Authorized stockist for Lapp, Eaton, Partex, Mennekes &amp; premier global OEMs</span>
             </div>
           </div>
 
@@ -427,8 +425,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <Zap className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">Central Bangalore Hub</span>
-              <span className="block text-[10px] text-[#5F524C] sm:truncate">Banashankari Ex-Stock Drums</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">Ready Ex-Stock &amp; Fast Logistics</span>
+              <span className="block text-[10px] leading-snug text-[#5F524C]">Full-length cable drums &amp; immediate same-day dispatch pan-India</span>
             </div>
           </div>
 
@@ -437,8 +435,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <Award className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">Statutory Compliant</span>
-              <span className="block text-[10px] text-[#5F524C] sm:truncate">IS & IEC Certified Supply</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">100% Genuine OEM Guarantee</span>
+              <span className="block text-[10px] leading-snug text-[#5F524C]">Factory test reports (TC) with full IS, IEC &amp; CE standard compliance</span>
             </div>
           </div>
         </div>

@@ -40,6 +40,12 @@ export const Footer: React.FC<FooterProps> = () => {
               Siddhi Kabel Corporation Private Limited supplies world-leading electrical cables, switchgears, plugs, and safety equipment.
             </p>
 
+            <p className="text-xs font-semibold text-white">
+              Authorized Dealer &amp; Channel Partner
+              <span className="block font-normal text-white/80">Reliable Products | Expert Support</span>
+            </p>
+            <p className="text-xs italic text-white/90">Your Trusted Partner for Electrical &amp; Industrial Connectivity.</p>
+
             {/* Certifications and Badges */}
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-2 text-xs text-white/80">
@@ -114,16 +120,16 @@ export const Footer: React.FC<FooterProps> = () => {
             </h4>
             <ul className="space-y-1.5 text-xs font-light text-white/80">
               <li className="group">
-                <span className="hover:text-[#FFD7C2] transition-colors">LAPP India (ÖLFLEX / UNITRONIC)</span>
+                <span className="hover:text-[#FFD7C2] transition-colors">LAPP (ÖLFLEX / UNITRONIC)</span>
               </li>
               <li className="group">
-                <span className="hover:text-[#FFD7C2] transition-colors">Eaton - Moeller Switchgears</span>
+                <span className="hover:text-[#FFD7C2] transition-colors">EATON Switchgear</span>
               </li>
               <li className="group">
-                <span className="hover:text-[#FFD7C2] transition-colors">Partex Marking Systems</span>
+                <span className="hover:text-[#FFD7C2] transition-colors">PARTEX Marking Systems</span>
               </li>
               <li className="group">
-                <span className="hover:text-[#FFD7C2] transition-colors">Mennekes Plugs &amp; Sockets</span>
+                <span className="hover:text-[#FFD7C2] transition-colors">MENNEKES Plugs &amp; Sockets</span>
               </li>
               
               

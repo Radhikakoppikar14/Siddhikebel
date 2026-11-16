@@ -361,7 +361,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onGoToContact }) => {
                 />
               </div>
 
-              <div className="mt-3 shrink-0 flex flex-wrap items-center justify-between gap-3 px-2 text-xs text-[#5F524C]/80">
+              <div className="mt-3 shrink-0 flex flex-wrap items-center justify-between gap-3 px-2 text-xs text-[#5F524C]">
                 <span>Authorized Siddhi Kabel Corporate Archives</span>
                 <button
                   onClick={() => {

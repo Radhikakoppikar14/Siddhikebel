@@ -1,43 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Check, Zap, ShieldCheck, Lightbulb, HardHat, Cog, ClipboardList, Wrench } from 'lucide-react';
+import { ArrowUpRight, Check, Zap, Lightbulb, HardHat, Wrench, Package } from 'lucide-react';
 import { BRANDS_DATA } from '../data/siddhiData';
 
-// Small image shown on the right side of each category pill.
-// Any category not listed here falls back to the brand's featured photo.
-const CATEGORY_IMAGES: Record<string, string> = {
-  // Lapp
-  'Power & Control Cables': '/images/lapp/power-control-cables.jpg',
-  'Data Communication': '/images/lapp/data-communication-cables.jpg',
-  'Cable Glands & Connectors': '/images/lapp/cable-glands-counter-nuts.jpg',
-  // Eaton
-  'Motor Protection (PKZ/PKE)': '/images/resource/et1.jpg',
-  'Contactors & Relays': '/images/resource/et2.jpg',
-  'Pilot Devices (RMQ 22.5)': '/images/resource/et4.jpg',
-  // Partex
-  'Wire & Cable Markers': '/images/clients/partex.png',
-  'Marking Sleeves': '/images/clients/partex.png',
-  'Labels & Marking Printers': '/images/clients/partex.png',
-  // Mennekes
-  'CEE Plugs & Sockets (16A–125A)': '/images/resource/me1.jpg',
-  'Interlocked Combinations': '/images/resource/me6.jpg',
-};
-
+// Card text per brand (from the brand & product category requirements document)
 const BRAND_COPY: Record<string, { title: string; desc: string }> = {
-  lapp: { title: 'Cables & connectivity', desc: 'Power, control and data cables, single-core cables, cable glands, protection systems and industrial connectors for machines, panels and installations.' },
-  eaton: { title: 'Switchgear & control', desc: 'Switchgear, motor protection, controllers, contactors, pushbuttons and switch-disconnectors for industrial control panels and equipment.' },
-  partex: { title: 'Identification & marking', desc: 'Cable and wire markers, component markers, sleeves, labels, printers and accessories to keep panels and systems clearly identified.' },
-  mennekes: { title: 'Industrial power connections', desc: 'CEE plugs and sockets, interlocked combinations and power distribution products for factories, workshops and worksites.' },
+  lapp: { title: 'Cables & Wiring Solutions', desc: 'Power, control, data and communication cables, single-core wires, cable glands, conduit systems and domestic wiring solutions for industrial and commercial applications.' },
+  eaton: { title: 'Switchgear & Control', desc: 'Complete switchgear and electrical control solutions, including circuit protection, motor protection, contactors, vacuum circuit breakers and UPS systems for industrial and commercial applications.' },
+  partex: { title: 'Identification & Marking Systems', desc: 'Professional cable and wire identification solutions, marking machines, labels, cable ties, tools and accessories for electrical panels and industrial applications.' },
+  mennekes: { title: 'Industrial Power Connections', desc: 'Industrial electrical plugs, sockets, panel-mounted receptacles, inlets and fused, switched and interlocked power connection solutions.' },
 };
 
+// Product categories per brand. `id` is the product on the brand page the row links to;
+// `img` is the thumbnail (the brand logo is shown when there is no photo or it fails to load).
+type Cat = { id: string; label: string; sub?: string; img?: string };
+const BRAND_CATS: Record<string, Cat[]> = {
+  lapp: [
+    { id: 'lapp-power-control', label: 'Power & Control Cables', img: '/images/lapp/power-control-cables.jpg' },
+    { id: 'lapp-data-communication', label: 'Data and Communication Cables', img: '/images/lapp/data-communication-cables.jpg' },
+    { id: 'lapp-control-cabinet', label: 'Control Cabinet Single Core', img: '/images/lapp/control-cabinet-single-cores.webp' },
+    { id: 'lapp-glands', label: 'Cable Glands & Counter Nuts', img: '/images/lapp/cable-glands-counter-nuts.jpg' },
+    { id: 'lapp-conduit', label: 'Rill, Conduit & Klick', img: '/images/lapp/rill-conduit-klick.jpg' },
+    { id: 'lapp-domestic', label: 'Domestic / House Wiring', img: '/images/lapp/domestic-house-wiring.webp' },
+  ],
+  eaton: [
+    { id: 'eaton-contactors', label: 'Contactors', img: '/images/eaton/contactor.png' },
+    { id: 'eaton-mccb', label: 'MCCB', img: '/images/eaton/mccb-nzm.png' },
+    { id: 'eaton-pkz', label: 'MPCB', img: '/images/eaton/mpcb-pkz.png' },
+    { id: 'eaton-acb', label: 'ACB', img: '/images/eaton/acb-izmx.png' },
+    { id: 'eaton-vcb', label: 'VCB', img: '/images/eaton/vcb-medium-voltage.png' },
+    { id: 'eaton-bussmann', label: 'Bussmann Fuses', img: '/images/eaton/bussmann-fuses.png' },
+    { id: 'eaton-ups', label: 'UPS', sub: 'Single Phase / Three Phase' },
+  ],
+  partex: [
+    { id: 'partex-machines', label: 'Marking Machines', img: '/images/partex/marking-machine.png' },
+    { id: 'partex-labels', label: 'Labels', img: '/images/partex/heat-shrink-labels.png' },
+    { id: 'partex-ties', label: 'Cable Ties and Tools', img: '/images/partex/cable-ties.png' },
+    { id: 'partex-profile', label: 'Accessories', sub: 'CAS · MD / MDH · PLD', img: '/images/partex/profile-accessories.png' },
+  ],
+  mennekes: [
+    { id: 'mennekes-receptacles', label: 'CEE Panel Mounted Receptacles', img: '/images/mennekes/panel-receptacle.png' },
+    { id: 'mennekes-plugs', label: 'CEE Plugs', img: '/images/mennekes/plugs-couplers.png' },
+    { id: 'mennekes-connectors', label: 'CEE Plugs and Connectors', img: '/images/mennekes/plug-connector.png' },
+    { id: 'mennekes-interlocked', label: 'CEE Receptacles: Fused, Switched and Interlocked', img: '/images/mennekes/interlocked-duo.png' },
+    { id: 'mennekes-inlets', label: 'CEE Panel Mounted Inlets', img: '/images/mennekes/panel-inlet.jpg' },
+  ],
+};
+
+/** Small square thumbnail; falls back to the brand logo when there is no photo. */
+const Thumb: React.FC<{ src?: string; logo: string; alt: string }> = ({ src, logo, alt }) => {
+  const [failed, setFailed] = useState(false);
+  const useLogo = !src || failed;
+  return (
+    <span className="w-11 h-11 shrink-0 rounded-md border border-[#F1D9CA] bg-white flex items-center justify-center overflow-hidden">
+      <img
+        src={useLogo ? logo : src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        onError={() => { if (!useLogo) setFailed(true); }}
+        className={`no-zoom ${useLogo ? 'w-8 h-8 object-contain' : 'w-full h-full object-cover'}`}
+      />
+    </span>
+  );
+};
+
+// Allied products & services: numbered 01 to 05
 const ALLIED = [
-  { icon: Zap, tag: 'POWER', title: 'LT & HT cables', desc: 'Cable options for low- and high-voltage distribution and industrial applications.' },
-  { icon: ShieldCheck, tag: 'PROTECTION', title: 'Armoured cables', desc: 'Protected cable choices for fixed power installations and demanding routes.' },
-  { icon: Lightbulb, tag: 'LIGHTING', title: 'Industrial lighting', desc: 'Lighting options for plant floors, workshops, warehouses and work areas.' },
-  { icon: HardHat, tag: 'SAFETY', title: 'Earthing solutions', desc: 'Products to support safe, dependable earthing and bonding installations.' },
-  { icon: Cog, tag: 'OEM SUPPORT', title: 'OEM requirements', desc: 'Product sourcing aligned with equipment specifications, bills of materials and repeat build needs.' },
-  { icon: ClipboardList, tag: 'PROJECTS', title: 'Project handling', desc: 'Coordination of product requirements and supply for industrial and building projects.' },
-  { icon: Wrench, tag: 'LIFECYCLE', title: 'RMO services', desc: 'Repair, Maintenance & Overhaul support for equipment and operations.' },
+  { icon: HardHat, slug: 'grounding-earthing', tag: 'SAFETY & EARTHING', title: 'Grounding or Earthing Solutions', desc: 'Earth pit auditing, maintenance-free chemical grounding and low-impedance bonding for plants, laboratories and buildings.' },
+  { icon: Lightbulb, slug: 'led-retrofits', tag: 'ENERGY EFFICIENCY', title: 'Industrial LED Retrofits', desc: 'Factory shop-floor, high-bay and cleanroom LED retrofits with lux level auditing and payback simulation.' },
+  { icon: Zap, slug: 'lt-ht-cables', tag: 'POWER DISTRIBUTION', title: 'LT & HT Armoured and Unarmoured Cables', desc: 'Supply, laying and termination of low- and high-voltage cables, in heavy-duty armoured and flexible unarmoured construction.' },
+  { icon: Wrench, slug: 'mro-services', tag: 'LIFECYCLE', title: 'MRO Services', desc: 'MRO (Maintenance, Repair, and Overhaul) support for plant equipment and operations.' },
+  { icon: Package, slug: 'consumables-equipment', tag: 'CONSUMABLES', title: 'Industrial Electrical Consumables & Equipment', desc: 'Glands, lugs, sleeves and other electrical consumables and equipment for plants, panels and projects.' },
 ];
 
 interface BrandSelectorProps {
@@ -56,7 +90,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
     <section id="brands" className="py-10 sm:py-12 bg-white border-b border-[#EBD9CD] ">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         {/* Heading (left) + authorised brand logos (right) */}
-        <div className="mb-10 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-8 lg:gap-14 items-center">
+        <div className="mb-8 sm:mb-10 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-6 sm:gap-8 lg:gap-14 items-center">
           <div className="border-l-4 border-[#D2430F] pl-5 sm:pl-7 text-left">
             <h2 className="text-[#231815] font-editorial leading-tight">
               Trusted brand partners.
@@ -72,8 +106,8 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
           <ul className="rounded-2xl border border-[#F1D9CA] bg-[#FFFAF6] divide-y divide-[#F1D9CA] shadow-xs">
             {[
               { title: 'Authorised brand ranges', desc: 'LAPP, Eaton, Partex and MENNEKES' },
-              { title: 'Allied product sourcing', desc: 'LT & HT cables, lighting, earthing and more' },
-              { title: 'OEM, project and RMO support', desc: 'From selection and supply to repair and overhaul' },
+              { title: 'Allied products & services', desc: 'Earthing, LED retrofits, LT & HT armoured and unarmoured cables, MRO, consumables' },
+              { title: 'OEM, project and MRO support', desc: 'From selection and supply to MRO (Maintenance, Repair, and Overhaul)' },
             ].map((item) => (
               <li key={item.title} className="group flex items-center gap-4 px-5 py-4 transition-colors duration-300 hover:bg-[#FFF1E8]">
                 <span className="w-9 h-9 shrink-0 rounded-full bg-white border border-[#D2430F]/30 text-[#D2430F] flex items-center justify-center transition-colors duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F]">
@@ -88,89 +122,80 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
           </ul>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {BRANDS_DATA.map((brand) => (
-            <article
-              key={brand.id}
-              className="flex flex-col text-left rounded-lg overflow-hidden"
-              style={{
-                border: `1px solid ${brand.color}66`,
-                borderTop: `5px solid ${brand.color}`,
-                background: `linear-gradient(135deg, ${brand.color}26 0%, #ffffff 58%, ${brand.color}14 100%)`,
-              }}
-            >
-              {/* Product photo */}
-              <div className="h-32 overflow-hidden bg-white">
-                <img
-                  src={brand.featuredImg}
-                  alt={`${brand.name} products`}
-                  loading="lazy"
-                  decoding="async"
-                  className="no-zoom w-full h-full object-cover"
-                />
-              </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-y-0">
+          {BRANDS_DATA.map((brand) => {
+            const accent = brand.color; // LAPP orange, Eaton blue, Partex green, Mennekes red
+            const short = brand.name.split(/[\s-]/)[0];
+            return (
+              <article
+                key={brand.id}
+                className="flex flex-col lg:grid lg:row-span-5 lg:grid-rows-subgrid text-left rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                style={{
+                  border: `1px solid ${accent}55`,
+                  borderTop: `4px solid ${accent}`,
+                  background: `linear-gradient(160deg, ${brand.colorTint} 0%, #ffffff 55%)`,
+                }}
+              >
+                {/* Brand photo with the original brand logo on top */}
+                <Link to={`/products/${brand.id}`} onClick={() => onSelectBrand(brand.id)} aria-label={`${brand.name} products`} className="block">
+                  <div className="relative h-24 sm:h-36 overflow-hidden bg-[#FFF1E8]">
+                    <img
+                      src={brand.featuredImg}
+                      alt={`${brand.name} products`}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      className="no-zoom absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="relative -mt-8 sm:-mt-12 ml-3 sm:ml-4 inline-flex items-center justify-center w-28 sm:w-40 h-12 sm:h-[72px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-white shadow-md" style={{ border: `1px solid ${accent}55` }}>
+                    <img src={brand.logo} alt={brand.name} className="no-zoom max-h-full max-w-full object-contain" />
+                  </div>
+                </Link>
 
-              <div className="flex flex-col items-start flex-1 px-6 pb-6">
-                {/* Logo overlapping the photo */}
-                <div
-                  className="-mt-10 w-36 h-20 rounded-md bg-white border shadow-md flex items-center justify-center px-3 py-2 relative z-10"
-                  style={{ borderColor: `${brand.color}55` }}
-                >
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    className="max-h-14 max-w-full w-auto object-contain"
-                    loading="eager"
-                    decoding="async"
-                    width={96}
-                    height={40}
-                  />
-                </div>
+                {/* Title, description, categories and button sit on shared rows, so all four cards line up */}
+                <h3 className="px-3 sm:px-4 pt-3 sm:pt-4 text-base sm:text-lg font-semibold text-[#231815] leading-snug">{BRAND_COPY[brand.id]?.title}</h3>
+                <p className="px-3 sm:px-4 pt-2 text-xs sm:text-sm text-[#5F524C] leading-relaxed line-clamp-4 sm:line-clamp-none">{BRAND_COPY[brand.id]?.desc}</p>
 
-                <h3 className="mt-4 text-base font-semibold text-[#231815]">{BRAND_COPY[brand.id]?.title}</h3>
-                <p className="mt-1.5 text-xs text-[#5F524C] leading-relaxed">{BRAND_COPY[brand.id]?.desc}</p>
-
-                <ul className="mt-4 flex flex-col gap-2">
-                  {brand.categories.map((cat) => (
-                    <li key={cat} className="flex items-center justify-between gap-2">
-                      <span
-                        className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1.5 rounded-md bg-white/80 border"
-                        style={{ color: brand.colorDark, borderColor: `${brand.color}55` }}
+                {/* Product categories: each row opens that product on the brand's listing page */}
+                <ul className="px-3 sm:px-4 pt-3 sm:pt-4 flex flex-col gap-1.5 sm:gap-2 content-start">
+                  {(BRAND_CATS[brand.id] ?? []).map((c) => (
+                    <li key={c.id}>
+                      <Link
+                        to={`/products/${brand.id}#${c.id}`}
+                        onClick={() => onSelectBrand(brand.id)}
+                        className="flex items-center justify-between gap-3"
                       >
-                        {cat}
-                      </span>
-                      <img
-                        src={CATEGORY_IMAGES[cat] ?? brand.featuredImg}
-                        alt=""
-                        aria-hidden="true"
-                        loading="lazy"
-                        decoding="async"
-                        width={40}
-                        height={40}
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                        className="no-zoom w-10 h-10 shrink-0 rounded-md bg-white object-contain p-0.5 border"
-                        style={{ borderColor: `${brand.color}55` }}
-                      />
+                        <span
+                          className="flex-1 rounded-md border bg-white px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium leading-snug hover:bg-white/60 transition-colors"
+                          style={{ color: brand.colorDark, borderColor: `${accent}88` }}
+                        >
+                          {c.label}
+                          {c.sub && <span className="block text-xs font-normal text-[#5F524C]">{c.sub}</span>}
+                        </span>
+                        <span className="hidden sm:block"><Thumb src={c.img} logo={brand.logo} alt={c.label} /></span>
+                      </Link>
                     </li>
                   ))}
                 </ul>
 
-                <Link
-                  to={`/products/${brand.id}`}
-                  onClick={() => onSelectBrand(brand.id)}
-                  className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold"
-                  style={{ color: brand.colorDark }}
-                >
-                  <span>Browse {brand.name.split(' ')[0]} products</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </article>
-          ))}
+                <div className="px-3 sm:px-4 pt-4 sm:pt-5 pb-4 sm:pb-5 mt-auto">
+                  <Link
+                    to={`/products/${brand.id}`}
+                    onClick={() => onSelectBrand(brand.id)}
+                    className="inline-flex w-full items-center justify-center gap-1 sm:gap-1.5 rounded-md px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white transition-colors hover:brightness-110"
+                    style={{ backgroundColor: brand.colorDark }}
+                  >
+                    Browse {short} Products <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* Allied products & services: big heading outside the panel */}
-        <div className="mt-14 mb-8 max-w-3xl border-l-4 border-[#D2430F] pl-5 sm:pl-7 text-left">
+        <div id="allied" className="mt-10 sm:mt-14 mb-6 sm:mb-8 max-w-3xl scroll-mt-28 border-l-4 border-[#D2430F] pl-5 sm:pl-7 text-left">
           <h2 className="text-[#231815] font-editorial leading-tight">Allied products &amp; services.</h2>
         </div>
 
@@ -184,19 +209,19 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
               More ways we support your requirements.
             </h3>
             <p className="relative mt-4 text-sm text-white/85 leading-relaxed">
-              Alongside our authorised brands, we help with allied product sourcing, OEM needs, project supply and lifecycle services.
+              Alongside our authorised brands, we deliver five core areas: earthing, LED retrofits, LT &amp; HT cables, MRO support, and industrial electrical consumables and equipment.
             </p>
             {/* Related image fills the free space (same photo as the Allied slide in the hero) */}
             <div className="relative mt-6 flex-1 min-h-[160px] rounded-2xl overflow-hidden border border-white/25 shadow-lg">
               <img
-                src="/assets/videos/hero-allied-poster.jpg"
+                src="/images/gallery/allied-warehouse.jpg"
                 alt="Allied industrial products and services"
                 loading="lazy"
                 decoding="async"
                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 className="no-zoom absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#A8340A]/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#A8340A]/40 via-transparent to-transparent" />
             </div>
             <div className="relative pt-6">
               {onOpenRfq ? (
@@ -219,28 +244,30 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
           </div>
 
           {/* Right: numbered rows */}
-          <ul className="grid grid-cols-1 sm:grid-cols-2 bg-[#FFFAF6]">
+          <ul className="grid grid-cols-2 bg-[#FFFAF6]">
             {ALLIED.map((a, i) => {
               const Icon = a.icon;
               const isLast = i === ALLIED.length - 1;
               return (
                 <li
                   key={a.title}
-                  className={`group relative flex gap-4 p-5 sm:p-6 border-b border-[#F1D9CA] cursor-default transition-colors duration-300 hover:bg-[#FFF1E8] ${
-                    isLast ? 'sm:col-span-2 border-b-0' : i % 2 === 0 ? 'sm:border-r' : ''
+                  className={`group relative flex flex-col sm:flex-row gap-2 sm:gap-4 p-3 sm:p-6 border-b border-[#F1D9CA] cursor-pointer transition-colors duration-300 hover:bg-[#FFF1E8] ${
+                    isLast ? 'col-span-2 border-b-0' : i % 2 === 0 ? 'border-r' : ''
                   }`}
                 >
+                  <Link to={`/services/${a.slug}`} aria-label={a.title} className="absolute inset-0 z-10" />
                   <span className="absolute left-0 top-0 h-full w-1 bg-[#D2430F] scale-y-0 origin-top transition-transform duration-300 group-hover:scale-y-100" />
-                  <span className="shrink-0 w-12 h-12 rounded-full border border-[#D2430F]/30 bg-white text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F]">
+                  <span className="shrink-0 w-9 h-9 sm:w-12 sm:h-12 rounded-full border border-[#D2430F]/30 bg-white text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F]">
                     <Icon className="w-5 h-5" />
                   </span>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-bold tabular-nums text-[#D2430F]/60">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="text-[11px] font-bold tabular-nums text-[#A8340A]">{String(i + 1).padStart(2, '0')}</span>
                       <span className="text-[10px] font-bold tracking-widest text-[#5F524C]">{a.tag}</span>
                     </div>
-                    <h4 className="mt-1 text-base sm:text-lg font-semibold text-[#231815] group-hover:text-[#D2430F] transition-colors">{a.title}</h4>
-                    <p className="mt-1 text-xs sm:text-[13px] text-[#5F524C] leading-relaxed">{a.desc}</p>
+                    <h4 className="mt-1 text-sm sm:text-lg font-semibold text-[#231815] leading-snug group-hover:text-[#D2430F] transition-colors">{a.title}</h4>
+                    <p className="mt-1 text-[11px] sm:text-[13px] text-[#5F524C] leading-relaxed line-clamp-3 sm:line-clamp-none">{a.desc}</p>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-[#D2430F]">Learn more <ArrowUpRight className="w-3.5 h-3.5" /></span>
                   </div>
                 </li>
               );

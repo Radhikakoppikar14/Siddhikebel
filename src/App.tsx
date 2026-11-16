@@ -21,6 +21,8 @@ const IndustriesPage = lazy(() => import('./pages/IndustriesPage').then((m) => (
 const ContactPage = lazy(() => import('./pages/ContactPage').then((m) => ({ default: m.ContactPage })));
 const ServicesPage = lazy(() => import('./pages/ServicesPage').then((m) => ({ default: m.ServicesPage })));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage').then((m) => ({ default: m.ProjectsPage })));
+const AlliedPage = lazy(() => import('./pages/AlliedPage').then((m) => ({ default: m.AlliedPage })));
+const AlliedServicePage = lazy(() => import('./pages/AlliedServicePage').then((m) => ({ default: m.AlliedServicePage })));
 
 import { ProductItem, BRANDS_DATA } from './data/siddhiData';
 
@@ -134,6 +136,13 @@ function AppContent() {
               <Route
                 path="/services.html"
                 element={<ServicesPage onOpenRfq={handleOpenContactModal} />}
+              />
+
+              <Route path="/allied" element={<AlliedPage onOpenRfq={handleOpenContactModal} />} />
+
+              <Route
+                path="/services/:serviceId"
+                element={<AlliedServicePage onOpenRfq={handleOpenContactModal} />}
               />
 
               <Route

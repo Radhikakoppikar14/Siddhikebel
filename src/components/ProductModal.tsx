@@ -40,7 +40,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   {product.brandName}
                 </span>
                 <span className="text-xs text-[#D2430F] mx-2">/</span>
-                <span className="text-xs text-[#5F524C]/80">{product.category}</span>
+                <span className="text-xs text-[#5F524C]">{product.category}</span>
               </div>
               <button
                 onClick={onClose}
@@ -56,12 +56,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                 {/* Image Column */}
                 <div className="md:col-span-5 bg-white rounded-2xl border border-[#F1D9CA] p-6 flex flex-col items-center justify-center min-h-[220px]">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="max-h-48 max-w-full object-contain filter drop-shadow-sm"
-                    referrerPolicy="no-referrer"
-                  />
+                  {product.image && (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      className="max-h-48 max-w-full object-contain filter drop-shadow-sm"
+                      referrerPolicy="no-referrer"
+                    />
+                  )}
                   {product.code && (
                     <div className="mt-4 px-3 py-1 bg-[#FFFAF6] border border-[#F1D9CA] rounded-md text-[11px] font-mono text-[#5F524C]">
                       Part: {product.code}
@@ -118,7 +121,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
               {/* Modal Actions */}
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#F1D9CA]">
-                <span className="text-xs text-[#5F524C]/80 font-light text-center sm:text-left">
+                <span className="text-xs text-[#5F524C] font-light text-center sm:text-left">
                   Genuine manufacturer warranty &amp; test certificates provided with every dispatch.
                 </span>
                 <div className="flex items-center gap-3 w-full sm:w-auto">

@@ -16,7 +16,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onGoToContact }) => 
       <PageHeader
         title="Products"
         breadcrumb="Products"
-        category="Siddhi Kabel LTD."
+        category="Siddhi Kabel Corporation Private Limited"
         bgImage="/images/products-banner.webp"
         overlay={false}
       />

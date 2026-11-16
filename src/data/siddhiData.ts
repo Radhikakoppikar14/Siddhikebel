@@ -23,7 +23,8 @@ export interface ProductItem {
   shortDesc: string;
   details: string;
   specifications: { label: string; value: string }[];
-  image: string;
+  image?: string;          // leave out until a real product photo is available (a clean placeholder is shown)
+  imagePosition?: string;  // CSS object-position, e.g. 'left center' when one photo shows two products
   standards: string[];
   isFeatured?: boolean;
 }
@@ -40,7 +41,8 @@ export interface CaseStudy {
   id: string;
   title: string;
   category: string;
-  clients: string;
+  /** Optional: leave out when no client names are to be shown */
+  clients?: string;
   summary: string;
   highlights: string[];
   image: string;
@@ -103,13 +105,13 @@ export const COMPANY_INFO = {
 export const BRANDS_DATA: BrandInfo[] = [
   {
     id: "lapp",
-    name: "LAPP India",
-    shortDesc: "Integrated cable and connection technology.",
+    name: "LAPP",
+    shortDesc: "Power, control, data and communication cables, single-core wires, cable glands, conduit systems and domestic wiring solutions for industrial and commercial applications.",
     fullDesc:
-      "We supply LAPP cables and connection products: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.\n\nLAPP Group, headquartered in Stuttgart, Germany, has over 65 years of experience in cable and connection technology, with 5,500+ employees and a presence in 152 countries. LAPP India began operations in 1996 at Jigani, Bengaluru, serves 12,000+ customers and manufactures at Bengaluru, Bhopal and Dharuhera, supported by an in-house testing lab.",
+      "We supply LAPP cables and connection products: ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.\n\nLAPP, headquartered in Stuttgart, Germany, has over 65 years of experience in cable and connection technology, with 5,500+ employees and a presence in 152 countries. LAPP India began operations in 1996 at Jigani, Bengaluru, serves 12,000+ customers and manufactures at Bengaluru, Bhopal and Dharuhera, supported by an in-house testing lab.",
     logo: "/images/clients/lapp.png",
     featuredImg: "/images/brands/lapp.jpg",
-    categories: ["Power & Control Cables", "Data Communication", "Cable Glands & Connectors"],
+    categories: ["Power & Control Cables", "Data and Communication Cables", "Control Cabinet Single Core", "Cable Glands & Counter Nuts", "Rill, Conduit & Klick", "Domestic / House Wiring"],
     productCount: "40,000+ Items",
     origin: "Germany",
     color: "#FF6A00",
@@ -118,13 +120,13 @@ export const BRANDS_DATA: BrandInfo[] = [
   },
   {
     id: "eaton",
-    name: "Eaton - Moeller",
-    shortDesc: "Motor control, switchgear and power distribution.",
+    name: "EATON",
+    shortDesc: "Complete switchgear and electrical control solutions, including circuit protection, motor protection, contactors, vacuum circuit breakers and UPS systems for industrial and commercial applications.",
     fullDesc:
-      "Eaton makes power and control products: motor-protective circuit breakers, contactors, pilot devices and communication systems.",
+      "Eaton makes power and control products: contactors, MCCB, MPCB, ACB and VCB circuit breakers, Bussmann fuses and UPS systems.",
     logo: "/images/clients/eaton.png",
     featuredImg: "/images/brands/eaton.jpg",
-    categories: ["Motor Protection (PKZ/PKE)", "Contactors & Relays", "Pilot Devices (RMQ 22.5)"],
+    categories: ["Contactors", "MCCB", "MPCB", "ACB", "VCB", "Bussmann Fuses", "UPS: Single Phase / Three Phase"],
     productCount: "Full Industrial Line",
     origin: "Germany / USA",
     color: "#2F7BFF",
@@ -133,28 +135,28 @@ export const BRANDS_DATA: BrandInfo[] = [
   },
   {
     id: "partex",
-    name: "Partex",
-    shortDesc: "Precision wire, cable and component marking systems.",
+    name: "PARTEX",
+    shortDesc: "Professional cable and wire identification solutions, marking machines, labels, cable ties, tools and accessories for electrical panels and industrial applications.",
     fullDesc:
-      "Partex Marking Systems makes wire, cable and component identification: sleeves, markers, labels and printers.",
+      "Partex Marking Systems makes wire, cable and component identification: marking machines, labels, cable ties and tools, and profile accessories.",
     logo: "/images/clients/partex.png",
     featuredImg: "/images/brands/partex.jpg",
-    categories: ["Wire & Cable Markers", "Marking Sleeves", "Labels & Marking Printers"],
+    categories: ["Marking Machines", "Labels", "Cable Ties and Tools", "Accessories: CAS, MD / MDH, PLD"],
     productCount: "Marking Systems",
     origin: "Sweden",
-    color: "#64748B",
-    colorDark: "#1F2937",
-    colorTint: "#EEF1F5",
+    color: "#16A34A",
+    colorDark: "#166534",
+    colorTint: "#ECFDF3",
   },
   {
     id: "mennekes",
-    name: "Mennekes",
-    shortDesc: "Industrial plugs, CEE receptacles and distribution units.",
+    name: "MENNEKES",
+    shortDesc: "Industrial electrical plugs, sockets, panel-mounted receptacles, inlets and fused, switched and interlocked power connection solutions.",
     fullDesc:
-      "MENNEKES makes industrial plugs and sockets, CEE receptacles and interlocked combinations for harsh industrial environments.",
+      "MENNEKES makes CEE industrial plugs, receptacles, connectors, interlocked units and panel mounted inlets for harsh industrial environments.",
     logo: "/images/clients/mennekes.png",
     featuredImg: "/images/brands/mennekes.jpg",
-    categories: ["CEE Plugs & Sockets (16A–125A)", "Interlocked Combinations", "Distribution Units"],
+    categories: ["CEE Panel Mounted Receptacles", "CEE Plugs", "CEE Plugs and Connectors", "CEE Receptacles: Fused, Switched and Interlocked", "CEE Panel Mounted Inlets"],
     productCount: "IP44 / IP67 Rated",
     origin: "Germany",
     color: "#F0283A",
@@ -168,7 +170,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   {
     id: "lapp-power-control",
     brandId: "lapp",
-    brandName: "LAPP India",
+    brandName: "LAPP",
     name: "Power and Control Cables",
     category: "Power & Control Cables",
     shortDesc: "Flexible, oil-resistant ÖLFLEX® cables for machines, control panels and power connections.",
@@ -181,8 +183,8 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   {
     id: "lapp-data-communication",
     brandId: "lapp",
-    brandName: "LAPP India",
-    name: "Data Communication Cables",
+    brandName: "LAPP",
+    name: "Data and Communication Cables",
     category: "Data Communication",
     shortDesc: "Shielded UNITRONIC® data and bus cables for reliable signal transmission.",
     details: "Shielded UNITRONIC® data and bus cables for reliable signal transmission.",
@@ -194,11 +196,11 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   {
     id: "lapp-control-cabinet",
     brandId: "lapp",
-    brandName: "LAPP India",
-    name: "Control Cabinet Single Cores",
+    brandName: "LAPP",
+    name: "Control Cabinet Single Core",
     category: "Power & Control Cables",
-    shortDesc: "Single-core wires for control cabinet and panel wiring.",
-    details: "Single-core wires for control cabinet and panel wiring.",
+    shortDesc: "ÖLFLEX® UNIPLUS single-core wires for wiring inside control cabinets, panels and distribution boards.",
+    details: "ÖLFLEX® UNIPLUS single-core wires, including flame-retardant and halogen-free options, for wiring inside control cabinets, panels and distribution boards.",
     specifications: [],
     image: "/images/lapp/control-cabinet-single-cores.webp",
     standards: [],
@@ -207,7 +209,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   {
     id: "lapp-glands",
     brandId: "lapp",
-    brandName: "LAPP India",
+    brandName: "LAPP",
     name: "Cable Glands & Counter Nuts",
     category: "Cable Glands & Connectors",
     shortDesc: "SKINTOP® cable glands, counter nuts and entry plates for secure, sealed cable entries.",
@@ -220,7 +222,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   {
     id: "lapp-conduit",
     brandId: "lapp",
-    brandName: "LAPP India",
+    brandName: "LAPP",
     name: "Rill, Conduit & Klick",
     category: "Cable Glands & Connectors",
     shortDesc: "Flexible conduits, fittings and cable chains that guide and protect cables.",
@@ -233,11 +235,11 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   {
     id: "lapp-domestic",
     brandId: "lapp",
-    brandName: "LAPP India",
+    brandName: "LAPP",
     name: "Domestic / House Wiring",
     category: "Power & Control Cables",
-    shortDesc: "Wires and cable end sleeves for safe, neat domestic and house wiring.",
-    details: "Wires and cable end sleeves for safe, neat domestic and house wiring.",
+    shortDesc: "ÖLFLEX® INFRA single-core wires in ready-to-use boxes for domestic, building and infrastructure wiring.",
+    details: "ÖLFLEX® INFRA single-core wires, including flame-retardant and halogen-free options, supplied in boxes for domestic, building and infrastructure wiring, with cable end sleeves for neat terminations.",
     specifications: [],
     image: "/images/lapp/domestic-house-wiring.webp",
     standards: [],
@@ -245,10 +247,48 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
   },
   // Eaton Moeller products
   {
+    id: "eaton-contactors",
+    brandId: "eaton",
+    brandName: "EATON",
+    name: "Contactors",
+    category: "Industrial Switchgear",
+    code: "DILM-XT",
+    shortDesc: "Compact power contactors and contactor relays with low coil consumption and long electrical lifespan.",
+    details:
+      "Engineered for heavy inductive duty (AC-3) in pump panels, motor control centers (MCC), and automated machinery. Features dual-box terminals for secure wiring.",
+    specifications: [
+      { label: "Rated Power", value: "Up to 2600 A / 900 kW" },
+      { label: "Control Voltage", value: "24V DC to 230V AC" },
+      { label: "Auxiliary Contacts", value: "Integrated 1NO + 1NC" },
+      { label: "Mechanical Lifespan", value: "10 million operating cycles" },
+    ],
+    image: "/images/eaton/contactor.png",
+    standards: ["IEC/EN 60947", "UL", "CCC"],
+    isFeatured: true,
+  },
+  {
+    id: "eaton-mccb",
+    brandId: "eaton",
+    brandName: "EATON",
+    name: "MCCB: Molded Case Circuit Breakers (up to 1600 A)",
+    category: "Industrial Switchgear",
+    code: "NZM",
+    shortDesc: "NZM series molded case circuit breakers up to 1600 A with accessories and remote operators.",
+    details:
+      "Molded case circuit breakers and compact switch disconnectors for panel builders, EPCs and heavy industrial facilities. Door-coupling rotary handles and remote operators are available.",
+    specifications: [
+      { label: "Series", value: "NZM1 to NZM4" },
+      { label: "Rated Current", value: "Up to 1600 A" },
+      { label: "Accessories", value: "Door-coupling handles, remote operators" },
+    ],
+    image: "/images/eaton/mccb-nzm.png",
+    standards: ["IEC/EN 60947-2"],
+  },
+  {
     id: "eaton-pkz",
     brandId: "eaton",
-    brandName: "Eaton - Moeller",
-    name: "PKZ & PKE Motor-Protective Circuit Breakers",
+    brandName: "EATON",
+    name: "MPCB: PKZ & PKE Motor-Protective Circuit Breakers",
     category: "Industrial Switchgear",
     code: "PKZM0-25",
     shortDesc: "Fuseless motor protection up to 65 A with short-circuit breaking capacity up to 150 kA.",
@@ -260,34 +300,79 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Tripping Class", value: "Class 10 adjustable" },
       { label: "Mounting", value: "Top-hat rail DIN EN 60715" },
     ],
-    image: "/images/resource/et1.jpg",
+    image: "/images/eaton/mpcb-pkz.png",
     standards: ["IEC/EN 60947-4-1", "UL 508", "CSA"],
     isFeatured: true,
   },
   {
-    id: "eaton-dil",
+    id: "eaton-acb",
     brandId: "eaton",
-    brandName: "Eaton - Moeller",
-    name: "DIL Contactors & Contactor Relays",
+    brandName: "EATON",
+    name: "ACB: IZMX Air Circuit Breakers",
     category: "Industrial Switchgear",
-    code: "DILM-XT",
-    shortDesc: "Compact power contactors with low coil consumption and long electrical lifespan.",
+    code: "IZMX16 / IZMX40",
+    shortDesc: "IZMX16 and IZMX40 open air circuit breakers for main and distribution incomers.",
     details:
-      "Engineered for heavy inductive duty (AC-3) in pump panels, motor control centers (MCC), and automated machinery. Features dual-box terminals for secure wiring.",
+      "Air circuit breakers for low-voltage main distribution boards in industrial plants and large buildings.",
     specifications: [
-      { label: "Rated Power", value: "Up to 2600 A / 900 kW" },
-      { label: "Control Voltage", value: "24V DC to 230V AC" },
-      { label: "Auxiliary Contacts", value: "Integrated 1NO + 1NC" },
-      { label: "Mechanical Lifespan", value: "10 million operating cycles" },
+      { label: "Series", value: "IZMX16, IZMX40" },
+      { label: "Type", value: "Open air circuit breaker (ACB)" },
     ],
-    image: "/images/resource/et2.jpg",
-    standards: ["IEC/EN 60947", "UL", "CCC"],
+    image: "/images/eaton/acb-izmx.png",
+    imagePosition: "center",
+    standards: ["IEC/EN 60947-2"],
+  },
+  {
+    id: "eaton-vcb",
+    brandId: "eaton",
+    brandName: "EATON",
+    name: "VCB: Medium Voltage Vacuum Circuit Breakers",
+    category: "Medium Voltage Switchgear",
+    shortDesc: "Medium voltage vacuum circuit breakers for substations and industrial power distribution.",
+    details:
+      "Vacuum circuit breakers for medium voltage switchgear in industrial plants, substations and utilities.",
+    specifications: [
+      { label: "Type", value: "Vacuum circuit breaker (medium voltage)" },
+    ],
+    image: "/images/eaton/vcb-medium-voltage.png",
+    standards: ["IEC 62271-100"],
+  },
+  {
+    id: "eaton-bussmann",
+    brandId: "eaton",
+    brandName: "EATON",
+    name: "Bussmann Series Fuses",
+    category: "Fuses & Protection",
+    shortDesc: "Bussmann fuses, including semiconductor high-speed fuses, for industrial equipment and drives.",
+    details:
+      "Bussmann series fuses for short-circuit protection of power electronics, drives, panels and industrial equipment.",
+    specifications: [
+      { label: "Range", value: "Semiconductor high-speed fuses and industrial fuse links" },
+    ],
+    image: "/images/eaton/bussmann-fuses.png",
+    standards: ["IEC 60269"],
+  },
+  {
+    id: "eaton-ups",
+    brandId: "eaton",
+    brandName: "EATON",
+    name: "UPS: Single & 3-Phase Systems",
+    category: "Power Quality",
+    code: "9PX / 93E / 93PR",
+    shortDesc: "Eaton 9PX, 93E and 93PR enterprise uninterruptible power supply systems.",
+    details:
+      "Single-phase and three-phase UPS systems that protect critical loads, control rooms and IT infrastructure from power disturbances and outages.",
+    specifications: [
+      { label: "Models", value: "9PX, 93E, 93PR" },
+      { label: "Phases", value: "Single-phase and 3-phase" },
+    ],
+    standards: ["IEC 62040"],
   },
   {
     id: "eaton-rmq",
     brandId: "eaton",
-    brandName: "Eaton - Moeller",
-    name: "RMQ-Titan 22.5mm Pilot Devices & Palm Switches",
+    brandName: "EATON",
+    name: "RMQ-Titan 22.5mm Pilot Devices & Push Buttons",
     category: "Industrial Switchgear",
     code: "RMQ-TITAN-M22",
     shortDesc: "Ergonomic pushbuttons, emergency stops, indicator lamps, and palm switches.",
@@ -299,19 +384,37 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Illumination", value: "High-efficiency multi-LED" },
       { label: "Contact Modules", value: "Tool-less front clip-on" },
     ],
-    image: "/images/resource/et4.jpg",
+    image: "/images/resource/et1.jpg",
     standards: ["IP69K", "IEC 60947-5-1", "UL Listed"],
   },
 
   // Mennekes products
   {
-    id: "mennekes-cee",
+    id: "mennekes-receptacles",
     brandId: "mennekes",
-    brandName: "Mennekes",
-    name: "CEE Industrial Plugs & Sockets (16A – 125A)",
+    brandName: "MENNEKES",
+    name: "CEE Panel Mounted Receptacles",
     category: "Industrial Sockets & Receptacles",
+    shortDesc: "Straight and angled panel sockets for machines, control panels and distribution boards.",
+    details:
+      "Heat-resistant contact carriers and nickel-plated contacts for safe, dust and moisture tight connections on machinery and panels.",
+    specifications: [
+      { label: "Current Ratings", value: "16A, 32A, 63A, 125A" },
+      { label: "Types", value: "Straight and angled panel sockets" },
+      { label: "Enclosure Ingress", value: "IP44 / IP67" },
+    ],
+    image: "/images/mennekes/panel-receptacle.png",
+    standards: ["IEC 60309-1/-2", "EN 60309", "VDE"],
+    isFeatured: true,
+  },
+  {
+    id: "mennekes-plugs",
+    brandId: "mennekes",
+    brandName: "MENNEKES",
+    name: "CEE Plugs",
+    category: "Industrial Plugs",
     code: "MENNEKES-POWERTOP-XTRA",
-    shortDesc: "Heavy-duty industrial plugs, connectors, and panel-mounted sockets for tough site operations.",
+    shortDesc: "PowerTOP Xtra industrial plugs for tough site operations.",
     details:
       "Features rubberized grip zones, highly heat-resistant contact carriers, and nickel-plated contacts. Guarantees moisture and dust tight connections up to IP67.",
     specifications: [
@@ -320,65 +423,129 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Enclosure Ingress", value: "IP44 / IP67 watertight" },
       { label: "Housing Material", value: "Impact-proof Polyamide (AM-TOP)" },
     ],
-    image: "/images/resource/me1.jpg",
+    image: "/images/mennekes/plugs-couplers.png",
     standards: ["IEC 60309-1/-2", "EN 60309", "VDE"],
-    isFeatured: true,
   },
   {
-    id: "mennekes-receptacle",
+    id: "mennekes-connectors",
     brandId: "mennekes",
-    brandName: "Mennekes",
-    name: "EverGUM & AMAXX Receptacle Combinations",
+    brandName: "MENNEKES",
+    name: "CEE Plugs & Connectors",
+    category: "Industrial Plugs",
+    shortDesc: "Cable-mounted inline couplers and connectors for extension and portable power.",
+    details:
+      "Cable-mounted inline couplers for portable equipment, generators and temporary site power.",
+    specifications: [
+      { label: "Type", value: "Cable-mounted inline couplers and connectors" },
+      { label: "Enclosure Ingress", value: "IP44 / IP67" },
+    ],
+    image: "/images/mennekes/plug-connector.png",
+    standards: ["IEC 60309-1/-2", "EN 60309"],
+  },
+  {
+    id: "mennekes-interlocked",
+    brandId: "mennekes",
+    brandName: "MENNEKES",
+    name: "CEE Receptacles: Fused, Switched & Interlocked (DUO / AMAXX)",
     category: "Industrial Sockets & Receptacles",
     code: "MENNEKES-AMAXX-DB",
-    shortDesc: "Customizable power distributor boxes with integrated circuit breakers and residual current protection.",
+    shortDesc: "DUO switched and mechanically interlocked receptacles, and AMAXX combinations with MCBs and RCDs.",
     details:
-      "Made of solid rubber (EverGUM) or high-grade thermoplastic (AMAXX) resisting chemicals, oils, and heavy physical shocks on construction and industrial workshop floors.",
+      "Made of solid rubber (EverGUM) or high-grade thermoplastic (AMAXX) resisting chemicals, oils, and heavy physical shocks on construction and industrial workshop floors. Safety interlocking prevents plugging or unplugging under load.",
     specifications: [
       { label: "Protection", value: "Integrated MCBs & RCDs" },
       { label: "Ingress Rating", value: "IP44 / IP67" },
       { label: "Impact Resistance", value: "IK08 / IK10" },
       { label: "Modular Design", value: "Up to 5 segment rows" },
     ],
-    image: "/images/resource/me6.jpg",
+    image: "/images/mennekes/interlocked-duo.png",
     standards: ["DIN EN 61439", "CE", "DNV-GL"],
+  },
+  {
+    id: "mennekes-inlets",
+    brandId: "mennekes",
+    brandName: "MENNEKES",
+    name: "CEE Panel Mounted Inlets",
+    category: "Industrial Inlets",
+    shortDesc: "Reverse-pin panel mounted appliance inlets for machines and mobile equipment.",
+    details:
+      "Panel mounted inlets that bring power into machines, generators and mobile equipment through a standard CEE plug.",
+    specifications: [
+      { label: "Type", value: "Reverse-pin panel mounted appliance inlets" },
+      { label: "Enclosure Ingress", value: "IP44 / IP67" },
+    ],
+    image: "/images/mennekes/panel-inlet.jpg",
+    standards: ["IEC 60309-1/-2", "EN 60309"],
   },
 
   // Partex products
   {
-    id: "partex-sleeves",
+    id: "partex-machines",
     brandId: "partex",
-    brandName: "Partex",
-    name: "PARTEX Marking Sleeves & Wire Markers",
+    brandName: "PARTEX",
+    name: "Marking Machines & Printers (Promark T-1000 / EOS)",
+    category: "Marking Machines",
+    code: "PROMARK-T-1000 / EOS",
+    shortDesc: "Promark T-1000 thermal transfer printers and EOS marking machines for in-house marking.",
+    details:
+      "Produce sleeves and labels on site with the sequence and legend your drawings call for, so panel shops spend less time on manual marking.",
+    specifications: [
+      { label: "Models", value: "Promark T-1000, EOS" },
+      { label: "Output", value: "Sleeves, labels, tags" },
+      { label: "Use", value: "Panel building, maintenance, projects" },
+    ],
+    image: "/images/partex/marking-machine.png",
+    standards: ["CE"],
+    isFeatured: true,
+  },
+  {
+    id: "partex-labels",
+    brandId: "partex",
+    brandName: "PARTEX",
+    name: "Labels (Heat Shrink / Vinyl)",
     category: "Wire & Cable Marking",
     code: "PARTEX-PS-SLEEVE",
-    shortDesc: "Pre-printed and print-on-demand sleeves for clear, lasting wire identification.",
+    shortDesc: "Heat shrink printable sleeves and vinyl wrap-around labels for clear, lasting identification.",
     details:
       "Wire and cable markers for control panels, machine wiring and plant installations. Legible numbering that stays put through heat, oil and handling.",
     specifications: [
       { label: "Application", value: "Wire & cable identification" },
-      { label: "Formats", value: "Sleeves, clip-on markers, flat labels" },
+      { label: "Formats", value: "Heat shrink sleeves, vinyl wrap-around labels, clip-on markers" },
       { label: "Marking", value: "Pre-printed or printed on demand" },
     ],
-    image: "/images/partex/marking-sleeves.jpg",
+    image: "/images/partex/heat-shrink-labels.png",
     standards: ["CE", "RoHS"],
-    isFeatured: true,
   },
   {
-    id: "partex-printers",
+    id: "partex-ties",
     brandId: "partex",
-    brandName: "Partex",
-    name: "PARTEX Marking Printers & Software",
-    category: "Wire & Cable Marking",
-    code: "PARTEX-PRINT",
-    shortDesc: "Printers and software for producing wire and component markers in-house.",
+    brandName: "PARTEX",
+    name: "Cable Ties & Tools",
+    category: "Cable Fasteners",
+    shortDesc: "Industrial nylon 6.6 cable ties, UV-resistant options and installation tools.",
     details:
-      "Produce sleeves and labels on site with the sequence and legend your drawings call for, so panel shops spend less time on manual marking.",
+      "Cable ties and tensioning tools for bundling and fixing cables in panels, machines and plant installations.",
     specifications: [
-      { label: "Output", value: "Sleeves, labels, tags" },
-      { label: "Use", value: "Panel building, maintenance, projects" },
+      { label: "Material", value: "Nylon 6.6 (UV-resistant options)" },
     ],
-    image: "/images/partex/wire-markers.jpg",
+    image: "/images/partex/cable-ties.png",
+    standards: ["CE", "RoHS"],
+  },
+  {
+    id: "partex-profile",
+    brandId: "partex",
+    brandName: "PARTEX",
+    name: "Profile Accessories (CAS, MD / MDH, PLD)",
+    category: "Profile Accessories",
+    shortDesc: "CAS strip holders, MD/MDH stainless steel embossed markers and PLD push-in terminal block markers.",
+    details:
+      "Profile accessories for marking components, cables and terminal blocks in control panels and machines.",
+    specifications: [
+      { label: "CAS", value: "Strip holders for multiple markers" },
+      { label: "MD / MDH", value: "Stainless steel embossed markers" },
+      { label: "PLD", value: "Push-in terminal block markers" },
+    ],
+    image: "/images/partex/profile-accessories.png",
     standards: ["CE"],
   },
 ];
@@ -416,36 +583,8 @@ export const CLIENTS_LIST: ClientPartner[] = [
 
 export const SERVICES_DATA = [
   {
-    id: "electrical",
-    title: "Electrical Solutions",
-    subtitle: "Engineered Power & Control",
-    description:
-      "Customized control equipment, wire harness assemblies, LT and HT cables, glands, conductors and connectors.",
-    features: [
-      "Custom control panel wiring & harness assemblies",
-      "Authorized Lapp Olflex & Uniplus bulk supply",
-      "Comprehensive cable glanding & conduit protection systems",
-      "End-to-end statutory and electrical safety compliance",
-    ],
-    image: "/images/gallery/are.jpg",
-  },
-  {
-    id: "energy",
-    title: "LED Lighting Solutions",
-    subtitle: "Energy-Saving Lighting",
-    description:
-      "Supply and installation of LED light fittings for retrofits and new establishments.",
-    features: [
-      "Factory & shop floor high-bay LED retrofit projects",
-      "Commercial office and cleanroom luminaires",
-      "Lighting lux level auditing & ROI payback simulation",
-      "Heavy duty surge protected luminaires for harsh plants",
-    ],
-    image: "/images/gallery/led.jpg",
-  },
-  {
     id: "grounding",
-    title: "Earthing & Grounding Systems",
+    title: "Grounding or Earthing Solutions",
     subtitle: "Safety for People & Assets",
     description:
       "Auditing and installation of earth pits and maintenance-free chemical grounding for plants, laboratories and commercial buildings, keeping people and equipment safe.",
@@ -457,50 +596,83 @@ export const SERVICES_DATA = [
     ],
     image: "/images/gallery/grounding.jpg",
   },
+  {
+    id: "energy",
+    title: "Industrial LED Retrofits",
+    subtitle: "Energy-Saving Lighting",
+    description:
+      "Supply and installation of LED light fittings for retrofits and new establishments.",
+    features: [
+      "Factory & shop floor high-bay LED retrofit projects",
+      "Commercial office and cleanroom luminaires",
+      "Lighting lux level auditing & ROI payback simulation",
+      "Heavy duty surge protected luminaires for harsh plants",
+    ],
+    image: "/images/resource/ind3.jpg",
+  },
+  {
+    id: "cables",
+    title: "LT & HT Cables",
+    subtitle: "Supply, Laying & Termination",
+    description:
+      "Supply, laying and termination of LT and HT armoured and unarmoured cables for industrial plants, control panels and buildings.",
+    features: [
+      "LT & HT armoured and unarmoured cable supply",
+      "Authorized Lapp Olflex & Uniplus bulk supply",
+      "Cable laying and termination at site",
+      "Cable glanding & conduit protection systems",
+    ],
+    image: "/images/gallery/lt-ht-cables.jpg",
+  },
+  {
+    id: "consumables",
+    title: "Industrial Consumables & Equipments",
+    subtitle: "MRO & Allied Supplies",
+    description:
+      "Glands, lugs, sleeves and other consumables and equipment for MRO (Maintenance, Repair, and Overhaul) of industrial plants.",
+    features: [
+      "Cable glands & counter nuts",
+      "Cable lugs and terminations",
+      "Marking sleeves & wire markers",
+      "MRO (Maintenance, Repair, and Overhaul) supplies for plant upkeep",
+    ],
+    image: "/images/gallery/consumables-warehouse.jpg",
+  },
 ];
 
+// Recent projects: the 4 core industrial pillars (audit point A4)
 export const CASE_STUDIES: CaseStudy[] = [
   {
     id: "cs-grounding",
-    title: "Chemical Grounding Systems",
-    category: "Safety & Protection",
-    clients: "GE India, Toyota, National Aerospace Laboratory (NAL), Orb Energy",
-    summary:
-      "Supply and installation of maintenance-free carbon chemical grounding systems for Bangalore plants and laboratories.",
-    highlights: [
-      "Achieved sub-1-Ohm resistance across high-resistivity soil",
-      "Zero periodic watering required with 25-year service life guarantee",
-      "Certified to IEEE 80, IS 3043, and IEC safety standards",
-    ],
+    title: "Grounding or Earthing Solutions",
+    category: "Safety & Earthing",
+    summary: "Chemical grounding and earthing solutions for plants, laboratories and buildings.",
+    highlights: [],
     image: "/images/resource/ind1.jpg",
   },
   {
     id: "cs-led",
     title: "Industrial LED Retrofits",
     category: "Energy Efficiency",
-    clients: "Denso Kirloskar, Sartorius, EFD, BP Biotree, Tata Advance Materials, Sutures India, Kennametal",
-    summary:
-      "Retrofit and installation of industrial LED fixtures for factory blocks, CNC shop floors, cleanrooms and offices.",
-    highlights: [
-      "Over 60% lighting energy savings across continuous 24/7 operating lines",
-      "Uniform lux distribution improving operator inspection accuracy",
-      "Complete seamless execution during scheduled maintenance downtime",
-    ],
+    summary: "Industrial LED retrofits for factories, shop floors, cleanrooms and offices.",
+    highlights: [],
     image: "/images/resource/ind3.jpg",
   },
   {
-    id: "cs-surge-earthing",
-    title: "Surge & Earthing Protection",
-    category: "Infrastructure Defense",
-    clients: "Ace Designers Ltd, Himalaya Drug Company, H & R Johnson",
-    summary:
-      "Installation of earthing and surge protection for factory structures, CNC tooling shops and pharmaceutical labs.",
-    highlights: [
-      "Reliable low-impedance earthing across the whole site",
-      "Complete surge protection safeguarding computerized CNC machine controls",
-      "Accompanied by shop floor LED retrofit for maximum operating savings",
-    ],
-    image: "/images/resource/ind2.jpg",
+    id: "cs-cables",
+    title: "LT & HT Cables",
+    category: "Power Distribution",
+    summary: "Supply, laying and termination of LT & HT armoured and unarmoured cables.",
+    highlights: [],
+    image: "/images/gallery/lt-ht-cables.jpg",
+  },
+  {
+    id: "cs-consumables",
+    title: "Industrial Consumables & Equipments",
+    category: "MRO & Allied",
+    summary: "Glands, lugs, sleeves and MRO (Maintenance, Repair, and Overhaul) supplies.",
+    highlights: [],
+    image: "/images/lapp/cable-glands-counter-nuts.jpg",
   },
 ];
 

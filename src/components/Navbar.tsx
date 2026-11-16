@@ -36,6 +36,7 @@ const MOBILE_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
   { to: '/products', label: 'Products' },
+  { to: '/allied', label: 'Allied Products & Services' },
   { to: '/industries', label: 'Industries' },
   { to: '/contact', label: 'Contact' },
 ];
@@ -106,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 </svg>
               </a>
             </div>
-            <span className="flex items-center gap-2 font-normal text-white/90 truncate max-w-[220px] sm:max-w-xs md:max-w-md lg:max-w-none"><span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B] shrink-0" />
+            <span className="flex items-center gap-2 font-normal text-white/90 min-w-0 leading-snug whitespace-normal break-words"><span className="w-1.5 h-1.5 rounded-full bg-[#F08A4B] shrink-0" />
               {COMPANY_INFO.tagline}
             </span>
           </div>
@@ -209,6 +210,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                             </motion.div>
                           ))}
                         </div>
+                        {/* Allied products & services */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.24, duration: 0.25 }}
+                          className="mt-2"
+                        >
+                          <Link
+                            to="/allied"
+                            className="group/allied flex items-center justify-between gap-2 rounded-xl border border-[#F1D9CA] bg-[#FFF1E8] px-3.5 py-3 text-[13px] font-semibold text-[#231815] hover:-translate-y-0.5 hover:shadow-lg hover:border-[#D2430F] transition-all duration-200"
+                          >
+                            <img
+                              src="/images/gallery/allied-warehouse.jpg"
+                              alt=""
+                              loading="lazy"
+                              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                              className="no-zoom w-14 h-11 shrink-0 rounded-lg object-cover border border-[#F1D9CA]"
+                            />
+                            <span className="leading-tight flex-1">
+                              Allied Products &amp; Services
+                              <span className="block text-[11px] font-normal text-[#5F524C]">Earthing, LED, LT &amp; HT cables, MRO</span>
+                            </span>
+                            <span className="text-[#D2430F] transition-transform duration-200 group-hover/allied:translate-x-0.5">→</span>
+                          </Link>
+                        </motion.div>
                       </div>
                     </motion.div>
                   )}
@@ -264,11 +290,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                   >
                     <NavLink
                       to={item.to}
-                      end={item.to === '/'}
+                      end={item.to === '/' || item.to.includes('#')}
                       onClick={() => setMobileMenuOpen(false)}
                       className={({ isActive }) =>
                         `block py-2.5 border-b border-[#F1D9CA]/60 transition-all duration-200 hover:pl-2 hover:text-[#5F524C] ${
-                          isActive ? 'text-[#D2430F] font-semibold pl-2 border-l-2 border-l-[#D2430F]' : ''
+                          isActive && !item.to.includes('#') ? 'text-[#D2430F] font-semibold pl-2 border-l-2 border-l-[#D2430F]' : ''
                         }`
                       }
                     >
@@ -289,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                       }}
                       className="w-full py-2.5 text-xs font-medium uppercase tracking-wider text-[#5F524C] bg-[#FFF1E8] border border-[#F1D9CA] hover:bg-[#F1D9CA] rounded-xl text-center cursor-pointer"
                     >
-                      Instant Contact Popup
+                      Instant Inquiry
                     </button>
                   )}
                 </div>

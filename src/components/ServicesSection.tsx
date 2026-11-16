@@ -9,6 +9,8 @@ interface ServicesSectionProps {
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) => {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  // services whose photo failed to load: show a clean panel instead of a broken image icon
+  const [broken, setBroken] = useState<Record<string, boolean>>({});
 
   return (
     <section id="services" className="py-10 sm:py-12 bg-white border-b border-[#F1D9CA] relative overflow-hidden">
@@ -22,7 +24,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.05 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.55 }}
           >
             <div className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-widest uppercase text-[#5F524C] mb-2 px-3 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]">
@@ -37,15 +39,15 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
           <motion.p
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.05 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.55 }}
-            className="text-sm sm:text-base text-[#5F524C]/80 max-w-md font-light leading-relaxed"
+            className="text-sm sm:text-base text-[#5F524C] max-w-md font-light leading-relaxed"
           >
             Get benefited with our unique industrial solutions specially designed for Indian industries to enhance electrical performance and safety compliance.
           </motion.p>
         </div>
 
-        {/* 3 Core Services */}
+        {/* 4 Core Services */}
         <div className="space-y-12">
           {SERVICES_DATA.map((service, index) => {
             const isReversed = index % 2 !== 0;
@@ -54,7 +56,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                 key={service.id}
                 initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.05 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
                 whileHover={{ y: -6 }}
                 className="bg-white rounded-3xl border border-[#F1D9CA] hover:border-[#F1D9CA] overflow-hidden shadow-xs hover:shadow-2xl transition-all duration-300"
@@ -65,7 +67,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                   }`}
                 >
                   {/* Text Container */}
-                  <div className={`p-8 lg:p-12 space-y-6 ${isReversed ? 'lg:col-span-7 lg:order-2' : 'lg:col-span-7'}`}>
+                  <div className={`p-8 lg:p-12 space-y-6 ${broken[service.id] ? 'lg:col-span-12' : isReversed ? 'lg:col-span-7 lg:order-2' : 'lg:col-span-7'}`}>
                     <div className="space-y-2">
                       <span className="inline-block text-xs font-semibold uppercase tracking-wider text-[#5F524C] px-2.5 py-1 rounded-md bg-[#FFF1E8] border border-[#F1D9CA]">
                         {service.subtitle}
@@ -106,6 +108,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                         <ArrowRight className="w-3.5 h-3.5" />
                       </motion.button>
 
+                      {!broken[service.id] && (
                       <button
                         onClick={() => setSelectedService(service)}
                         className="inline-flex items-center gap-1.5 px-4 py-3 text-xs font-medium text-[#231815] hover:text-[#5F524C] bg-[#FFFAF6] hover:bg-[#D2430F]/8 rounded-xl border border-[#F1D9CA] transition-colors cursor-pointer"
@@ -113,24 +116,28 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                         <ZoomIn className="w-3.5 h-3.5 text-[#5F524C]" />
                         <span>View Work Photo</span>
                       </button>
+                      )}
                     </div>
                   </div>
 
                   {/* Image Container */}
                   <div
-                    onClick={() => setSelectedService(service)}
-                    className={`h-72 sm:h-88 lg:h-full min-h-[340px] relative overflow-hidden group cursor-zoom-in ${
+                    onClick={() => { if (!broken[service.id]) setSelectedService(service); }}
+                    className={`h-72 sm:h-88 lg:h-full min-h-[340px] relative overflow-hidden group ${broken[service.id] ? 'hidden' : 'cursor-zoom-in'} ${
                       isReversed ? 'lg:col-span-5 lg:order-1' : 'lg:col-span-5'
                     }`}
                   >
+                    {!broken[service.id] && (
                     <motion.img
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.6, ease: 'easeOut' }}
                       src={service.image}
                       alt={service.title}
+                      onError={() => setBroken((b) => ({ ...b, [service.id]: true }))}
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
                     />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#FFFAF6]/60 via-transparent to-transparent pointer-events-none" />
 
                     <div className="absolute bottom-4 right-4 px-3 py-1 rounded-full bg-[#FFFAF6]/95 backdrop-blur-xs text-[11px] font-medium text-[#231815] flex items-center gap-1.5 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity border border-[#F1D9CA]">
@@ -185,7 +192,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenRfq }) =
                 <h3 className="text-xl sm:text-2xl font-normal text-[#231815] font-editorial">
                   {selectedService.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#5F524C]/80 font-light leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#5F524C] font-light leading-relaxed">
                   {selectedService.description}
                 </p>
 

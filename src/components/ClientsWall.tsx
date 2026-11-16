@@ -122,7 +122,7 @@ export const ClientsWall: React.FC = () => {
           <h2 className="text-3xl sm:text-5xl font-normal text-[#231815] font-editorial tracking-tight">
             Our Clients
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[#5F524C]/80 font-light max-w-3xl mx-auto">
+          <p className="mt-4 text-sm sm:text-base text-[#5F524C] font-light max-w-3xl mx-auto">
             We are committed to provide safe industrial solutions to India's foremost engineering, automotive, defense, and manufacturing leaders.
           </p>
 

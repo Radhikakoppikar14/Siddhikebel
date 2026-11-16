@@ -34,7 +34,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onOpenRfq }) => {
                 <h3 className="text-2xl sm:text-3xl font-normal text-[#231815] font-editorial leading-tight">
                   Zero Plant Downtime &amp; Certified Compliance
                 </h3>
-                <p className="text-sm text-[#5F524C]/80 font-light leading-relaxed">
+                <p className="text-sm text-[#5F524C] font-light leading-relaxed">
                   Industrial revamps require extreme coordination. Whether installing chemical earthing pits for GE &amp; Toyota or executing full LED retrofits for Denso Kirloskar &amp; Kennametal, our certified technicians execute during scheduled shutdown windows with zero disruption to continuous production.
                 </p>
 
@@ -43,7 +43,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onOpenRfq }) => {
                     <span className="text-xs font-semibold uppercase tracking-wider text-[#5F524C] block mb-1">
                       Pre-Commission Testing
                     </span>
-                    <p className="text-xs text-[#5F524C]/80 font-light">
+                    <p className="text-xs text-[#5F524C] font-light">
                       Complete Earth Megger testing, insulation resistance certification, and lux mapping provided upon project handover.
                     </p>
                   </div>
@@ -51,7 +51,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onOpenRfq }) => {
                     <span className="text-xs font-semibold uppercase tracking-wider text-[#5F524C] block mb-1">
                       Statutory Documentation
                     </span>
-                    <p className="text-xs text-[#5F524C]/80 font-light">
+                    <p className="text-xs text-[#5F524C] font-light">
                       Electrical inspectorate-ready test reports and original equipment manufacturer warranties provided with every installation.
                     </p>
                   </div>

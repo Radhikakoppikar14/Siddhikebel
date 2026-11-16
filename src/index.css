@@ -36,6 +36,8 @@
     overflow-x: clip; /* stops the page scrolling sideways */
   }
   body { overflow-x: clip; max-width: 100%; }
+  /* Full-width page container: no fixed narrow width (audit B7) */
+  #root { width: 100%; max-width: none; margin: 0; }
 
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: auto; }

@@ -41,7 +41,7 @@ export const MotionReveal: React.FC<MotionRevealProps> = ({
   duration = 0.8,
   yOffset = 40,
   className = '',
-  once = false,
+  once = true,
   direction = 'up',
 }) => {
   const o = getOffset(direction, yOffset);
@@ -49,7 +49,7 @@ export const MotionReveal: React.FC<MotionRevealProps> = ({
     <motion.div
       initial={{ opacity: 0, x: o.x, y: o.y, scale: o.scale }}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
-      viewport={{ once, amount: 0.05 }}
+      viewport={{ once, amount: 0.1 }}
       transition={{ duration, delay, ease: EASE }}
       className={className}
     >
@@ -65,7 +65,7 @@ export const StaggerContainer: React.FC<{
   delayChildren?: number;
   staggerDelta?: number;
   once?: boolean;
-}> = ({ children, className = '', delayChildren = 0.05, staggerDelta = 0.1, once = false }) => {
+}> = ({ children, className = '', delayChildren = 0.05, staggerDelta = 0.1, once = true }) => {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
@@ -82,7 +82,7 @@ export const StaggerContainer: React.FC<{
       variants={containerVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{ once, amount: 0.05 }}
+      viewport={{ once, amount: 0.1 }}
       className={className}
     >
       {children}
@@ -174,7 +174,7 @@ export const ParallaxImage: React.FC<{
       ref={ref}
       initial={{ opacity: 0, clipPath: 'inset(12% 8% 12% 8% round 24px)' }}
       whileInView={{ opacity: 1, clipPath: 'inset(0% 0% 0% 0% round 0px)' }}
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 1, ease: EASE }}
       className={`overflow-hidden ${className}`}
     >
@@ -200,7 +200,7 @@ export const WordReveal: React.FC<{
     <motion.span
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ staggerChildren: 0.07, delayChildren: delay }}
       className={`inline-flex flex-wrap ${className}`}
       aria-label={text}

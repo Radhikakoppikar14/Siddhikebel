@@ -1,11 +1,40 @@
-import React from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Link, Navigate, useParams, useLocation } from 'react-router-dom';
+import { ChevronRight, Package } from 'lucide-react';
 import { BRANDS_DATA, PRODUCTS_CATALOG, ProductItem } from '../data/siddhiData';
 import { BRAND_DETAILS } from '../data/brandDetails';
 import { CroppedVideo } from '../components/CroppedVideo';
 import { BrandIndustries } from '../components/BrandIndustries';
 import { BRAND_INDUSTRIES } from '../data/industries';
+
+/** Product photo. If there is no photo yet (or the file is missing) a clean brand-tinted panel is shown instead of a broken image. */
+const ProductImage: React.FC<{ product: ProductItem; color: string; tint: string; dark: string }> = ({ product, color, tint, dark }) => {
+  const [failed, setFailed] = useState(false);
+  if (!product.image || failed) {
+    return (
+      <div
+        className="w-full h-full flex flex-col items-center justify-center gap-2 px-4 text-center"
+        style={{ backgroundColor: tint }}
+      >
+        <Package className="w-10 h-10" style={{ color }} strokeWidth={1.5} />
+        <span className="text-xs font-semibold tracking-wide uppercase" style={{ color: dark }}>
+          {product.category}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <img
+      src={product.image}
+      alt={product.name}
+      loading="lazy"
+      decoding="async"
+      onError={() => setFailed(true)}
+      style={product.imagePosition ? { objectPosition: product.imagePosition } : undefined}
+      className="no-zoom w-full h-full object-cover"
+    />
+  );
+};
 
 interface BrandPageProps {
   onOpenSpecs: (product: ProductItem) => void;
@@ -14,6 +43,18 @@ interface BrandPageProps {
 
 export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
   const { brandId } = useParams<{ brandId: string }>();
+  const { hash } = useLocation();
+
+  // Category links such as /products/eaton#eaton-mccb scroll to that product once the page has loaded
+  useEffect(() => {
+    if (!hash) return;
+    const id = decodeURIComponent(hash.slice(1));
+    const t = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 500);
+    return () => window.clearTimeout(t);
+  }, [hash, brandId]);
+
   const brand = BRANDS_DATA.find((b) => b.id === brandId);
   if (!brand) return <Navigate to="/products" replace />;
 
@@ -53,7 +94,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
               />
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-editorial leading-none">{brand.name}</h1>
-            <p className="mt-3 text-sm font-semibold text-[#FF8A55]">Siddhi Cable Corporation Private Limited</p>
+            <p className="mt-3 text-sm font-semibold text-[#FF8A55]">Siddhi Kabel Corporation Private Limited</p>
           </div>
         </div>
       </header>
@@ -92,18 +133,12 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
       {/* Catalogue products */}
       {products.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
-          <h2 className="text-3xl sm:text-4xl font-bold font-editorial">Featured {brand.name.split(' ')[0]} products</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold font-editorial text-[#231815]">Featured {brand.name.split(' ')[0]} products</h2>
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {products.map((p) => (
-              <article key={p.id} className="flex flex-col border border-[#F1D9CA] rounded-md overflow-hidden bg-white">
+              <article key={p.id} id={p.id} className="flex flex-col border border-[#F1D9CA] rounded-md overflow-hidden bg-white scroll-mt-28">
                 <div className="h-52 sm:h-56 bg-[#FFFAF6] overflow-hidden shrink-0">
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="no-zoom w-full h-full object-cover"
-                  />
+                  <ProductImage product={p} color={brand.color} tint={brand.colorTint} dark={brand.colorDark} />
                 </div>
                 <div className="p-5 flex flex-col flex-1 border-t-4" style={{ borderColor: brand.color }}>
                   <h3 className="font-bold leading-snug">{p.name}</h3>

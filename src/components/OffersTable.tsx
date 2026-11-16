@@ -29,7 +29,7 @@ export const OffersTable: React.FC<OffersTableProps> = ({ onOpenRfq }) => {
               Products On Special Offer
             </h2>
           </div>
-          <p className="text-sm text-[#5F524C]/80 max-w-md font-light">
+          <p className="text-sm text-[#5F524C] max-w-md font-light">
             Discounted inventory available for immediate dispatch from our Bangalore warehouse while stocks last.
           </p>
         </div>
@@ -148,11 +148,11 @@ export const OffersTable: React.FC<OffersTableProps> = ({ onOpenRfq }) => {
           </div>
 
           {/* Terms & Conditions Footer */}
-          <div className="bg-[#FFFAF6] p-4 sm:p-6 border-t border-[#F1D9CA] text-xs text-[#5F524C]/80 space-y-2">
+          <div className="bg-[#FFFAF6] p-4 sm:p-6 border-t border-[#F1D9CA] text-xs text-[#5F524C] space-y-2">
             <span className="font-semibold text-[#231815] uppercase tracking-wider text-[11px]">
               Terms &amp; Conditions:
             </span>
-            <ul className="list-disc list-inside space-y-1 text-[#5F524C]/80 font-light">
+            <ul className="list-disc list-inside space-y-1 text-[#5F524C] font-light">
               <li>The above special Prices are discounted; GST Extra as applicable.</li>
               <li>Payment 100% through bank transfer along with the order after confirmation.</li>
               <li>Delivery: Free Delivery to Bangalore urban and industrial area.</li>

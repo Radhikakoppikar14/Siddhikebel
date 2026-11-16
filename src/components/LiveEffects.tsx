@@ -77,18 +77,16 @@ export const LiveEffects: React.FC = () => {
       el.classList.add(el.dataset.liveVariant || 'live-in');
     };
 
-    // Reset to hidden once it has left the screen, so it can play again next visit
-    const hide = (el: HTMLElement) => {
-      el.classList.remove(...VARIANTS);
-      el.classList.add('live-pre');
-    };
-
     ioRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const el = entry.target as HTMLElement;
-          if (entry.isIntersecting) reveal(el);
-          else hide(el);
+          // Reveal once and stop watching, so content can never go blank again while scrolling
+          if (entry.isIntersecting) {
+            reveal(el);
+            el.dataset.liveDone = '1';
+            ioRef.current?.unobserve(el);
+          }
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
@@ -121,11 +119,11 @@ export const LiveEffects: React.FC = () => {
         const r = el.getBoundingClientRect();
         const inView = r.bottom > 0 && r.top < window.innerHeight * 0.92;
         el.classList.add(inView ? variant : 'live-pre'); // visible now -> animate; else wait
-        ioRef.current?.observe(el); // keep observing so it replays on every visit
+        ioRef.current?.observe(el); // reveal once when it first enters the screen
       });
 
       // Re-attach pending elements (e.g. footer) after the observer was recreated on route change
-      document.querySelectorAll<HTMLElement>('[data-live-variant]').forEach((el) => ioRef.current?.observe(el));
+      document.querySelectorAll<HTMLElement>('[data-live-variant]:not([data-live-done])').forEach((el) => ioRef.current?.observe(el));
 
       // 2) Shine on solid CTA buttons
       document.querySelectorAll<HTMLElement>(SHINE_SELECTOR).forEach((btn) => {

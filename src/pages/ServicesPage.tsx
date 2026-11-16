@@ -19,7 +19,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenRfq }) => {
         category="Industrial Capabilities"
       />
 
-      {/* Main 3 Services with high clarity images */}
+      {/* Allied services: 4 core industrial pillars (grounding, LED, LT & HT cables, consumables) */}
       <ServicesSection onOpenRfq={onOpenRfq} />
 
       {/* Technical Audit & Site Consultation CTA Banner */}
@@ -35,7 +35,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenRfq }) => {
                   <h3 className="text-2xl sm:text-3xl font-normal text-[#231815] font-editorial">
                     Need an Electrical Earth Pit Audit or Factory LED Retrofit Study?
                   </h3>
-                  <p className="text-sm text-[#5F524C]/80 font-light leading-relaxed max-w-2xl">
+                  <p className="text-sm text-[#5F524C] font-light leading-relaxed max-w-2xl">
                     Our certified electrical engineers visit your manufacturing plant to measure soil resistivity, assess earth pit ohmic health, simulate LED lux levels, and propose an optimal, cost-effective execution plan.
                   </p>
                   <div className="flex flex-wrap gap-6 pt-2 text-xs text-[#231815]">

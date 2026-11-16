@@ -80,7 +80,7 @@ const InfoCard: React.FC<{
   <motion.div
     initial={{ opacity: 0, x: side === 'right' ? 24 : -24 }}
     whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: false, amount: 0.15 }}
+    viewport={{ once: true, amount: 0.1 }}
     transition={{ duration: 0.45, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
     whileHover={{ y: -4, transition: { duration: 0.2 } }}
     className="relative group rounded-2xl border border-[#F1D9CA] hover:border-[#D2430F]/50 bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm hover:shadow-lg transition-all duration-200 p-4 sm:p-5 overflow-hidden cursor-default lg:flex-1 min-h-fit"
@@ -97,11 +97,13 @@ const InfoCard: React.FC<{
 
 const AnimatedCounterCard: React.FC<{
   target: number;
+  /** Show this text instead of a counting number (e.g. "Multi") */
+  text?: string;
   suffix: string;
   label: string;
   subLabel?: string;
   theme?: number;
-}> = ({ target, suffix, label, subLabel, theme = 0 }) => {
+}> = ({ target, text, suffix, label, subLabel, theme = 0 }) => {
   const [count, setCount] = useState(0);
   const card = STAT_CARDS[theme % STAT_CARDS.length];
 
@@ -109,8 +111,9 @@ const AnimatedCounterCard: React.FC<{
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       onViewportEnter={() => {
+        if (text) return;
         setCount(0);
         let start = 0;
         const duration = 1200;
@@ -129,7 +132,7 @@ const AnimatedCounterCard: React.FC<{
       }}
       whileHover={{ y: -7, scale: 1.03 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className="relative p-5 sm:p-6 rounded-2xl border border-[#F1CDB3] shadow-sm hover:shadow-lg transition-shadow duration-300 cursor-default group overflow-hidden bg-[#FFF7F0]"
+      className="relative p-4 sm:p-6 rounded-2xl border border-[#F1CDB3] shadow-sm hover:shadow-lg transition-shadow duration-300 cursor-default group overflow-hidden bg-[#FFF7F0]"
     >
       {/* Wash: solid behind the text, lighter towards the graphic */}
       <div
@@ -139,7 +142,7 @@ const AnimatedCounterCard: React.FC<{
         }}
       />
       {/* Soft themed graphic, right side */}
-      <div className="absolute inset-y-0 right-0 w-3/5 flex items-center justify-end pr-3 opacity-35 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none">
+      <div className={`absolute inset-y-0 right-0 ${text ? 'w-1/4 opacity-25' : 'w-3/5 opacity-35'} flex items-center justify-end pr-3 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none`}>
         <div className="h-[85%] w-full [&>svg]:h-full [&>svg]:w-full [&>svg]:object-right">
           {CARD_ART[theme % CARD_ART.length]}
         </div>
@@ -149,11 +152,11 @@ const AnimatedCounterCard: React.FC<{
 
       <div className="relative z-10 pl-2">
         <div className="flex items-baseline justify-between">
-          <div className="flex items-baseline">
+          <div className="flex flex-wrap items-baseline">
             <span className="text-3xl sm:text-4xl lg:text-5xl font-light font-editorial text-[#1E293B] tabular-nums tracking-tight">
-              {count.toLocaleString('en-US')}
+              {text ?? count.toLocaleString('en-US')}
             </span>
-            <span className="text-2xl sm:text-3xl font-light text-[#D2430F] font-editorial ml-0.5">
+            <span className={`text-2xl sm:text-3xl font-light text-[#D2430F] font-editorial ${text ? 'ml-2' : 'ml-0.5'}`}>
               {suffix}
             </span>
           </div>
@@ -194,7 +197,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="lg:col-span-7 space-y-6"
           >
@@ -212,7 +215,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                 Since 2008, Siddhi Kabel Corporation Private Limited has supported industrial businesses with electrical, automation, safety and infrastructure requirements. We provide access to trusted LAPP, Eaton, Partex and MENNEKES product ranges—alongside sourcing support for allied product needs.
               </p>
               <p>
-                From OEM product specifications and project-based requirements to repair, maintenance and overhaul support, we help identify suitable products and coordinate supply for plants, control panels, buildings and production lines. Our allied offerings include LT and HT cables, armoured cables, industrial lighting and earthing products. RMO support covers Repair, Maintenance and Overhaul. With more than 33 years of industrial experience, we are able to make procurement clearer and ongoing support more dependable.
+                From OEM product specifications and project-based requirements to maintenance, repair and overhaul support, we help identify suitable products and coordinate supply for plants, control panels, buildings and production lines. Our allied offerings include LT and HT armoured and unarmoured cables, industrial lighting and earthing products. MRO support covers Maintenance, Repair and Overhaul. With more than 33 years of industrial experience, we are able to make procurement clearer and ongoing support more dependable.
               </p>
             </div>
           </motion.div>
@@ -220,7 +223,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.45 }}
             className="lg:col-span-5 relative flex flex-col justify-center self-stretch rounded-2xl border border-[#F1D9CA] bg-gradient-to-br from-white to-[#FFF1E8] shadow-sm p-6 sm:p-10 overflow-hidden"
           >
@@ -229,7 +232,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               Your industrial supply partner
             </span>
             <h3 className="mt-5 text-xl sm:text-2xl lg:text-3xl font-semibold text-[#231815] leading-snug">
-              OEM sourcing, project coordination and RMO support—from one responsive team.
+              OEM sourcing, project coordination and MRO support—from one responsive team.
             </h3>
             <p className="mt-4 text-sm sm:text-base text-[#5F524C] leading-relaxed">
               From product selection and supply coordination to Repair, Maintenance &amp; Overhaul support shaped around your operation.
@@ -256,7 +259,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
           <AnimatedCounterCard target={33} suffix="+ years" theme={0} label="Industrial experience" />
           <AnimatedCounterCard target={18} suffix=" years" theme={1} label="Established in 2008" />
           <AnimatedCounterCard target={1800} suffix="+" theme={2} label="Happy customers served" />
-          <AnimatedCounterCard target={4} suffix=" brands" theme={3} label="LAPP · Eaton · Partex · MENNEKES" />
+          <AnimatedCounterCard target={0} text="Multi" suffix=" brand" theme={3} label="Authorised OEM partners" />
         </div>
 
         {/* Why Choose Us Grid - Redesigned to be space-efficient & compact */}
@@ -265,7 +268,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
+              viewport={{ once: true, amount: 0.1 }}
               className="inline-block text-xs font-semibold tracking-widest uppercase text-[#5F524C] px-3.5 py-1 rounded-full bg-[#FFF1E8] border border-[#F1D9CA]"
             >
               The Siddhi Kabel Advantage
@@ -273,13 +276,13 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.05 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: 0.1 }}
               className="text-2xl sm:text-4xl font-normal text-[#231815] font-editorial tracking-tight"
             >
               Why industry chooses Siddhi Kabel.
             </motion.h2>
-            <p className="text-sm sm:text-base text-[#5F524C]/80 font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5F524C] font-light leading-relaxed">
               Strong product partnerships. Real-world experience. One responsive team for your industrial requirements.
             </p>
           </div>
@@ -288,8 +291,12 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
           <div className="rounded-3xl border border-[#F1D9CA] bg-gradient-to-br from-[#FFFAF6] via-white to-[#FFF1E8] p-4 sm:p-8 shadow-sm">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_1fr] gap-4 lg:gap-8 items-stretch">
               {/* LEFT COLUMN */}
-              <div className="flex flex-col gap-4 order-2 lg:order-1">
-                <InfoCard num="02" side="left" title="Four authorised partners" desc="Trusted products from LAPP, Eaton, Partex and MENNEKES.">
+              <div className="flex flex-col gap-4 order-1 lg:order-1">
+                <InfoCard num="01" side="left" title="One dependable source" desc="Electrical, safety, energy and automation ranges together.">
+                  <IconRow icons={[ShieldCheck, Cog]} />
+                </InfoCard>
+
+                <InfoCard num="02" side="left" delay={0.06} title="Authorised multi-brand partners" desc="Trusted products from LAPP, Eaton, Partex, MENNEKES and more.">
                   <div className="grid grid-cols-4 gap-2 mt-3">
                     {BRAND_LOGOS.map((src) => (
                       <div key={src} className="h-10 rounded-lg bg-white border border-[#F1D9CA] flex items-center justify-center p-1.5">
@@ -299,7 +306,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                   </div>
                 </InfoCard>
 
-                <InfoCard num="03" side="left" delay={0.06} title="Broad product choice" desc="Options for industrial, commercial and domestic applications.">
+                <InfoCard num="03" side="left" delay={0.12} title="Broad product choice" desc="Options for industrial, commercial and domestic applications.">
                   <div className="flex items-stretch gap-2 mt-3">
                     {APPLICATIONS.map((a) => {
                       const I = a.icon;
@@ -315,19 +322,16 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                   </div>
                 </InfoCard>
 
-                <InfoCard num="04" side="left" delay={0.12} title="People who understand" desc="Responsive technical and commercial product guidance.">
-                  <IconRow icons={[Users, Wrench, Cog]} />
-                </InfoCard>
               </div>
 
               {/* CENTER HUB */}
-              <div className="order-1 lg:order-2 flex flex-col items-center justify-center gap-5">
+              <div className="contents lg:flex lg:order-2 lg:flex-col lg:items-center lg:justify-center lg:gap-5">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.5 }}
-                  className="relative w-60 h-60 sm:w-64 sm:h-64"
+                  className="relative w-60 h-60 sm:w-64 sm:h-64 mx-auto order-2"
                 >
                   <motion.div
                     animate={{ rotate: 360 }}
@@ -338,12 +342,12 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                     <div className="absolute inset-0 bg-gradient-to-b from-white via-[#FFF1E8] to-[#FDE5D3]" />
                     <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
                       <span className="w-11 h-11 rounded-full bg-[#D2430F] text-white flex items-center justify-center shadow-md mb-2">
-                        <ShieldCheck className="w-6 h-6" />
+                        <Users className="w-6 h-6" />
                       </span>
-                      <span className="text-[10px] font-mono font-bold text-[#D2430F] tracking-widest">01</span>
-                      <span className="text-sm font-semibold text-[#231815] leading-snug">One dependable source</span>
+                      <span className="text-[10px] font-mono font-bold text-[#D2430F] tracking-widest">04</span>
+                      <span className="text-sm font-semibold text-[#231815] leading-snug">People who understand</span>
                       <span className="text-[11px] text-[#5F524C] leading-snug mt-1">
-                        Electrical, safety, energy and automation ranges together.
+                        Responsive technical and commercial product guidance.
                       </span>
                     </div>
                   </div>
@@ -353,10 +357,10 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.45, delay: 0.1 }}
                   whileHover={{ y: -4 }}
-                  className="group relative w-full rounded-2xl border border-[#F1D9CA] bg-gradient-to-br from-white to-[#FFF4D6] shadow-sm hover:shadow-lg transition-shadow p-4 flex items-center gap-4"
+                  className="order-3 group relative w-full rounded-2xl border border-[#F1D9CA] bg-gradient-to-br from-white to-[#FFF4D6] shadow-sm hover:shadow-lg transition-shadow p-4 flex items-center gap-4"
                 >
                   <div className="shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-[#D2430F] to-[#F08A4B] ring-4 ring-[#FFE1CC] text-white flex flex-col items-center justify-center leading-none shadow-md">
                     <span className="text-xl font-bold font-editorial">33</span>
@@ -371,17 +375,17 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               </div>
 
               {/* RIGHT COLUMN */}
-              <div className="flex flex-col gap-4 order-3">
-                <InfoCard num="08" side="right" title="Ethical business practices" desc="Transparent dealings, quality-first decisions and trust built over time.">
-                  <IconRow icons={[HeartHandshake, Scale, ShieldCheck]} />
-                </InfoCard>
-
-                <InfoCard num="07" side="right" delay={0.06} title="100% statutory compliance" desc="Committed to meeting applicable statutory requirements in our business operations.">
+              <div className="flex flex-col gap-4 order-4 lg:order-3">
+                <InfoCard num="06" side="right" title="100% statutory compliance" desc="Committed to meeting applicable statutory requirements in our business operations.">
                   <IconRow icons={[FileCheck, BadgeCheck]} />
                 </InfoCard>
 
-                <InfoCard num="06" side="right" delay={0.12} title="Planned stock, wider reach" desc="Inventory planning backed by an extensive network.">
+                <InfoCard num="07" side="right" delay={0.06} title="Planned stock, wider reach" desc="Inventory planning backed by an extensive network.">
                   <IconRow icons={[Warehouse, Truck, Globe]} />
+                </InfoCard>
+
+                <InfoCard num="08" side="right" delay={0.12} title="Ethical business practices" desc="Transparent dealings, quality-first decisions and trust built over time.">
+                  <IconRow icons={[HeartHandshake, Scale, ShieldCheck]} />
                 </InfoCard>
               </div>
             </div>
@@ -393,7 +397,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
   );
 };
 
-/** Just the four animated number cards (33+ years, 18 years, 1,800+ customers, 4 brands). Used on the Home page under the slider. */
+/** Just the four animated number cards (33+ years, 18 years, 1,800+ customers, multi brand). Used on the Home page under the slider. */
 export const StatsStrip: React.FC = () => (
   <section className="py-8 sm:py-10 bg-white border-b border-[#F1D9CA]">
     <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -401,7 +405,7 @@ export const StatsStrip: React.FC = () => (
         <AnimatedCounterCard target={33} suffix="+ years" theme={0} label="Industrial experience" />
         <AnimatedCounterCard target={18} suffix=" years" theme={1} label="Established in 2008" />
         <AnimatedCounterCard target={1800} suffix="+" theme={2} label="Happy customers served" />
-        <AnimatedCounterCard target={4} suffix=" brands" theme={3} label="LAPP · Eaton · Partex · MENNEKES" />
+        <AnimatedCounterCard target={0} text="Multi" suffix=" brand" theme={3} label="Authorised OEM partners" />
       </div>
     </div>
   </section>

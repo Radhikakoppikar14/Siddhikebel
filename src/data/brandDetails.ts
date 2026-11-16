@@ -12,7 +12,7 @@ export interface BrandDetail {
 /**
  * Brand detail content.
  * Eaton and Mennekes follow siddhikabel.com/products_eaton.html and /products_mennekes.html.
- * Lapp and Partex: add their sections here when you have the page text; until then the
+ * Partex: About text from the brand. Lapp: add its section here when you have the page text; until then the
  * page lists their catalogue products from siddhiData.ts.
  */
 export const BRAND_DETAILS: Record<string, BrandDetail> = {
@@ -108,6 +108,12 @@ export const BRAND_DETAILS: Record<string, BrandDetail> = {
         ],
       },
     ],
+  },
+
+  partex: {
+    intro:
+      "Partex leads the world in industrial marking systems.\n\nWe manufacture products for the identification of wires, cables, pipes and components. From the individual electrician to the world’s largest companies, our unique marking systems contribute towards increased efficiency and higher safety levels.\n\nPartex is a family owned company going back three generations. We have over 75 years of experience in the field of marking. This experience, combined with state of the art production capabilities, enables us to offer the perfect solutions for today’s demanding identification requirements. Our continuous forward development in materials and advanced production techniques ensures that we will be equally well placed to offer solutions for tomorrow’s requirements.",
+    sections: [],
   },
 
   mennekes: {

@@ -22,14 +22,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onGoToContact, onSelectBrand
       {/* 2. Key numbers */}
       <StatsStrip />
 
-      {/* 3. Trusted brand partners + allied products & services */}
-      <MotionReveal direction="up" yOffset={50} duration={0.9}>
-        <BrandSelector onSelectBrand={onSelectBrand} onOpenRfq={onGoToContact} />
-      </MotionReveal>
-
-      {/* 4. Services for industries */}
+      {/* 3. Services for industries: the LAPP, Eaton, Partex and Mennekes sections */}
       <MotionReveal direction="up" yOffset={50} duration={0.9}>
         <BrandServicesSection onOpenRfq={onGoToContact} />
+      </MotionReveal>
+
+      {/* 4. Trusted brand partners + allied products & services (now after the four brand sections) */}
+      <MotionReveal direction="up" yOffset={50} duration={0.9}>
+        <BrandSelector onSelectBrand={onSelectBrand} onOpenRfq={onGoToContact} />
       </MotionReveal>
 
       {/* 5. Recent projects and client logos */}

@@ -159,7 +159,7 @@ export const ContactSection: React.FC = () => {
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <h4 className="text-lg font-medium text-[#231815] font-editorial">Enquiry Sent</h4>
-                <p className="text-xs text-[#5F524C]/80 max-w-sm mx-auto leading-relaxed">
+                <p className="text-xs text-[#5F524C] max-w-sm mx-auto leading-relaxed">
                   Thank you for contacting Siddhi Kabel. Our sales team will get back to you shortly.
                 </p>
                 <button

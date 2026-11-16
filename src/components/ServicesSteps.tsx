@@ -21,7 +21,7 @@ export const ServiceSteps: React.FC = () => (
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 1.1, ease: 'easeOut' }}
           style={{ originX: 0 }}
           className="hidden md:block absolute top-10 left-[16.66%] right-[16.66%] h-0 border-t-2 border-dashed border-[#D2430F]/50"
