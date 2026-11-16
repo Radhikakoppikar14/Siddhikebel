@@ -10,9 +10,9 @@ interface ContactModalProps {
 }
 
 const FIELD_WRAP = 'relative';
-const FIELD_ICON = 'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9A8B84] pointer-events-none';
+const FIELD_ICON = 'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6E5F58] pointer-events-none';
 const FIELD_INPUT =
-  'w-full pl-9 pr-2.5 py-3 bg-[#FFFAF6] border border-[#EBDCD2] rounded-xl text-[13px] leading-snug text-[#231815] placeholder:text-[#B3A59E] hover:border-[#D8C3B6] focus:outline-hidden focus:bg-white focus:border-[#D2430F] focus:ring-4 focus:ring-[#D2430F]/10 transition-all';
+  'w-full pl-9 pr-2.5 py-3 bg-[#FFFAF6] border border-[#EBDCD2] rounded-xl text-[13px] leading-snug text-[#231815] placeholder:text-[#7A6B64] hover:border-[#D8C3B6] focus:outline-hidden focus:bg-white focus:border-[#D2430F] focus:ring-4 focus:ring-[#D2430F]/10 transition-all';
 const LABEL = 'block text-[11px] font-semibold uppercase tracking-wider text-[#5F524C] mb-1.5';
 
 export const ContactModal: React.FC<ContactModalProps> = ({
@@ -245,7 +245,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   <div>
                     <label className={LABEL}>Your Message *</label>
                     <div className={FIELD_WRAP}>
-                      <MessageSquare className="absolute left-3 top-3.5 w-4 h-4 text-[#9A8B84] pointer-events-none" />
+                      <MessageSquare className="absolute left-3 top-3.5 w-4 h-4 text-[#6E5F58] pointer-events-none" />
                       <textarea
                         rows={4}
                         required

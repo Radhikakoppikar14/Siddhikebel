@@ -612,7 +612,7 @@ export const SERVICES_DATA = [
   },
   {
     id: "cables",
-    title: "LT & HT Cables",
+    title: "LT & HT Armoured and Unarmoured Cables",
     subtitle: "Supply, Laying & Termination",
     description:
       "Supply, laying and termination of LT and HT armoured and unarmoured cables for industrial plants, control panels and buildings.",
@@ -660,7 +660,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "cs-cables",
-    title: "LT & HT Cables",
+    title: "LT & HT Armoured and Unarmoured Cables",
     category: "Power Distribution",
     summary: "Supply, laying and termination of LT & HT armoured and unarmoured cables.",
     highlights: [],

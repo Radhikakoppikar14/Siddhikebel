@@ -3,7 +3,8 @@ import { PageHeader } from '../components/PageHeader';
 import { ServicesSection } from '../components/ServicesSection';
 import { MotionReveal } from '../components/MotionReveal';
 import { ShieldCheck, Zap, Lightbulb, ArrowRight, Phone } from 'lucide-react';
-import { COMPANY_INFO } from '../data/siddhiData';
+import { Link } from 'react-router-dom';
+import { COMPANY_INFO, BRANDS_DATA } from '../data/siddhiData';
 
 interface ServicesPageProps {
   onOpenRfq: (serviceName?: string) => void;
@@ -18,6 +19,39 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenRfq }) => {
         breadcrumb="Services"
         category="Industrial Capabilities"
       />
+
+      {/* Authorised brand banners */}
+      <section className="py-8 sm:py-10 bg-[#FFFAF6] border-b border-[#F1D9CA]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#A8340A] mb-4">Our authorised brands</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+            {BRANDS_DATA.map((b) => (
+              <Link
+                key={b.id}
+                to={`/products/${b.id}`}
+                aria-label={`${b.name} products`}
+                className="group overflow-hidden rounded-2xl bg-white border border-[#F1D9CA] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+                style={{ borderBottom: `4px solid ${b.color}` }}
+              >
+                <div className="h-24 sm:h-32 bg-white overflow-hidden">
+                  <img
+                    src={b.featuredImg}
+                    alt={`${b.name} products`}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    className="no-zoom w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex items-center justify-between gap-2 px-4 py-3 border-t border-[#F1D9CA]">
+                  <img src={b.logo} alt={b.name} className="no-zoom h-7 max-w-[60%] object-contain" />
+                  <span className="text-xs font-semibold" style={{ color: b.colorDark }}>View range →</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Allied services: 4 core industrial pillars (grounding, LED, LT & HT cables, consumables) */}
       <ServicesSection onOpenRfq={onOpenRfq} />
