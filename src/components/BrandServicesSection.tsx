@@ -180,14 +180,6 @@ export const BrandServicesSection: React.FC<Props> = ({ onOpenRfq }) => {
                     <div className="text-xl sm:text-3xl font-bold tracking-wide leading-tight">{b.title}</div>
                     <div className="text-sm sm:text-base font-medium text-white/95">{b.subtitle}</div>
                   </div>
-                  <Link
-                    to={listingUrl}
-                    className="ml-auto hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-white shadow-sm hover:shadow-md transition-shadow"
-                    style={{ color: theme.dark }}
-                  >
-                    Browse Products
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2">
