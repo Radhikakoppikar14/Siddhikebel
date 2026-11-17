@@ -82,7 +82,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
 
           <div className="mt-5">
             {/* Logo on a white box; same box size for every brand */}
-            <div className="mb-4 inline-flex items-center justify-center bg-white rounded-md shadow-md w-32 sm:w-36 h-14 sm:h-16 px-3 py-2">
+            <div className="mb-4 inline-flex items-center justify-center bg-white rounded-md shadow-md w-44 sm:w-56 h-20 sm:h-28 px-3 py-2">
               <img
                 src={brand.logo}
                 alt={brand.name}
@@ -92,8 +92,8 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
                 className="no-zoom max-h-full max-w-full w-auto h-auto object-contain"
               />
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-editorial leading-none">{brand.name}</h1>
-            <p className="mt-3 text-sm font-semibold text-[#FF8A55]">Siddhi Kabel Corporation Private Limited</p>
+            {/* Logo only: brand name kept as a visually hidden heading for screen readers / SEO */}
+            <h1 className="sr-only">{brand.name}</h1>
           </div>
         </div>
       </header>

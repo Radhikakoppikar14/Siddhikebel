@@ -235,7 +235,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
               OEM sourcing, project coordination and MRO support—from one responsive team.
             </h3>
             <p className="mt-4 text-sm sm:text-base text-[#5F524C] leading-relaxed">
-              From product selection and supply coordination to Repair, Maintenance &amp; Overhaul support shaped around your operation.
+              From product selection and supply coordination to MRO (Maintenance, Repair, and Overhaul) support shaped around your operation.
             </p>
             {onOpenRfq ? (
               <button

@@ -50,6 +50,24 @@ export const AlliedServicePage: React.FC<AlliedServicePageProps> = ({ onOpenRfq 
                 <p className="mt-3 text-base text-[#3D332E] leading-relaxed">{service.intro}</p>
               </div>
 
+              {service.highlights && service.highlights.length > 0 && (
+                <div>
+                  <h3 className="text-xs font-semibold uppercase tracking-widest text-[#A8340A] mb-3">
+                    Key specifications
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {service.highlights.map((h) => (
+                      <span
+                        key={h}
+                        className="text-sm font-medium px-3 py-1.5 rounded-lg bg-[#FFF1E8] border border-[#F1D9CA] text-[#A8340A]"
+                      >
+                        {h}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div>
                 <h3 className="text-xs font-semibold uppercase tracking-widest text-[#A8340A] mb-3">
                   What we offer

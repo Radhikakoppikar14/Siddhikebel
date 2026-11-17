@@ -6,6 +6,8 @@ export interface AlliedService {
   intro: string;
   features: string[];
   usedIn: string[];
+  /** Optional key-specification chips shown on the service page */
+  highlights?: string[];
   image: string;
 }
 
@@ -49,7 +51,7 @@ export const ALLIED_SERVICES: AlliedService[] = [
     title: 'LT & HT Armoured and Unarmoured Cables',
     subtitle: 'Supply, laying and termination',
     intro:
-      'Low-tension and high-tension cables in heavy-duty armoured construction for buried and harsh routes, and in flexible unarmoured construction for machinery, switchgear and panel wiring. We supply them, lay them and terminate them.',
+      'Comprehensive Low-Tension (LT) and High-Tension (HT) cable solutions engineered for industrial power distribution. Available in heavy-duty armoured configurations (steel wire/tape armoured for harsh buried routes) and flexible unarmoured designs for plant machinery, switchgear and panel wiring. We supply them, lay them and terminate them.',
     features: [
       'LT and HT armoured and unarmoured cable supply',
       'Authorized Lapp Olflex and Uniplus bulk supply',
@@ -57,6 +59,14 @@ export const ALLIED_SERVICES: AlliedService[] = [
       'Cable glanding and conduit protection systems',
     ],
     usedIn: ['Industrial plants', 'Control panels', 'Buildings and utilities'],
+    highlights: [
+      'LT Cables (Up to 1.1 kV)',
+      'HT Cables (3.3 kV - 33 kV)',
+      'Steel Wire / Tape Armoured',
+      'Flexible Unarmoured',
+      'LAPP & Polycab Alliances',
+      'IS 1554 / IS 7098 Compliant',
+    ],
     image: '/images/gallery/lt-ht-cables.jpg',
   },
   {

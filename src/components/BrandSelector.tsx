@@ -30,7 +30,7 @@ const BRAND_CATS: Record<string, Cat[]> = {
     { id: 'eaton-acb', label: 'ACB', img: '/images/eaton/acb-izmx.png' },
     { id: 'eaton-vcb', label: 'VCB', img: '/images/eaton/vcb-medium-voltage.png' },
     { id: 'eaton-bussmann', label: 'Bussmann Fuses', img: '/images/eaton/bussmann-fuses.png' },
-    { id: 'eaton-ups', label: 'UPS', sub: 'Single Phase / Three Phase' },
+    { id: 'eaton-ups', label: 'UPS', sub: 'Single Phase / Three Phase', img: '/images/eaton/ups.png' },
   ],
   partex: [
     { id: 'partex-machines', label: 'Marking Machines', img: '/images/partex/marking-machine.png' },
