@@ -366,26 +366,8 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Models", value: "9PX, 93E, 93PR" },
       { label: "Phases", value: "Single-phase and 3-phase" },
     ],
+    image: "/images/eaton/ups.png",
     standards: ["IEC 62040"],
-  },
-  {
-    id: "eaton-rmq",
-    brandId: "eaton",
-    brandName: "EATON",
-    name: "RMQ-Titan 22.5mm Pilot Devices & Push Buttons",
-    category: "Industrial Switchgear",
-    code: "RMQ-TITAN-M22",
-    shortDesc: "Ergonomic pushbuttons, emergency stops, indicator lamps, and palm switches.",
-    details:
-      "High ingress protection up to IP67 and IP69K allowing high-pressure washdowns in pharmaceutical, food, and automotive control consoles.",
-    specifications: [
-      { label: "Mounting Diameter", value: "22.5 mm" },
-      { label: "Ingress Rating", value: "IP67 / IP69K (washdown)" },
-      { label: "Illumination", value: "High-efficiency multi-LED" },
-      { label: "Contact Modules", value: "Tool-less front clip-on" },
-    ],
-    image: "/images/resource/et1.jpg",
-    standards: ["IP69K", "IEC 60947-5-1", "UL Listed"],
   },
 
   // Mennekes products
