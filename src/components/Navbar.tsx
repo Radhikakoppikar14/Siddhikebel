@@ -4,19 +4,22 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Phone, Mail, Menu, X, Sparkles } from 'lucide-react';
 import { COMPANY_INFO, BRANDS_DATA } from '../data/siddhiData';
 import { motion, AnimatePresence } from 'framer-motion';
+import { brandPath } from '../data/paths';
 
 /* Desktop nav link: slim underline that grows on hover and slides to the active page */
-const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: boolean }> = ({ to, children, end }) => (
+const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: boolean; forceActive?: boolean }> = ({ to, children, end, forceActive }) => (
   <NavLink
     to={to}
     end={end}
-    className={({ isActive }) =>
+    className={({ isActive: routeActive }) =>
       `relative group inline-flex items-center whitespace-nowrap leading-6 px-2.5 xl:px-4 py-2 text-[13px] xl:text-sm transition-colors duration-200 ${
-        isActive ? 'text-[#D2430F] font-semibold' : 'text-[#231815]/75 hover:text-[#231815]'
+        routeActive || forceActive ? 'text-[#D2430F] font-semibold' : 'text-[#231815]/75 hover:text-[#231815]'
       }`
     }
   >
-    {({ isActive }) => (
+    {({ isActive: routeActive }) => {
+      const isActive = routeActive || !!forceActive;
+      return (
       <>
         <span className="relative z-10">{children}</span>
         <span className="absolute left-2.5 right-2.5 xl:left-4 xl:right-4 bottom-0.5 h-0.5 rounded-full origin-left bg-[#231815]/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
@@ -28,17 +31,18 @@ const DesktopNavLink: React.FC<{ to: string; children: React.ReactNode; end?: bo
           />
         )}
       </>
-    )}
+      );
+    }}
   </NavLink>
 );
 
 const MOBILE_LINKS = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us' },
-  { to: '/products', label: 'Products' },
-  { to: '/allied', label: 'Allied Products & Services' },
-  { to: '/industries', label: 'Industries' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/index.html', label: 'Home' },
+  { to: '/about_us.html', label: 'About Us' },
+  { to: '/products.html', label: 'Products' },
+  { to: '/allied.html', label: 'Allied Products & Services' },
+  { to: '/industries.html', label: 'Industries' },
+  { to: '/contact_us.html', label: 'Contact' },
 ];
 
 interface NavbarProps {
@@ -143,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
           >
             {/* Brand Logo */}
             <Link
-              to="/"
+              to="/index.html"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center justify-self-start shrink-0 group bg-white py-1"
               title="Siddhi Kabel - Home"
@@ -157,8 +161,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
 
             {/* Navigation (desktop): Home, About Us, Products, Industries, Contact */}
             <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 font-medium text-[#231815]">
-              <DesktopNavLink to="/" end>Home</DesktopNavLink>
-              <DesktopNavLink to="/about">About Us</DesktopNavLink>
+              <DesktopNavLink to="/index.html" end>Home</DesktopNavLink>
+              <DesktopNavLink to="/about_us.html">About Us</DesktopNavLink>
 
               {/* Products - opens a full-width mega menu */}
               <div
@@ -166,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 onMouseEnter={() => setProductsDropdownOpen(true)}
                 onMouseLeave={() => setProductsDropdownOpen(false)}
               >
-                <DesktopNavLink to="/products">
+                <DesktopNavLink to="/products.html" forceActive={location.pathname.startsWith('/products')}>
                   <span className="inline-flex items-center gap-1.5 leading-6">
                     <span>Products</span>
                     <motion.span
@@ -199,7 +203,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                               transition={{ delay: 0.04 * i + 0.04, duration: 0.25 }}
                             >
                               <Link
-                                to={`/products/${brand.id}`}
+                                to={brandPath(brand.id)}
                                 title={brand.name}
                                 className="group/tile relative flex h-14 items-center justify-center rounded-xl bg-white p-2.5 border border-[#F1D9CA] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
                                 onMouseEnter={(e) => (e.currentTarget.style.borderColor = brand.colorDark)}
@@ -218,7 +222,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                           className="mt-2"
                         >
                           <Link
-                            to="/allied"
+                            to="/allied.html"
                             className="group/allied flex items-center justify-between gap-2 rounded-xl border border-[#F1D9CA] bg-[#FFF1E8] px-3.5 py-3 text-[13px] font-semibold text-[#231815] hover:-translate-y-0.5 hover:shadow-lg hover:border-[#D2430F] transition-all duration-200"
                           >
                             <img
@@ -241,8 +245,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                 </AnimatePresence>
               </div>
 
-              <DesktopNavLink to="/industries">Industries</DesktopNavLink>
-              <DesktopNavLink to="/contact">Contact</DesktopNavLink>
+              <DesktopNavLink to="/industries.html">Industries</DesktopNavLink>
+              <DesktopNavLink to="/contact_us.html">Contact</DesktopNavLink>
             </nav>
 
             {/* Desktop Action Button */}
@@ -290,11 +294,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal, onReplayIntr
                   >
                     <NavLink
                       to={item.to}
-                      end={item.to === '/' || item.to.includes('#')}
+                      end={item.to === '/index.html' || item.to.includes('#')}
                       onClick={() => setMobileMenuOpen(false)}
                       className={({ isActive }) =>
                         `block py-2.5 border-b border-[#F1D9CA]/60 transition-all duration-200 hover:pl-2 hover:text-[#5F524C] ${
-                          isActive && !item.to.includes('#') ? 'text-[#D2430F] font-semibold pl-2 border-l-2 border-l-[#D2430F]' : ''
+                          (isActive || (item.to === '/products.html' && location.pathname.startsWith('/products'))) && !item.to.includes('#') ? 'text-[#D2430F] font-semibold pl-2 border-l-2 border-l-[#D2430F]' : ''
                         }`
                       }
                     >

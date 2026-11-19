@@ -5,6 +5,7 @@ import { MotionReveal } from '../components/MotionReveal';
 import { ShieldCheck, Zap, Lightbulb, ArrowRight, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { COMPANY_INFO, BRANDS_DATA } from '../data/siddhiData';
+import { brandPath } from '../data/paths';
 
 interface ServicesPageProps {
   onOpenRfq: (serviceName?: string) => void;
@@ -28,7 +29,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenRfq }) => {
             {BRANDS_DATA.map((b) => (
               <Link
                 key={b.id}
-                to={`/products/${b.id}`}
+                to={brandPath(b.id)}
                 aria-label={`${b.name} products`}
                 className="group overflow-hidden rounded-2xl bg-white border border-[#F1D9CA] hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
                 style={{ borderBottom: `4px solid ${b.color}` }}

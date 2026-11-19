@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
       {/* Main Multi-Column Footer Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
-        <Link to="/" className="inline-block mb-5">
+        <Link to="/index.html" className="inline-block mb-5">
           <img
             src="/images/logo.png"
             alt="Siddhi Kabel Corporation"
@@ -66,43 +66,43 @@ export const Footer: React.FC<FooterProps> = () => {
             </h4>
             <ul className="space-y-1.5 text-xs font-light text-white/80">
               <li>
-                <Link to="/" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/index.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/about_us.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>About Us</span>
                 </Link>
               </li>
               <li>
-                <Link to="/products" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/products.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Products &amp; Catalog</span>
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/services.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Engineering Services</span>
                 </Link>
               </li>
               <li>
-                <Link to="/industries" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/industries.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Industries Catered</span>
                 </Link>
               </li>
               <li>
-                <Link to="/projects" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/projects.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Case Studies</span>
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
+                <Link to="/contact_us.html" className="hover:text-[#FFD7C2] transition-colors flex items-center gap-1.5 group">
                   <ChevronRight className="w-3 h-3 text-[#FFD7C2] group-hover:translate-x-1 transition-transform" />
                   <span>Contact Office</span>
                 </Link>
@@ -210,9 +210,9 @@ export const Footer: React.FC<FooterProps> = () => {
             <span aria-hidden="true">·</span>
             <span>GST Registered Industrial Supplier</span>
             <span aria-hidden="true">·</span>
-            <Link to="/about" className="hover:text-[#FFD7C2]">Corporate Profile</Link>
+            <Link to="/about_us.html" className="hover:text-[#FFD7C2]">Corporate Profile</Link>
             <span aria-hidden="true">·</span>
-            <Link to="/contact" className="hover:text-[#FFD7C2]">Contact &amp; Support</Link>
+            <Link to="/contact_us.html" className="hover:text-[#FFD7C2]">Contact &amp; Support</Link>
           </div>
         </div>
       </div>

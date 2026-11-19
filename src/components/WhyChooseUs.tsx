@@ -246,7 +246,7 @@ export const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onOpenRfq, hideAbout =
                 Talk with our team <ArrowRight className="w-3.5 h-3.5" />
               </button>
             ) : (
-              <Link to="/contact" className="mt-6 self-start inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A]">
+              <Link to="/contact_us.html" className="mt-6 self-start inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A]">
                 Talk with our team <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             )}

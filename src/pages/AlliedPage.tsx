@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { ALLIED_SERVICES } from '../data/alliedServices';
+import { servicePath } from '../data/paths';
 
 interface AlliedPageProps {
   onOpenRfq: (subject?: string) => void;
@@ -26,7 +27,7 @@ export const AlliedPage: React.FC<AlliedPageProps> = ({ onOpenRfq }) => {
             {ALLIED_SERVICES.map((s) => (
               <Link
                 key={s.slug}
-                to={`/services/${s.slug}`}
+                to={servicePath(s.slug)}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-[#F1D9CA] bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
               >
                 <div className="h-44 bg-[#FFF1E8] overflow-hidden">

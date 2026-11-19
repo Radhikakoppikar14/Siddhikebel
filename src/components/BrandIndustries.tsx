@@ -19,7 +19,7 @@ export const BrandIndustries: React.FC<{ brand: BrandInfo; compact?: boolean }> 
       {industries.map((ind) => (
         <Link
           key={ind.name}
-          to="/industries"
+          to="/industries.html"
           className="group flex flex-col h-full overflow-hidden rounded-xl bg-white border transition-shadow hover:shadow-lg"
           style={{ borderColor: `${brand.color}55` }}
         >

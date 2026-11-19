@@ -1,5 +1,5 @@
 import React, { useState, lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollToTop } from './components/ScrollToTop';
 import { SectionScroll } from './components/SectionScroll';
@@ -25,6 +25,19 @@ const AlliedPage = lazy(() => import('./pages/AlliedPage').then((m) => ({ defaul
 const AlliedServicePage = lazy(() => import('./pages/AlliedServicePage').then((m) => ({ default: m.AlliedServicePage })));
 
 import { ProductItem, BRANDS_DATA } from './data/siddhiData';
+import { ALLIED_SERVICES } from './data/alliedServices';
+import { PATHS, brandPath, servicePath } from './data/paths';
+
+// Old clean addresses (/products/lapp, /services/lt-ht-cables) now go to the .html address, keeping any #section
+const LegacyBrandRedirect: React.FC = () => {
+  const { brandId = '' } = useParams<{ brandId: string }>();
+  const { hash } = useLocation();
+  return <Navigate to={brandPath(brandId) + hash} replace />;
+};
+const LegacyServiceRedirect: React.FC = () => {
+  const { serviceId = '' } = useParams<{ serviceId: string }>();
+  return <Navigate to={servicePath(serviceId)} replace />;
+};
 
 // Warm the browser cache so brand logos and the video thumbnail appear instantly
 if (typeof window !== 'undefined') {
@@ -91,7 +104,7 @@ function AppContent() {
             <Suspense fallback={<div className="min-h-[60vh]" />}>
             <Routes location={location} key={location.pathname}>
               <Route
-                path="/"
+                path={PATHS.home}
                 element={
                   <HomePage
                     onGoToContact={handleOpenContactModal}
@@ -99,11 +112,11 @@ function AppContent() {
                   />
                 }
               />
-              <Route path="/about" element={<AboutPage onGoToContact={handleOpenContactModal} />} />
-              <Route path="/about_us.html" element={<AboutPage onGoToContact={handleOpenContactModal} />} />
+              {/* Page addresses follow the original live site: about_us.html, products_lapp.html, contact_us.html ... */}
+              <Route path={PATHS.about} element={<AboutPage onGoToContact={handleOpenContactModal} />} />
 
               <Route
-                path="/products"
+                path={PATHS.products}
                 element={
                   <ProductsPage
                     selectedBrandId={selectedBrandId}
@@ -114,53 +127,52 @@ function AppContent() {
                 }
               />
 
-              <Route
-                path="/products/:brandId"
-                element={<BrandPage onOpenSpecs={handleOpenSpecs} onGoToContact={handleOpenContactModal} />}
-              />
-              <Route path="/products_lapp.html" element={<Navigate to="/products/lapp" replace />} />
-              <Route path="/products_eaton.html" element={<Navigate to="/products/eaton" replace />} />
-              <Route path="/products_partex.html" element={<Navigate to="/products/partex" replace />} />
-              <Route path="/products_mennekes.html" element={<Navigate to="/products/mennekes" replace />} />
+              {/* /products_lapp.html, /products_eaton.html, /products_partex.html, /products_mennekes.html */}
+              {BRANDS_DATA.map((b) => (
+                <Route
+                  key={b.id}
+                  path={brandPath(b.id)}
+                  element={<BrandPage brandId={b.id} onOpenSpecs={handleOpenSpecs} onGoToContact={handleOpenContactModal} />}
+                />
+              ))}
 
-              <Route path="/industries" element={<IndustriesPage />} />
-              <Route path="/industries.html" element={<IndustriesPage />} />
+              <Route path={PATHS.industries} element={<IndustriesPage />} />
+              <Route path={PATHS.contact} element={<ContactPage />} />
+              <Route path={PATHS.services} element={<ServicesPage onOpenRfq={handleOpenContactModal} />} />
+              <Route path={PATHS.allied} element={<AlliedPage onOpenRfq={handleOpenContactModal} />} />
 
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/contact_us.html" element={<ContactPage />} />
+              {/* /services_lt-ht-cables.html, /services_mro-services.html ... */}
+              {ALLIED_SERVICES.map((svc) => (
+                <Route
+                  key={svc.slug}
+                  path={servicePath(svc.slug)}
+                  element={<AlliedServicePage serviceId={svc.slug} onOpenRfq={handleOpenContactModal} />}
+                />
+              ))}
 
-              <Route
-                path="/services"
-                element={<ServicesPage onOpenRfq={handleOpenContactModal} />}
-              />
-              <Route
-                path="/services.html"
-                element={<ServicesPage onOpenRfq={handleOpenContactModal} />}
-              />
+              <Route path={PATHS.projects} element={<ProjectsPage onOpenRfq={handleOpenContactModal} />} />
 
-              <Route path="/allied" element={<AlliedPage onOpenRfq={handleOpenContactModal} />} />
+              {/* Old clean addresses (from the earlier Vercel build) go to the .html address */}
+              <Route path="/about" element={<Navigate to={PATHS.about} replace />} />
+              <Route path="/products" element={<Navigate to={PATHS.products} replace />} />
+              <Route path="/products/:brandId" element={<LegacyBrandRedirect />} />
+              <Route path="/industries" element={<Navigate to={PATHS.industries} replace />} />
+              <Route path="/contact" element={<Navigate to={PATHS.contact} replace />} />
+              <Route path="/services" element={<Navigate to={PATHS.services} replace />} />
+              <Route path="/allied" element={<Navigate to={PATHS.allied} replace />} />
+              <Route path="/services/:serviceId" element={<LegacyServiceRedirect />} />
+              <Route path="/projects" element={<Navigate to={PATHS.projects} replace />} />
 
-              <Route
-                path="/services/:serviceId"
-                element={<AlliedServicePage onOpenRfq={handleOpenContactModal} />}
-              />
+              {/* Home page address is index.html, same as the original live site; "/" goes there */}
+              <Route path="/" element={<Navigate to={PATHS.home} replace />} />
 
-              <Route
-                path="/projects"
-                element={<ProjectsPage onOpenRfq={handleOpenContactModal} />}
-              />
-              <Route
-                path="/projects.html"
-                element={<ProjectsPage onOpenRfq={handleOpenContactModal} />}
-              />
-
-              {/* Old RFQ / offers links now go to Home */}
-              <Route path="/products-on-offer" element={<Navigate to="/" replace />} />
-              <Route path="/products-on-offer.html" element={<Navigate to="/" replace />} />
-              <Route path="/offers" element={<Navigate to="/" replace />} />
+              {/* RFQ site / products on offer: left as before for now (goes to Home) */}
+              <Route path="/products-on-offer" element={<Navigate to={PATHS.home} replace />} />
+              <Route path="/products-on-offer.html" element={<Navigate to={PATHS.home} replace />} />
+              <Route path="/offers" element={<Navigate to={PATHS.home} replace />} />
 
               {/* Fallback to Home */}
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<Navigate to={PATHS.home} replace />} />
             </Routes>
             </Suspense>
           </motion.div>

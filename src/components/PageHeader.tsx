@@ -71,7 +71,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           {!minimal && (
             <>
           <nav className="flex items-center gap-2 text-sm text-white/75" aria-label="Breadcrumb">
-            <Link to="/" className="font-medium hover:text-white transition-colors">
+            <Link to="/index.html" className="font-medium hover:text-white transition-colors">
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5" />
@@ -90,7 +90,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           {minimal && (
           <nav className="flex items-center gap-2 text-sm text-white/75" aria-label="Breadcrumb">
-              <Link to="/" className="font-medium hover:text-white transition-colors">
+              <Link to="/index.html" className="font-medium hover:text-white transition-colors">
                 Home
               </Link>
               <ChevronRight className="w-3.5 h-3.5" />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Check, Zap, Lightbulb, HardHat, Wrench, Package } from 'lucide-react';
 import { BRANDS_DATA } from '../data/siddhiData';
+import { brandPath, servicePath } from '../data/paths';
 
 // Card text per brand (from the brand & product category requirements document)
 const BRAND_COPY: Record<string, { title: string; desc: string }> = {
@@ -137,7 +138,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
                 }}
               >
                 {/* Brand photo with the original brand logo on top */}
-                <Link to={`/products/${brand.id}`} onClick={() => onSelectBrand(brand.id)} aria-label={`${brand.name} products`} className="block">
+                <Link to={brandPath(brand.id)} onClick={() => onSelectBrand(brand.id)} aria-label={`${brand.name} products`} className="block">
                   <div className="relative h-24 sm:h-36 overflow-hidden bg-[#FFF1E8]">
                     <img
                       src={brand.featuredImg}
@@ -162,7 +163,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
                   {(BRAND_CATS[brand.id] ?? []).map((c) => (
                     <li key={c.id}>
                       <Link
-                        to={`/products/${brand.id}#${c.id}`}
+                        to={`${brandPath(brand.id)}#${c.id}`}
                         onClick={() => onSelectBrand(brand.id)}
                         className="flex items-center justify-between gap-3"
                       >
@@ -181,7 +182,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
 
                 <div className="px-3 sm:px-4 pt-4 sm:pt-5 pb-4 sm:pb-5 mt-auto">
                   <Link
-                    to={`/products/${brand.id}`}
+                    to={brandPath(brand.id)}
                     onClick={() => onSelectBrand(brand.id)}
                     className="inline-flex w-full items-center justify-center gap-1 sm:gap-1.5 rounded-md px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white transition-colors hover:brightness-110"
                     style={{ backgroundColor: brand.colorDark }}
@@ -234,7 +235,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
                 </button>
               ) : (
                 <Link
-                  to="/contact"
+                  to="/contact_us.html"
                   className="inline-flex items-center gap-2 bg-white text-[#A8340A] text-xs font-bold uppercase tracking-wider rounded-md px-5 py-3 shadow-lg hover:bg-[#FFF1E8] transition-colors"
                 >
                   Share your requirement <ArrowUpRight className="w-4 h-4" />
@@ -255,7 +256,7 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
                     isLast ? 'col-span-2 border-b-0' : i % 2 === 0 ? 'border-r' : ''
                   }`}
                 >
-                  <Link to={`/services/${a.slug}`} aria-label={a.title} className="absolute inset-0 z-10" />
+                  <Link to={servicePath(a.slug)} aria-label={a.title} className="absolute inset-0 z-10" />
                   <span className="absolute left-0 top-0 h-full w-1 bg-[#D2430F] scale-y-0 origin-top transition-transform duration-300 group-hover:scale-y-100" />
                   <span className="shrink-0 w-9 h-9 sm:w-12 sm:h-12 rounded-full border border-[#D2430F]/30 bg-white text-[#D2430F] flex items-center justify-center transition-all duration-300 group-hover:bg-[#D2430F] group-hover:text-white group-hover:border-[#D2430F]">
                     <Icon className="w-5 h-5" />

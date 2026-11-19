@@ -3,17 +3,21 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, Check } from 'lucide-react';
 import { PageHeader } from '../components/PageHeader';
 import { ALLIED_SERVICES } from '../data/alliedServices';
+import { servicePath } from '../data/paths';
 
 interface AlliedServicePageProps {
   onOpenRfq: (subject?: string) => void;
+  /** Set by the /services_<name>.html routes */
+  serviceId?: string;
 }
 
-export const AlliedServicePage: React.FC<AlliedServicePageProps> = ({ onOpenRfq }) => {
-  const { serviceId } = useParams<{ serviceId: string }>();
+export const AlliedServicePage: React.FC<AlliedServicePageProps> = ({ onOpenRfq, serviceId: serviceIdProp }) => {
+  const params = useParams<{ serviceId: string }>();
+  const serviceId = serviceIdProp ?? params.serviceId;
   const [imageFailed, setImageFailed] = useState(false);
 
   const index = ALLIED_SERVICES.findIndex((s) => s.slug === serviceId);
-  if (index === -1) return <Navigate to="/services" replace />;
+  if (index === -1) return <Navigate to="/services.html" replace />;
 
   const service = ALLIED_SERVICES[index];
   const others = ALLIED_SERVICES.filter((s) => s.slug !== service.slug);
@@ -31,7 +35,7 @@ export const AlliedServicePage: React.FC<AlliedServicePageProps> = ({ onOpenRfq 
       <section className="py-8 sm:py-12 border-b border-[#F1D9CA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <Link
-            to="/allied"
+            to="/allied.html"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#D2430F] hover:underline mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -113,7 +117,7 @@ export const AlliedServicePage: React.FC<AlliedServicePageProps> = ({ onOpenRfq 
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
                 <Link
-                  to="/contact"
+                  to="/contact_us.html"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-[#A8340A] border-2 border-[#D2430F] rounded-full hover:bg-[#FFF1E8] transition-colors"
                 >
                   Contact us
@@ -151,7 +155,7 @@ export const AlliedServicePage: React.FC<AlliedServicePageProps> = ({ onOpenRfq 
             {others.map((o) => (
               <Link
                 key={o.slug}
-                to={`/services/${o.slug}`}
+                to={servicePath(o.slug)}
                 className="group flex flex-col rounded-xl border border-[#F1D9CA] bg-white p-4 sm:p-5 hover:shadow-md hover:-translate-y-0.5 transition"
               >
                 <span className="text-[10px] font-bold tracking-widest uppercase text-[#A8340A]">{o.tag}</span>

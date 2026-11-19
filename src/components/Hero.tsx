@@ -193,7 +193,7 @@ const SlideContent: React.FC<{ slide: SlideItem; onOpenRfq: (topic?: string) => 
               </motion.button>
 
               <Link
-                to="/products"
+                to="/products.html"
                 className="inline-flex w-full sm:w-auto items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-[#D2430F] hover:text-[#A8340A] bg-white/85 hover:bg-white border border-[#D2430F]/30 rounded-xl transition-all hover:scale-102 shadow-sm"
               >
                 Browse Catalog

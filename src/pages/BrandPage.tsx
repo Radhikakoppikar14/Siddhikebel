@@ -6,6 +6,7 @@ import { BRAND_DETAILS } from '../data/brandDetails';
 import { CroppedVideo } from '../components/CroppedVideo';
 import { BrandIndustries } from '../components/BrandIndustries';
 import { BRAND_INDUSTRIES } from '../data/industries';
+import { brandPath } from '../data/paths';
 
 /** Product photo. If there is no photo yet (or the file is missing) a clean brand-tinted panel is shown instead of a broken image. */
 const ProductImage: React.FC<{ product: ProductItem; color: string; tint: string; dark: string }> = ({ product, color, tint, dark }) => {
@@ -38,10 +39,13 @@ const ProductImage: React.FC<{ product: ProductItem; color: string; tint: string
 interface BrandPageProps {
   onOpenSpecs: (product: ProductItem) => void;
   onGoToContact: (subject?: string) => void;
+  /** Set by the /products_<brand>.html routes */
+  brandId?: string;
 }
 
-export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
-  const { brandId } = useParams<{ brandId: string }>();
+export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact, brandId: brandIdProp }) => {
+  const params = useParams<{ brandId: string }>();
+  const brandId = brandIdProp ?? params.brandId;
   const { hash } = useLocation();
 
   // Category links such as /products/eaton#eaton-mccb scroll to that product once the page has loaded
@@ -55,7 +59,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
   }, [hash, brandId]);
 
   const brand = BRANDS_DATA.find((b) => b.id === brandId);
-  if (!brand) return <Navigate to="/products" replace />;
+  if (!brand) return <Navigate to="/products.html" replace />;
 
   // Each brand uses its own slider video (same files as the home page slider)
   const bgVideo = `/assets/videos/hero-${brand.id}.mp4`;
@@ -73,9 +77,9 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
           <nav className="flex items-center gap-2 text-sm text-white/90" aria-label="Breadcrumb">
-            <Link to="/" className="hover:underline">Home</Link>
+            <Link to="/index.html" className="hover:underline">Home</Link>
             <ChevronRight className="w-3.5 h-3.5" />
-            <Link to="/products" className="hover:underline">Products</Link>
+            <Link to="/products.html" className="hover:underline">Products</Link>
             <ChevronRight className="w-3.5 h-3.5" />
             <span className="font-semibold">{brand.name}</span>
           </nav>
@@ -168,7 +172,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
           <span className="font-semibold">Other brands</span>
           {BRANDS_DATA.filter((b) => b.id !== brand.id).map((b) => (
-            <Link key={b.id} to={`/products/${b.id}`} className="font-semibold hover:underline" style={{ color: b.colorDark }}>
+            <Link key={b.id} to={brandPath(b.id)} className="font-semibold hover:underline" style={{ color: b.colorDark }}>
               {b.name}
             </Link>
           ))}

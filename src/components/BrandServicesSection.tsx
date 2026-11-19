@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ZoomIn, X, Sparkles, ChevronRight } from 'lucide-react';
 import { BRANDS_DATA, PRODUCTS_CATALOG } from '../data/siddhiData';
+import { brandPath } from '../data/paths';
 
 interface BrandCategory {
   label: string;
@@ -160,7 +161,7 @@ export const BrandServicesSection: React.FC<Props> = ({ onOpenRfq }) => {
             const theme = THEME[brand.id];
             const imageLeft = i % 2 === 1;
             const brandName = brand.name;
-            const listingUrl = `/products/${brand.id}`;
+            const listingUrl = brandPath(brand.id);
             const thumbs = PRODUCTS_CATALOG.filter((p) => p.brandId === brand.id && p.image).slice(0, 3);
 
             return (
