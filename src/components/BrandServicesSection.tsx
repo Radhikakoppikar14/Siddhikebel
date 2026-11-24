@@ -43,6 +43,7 @@ const BLOCKS: BrandBlock[] = [
     categories: [
       { label: 'Contactors', productId: 'eaton-contactors' },
       { label: 'MCCB', productId: 'eaton-mccb' },
+      { label: 'MCB', productId: 'eaton-mcb' },
       { label: 'MPCB', productId: 'eaton-pkz' },
       { label: 'ACB', productId: 'eaton-acb' },
       { label: 'VCB', productId: 'eaton-vcb' },

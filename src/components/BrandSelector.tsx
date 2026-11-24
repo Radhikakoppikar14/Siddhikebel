@@ -27,6 +27,7 @@ const BRAND_CATS: Record<string, Cat[]> = {
   eaton: [
     { id: 'eaton-contactors', label: 'Contactors', img: '/images/eaton/contactor.png' },
     { id: 'eaton-mccb', label: 'MCCB', img: '/images/eaton/mccb-nzm.png' },
+    { id: 'eaton-mcb', label: 'MCB', img: '/images/eaton/mcb-xpole-pls6.png' },
     { id: 'eaton-pkz', label: 'MPCB', img: '/images/eaton/mpcb-pkz.png' },
     { id: 'eaton-acb', label: 'ACB', img: '/images/eaton/acb-izmx.png' },
     { id: 'eaton-vcb', label: 'VCB', img: '/images/eaton/vcb-medium-voltage.png' },
