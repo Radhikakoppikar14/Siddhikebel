@@ -5,6 +5,7 @@ export interface BrandInfo {
   fullDesc: string;
   logo: string;
   featuredImg: string;
+  aboutImg?: string;   // optional different photo for the About section on the brand page
   categories: string[];
   productCount: string;
   origin: string;
@@ -24,6 +25,7 @@ export interface ProductItem {
   details: string;
   specifications: { label: string; value: string }[];
   image?: string;          // leave out until a real product photo is available (a clean placeholder is shown)
+  imageZoom?: number;      // e.g. 1.35 to zoom in on a photo where the product looks small
   imagePosition?: string;  // CSS object-position, e.g. 'left center' when one photo shows two products
   standards: string[];
   isFeatured?: boolean;
@@ -111,6 +113,7 @@ export const BRANDS_DATA: BrandInfo[] = [
       "LAPP is a global leader in integrated solutions and branded products for cable and connection technology. Headquartered in Stuttgart, Germany, it has over 65 years of experience, 5,500+ employees and a presence in 152 countries.\n\nLAPP India began operations in 1996, serves 12,000+ customers and manufactures at Bengaluru, Bhopal and Dharuhera. We supply ÖLFLEX® control cables, UNITRONIC® data cables, ETHERLINE® Ethernet cables, SKINTOP® cable glands, EPIC® connectors and SILVYN® conduits.",
     logo: "/images/clients/lapp.png",
     featuredImg: "/images/brands/lapp.jpg",
+    aboutImg: "/images/brands/lapp-about.jpg",
     categories: ["Power & Control Cables", "Data and Communication Cables", "Control Cabinet Single Core", "Cable Glands & Counter Nuts", "Rill, Conduit & Klick", "Domestic / House Wiring"],
     productCount: "40,000+ Items",
     origin: "Germany",
@@ -285,6 +288,23 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
     standards: ["IEC/EN 60947-2"],
   },
   {
+    id: "eaton-mcb",
+    brandId: "eaton",
+    brandName: "EATON",
+    name: "MCB: xPole PLS6 Miniature Circuit Breakers",
+    category: "Industrial Switchgear",
+    code: "PLS6",
+    shortDesc: "xPole PLS6 miniature circuit breakers for overload and short-circuit protection of final circuits.",
+    details:
+      "Miniature circuit breakers for overload and short-circuit protection in distribution boards and final circuits of industrial and commercial installations.",
+    specifications: [
+      { label: "Series", value: "xPole PLS6" },
+      { label: "Type", value: "Miniature circuit breaker (MCB)" },
+    ],
+    image: "/images/eaton/mcb-xpole-pls6.png",
+    standards: ["IEC/EN 60898-1"],
+  },
+  {
     id: "eaton-pkz",
     brandId: "eaton",
     brandName: "EATON",
@@ -301,6 +321,7 @@ export const PRODUCTS_CATALOG: ProductItem[] = [
       { label: "Mounting", value: "Top-hat rail DIN EN 60715" },
     ],
     image: "/images/eaton/mpcb-pkz.png",
+    imageZoom: 1.4,
     standards: ["IEC/EN 60947-4-1", "UL 508", "CSA"],
     isFeatured: true,
   },
@@ -630,7 +651,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "Safety & Earthing",
     summary: "Chemical grounding and earthing solutions for plants, laboratories and buildings.",
     highlights: [],
-    image: "/images/resource/ind1.jpg",
+    image: "/images/gallery/grounding.jpg",
   },
   {
     id: "cs-led",
@@ -654,7 +675,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     category: "MRO & Allied",
     summary: "Glands, lugs, sleeves and MRO (Maintenance, Repair, and Overhaul) supplies.",
     highlights: [],
-    image: "/images/lapp/cable-glands-counter-nuts.jpg",
+    image: "/images/gallery/consumables-warehouse.jpg",
   },
 ];
 

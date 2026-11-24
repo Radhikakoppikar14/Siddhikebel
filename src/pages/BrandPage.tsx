@@ -31,6 +31,7 @@ const ProductImage: React.FC<{ product: ProductItem; color: string; tint: string
       loading="lazy"
       decoding="async"
       onError={() => setFailed(true)}
+      style={product.imageZoom ? { transform: `scale(${product.imageZoom})` } : undefined}
       className="no-zoom w-full h-full object-contain p-2"
     />
   );
@@ -118,7 +119,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact, brandId: br
             style={{ border: `1px solid ${brand.color}55`, borderBottom: `5px solid ${brand.color}` }}
           >
             <img
-              src={brand.featuredImg}
+              src={brand.aboutImg ?? brand.featuredImg}
               alt={`${brand.name} products`}
               loading="lazy"
               decoding="async"
@@ -127,7 +128,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onGoToContact, brandId: br
                 const frame = e.currentTarget.parentElement;
                 if (frame) frame.style.display = 'none';
               }}
-              className="no-zoom w-full h-32 lg:h-36 object-contain bg-white"
+              className="no-zoom block w-full h-auto max-h-56 object-cover bg-white"
             />
           </div>
         </div>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, MapPin, Phone, Mail, Send, CheckCircle2, User, Tag, MessageSquare } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, MapPin, Phone, Mail, Send, CheckCircle2, User, Tag, MessageSquare, Paperclip } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { COMPANY_INFO } from '../data/siddhiData';
 
@@ -13,6 +13,8 @@ const FIELD_WRAP = 'relative';
 const FIELD_ICON = 'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6E5F58] pointer-events-none';
 const FIELD_INPUT =
   'w-full pl-9 pr-2.5 py-3 bg-[#FFFAF6] border border-[#EBDCD2] rounded-xl text-[13px] leading-snug text-[#231815] placeholder:text-[#7A6B64] hover:border-[#D8C3B6] focus:outline-hidden focus:bg-white focus:border-[#D2430F] focus:ring-4 focus:ring-[#D2430F]/10 transition-all';
+const ACCEPTED_FILES = '.pdf,.xls,.xlsx,.csv,.doc,.docx,.png,.jpg,.jpeg,.webp';
+const MAX_FILE_MB = 10;
 const LABEL = 'block text-[11px] font-semibold uppercase tracking-wider text-[#5F524C] mb-1.5';
 
 export const ContactModal: React.FC<ContactModalProps> = ({
@@ -28,6 +30,9 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     message: '',
   });
 
+  const [attachment, setAttachment] = useState<File | null>(null);
+  const [fileError, setFileError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSent, setIsSent] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
@@ -49,10 +54,31 @@ export const ContactModal: React.FC<ContactModalProps> = ({
         message: '',
       });
     }
+    setAttachment(null);
+    setFileError('');
     setIsSent(false);
   }, [prefilledItem, isOpen]);
 
   if (!isOpen) return null;
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    if (f.size > MAX_FILE_MB * 1024 * 1024) {
+      setFileError(`File is larger than ${MAX_FILE_MB} MB. Please attach a smaller file.`);
+      setAttachment(null);
+      e.target.value = '';
+      return;
+    }
+    setFileError('');
+    setAttachment(f);
+  };
+
+  const removeFile = () => {
+    setAttachment(null);
+    setFileError('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -255,6 +281,39 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                         className={`${FIELD_INPUT} resize-none`}
                       />
                     </div>
+                  </div>
+
+                  <div>
+                    <label className={LABEL}>Attach Requirement / BOQ (optional)</label>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept={ACCEPTED_FILES}
+                      onChange={handleFile}
+                      className="sr-only"
+                      id="inquiry-attachment"
+                    />
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-[#A8340A] bg-[#FFF1E8] border border-dashed border-[#D2430F]/50 hover:bg-[#FFE4D2] rounded-xl transition-colors cursor-pointer"
+                      >
+                        <Paperclip className="w-4 h-4" />
+                        {attachment ? 'Change file' : 'Attach file'}
+                      </button>
+                      {attachment ? (
+                        <span className="inline-flex items-center gap-2 max-w-full text-xs text-[#231815] bg-[#FFFAF6] border border-[#EBDCD2] rounded-full pl-3 pr-1.5 py-1">
+                          <span className="truncate max-w-[200px]">{attachment.name}</span>
+                          <button type="button" onClick={removeFile} aria-label="Remove attachment" className="p-1 rounded-full hover:bg-[#FFF1E8] cursor-pointer">
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </span>
+                      ) : (
+                        <span className="text-[11px] text-[#5F524C]">PDF, Excel, Word or image (max {MAX_FILE_MB} MB)</span>
+                      )}
+                    </div>
+                    {fileError && <p className="mt-1.5 text-[11px] text-[#B42318]" role="alert">{fileError}</p>}
                   </div>
 
                   <div className="pt-2 flex items-center justify-end gap-3">

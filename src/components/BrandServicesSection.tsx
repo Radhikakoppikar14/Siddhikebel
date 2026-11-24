@@ -75,6 +75,36 @@ const BLOCKS: BrandBlock[] = [
   },
 ];
 
+// Thumbnail strip under each brand photo (revision manual 3.2 and 4.1).
+// LAPP shows all six core lines; EATON shows MCCB, Bussmann fuses and UPS.
+const THUMB_IDS: Record<string, string[]> = {
+  lapp: ['lapp-power-control', 'lapp-data-communication', 'lapp-control-cabinet', 'lapp-glands', 'lapp-conduit', 'lapp-domestic'],
+  eaton: ['eaton-mccb', 'eaton-bussmann', 'eaton-ups'],
+};
+// Dedicated thumbnail photos (public/images/lapp/gallery and public/images/eaton/gallery).
+const THUMB_IMG: Record<string, string> = {
+  'lapp-power-control': '/images/lapp/gallery/oelflex.jpg',
+  'lapp-data-communication': '/images/lapp/gallery/unitronic.jpg',
+  'lapp-control-cabinet': '/images/lapp/gallery/uniplus.jpg',
+  'lapp-glands': '/images/lapp/gallery/skintop.jpg',
+  'lapp-conduit': '/images/lapp/gallery/silvyn.jpg',
+  'lapp-domestic': '/images/lapp/gallery/infra.jpg',
+  'eaton-mccb': '/images/eaton/gallery/mccb.png',
+  'eaton-bussmann': '/images/eaton/gallery/bussmann.png',
+  'eaton-ups': '/images/eaton/gallery/ups.png',
+};
+const THUMB_CONTAIN = new Set<string>();
+
+// Product line names shown as tooltips on the LAPP thumbnails
+const THUMB_TITLES: Record<string, string> = {
+  'lapp-power-control': 'ÖLFLEX®',
+  'lapp-data-communication': 'UNITRONIC®',
+  'lapp-control-cabinet': 'UNIPLUS',
+  'lapp-glands': 'SKINTOP®',
+  'lapp-conduit': 'SILVYN®',
+  'lapp-domestic': 'ÖLFLEX® / UNIPLUS INFRA',
+};
+
 // Brand colour themes: LAPP orange, EATON blue, PARTEX green, MENNEKES red
 const THEME: Record<string, { bar: string; dark: string; tint: string }> = {
   lapp: { bar: '#EA580C', dark: '#9A3412', tint: '#FFF3EA' },
@@ -105,13 +135,14 @@ const LogoChip: React.FC<{ src: string; name: string }> = ({ src, name }) => {
 };
 
 /** Small product photo; hidden if the file is missing so no broken image shows. */
-const Thumb: React.FC<{ src: string; alt: string; to: string }> = ({ src, alt, to }) => {
+const Thumb: React.FC<{ src: string; alt: string; to: string; contain?: boolean }> = ({ src, alt, to, contain }) => {
   const [failed, setFailed] = useState(false);
   if (failed) return null;
   return (
     <Link
       to={to}
       aria-label={alt}
+      title={alt}
       className="block w-full aspect-[4/3] rounded-lg overflow-hidden bg-white border border-white/70 shadow-md hover:scale-[1.04] transition-transform"
     >
       <img
@@ -120,7 +151,7 @@ const Thumb: React.FC<{ src: string; alt: string; to: string }> = ({ src, alt, t
         loading="lazy"
         decoding="async"
         onError={() => setFailed(true)}
-        className="no-zoom w-full h-full object-cover"
+        className={`no-zoom w-full h-full ${contain ? 'object-contain p-1' : 'object-cover'}`}
       />
     </Link>
   );
@@ -162,7 +193,10 @@ export const BrandServicesSection: React.FC<Props> = ({ onOpenRfq }) => {
             const imageLeft = i % 2 === 1;
             const brandName = brand.name;
             const listingUrl = brandPath(brand.id);
-            const thumbs = PRODUCTS_CATALOG.filter((p) => p.brandId === brand.id && p.image).slice(0, 3);
+            const thumbIds = THUMB_IDS[brand.id];
+            const thumbs = thumbIds
+              ? thumbIds.map((id) => PRODUCTS_CATALOG.find((p) => p.id === id)).filter((p): p is NonNullable<typeof p> => !!p && !!p.image)
+              : PRODUCTS_CATALOG.filter((p) => p.brandId === brand.id && p.image).slice(0, 3);
 
             return (
               <article
@@ -277,9 +311,9 @@ export const BrandServicesSection: React.FC<Props> = ({ onOpenRfq }) => {
                     </Link>
                     {thumbs.length > 0 && (
                       <div className="absolute inset-x-0 bottom-0 z-10 px-4 pb-4 pt-12 bg-gradient-to-t from-black/60 to-transparent pointer-events-none">
-                        <div className="grid grid-cols-3 gap-3 max-w-md pointer-events-auto pr-14">
+                        <div className={`grid ${thumbs.length > 3 ? 'grid-cols-6 gap-1.5 sm:gap-2 max-w-lg' : 'grid-cols-3 gap-3 max-w-md'} pointer-events-auto pr-14`}>
                           {thumbs.map((p) => (
-                            <Thumb key={p.id} src={p.image as string} alt={p.name} to={`${listingUrl}#${p.id}`} />
+                            <Thumb key={p.id} contain={THUMB_CONTAIN.has(p.id)} src={THUMB_IMG[p.id] ?? (p.image as string)} alt={THUMB_TITLES[p.id] ?? p.name} to={`${listingUrl}#${p.id}`} />
                           ))}
                         </div>
                       </div>

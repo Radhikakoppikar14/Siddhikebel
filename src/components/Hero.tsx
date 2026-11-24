@@ -425,8 +425,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <Zap className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">Ready Ex-Stock &amp; Fast Logistics</span>
-              <span className="block text-[10px] leading-snug text-[#5F524C]">Full-length cable drums &amp; immediate same-day dispatch pan-India</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">Ready Stock &amp; Fast Delivery</span>
+              <span className="block text-[10px] leading-snug text-[#5F524C]">Extensive cable inventory with quick dispatch across India.</span>
             </div>
           </div>
 
@@ -435,8 +435,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenRfq }) => {
               <Award className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <span className="block text-xs font-semibold text-[#231815] tracking-tight">100% Genuine OEM Guarantee</span>
-              <span className="block text-[10px] leading-snug text-[#5F524C]">Factory test reports (TC) with full IS, IEC &amp; CE standard compliance</span>
+              <span className="block text-xs font-semibold text-[#231815] tracking-tight">100% Genuine OEM Products</span>
+              <span className="block text-[10px] leading-snug text-[#5F524C]">Authentic products with manufacturer-backed quality assurance.</span>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Check, Zap, Lightbulb, HardHat, Wrench, Package } from 'lucide-react';
 import { BRANDS_DATA } from '../data/siddhiData';
@@ -46,24 +46,6 @@ const BRAND_CATS: Record<string, Cat[]> = {
     { id: 'mennekes-interlocked', label: 'CEE Receptacles: Fused, Switched and Interlocked', img: '/images/mennekes/interlocked-duo.png' },
     { id: 'mennekes-inlets', label: 'CEE Panel Mounted Inlets', img: '/images/mennekes/panel-inlet.jpg' },
   ],
-};
-
-/** Small square thumbnail; falls back to the brand logo when there is no photo. */
-const Thumb: React.FC<{ src?: string; logo: string; alt: string }> = ({ src, logo, alt }) => {
-  const [failed, setFailed] = useState(false);
-  const useLogo = !src || failed;
-  return (
-    <span className="w-11 h-11 shrink-0 rounded-md border border-[#F1D9CA] bg-white flex items-center justify-center overflow-hidden">
-      <img
-        src={useLogo ? logo : src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        onError={() => { if (!useLogo) setFailed(true); }}
-        className={`no-zoom ${useLogo ? 'w-8 h-8 object-contain' : 'w-full h-full object-cover'}`}
-      />
-    </span>
-  );
 };
 
 // Allied products & services: numbered 01 to 05
@@ -159,22 +141,21 @@ export const BrandSelector: React.FC<BrandSelectorProps> = ({ onSelectBrand, onO
                 <p className="px-3 sm:px-4 pt-2 text-xs sm:text-sm text-[#5F524C] leading-relaxed line-clamp-4 sm:line-clamp-none">{BRAND_COPY[brand.id]?.desc}</p>
 
                 {/* Product categories: each row opens that product on the brand's listing page */}
-                <ul className="px-3 sm:px-4 pt-3 sm:pt-4 flex flex-col gap-1.5 sm:gap-2 content-start">
-                  {(BRAND_CATS[brand.id] ?? []).map((c) => (
-                    <li key={c.id}>
+                <ul className="px-3 sm:px-4 pt-3 sm:pt-4 grid grid-cols-2 gap-1.5 sm:gap-2 content-start">
+                  {(BRAND_CATS[brand.id] ?? []).map((c, ci, arr) => (
+                    <li key={c.id} className={ci === arr.length - 1 && arr.length % 2 === 1 ? 'col-span-2' : ''}>
                       <Link
                         to={`${brandPath(brand.id)}#${c.id}`}
                         onClick={() => onSelectBrand(brand.id)}
-                        className="flex items-center justify-between gap-3"
+                        className="flex h-full"
                       >
                         <span
-                          className="flex-1 rounded-md border bg-white px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium leading-snug hover:bg-white/60 transition-colors"
+                          className="flex-1 flex flex-col justify-center rounded-md border bg-white px-2 sm:px-2.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium leading-snug hover:bg-white/60 transition-colors"
                           style={{ color: brand.colorDark, borderColor: `${accent}88` }}
                         >
                           {c.label}
-                          {c.sub && <span className="block text-xs font-normal text-[#5F524C]">{c.sub}</span>}
+                          {c.sub && <span className="block text-[10px] font-normal text-[#5F524C]">{c.sub}</span>}
                         </span>
-                        <span className="hidden sm:block"><Thumb src={c.img} logo={brand.logo} alt={c.label} /></span>
                       </Link>
                     </li>
                   ))}
